@@ -1,0 +1,43 @@
+.notification-profile-request-img {
+    border-radius: 100%;
+    height: 2.5em;
+    width: 2.5em;
+}
+.notification-profile-img {
+    border-radius: 100%;
+    height: 2.5em;
+    width: 2.5em;
+}
+.notification-text-request-muted {
+    color: #C8C8C8;
+    font-size: 95%;
+}
+.notification-request-icon-ok {
+    font-size: 2.2em;
+    color: #56BCC5;
+}
+.notification-icon-align-go {
+    text-align: right;
+    vertical-align: middle;
+}
+.notification-profile-img-center {
+    padding-right: 2.5em;
+}
+.request-button-align-ok {
+    text-align: right;
+    vertical-align: middle;
+}
+.notification-container-text {
+    white-space: normal;
+}
+.notification-icon-go {
+    font-size: 2em;
+    color: #C8C8C8;
+}
+.notification-user-go {
+    color: #56BCC5;
+    font-weight: 600;
+}
+.notification-timestamp-text {
+    color: #C8C8C8;
+}

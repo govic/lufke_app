@@ -1,0 +1,67 @@
+<ion-view  hide-back-button="true" view-title="Explorar">
+    <ion-content id="explore" class="padding">
+		<ion-list>
+			<ion-item class="item-divider">
+				<div class="row">
+					<div class="col">
+						Usuarios populares
+					</div>
+					<div class="col explore-view-all" ng-click="allTopUsers()">
+						Ver todos <i class="ion-chevron-right"></i>
+					</div>
+				</div>
+			</ion-item>
+
+			<ion-item ng-repeat="item in model.topUsers" style="background-image: url('{{item.backgroundImgUrl}}');">
+				<div class="row">
+					<div class="col" ng-click="goToProfile(item.profileId)">
+						<img ng-src="{{item.profileImgUrl}}" class="explore-profile-img" />
+					</div>
+
+					<div class="col explore-font">
+						{{item.profileFirstName}}<br/>
+						{{item.profileLastName}}<br/>
+						<button class="button button-light button-small" ng-click="followUser(item.profileId)">
+							<i class="ion-plus active"></i> Seguir
+						</button>
+					</div>
+
+					<div ng-repeat="pub in item.lastPosts"
+						 class="col post-content" 
+						 style="background-image: url('{{pub.postImgUrl}}');">
+						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+
+		<br/>
+
+        <ion-list>
+			<ion-item class="item-divider">
+				<div class="row">
+					<div class="col">
+						Categorías
+					</div>
+					<div class="col explore-view-all" ng-click="allCategories()">
+						Ver todas <i class="ion-chevron-right"></i>
+					</div>
+				</div>
+			</ion-item>
+
+			<ion-item>
+				<div class="row" ng-repeat="row in model.topCategories">
+					<div class="col padding light category-content" 
+						 style="background-image: url('{{category.categoryImgUrl}}');" 
+						 ng-repeat="category in row">
+						{{category.categoryName}}<br />
+						<button class="button button-light button-small" ng-click="followCategory(category.id, category.categoryName)">
+							<i class="ion-plus active"></i> Seguir
+						</button>
+					</div>
+					&nbsp;
+				</div>
+			</ion-item>
+		</ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,51 @@
+.explore-profile-img {
+    border-radius: 100%;
+    height: 3.5em;
+    width: 3.5em;
+}
+#explore .item-divider .row{
+	padding: 0; 
+}
+
+#explore .item:not(.item-divider) { 
+	padding: 0.5em;
+}
+
+#explore .item-divider .row .col{
+	padding: inherit; 
+}
+
+.explore-view-all{
+	text-align: right;
+}
+
+.explore-view-more{
+	text-align: right;
+    vertical-align: middle;
+}
+
+.explore-font{
+	font-size: 80%;
+}
+
+.post-content {
+    height: 4em;
+    width: 4em;
+    background-size: cover;
+	background-position: center;
+    background-repeat: no-repeat;
+}
+.post-icon {
+    font-size: 2em;
+	display: block;
+	margin: auto auto;
+    vertical-align: middle;
+    text-align: center;
+}
+.category-content {
+    height: 6em;
+    width: 6em;
+    background-size: contain;
+	background-position: center;
+    background-repeat: no-repeat;   
+}

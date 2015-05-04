@@ -1,0 +1,42 @@
+<ion-view id="news" hide-back-button="true" view-title="Noticias">
+    <ion-nav-buttons side="left">
+        <a class="button button-icon icon ion-search" href="#/buscar"></a>  
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a class="button button-icon icon ion-levels" href="#/filters"></a>  
+    </ion-nav-buttons>
+
+	<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
+		<textarea id="experienceTextArea" 
+				  ng-model="model.experienceText" 
+				  ng-blur="model.isExperienceTextFocus = false" 
+				  ng-focus="model.isExperienceTextFocus = true" 
+				  placeholder="Comparte tu experiencia...">
+		</textarea>
+		<div class="padding">
+			<button class="button button-positive ion-camera" 
+					ng-click="getPhoto()">
+			</button>
+		</div>
+		
+		<div class="padding">
+			<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
+					class="button button-positive ion-edit" 
+					ng-click="shareExperience()">
+			</button>
+		</div>
+	</ion-header-bar>
+
+    <ion-content padding="true">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()">
+        </ion-refresher>
+		<ion-list>
+			<a ng-show="!model.posts.length" class="item item-icon-left item-icon-right" href="#/tab/explore">
+                No hay noticias que mostrar :(<br/>
+				Deberías seguir algunas personas<br>
+				<i class="icon ion-eye"></i>
+			</a>
+            <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-timestamp'"></post-summary>
+        </ion-list>
+    </ion-content>
+</ion-view>

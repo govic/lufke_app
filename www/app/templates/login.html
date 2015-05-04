@@ -1,0 +1,32 @@
+<ion-view  hide-back-button="true" view-title="Login">
+<ion-content>
+<form name="loginForm" ng-submit="loginForm.$valid && validateUser()" class="content has-header css-form">
+    <div class="list">
+        <label class="item item-input">
+            <input name="loginName" ng-model="model.user.name" type="text" placeholder="Usuario" required>
+            <i ng-show="loginForm.loginName.$touched && loginForm.loginName.$invalid" class="icon assertive ion-alert"></i>
+        </label>
+        <label class="item item-input">
+            <input name="loginPassword" ng-model="model.user.password" type="password" placeholder="Contraseña" required>
+            <i ng-show="loginForm.loginPassword.$touched && loginForm.loginPassword.$invalid" class="icon assertive ion-alert"></i>
+        </label>
+        <div id="login-forgot-password" ng-click="showRememberPassword()">
+            Olvidé mi contraseña
+        </div>
+    </div>
+    <div class="card" ng-show="model.loginError">
+        <div class="item item-text-wrap assertive">
+            El nombre de usuario o la contraseña ingresado son incorrectos, {{model.loginErrorMsg}}.
+        </div>
+    </div>
+    <div class="padding">
+        <input ng-disabled="loginForm.$invalid" type="submit" class="button button-block button-positive" value="Iniciar sesión">
+    </div>
+    <div class="padding">
+        <button class="button button-block button-positive" ui-sref="register">
+        Registro de usuario
+        </button>
+    </div>
+</form>
+</ion-content>
+</ion-view>

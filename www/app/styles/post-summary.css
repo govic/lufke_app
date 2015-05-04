@@ -1,0 +1,48 @@
+.post-summary {
+    height: 14em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0;
+}
+
+.post-summary-body-text {
+    padding-top: 6.8em;
+	height: 1.5em;
+    font-size: 90%;
+}
+
+.post-summary-footer {
+    padding-top: 0.5em;
+	height: 1.5em;
+    font-size: 85%;
+	color: #666666;
+}
+
+.post-summary-timestamp {
+    padding-top: 0.7em;
+	text-align: right;
+}
+
+.post-summary-user-name {
+    font-size: 110%;
+}
+
+.post-summary-user-data{
+	padding-top: 0.7em;
+	text-align: left;
+}
+
+.post-summary-location {
+    color: #EEE0BB;
+    font-size: 90%;
+}
+
+.post-summary-user-img {
+    border-radius: 100%;
+    height: 3.5em;
+    width: 3.5em;
+}
+
+.post-summary-user-img-container {
+    padding: 0.3em;
+}

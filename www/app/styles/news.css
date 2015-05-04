@@ -1,0 +1,7 @@
+#experienceTextArea{	
+	font-size: 75%;
+	resize: none;
+}
+input, textarea {
+  width: 80%;
+}

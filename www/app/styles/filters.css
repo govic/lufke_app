@@ -1,0 +1,38 @@
+.filters-gray {
+    color: #B5B5B5;
+}
+.filters-align-right {
+    text-align: right;
+}
+.filters-align-center {
+    text-align: center;
+}
+.filters-color-links {
+    color: #56BCC5;
+}
+.filters-no-padding {
+    padding: 0px;
+}
+.fitros-ranking-borders {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background-color: #FAFAFA;
+    border-color: #B5B5B5;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+}
+.filters-font-interests-text {
+    font-size: 110%;
+}
+.filters-fix-padding-name {
+    padding-left: 15px;
+}
+.filters-fix-padding-prop {
+    padding-right: 5px;
+}
+.filters-icon-size {
+    padding-left: 8px;
+    font-size: 35px;
+}

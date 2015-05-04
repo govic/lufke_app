@@ -1,0 +1,33 @@
+#profile-img {
+    border-radius: 100%;
+    height: 7em;
+    width: 7em;
+}
+
+.tag-social-link-text {
+    color: #56BCC5;
+}
+.profile-text-center {
+    text-align: center;
+}
+.profile-background-img {
+	height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.profile-number {
+    text-shadow: 1px 0px #56BCC5;
+    font-size: 120%;
+}
+.profile-number-text-under {
+    font-weight: bold;
+    font-size: 70%;
+}
+.profile-name-text {
+    font-size: 110%;
+	font-weight: bold;
+}
+.profile-button-edit {
+    text-align: right;
+    padding-right: 0px;
+}

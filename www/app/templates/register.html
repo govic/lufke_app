@@ -1,0 +1,33 @@
+<ion-view  hide-back-button="false" view-title="Registro">
+<ion-content>
+<form name="registerForm" ng-submit="registerForm.$valid && register()" class="content has-header css-form">
+    <div class="list">
+        <label class="item item-input">
+            <input name="registerName" ng-model="model.user.name" type="text" placeholder="Usuario" required>
+            <i ng-show="registerForm.registerName.$touched && registerForm.registerName.$invalid" class="icon assertive ion-alert"></i>
+        </label>
+        <label class="item item-input">
+            <input name="registerEmail" ng-model="model.user.email" type="email" placeholder="Correo" required>
+            <i ng-show="registerForm.registerEmail.$touched && registerForm.registerEmail.$invalid" class="icon assertive ion-alert"></i>
+        </label>
+        <label class="item item-input">
+            <input name="registerPassword" ng-model="model.user.password" type="password" placeholder="Contraseña" required>
+            <i ng-show="registerForm.registerPassword.$touched && registerForm.registerPassword.$invalid" class="icon assertive ion-alert"></i>
+        </label>
+        <label class="item item-input">
+            <input name="registerPasswordVerify" ng-model="model.user.passwordVerify" type="password" placeholder="Confirma tu contraseña" required>
+            <i ng-show="passwordVerify() || (registerForm.registerPasswordVerify.$touched && registerForm.registerPasswordVerify.$invalid)" class="icon assertive ion-alert"></i>
+        </label>
+        <p>{{verifyPassword()}}</p>
+    </div>
+    <div class="card" ng-show="model.registerError">
+        <div class="item item-text-wrap assertive">
+            {{model.registerErrorMsg}}
+        </div>
+    </div>
+    <div class="padding">
+        <input ng-disabled="registerForm.$invalid || passwordVerify()" type="submit" class="button button-block button-positive" value="Regístrame">
+    </div>
+</form>
+</ion-content>
+</ion-view>

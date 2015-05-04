@@ -1,0 +1,61 @@
+<ion-view title="Filtros">
+    <ion-content class="padding">
+        <div class="row">
+            <div class="col">
+                <div class="list">
+                    <div class="item filters-gray">
+                        <div class="row filters-no-padding">
+                            <div class="col col-75 filters-no-padding">
+                                ¿QUÉ QUIERO VER?
+                            </div>
+                            <div class="col filters-align-right filters-no-padding" ng-click="editarIntereses()">
+                                Editar
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" ng-repeat="item in model.interests">
+                        <div class="row filters-no-padding filters-font-interests-text">
+                            <div class="col col-10 filters-color-links filters-no-padding">
+                                <span class="fitros-ranking-borders">
+                                    #{{item.interestRanking}}
+                                </span>
+                            </div>
+                            <div class="col col-70 filters-no-padding filters-fix-padding-name">
+                                {{item.interestName}}
+                            </div>
+                            <div class="col col-20 filters-align-right filters-gray filters-no-padding">
+                                {{item.interestPercentage}}%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item filters-gray">
+                        PROPORCIONES
+                    </div>
+                    <div class="item range range-energized">
+                        <i class="ion-camera filters-icon-size"></i>
+                        <input type="range" ng-model="model.proportions.percentagePhotos" min="0" max="100">
+                        <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentagePhotos}}%</span>
+                    </div>
+                    <div class="item range range-assertive">
+                        <i class="ion-play filters-icon-size"></i>
+                        <input type="range" ng-model="model.proportions.percentageVideos" min="0" max="100">
+                        <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentageVideos}}%</span>
+                    </div>
+                    <div class="item range range-calm">
+                        <i class="ion-link filters-icon-size"></i>
+                        <input type="range" ng-model="model.proportions.percentageLinks" min="0" max="100">
+                        <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentageLinks}}%</span>
+                    </div>
+                    <div class="item filters-gray">
+                        DISTANCIA
+                    </div>
+                    <div class="item range range-calm">
+                        <i class="ion-link filters-icon-size"></i>
+                        <input type="range" ng-model="model.distance" min="0" max="1000">
+                        <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.distance}} {{model.distanceUnit}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,62 @@
+<ion-view hide-back-button="true" view-title="Perfil">
+    <ion-content class="padding">
+        <div class="row profile-background-img" ng-style="{'background-image': 'url(' + model.backgroundImgUrl + ')'}">
+            <div class="col">
+                <div class="row">
+                    <div>
+                        <img id="profile-img" ng-src="{{model.profileImgUrl}}" />
+                    </div>
+                    <div class="col">
+                        <div class="row light">
+                            <div class="col">
+                                <div class="profile-name-text">{{model.profileFirstName}}</div>
+                                <div class="profile-name-text">{{model.profileLastName}}</div>
+                            </div>
+                            <div class="col profile-button-edit">
+                                <a class="button button-light button-small" ng-click="editProfile(model)">
+                                    Editar perfil
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row profile-text-center light">
+                            <div class="col">
+                                <div class="profile-number">{{model.postsNumber}} {{model.postsUnit}}</div>
+                                <div class="profile-number-text-under">Publicaciones</div>
+                            </div>
+                            <div class="col">
+                                <div class="profile-number">{{model.followersNumber}} {{model.followersUnit}}</div>
+                                <div class="profile-number-text-under">Seguidores</div>
+                            </div>
+                            <div class="col">
+                                <div class="profile-number">{{model.followingNumber}} {{model.followingUnit}}</div>
+                                <div class="profile-number-text-under">Siguiendo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div ng-repeat="item in model.interests">
+                            {{item.interestText}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>		
+        <div class="row">
+            <div class="col profile-text-center">
+                <p>{{model.summaryText}}</p>
+                <p>
+                    <span>|</span>
+                    <span ng-repeat="item in model.tags">
+                        <span class="tag-social-link-text" ng-click="viewTag(item)">{{item.tagText}}</span>
+                        <span>|</span>
+                    </span>
+                </p>
+                <p class="tag-social-link-text" ng-click="socialLink(model.socialLinkUrl)">
+                    {{model.socialLinkText}}
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

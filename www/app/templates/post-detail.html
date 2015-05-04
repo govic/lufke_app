@@ -1,0 +1,74 @@
+<ion-view id="postDetail" view-title="Publicación">
+    <ion-content class="padding">
+
+		<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updatePost()">
+        </ion-refresher>
+
+		<div id="post-detail-content-container" class="item" ng-style="{'background-image':'url(' + model.post.backgroundImgUrl + ')'}">
+		</div>
+		
+		<div class="row row-top">
+			<div id="post-detail-user-img-container">
+				<img id="post-detail-user-img" ng-src="{{model.post.authorUrlImage}}" alt="Foto de perfil"/>
+			</div>
+
+			<div class="col post-detail-user-data">
+				<span id="post-detail-user-name">{{model.post.authorName}}<br/></span>
+				<span ng-show="model.post.authorLocation !== ''" id="post-detail-location">
+					<i class="ion-location"></i> {{model.post.authorLocation}}<br/>
+				</span>				
+				<span><i class="ion-clock"></i> </span><span am-time-ago="model.post.timestamp"></span>
+			</div>
+		</div>
+
+		<div class="row row-bottom">
+			<div class="col">{{model.post.text}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<span ng-click="toggleLike()">
+					<i ng-show="model.post.isLiked" class="ion-ios7-star"></i> 
+					<i ng-show="!model.post.isLiked" class="ion-ios7-star-outline"></i> 
+					{{model.post.totalStars}}
+				</span>
+			</div>
+
+			<div class="col" id="post-detail-more" ng-click="showMore()">
+				<i class="ion-more"></i>
+			</div>
+		</div>
+
+		<ion-list>
+			<ion-item id="commentTextContainer" class="item-input-inset">
+				<textarea id="commentTextArea"
+						  ng-model="model.commentText"
+						  ng-blur="model.isCommentTextFocus = false" 
+						  ng-focus="model.isCommentTextFocus = true" 
+						  placeholder="Agrega un comentario...">
+				</textarea>
+				<div class="padding">
+					<button ng-show="model.isCommentTextFocus || model.commentText.length"
+							ng-disabled="!model.commentText.length" 
+							class="button button-positive button-small ion-edit" 
+							ng-click="addComment()">
+					</button>
+				</div>
+			</ion-item>
+
+			<ion-item ng-repeat="comment in model.post.comments" class="post-detail-comment-container" on-hold="showDeleteComment(comment.id)">
+				<div class="row">
+					<div class="post-detail-comment-user-img-container">
+						<img class="post-detail-comment-user-img" ng-src="{{comment.authorUrlImage}}"/>
+					</div>
+
+					<div class="col col-top">
+						<span class="post-detail-comment-user-name">{{comment.authorName}}</span>
+						<span class="post-detail-comment-timestamp" am-time-ago="comment.timestamp"></span><br/>
+						<span class="post-detail-comment-text">{{comment.text}}</span>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

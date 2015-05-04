@@ -1,0 +1,74 @@
+<ion-view  hide-back-button="true" view-title="Notificaciones">
+    <ion-content id="notifications" class="padding">
+        <ion-list>
+            <ion-item class="item-divider">
+				Solicitudes de Seguimiento
+            </ion-item>
+
+            <ion-item ng-repeat="item in model.requests.requestsList">
+                <div class="row">
+                    <div class="col notification-profile-img-center">
+                        <img ng-src="{{item.profileImgUrl}}" class="notification-profile-request-img" />
+                    </div>
+                    <div class="col col-75">
+                        {{item.profileName}}
+                        <br />
+                        <span class="notification-text-request-muted">{{item.profileUser}}</span>
+                    </div>
+                    <div class="col request-button-align-ok">
+                        <span ng-click="acceptRequest(item)">
+                            <i class="ion-checkmark-circled notification-request-icon-ok"></i>
+                        </span>
+                    </div>
+                </div>
+                <ion-option-button class="button-assertive" ng-click="ignoreRequest(item)">
+                    Ignorar
+                </ion-option-button>
+            </ion-item>
+
+            <ion-item ng-show="!model.requests.requestsList.length">
+                No tiene solicitudes para mostrar
+            </ion-item>
+
+            <ion-item class="item-divider" ng-show="model.requests.requestsList.length > 0" ng-click="viewRequests()">
+				Ver {{requests.totalMore}} más <i class="ion-chevron-down"></i>
+            </ion-item>
+        </ion-list>
+
+		<br/>
+
+        <ion-list>
+            <ion-item class="item-divider">
+                Notificaciones
+            </ion-item>
+
+            <ion-item ng-repeat="item in model.notifications.notificationsList">
+                <div class="row">
+                    <div class="col notification-profile-img-center">
+                        <img ng-src="{{item.profileImgUrl}}" class="notification-profile-img" />
+                    </div>
+
+                    <div class="col col-75">
+                        <span class="notification-container-text">
+                            <span class="notification-user-go">{{item.profileUser}}</span>
+                            {{item.notificationText}}
+                            <span class="notification-timestamp-text">{{item.timestampText}}</span>
+                        </span>
+                    </div>
+
+                    <div class="col notification-icon-align-go" ng-click="verNotificacion(item)">
+                        <i class="ion-chevron-right notification-icon-go"></i>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item ng-show="!model.notifications.notificationsList.length">
+                No tiene notificaciones para motrar
+            </ion-item>
+
+            <ion-item class="item-divider" ng-show="model.notifications.notificationsList.length" ng-click="viewNotifications()">
+				Ver más <i class="ion-chevron-down"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
