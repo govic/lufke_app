@@ -7,6 +7,7 @@ var url_base = 'http://localhost:8080/api';
 //var url_base = 'http://10.0.2.2:8080/api';
 //var url_base = 'http://192.168.0.101:8080/api';
 var url_files = 'http://localhost:8080';
+
 var api = {
         user: {
             login: url_base + '/user/login',
@@ -32,6 +33,20 @@ var api = {
         notifications: {
             getNotifications: url_base + '/notification/getnotificationsdata'
         }
+<<<<<<< HEAD
+=======
+    },
+    explore: {
+        getPopulars: url_base + '/explore/getexploredata',
+        followCategory: url_base + '/explore/followcategory',
+        followUser: url_base + '/notification/followuser'
+    },
+    notifications: {
+        getNotifications: url_base + '/notification/getnotificationsdata',
+        ignoreRequest: url_base + '/notification/ignorerequest',
+        acceptRequest: url_base + '/notification/acceptrequest'
+    }
+>>>>>>> 1345f35b794d7b200568137d898107f4fff0aa64
 };
 
 function getPostBackgroundUlr(post) {
