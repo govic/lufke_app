@@ -30,7 +30,9 @@ var api = {
         followUser: url_base + '/notification/followuser'
     },
     notifications: {
-        getNotifications: url_base + '/notification/getnotificationsdata'
+        getNotifications: url_base + '/notification/getnotificationsdata',
+        ignoreRequest: url_base + '/notification/ignorerequest',
+        acceptRequest: url_base + '/notification/acceptrequest'
     }
 };
 
