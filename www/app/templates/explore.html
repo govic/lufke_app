@@ -1,5 +1,7 @@
 <ion-view  hide-back-button="true" view-title="Explorar">
     <ion-content id="explore" class="padding">
+    	<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateExploreData()">
+        </ion-refresher>
 		<ion-list>
 			<ion-item class="item-divider">
 				<div class="row">

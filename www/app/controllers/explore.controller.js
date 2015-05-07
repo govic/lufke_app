@@ -9,6 +9,16 @@ angular.module('lufke').controller('ExploreController', function($scope, $http, 
         console.dir(status);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar los usuarios populares y las categorías.");
     });
+    $scope.updateExploreData = function() {
+        $http.post(api.explore.getPopulars).success(function(data, status, headers, config) {
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.model = data;
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.dir(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar los usuarios populares y las categorías.");
+        });
+    };
     $scope.allCategories = function() {
         alert('All Categories');
     };
@@ -24,11 +34,11 @@ angular.module('lufke').controller('ExploreController', function($scope, $http, 
         });
     };
     $scope.followUser = function(userToFollowId) {
-    	$http.post(api.explore.followUser, {
+        $http.post(api.explore.followUser, {
             id: userToFollowId
         }).success(function(data, status, headers, config) {
             $scope.showMessage("Mensaje", "Solicitud realizada!", function() {
-            	//TODO falta hacer efecto visual
+                //TODO falta hacer efecto visual
             });
         }).error(function(data, status, headers, config) {
             console.dir(data);

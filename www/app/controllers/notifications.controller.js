@@ -7,6 +7,16 @@ angular.module('lufke').controller('NotificationsController', function($scope, $
         console.dir(status);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
     });
+    $scope.updateNotificationsData = function() {
+        $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.model = data;
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.dir(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
+        });
+    };
     /* Metodo para control de requests */
     //metodo que realiza la logica para ignorar una solicitud
     $scope.ignoreRequest = function(request) {
