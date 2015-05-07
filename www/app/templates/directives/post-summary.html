@@ -1,4 +1,4 @@
-<div class="item post-summary" ng-style="{'background-image':'url({{post.backgroundImgUrl}})'}">
+<div class="item post-summary" ng-style="{'background-image':'url({{url + post.backgroundImgUrl}})'}">
     <div class="row row-top" ui-sref="post({'postId': post.id})">
         <div class="post-summary-user-img-container">
             <img class="post-summary-user-img" ng-src="{{post.authorUrlImage}}" alt="Foto de perfil"/>
@@ -13,7 +13,7 @@
         </div>
 
         <div class="col post-summary-timestamp">
-            <i class="ion-clock"></i> <span am-time-ago="post.timestamp"></span>                        
+            <i class="ion-clock"></i> <span am-time-ago="post.postTimestamp"></span>                        
         </div>
     </div>
 
