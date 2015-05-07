@@ -3,26 +3,21 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
     $localStorage.$default({
         'newsUpdateNumber': 0
     });
-    $http.post(api.post.getAll).success(function(data) {
-        lodash.each(data.news, function(item) {
-            //item.backgroundImgUrl = getPostBackgroundUlr(item);
-        });
+    $scope.url = url_files;
+    $http.post(api.post.getAll).success(function(data) {        
         $scope.model = {
             posts: data.news,
             isExperienceTextFocus: false,
             mediaSelected: false,
             imageBase64: "",
-            experienceText: ""
+            experienceText: "",            
         };
     });
     $scope.updateNews = function() {
         //TODO: hay que sacar el uso de localstorage, es solo para el dummy
         $localStorage.newsUpdateNumber++;
         $scope.$broadcast('scroll.refreshComplete');
-        $http.post(api.post.getAll).success(function(data) {
-            lodash.each(data.news, function(item) {
-                //item.backgroundImgUrl = getPostBackgroundUlr(item);
-            });
+        $http.post(api.post.getAll).success(function(data) {           
             $scope.model = {
                 posts: data.news,
                 isExperienceTextFocus: false,
@@ -51,8 +46,10 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
             var post = {
                 authorId: $localStorage.session,
                 text: $scope.model.experienceText,
-                imageBase64: $scope.model.mediaSelected ? $scope.model.imageBase64 : ""
+                imgBase64: $scope.model.mediaSelected ? $scope.model.imageBase64 : "",
+                imgMimeType: "image/jpeg" //depende del metodo getPhoto en las opciones
             };
+            console.dir(post);
             $http.post(api.post.create, post).success(function(user) {
                 $scope.model.experienceText = "";
                 $scope.model.mediaSelected = false;
@@ -68,7 +65,7 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
             quality: 75,
             correctOrientation: true,
             destinationType: navigator.camera.DestinationType.DATA_URL, //DATA_URL,FILE_URI
-            encodingType: navigator.camera.EncodingType.PNG, //PNG,JPEG
+            encodingType: navigator.camera.EncodingType.JPEG, //PNG,JPEG
             sourceType: navigator.camera.PictureSourceType.CAMARA, //CAMARA,PHOTOLIBRARY
             allowEdit: true,
             targetWidth: 420,

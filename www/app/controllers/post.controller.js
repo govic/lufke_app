@@ -2,12 +2,12 @@ angular.module('lufke').controller('PostController', function(lodash, $http, $sc
     console.log('Inicia ... PostController');
     $http.post(api.post.get, {
         id: $stateParams.postId
-    }).success(function(post) {
-        //post.backgroundImgUrl = getPostBackgroundUlr(post);
+    }).success(function(post) {        
         $scope.model = {
             post: post,
             commentText: ""
         };
+        console.dir(post);
     }).error(function(data) {
         console.dir(data);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar la publicación.", function() {
@@ -15,6 +15,7 @@ angular.module('lufke').controller('PostController', function(lodash, $http, $sc
             return;
         });
     });
+    $scope.url = url_files;
     $scope.updatePost = function() {
         $http.post(api.post.get, {
             id: $stateParams.postId
