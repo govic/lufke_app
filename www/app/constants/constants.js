@@ -5,6 +5,8 @@
 var url_base = 'http://localhost:53110/api';
 //var url_base = 'http://192.168.0.100:53110/api';
 //var url_base = 'http://10.0.2.2:53110/api';
+//var url_base = 'http://192.168.0.102:53110/api';
+
 var api = {
     user: {
         login: url_base + '/user/login',
