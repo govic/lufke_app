@@ -1,4 +1,57 @@
-<ion-view title="Editar">
-	
-		
+<ion-view title="Editar">	
+<ion-content class="padding">
+	<div>
+        <img id="profile-img" ng-src="{{model.backgroundImgUrl}}" />
+        
+    </div>
+	<div>
+        <img id="profile-img" ng-src="{{model.profileImgUrl}}" />
+        <button ng-click="showOptions()">Editar</button>
+    </div>
+    <form name="editForm" ng-submit="editForm.$valid">
+        <div class="list">
+        	User Name
+            <label class="item item-input">
+            	<input name="editUserName" type="text" > 
+            	<i ng-show="editForm.editUserName.$touched && editForm.editUserName.$invalid" class="icon assertive ion-alert"></i>                  
+            </label>
+            First Name
+            <label class="item item-input">
+                <input name="editFirstName" type="text" ng-model="model.profileFirstName"> 
+                <i ng-show="editForm.editFirstName.$touched && editForm.editFirstName.$invalid" class="icon assertive ion-alert"></i>                  
+            </label>
+            Last Name
+             <label class="item item-input">
+                <input name="editLastName" type="text">  
+                <i ng-show="editForm.editLastName.$touched && editForm.editLastName.$invalid" class="icon assertive ion-alert"></i>                 
+            </label>
+            Location
+            <label class="item item-input">
+                <input name="editLocation" type="text"> 
+                <i ng-show="editForm.editLocation.$touched && editForm.editLocation.$invalid" class="icon assertive ion-alert"></i>                  
+            </label>                
+        </div>
+        Cambiar Contraseña
+        <div class="list">
+        	Actual
+            <label class="item item-input">
+            	<input type="password">                   
+            </label>
+            Nueva
+            <label class="item item-input">
+                <input type="password">                   
+            </label>
+            Repetir
+             <label class="item item-input">
+                <input type="password">                   
+            </label>
+                         
+        </div>
+        
+        <div class="padding">
+            <input ng-disabled="editForm.$invalid" type="submit" class="button button-block button-positive" value="Guardar">
+        </div>
+        
+    </form>
+   </ion-content>
 </ion-view>

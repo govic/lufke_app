@@ -1,6 +1,7 @@
 angular.module('lufke').controller('ProfileController', function($scope, PostsService, $state, $http) {
     console.log('Inicia ... ProfileController');
-    $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
+    $http.post(api.user.getProfile)
+    .success(function(profile, status, headers, config) {
         $scope.model = profile;
     }).error(function(data, status, headers, config) {
         console.dir(data);
