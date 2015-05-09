@@ -2,6 +2,13 @@
 //var url_base = 'http://lufke-server-44936.onmodulus.net'; //server modulus
 //var url_base = 'http://10.0.2.2:3000'; //server local dentro del emulador
 //var url_base = 'http://192.168.0.100:3000'; //server local dentro del emulador
+<<<<<<< HEAD
+var url_base = 'http://localhost:8080/api';
+//var url_base = 'http://192.168.0.100:53110/api';
+//var url_base = 'http://10.0.2.2:8080/api';
+//var url_base = 'http://192.168.0.101:8080/api';
+var url_files = 'http://localhost:8080';
+=======
 //var url_base = 'http://192.168.0.100:53110/api';
 //var url_base = 'http://10.0.2.2:8080/api';
 //var url_base = 'http://localhost:8080/api'; 
@@ -9,6 +16,7 @@
 var url_base = 'http://192.168.0.101:8080/api'; //sirve para local y celular
 var url_files = 'http://192.168.0.101:8080'; //sirve para local y celular
 
+>>>>>>> e1a30b52239abe622b23590982b46c7b6c6bd863
 var api = {
     user: {
         login: url_base + '/user/login',
