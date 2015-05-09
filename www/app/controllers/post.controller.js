@@ -1,4 +1,4 @@
-angular.module('lufke').controller('PostController', function(lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet, PostsService) {
+angular.module('lufke').controller('PostController', function(lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
     console.log('Inicia ... PostController');
     $http.post(api.post.get, {
         id: $stateParams.postId

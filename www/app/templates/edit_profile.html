@@ -1,21 +1,23 @@
 <ion-view title="Editar">	
-
+<ion-content class="padding">
 	<div>
-        <img ng-src="{{model.backgroundImgUrl}}" />
+        <img id="profile-img" ng-src="{{model.backgroundImgUrl}}" />
+        
     </div>
 	<div>
         <img id="profile-img" ng-src="{{model.profileImgUrl}}" />
+        <button ng-click="showOptions()">Editar</button>
     </div>
     <form name="editForm" ng-submit="editForm.$valid">
         <div class="list">
         	User Name
             <label class="item item-input">
-            	<input name="editUserName" type="text"> 
+            	<input name="editUserName" type="text" > 
             	<i ng-show="editForm.editUserName.$touched && editForm.editUserName.$invalid" class="icon assertive ion-alert"></i>                  
             </label>
             First Name
             <label class="item item-input">
-                <input name="editFirstName" type="text"> 
+                <input name="editFirstName" type="text" ng-model="model.profileFirstName"> 
                 <i ng-show="editForm.editFirstName.$touched && editForm.editFirstName.$invalid" class="icon assertive ion-alert"></i>                  
             </label>
             Last Name
@@ -51,4 +53,5 @@
         </div>
         
     </form>
+   </ion-content>
 </ion-view>
