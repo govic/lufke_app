@@ -41,9 +41,11 @@
         <script src="app/controllers/register.controller.js"></script>
         <script src="app/controllers/login.controller.js"></script>
         <script src="app/controllers/news.controller.js"></script>
+        <script src="app/controllers/newpost.controller.js"></script>
         <script src="app/controllers/explore.controller.js"></script>
         <script src="app/controllers/notifications.controller.js"></script>
         <script src="app/controllers/profile.controller.js"></script>
+        <script src="app/controllers/editprofile.controller.js"></script>
         <script src="app/controllers/filters.controller.js"></script>
         <script src="app/controllers/post.controller.js"></script>
         <!-- Routes -->
@@ -53,14 +55,17 @@
         <script src="app/routes/tabs.route.js"></script>
         <script src="app/routes/filters.route.js"></script>
         <script src="app/routes/post.route.js"></script>
+        <script src="app/routes/newpost.route.js"></script>
+        <script src="app/routes/editprofile.route.js"></script>
+
     </head>
     <body ng-app="lufke">
         <!--
         The nav bar that will be updated as we navigate between views.
         -->
         <ion-nav-bar class="bar-stable">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
+            <ion-nav-back-button>
+            </ion-nav-back-button>
         </ion-nav-bar>
         <!--
             The views will be rendered in the <ion-nav-view> directive below

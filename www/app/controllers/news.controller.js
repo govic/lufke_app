@@ -1,8 +1,5 @@
 angular.module('lufke').controller('NewsController', function(lodash, $http, $scope, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
-    $localStorage.$default({
-        'newsUpdateNumber': 0
-    });
     $scope.url = url_files;
     $http.post(api.post.getAll).success(function(data) {        
         $scope.model = {

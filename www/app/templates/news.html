@@ -6,26 +6,28 @@
         <a class="button button-icon icon ion-levels" href="#/filters"></a>  
     </ion-nav-buttons>
 
-	<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
-		<textarea id="experienceTextArea" 
-				  ng-model="model.experienceText" 
-				  ng-blur="model.isExperienceTextFocus = false" 
-				  ng-focus="model.isExperienceTextFocus = true" 
-				  placeholder="Comparte tu experiencia...">
-		</textarea>
-		<div class="padding">
-			<button class="button button-positive ion-camera" 
-					ng-click="getPhoto()">
-			</button>
-		</div>
-		
-		<div class="padding">
-			<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
-					class="button button-positive ion-edit" 
-					ng-click="shareExperience()">
-			</button>
-		</div>
-	</ion-header-bar>
+    <div ui-sref="newpost">
+		<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
+			<textarea id="experienceTextArea" 
+					  ng-model="model.experienceText" 
+					  ng-blur="model.isExperienceTextFocus = false" 
+					  ng-focus="model.isExperienceTextFocus = true" 
+					  placeholder="Comparte tu experiencia...">
+			</textarea>
+			<div class="padding">
+				<button class="button button-positive ion-camera" 
+						ng-click="getPhoto()">
+				</button>
+			</div>
+			
+			<div class="padding">
+				<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
+						class="button button-positive ion-edit" 
+						ng-click="shareExperience()">
+				</button>
+			</div>
+		</ion-header-bar>
+	</div>
 
     <ion-content padding="true">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()">
