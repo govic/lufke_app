@@ -1,4 +1,4 @@
-angular.module('lufke').controller('ProfileController', function ($scope, PostsService) {
+angular.module('lufke').controller('ProfileController', function ($scope, PostsService, $state) {
 	console.log('Inicia ... ProfileController');
 
 	$scope.model = {
@@ -49,8 +49,8 @@ angular.module('lufke').controller('ProfileController', function ($scope, PostsS
 		$scope.model.lastPosts = PostsService.getLastUserPosts($scope.model.profileId, 0);
 	});
 
-	$scope.editProfile = function (profile) {
-		alert("Editar profile id = " + profile.profileId);
+	$scope.editProfile = function (id) {
+		$state.go('editprofile', {'id': id});
 	}
 	$scope.viewTag = function (tag) {
 		alert("Ver detalle tag id = " + tag.tagId);

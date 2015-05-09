@@ -2,19 +2,6 @@ angular.module('lufke').controller('LoginController', function($localStorage, $h
     $ionicHistory.clearCache();
     console.log('Inicia ... LoginController');
     $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-    /*$http.get('http://static.comicvine.com/uploads/scale_small/3/39241/790730-konachan.com___41666_dragonball_son_goku.png')
-    .success(function(data, status, headers, config){
-        alert(data);
-        alert(status);
-        alert(headers);
-        alert(config);        
-    })
-    .error(function(err, status, headers, config){
-        alert(err);
-        alert(status);
-        alert(headers);
-        alert(config);
-    });*/
 
     $localStorage.session = null;
     $scope.model = {
