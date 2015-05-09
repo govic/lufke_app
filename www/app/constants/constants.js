@@ -1,12 +1,16 @@
-var url_base = 'http://192.168.0.101:8080/api'; //sirve para local y celular
-var url_files = 'http://192.168.0.101:8080'; //sirve para local y celular
+//var url_files = 'http://192.168.0.101:8080'; //sirve para local y celular
+var url_files = 'http://192.168.0.100:8080'; //sirve para local y celular
+var url_base = url_files + '/api'; //sirve para local y celular
 
 
 var api = {
     user: {
         login: url_base + '/user/login',
         register: url_base + '/user/register',
-        getProfile: url_base + '/user/getprofile'
+        getProfile: url_base + '/user/getprofile',
+        getEditProfile: url_base + '/user/geteditprofile',
+        editProfile: url_base + '/user/editprofile',
+        editProfileImage: url_base + '/user/editprofileimage'
     },
     post: {
         get: url_base + '/post/get',

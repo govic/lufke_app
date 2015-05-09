@@ -2,54 +2,59 @@
 <ion-content class="padding">
 	<div>
         <img id="profile-img" ng-src="{{model.backgroundImgUrl}}" />
-        
+        <button ng-click="showImagesOptions('background')">Editar</button>
     </div>
 	<div>
         <img id="profile-img" ng-src="{{model.profileImgUrl}}" />
-        <button ng-click="showOptions()">Editar</button>
+        <button ng-click="showImagesOptions('profile')">Editar</button>
     </div>
-    <form name="editForm" ng-submit="editForm.$valid">
+    <form name="editForm" ng-submit="editForm.$valid && editProfile()">
         <div class="list">
-        	User Name
+        	Nombre de usuario
             <label class="item item-input">
-            	<input name="editUserName" type="text" > 
+            	<input name="editUserName" type="text" ng-model="model.profileUserName" required> 
             	<i ng-show="editForm.editUserName.$touched && editForm.editUserName.$invalid" class="icon assertive ion-alert"></i>                  
             </label>
-            First Name
+            Nombre
             <label class="item item-input">
-                <input name="editFirstName" type="text" ng-model="model.profileFirstName"> 
+                <input name="editFirstName" type="text" ng-model="model.profileFirstName" required>
                 <i ng-show="editForm.editFirstName.$touched && editForm.editFirstName.$invalid" class="icon assertive ion-alert"></i>                  
             </label>
-            Last Name
+            Apellidos
              <label class="item item-input">
-                <input name="editLastName" type="text">  
+                <input name="editLastName" type="text" ng-model="model.profileLastName" required>
                 <i ng-show="editForm.editLastName.$touched && editForm.editLastName.$invalid" class="icon assertive ion-alert"></i>                 
             </label>
-            Location
+            Ubicación
             <label class="item item-input">
-                <input name="editLocation" type="text"> 
+                <input name="editLocation" type="text" ng-model="model.profileLocation" required>
                 <i ng-show="editForm.editLocation.$touched && editForm.editLocation.$invalid" class="icon assertive ion-alert"></i>                  
             </label>                
+            Correo electrónico
+            <label class="item item-input">
+                <input name="editEmail" type="text" ng-model="model.profileEmail" required>
+                <i ng-show="editForm.editEmail.$touched && editForm.editEmail.$invalid" class="icon assertive ion-alert"></i>                  
+            </label>  
         </div>
         Cambiar Contraseña
         <div class="list">
         	Actual
             <label class="item item-input">
-            	<input type="password">                   
+            	<input type="password" ng-model="model.oldPasswordHash">
             </label>
             Nueva
             <label class="item item-input">
-                <input type="password">                   
+                <input type="password" ng-model="model.newPasswordHash">
             </label>
             Repetir
              <label class="item item-input">
-                <input type="password">                   
+                <input type="password" ng-model="model.repeatPasswordHash">
             </label>
                          
         </div>
         
         <div class="padding">
-            <input ng-disabled="editForm.$invalid" type="submit" class="button button-block button-positive" value="Guardar">
+            <input ng-disabled="editForm.$invalid" type="submit" class="button button-block button-positive" value="Editar">
         </div>
         
     </form>
