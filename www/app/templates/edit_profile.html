@@ -6,6 +6,7 @@
     </div>
 	<div>
         <img id="profile-img" no-cache-src="{{url + model.profileImgUrl}}" />
+        <p>{{url + model.profileImgUrl}}</p>
         <button ng-click="showImagesOptions('profile')">Editar</button>
     </div>
     <form name="editForm" ng-submit="editForm.$valid && editProfile()">

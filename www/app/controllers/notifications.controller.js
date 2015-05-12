@@ -1,5 +1,6 @@
 angular.module('lufke').controller('NotificationsController', function($scope, $http, $ionicPopup) {
     console.log('Inicia ... NotificationsController');
+    $scope.url = url_files;
     $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
         $scope.model = data;
     }).error(function(data, status, headers, config) {

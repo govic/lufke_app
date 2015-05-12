@@ -6,11 +6,26 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
         $scope.model.oldPassword = "";
         $scope.model.newPassword = "";
         $scope.model.repeatPassword = "";
+        //console.dir($scope.model);
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.log(status);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
     });
+
+    $scope.updateEditProfile = function(){
+        $http.post(api.user.getEditProfile).success(function(profile, status, headers, config) {
+            $scope.model = profile;
+            $scope.model.oldPassword = "";
+            $scope.model.newPassword = "";
+            $scope.model.repeatPassword = "";
+            //console.dir($scope.model);
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.log(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
+        });
+    };
     $scope.editProfile = function() {
         //encripta variables para cambio de password
         $scope.model.oldPasswordHash = $scope.model.oldPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.oldPassword))) : "";
@@ -74,6 +89,7 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
                 imageMimeType: "image/jpeg",
                 imageType: imageType
             }).success(function(profile, status, headers, config) {
+                $scope.updateEditProfile();
                 $scope.showMessage("Exito", "La imagen ha sido cargada exitosamente.");
 
                 //TODO actualizar imagen con la carga reciente

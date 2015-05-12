@@ -26,9 +26,8 @@ angular.module('lufke').controller('ProfileController', function($scope, PostsSe
             $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
         });
     };
-    $scope.editProfile = function(id) {
-    	$scope.model.backgroundImgUrl = "http://www.car-vs-car.de/images/resized/Toyota-Celica-GTS-Vngr.jpg";
-    	//$state.go('editprofile');
+    $scope.editProfile = function() {    	
+    	$state.go('editprofile');
     }
     $scope.viewTag = function(tag) {
         alert("Ver detalle tag id = " + tag.tagId);
