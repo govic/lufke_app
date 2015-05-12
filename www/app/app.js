@@ -2,7 +2,30 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
-}).run(function($ionicPlatform) {
+}).factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
+    return {
+        response: function(response) {
+            if (response.status === 401) {
+                console.log("Response 401");
+            }
+            return response || $q.when(response);
+        },
+        responseError: function(rejection) {
+            if (rejection.status === 401) {
+                console.log("Response Error 401", rejection);
+                $localStorage.basic = null;
+                $localStorage.session = null;
+                $location.path('/login');
+            }
+            return $q.reject(rejection);
+        }
+    }
+}).config(['$httpProvider',
+    function($httpProvider) {
+        //Http Intercpetor to check auth failures for xhr requests
+        $httpProvider.interceptors.push('authHttpResponseInterceptor');
+    }
+]).run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -14,7 +37,6 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
         }
     });
 });
-
 moment.locale('es', {
     relativeTime: {
         future: 'en %s',

@@ -1,19 +1,32 @@
-angular.module('lufke').controller('EditProfileController', function($http, $scope, $stateParams, $ionicActionSheet, $ionicPopup) {
+angular.module('lufke').controller('EditProfileController', function($http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
     console.log('Inicia ... EditProfileController');
     $http.post(api.user.getEditProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
+        $scope.model.oldPassword = "";
+        $scope.model.newPassword = "";
+        $scope.model.repeatPassword = "";
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.log(status);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
     });
     $scope.editProfile = function() {
+        //encripta variables para cambio de password
+        $scope.model.oldPasswordHash = $scope.model.oldPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.oldPassword))) : "";
+        $scope.model.newPasswordHash = $scope.model.newPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.newPassword))) : "";
+        $scope.model.repeatPasswordHash = $scope.model.repeatPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.repeatPassword))) : "";
         $http.post(api.user.editProfile, $scope.model).success(function(profile, status, headers, config) {
             $scope.model = profile;
+            var auth = 'Basic ' + profile.credentialsHash;
+            $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
+            $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
             $scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");
         }).error(function(err, status, headers, config) {
             console.dir(err);
             console.log(status);
+            $scope.model.oldPassword = "";
+            $scope.model.newPassword = "";
+            $scope.model.repeatPassword = "";
             $scope.showMessage("Error", err.ExceptionMessage);
         });
     }
