@@ -1,28 +1,56 @@
 angular.module('lufke').controller('LoginController', function($localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64) {
-    $ionicHistory.clearCache();
     console.log('Inicia ... LoginController');
+    //verificacion de datos estaticos de autenticacion
+    if ($localStorage.basic && $localStorage.basic.trim() != "") {
+        $http.post(api.user.login, {
+            credentialsHash: $localStorage.basic.split(" ")[1]
+        }).success(function(user, status, headers, config) {
+            var auth = 'Basic ' + user.credentialsHash;
+            $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
+            $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
+            $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+            $scope.model.loginError = false;
+            $state.go('tab.news'); //redirige hacia news
+            return;
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.log(status);
+        });
+    }
+    $ionicHistory.clearCache();
     $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
+    $http.defaults.headers.common.Authorization = null;
+    $localStorage.basic = null;
     $localStorage.session = null;
     $scope.model = {
         user: {
             name: "",
             password: ""
         },
-        loginError: false,
         recoveryData: {
             emailError: false,
             email: ""
         },
         foto: ""
     };
+    $scope.showMessage = function(title, message, callback) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: message,
+            okText: "Aceptar"
+        });
+        alertPopup.then(function(res) {
+            if (callback) callback();
+            return;
+        });
+    };
     $scope.showRememberPassword = function() {
         var popupRemember = $ionicPopup.show({
-            template: '	<input ng-model="model.recoveryData.email" placeholder="correo@ejemplo.com" required>\n\
-						<div class="padding assertive" ng-show="model.recoveryData.emailError">\n\
-						<i class="icon ion-alert-circled"></i>\n\
-						Ingrese un correo electrónico correcto\n\
-						</div>',
+            template: ' <input ng-model="model.recoveryData.email" placeholder="correo@ejemplo.com" required>\n\
+                        <div class="padding assertive" ng-show="model.recoveryData.emailError">\n\
+                        <i class="icon ion-alert-circled"></i>\n\
+                        Ingrese un correo electrónico correcto\n\
+                        </div>',
             title: 'Ingrese su correo electrónico',
             scope: $scope,
             buttons: [{
@@ -46,13 +74,7 @@ angular.module('lufke').controller('LoginController', function($localStorage, $h
             $scope.model.recoveryData.emailError = true;
             e.preventDefault();
         } else {
-            $ionicPopup.alert({
-                title: 'Correo enviado',
-                template: 'Se ha enviado un correo con su contraseña',
-                buttons: [{
-                    text: 'Aceptar'
-                }]
-            });
+            $scope.showMessage("Correo enviado", "Se ha enviado un correo con su contraseña.");
         }
     };
     $scope.validateUser = function() {
@@ -61,29 +83,25 @@ angular.module('lufke').controller('LoginController', function($localStorage, $h
             var userModel = new User({
                 credentialsHash: $base64.encode(unescape(encodeURIComponent($scope.model.user.name + ":" + $scope.model.user.password)))
             });
-            $http.post(
-                api.user.login,
-                userModel
-            ).success(function(user, status, headers, config){
+            $http.post(api.user.login, userModel).success(function(user, status, headers, config) {
                 var auth = 'Basic ' + user.credentialsHash;
-                $http.defaults.headers.common.Authorization = auth;//cabecera auth por defecto
-                $localStorage.basic = auth;//guarda cabecera auth en var global localstorage
+                $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
+                $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                $scope.model.loginError = false;
                 $state.go('tab.news'); //redirige hacia news
                 return;
-            }).error(function(data, status, headers, config){
-                console.dir(data);
+            }).error(function(err, status, headers, config) {
+                console.dir(err);
                 console.log(status);
                 $http.defaults.headers.common.Authorization = null;
                 $localStorage.session = null;
                 $localStorage.basic = null;
-                $scope.model.loginError = true;
                 $scope.model.user.password = "";
+                if (status == 500) $scope.showMessage("Error", "El nombre de usuario o la contraseña no son correctos.");
+                else $scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");
             });
         } else {
             $localStorage.session = null;
-            $scope.model.loginError = true;
             $scope.model.user.password = "";
         }
     };

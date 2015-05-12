@@ -27,9 +27,8 @@ angular.module('lufke').controller('ProfileController', function($scope, PostsSe
         });
     };
     $scope.editProfile = function(id) {
-        $state.go('editprofile', {
-            'id': id
-        });
+    	$scope.model.backgroundImgUrl = "http://www.car-vs-car.de/images/resized/Toyota-Celica-GTS-Vngr.jpg";
+    	//$state.go('editprofile');
     }
     $scope.viewTag = function(tag) {
         alert("Ver detalle tag id = " + tag.tagId);
