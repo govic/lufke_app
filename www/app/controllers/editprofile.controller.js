@@ -1,5 +1,6 @@
 angular.module('lufke').controller('EditProfileController', function($http, $scope, $stateParams, $ionicActionSheet, $ionicPopup) {
     console.log('Inicia ... EditProfileController');
+    $scope.url = url_files;
     $http.post(api.user.getEditProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
     }).error(function(data, status, headers, config) {
@@ -27,7 +28,7 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
             cancelText: 'Cancelar',
             cancel: function() {},
             buttonClicked: function(index) {
-                console.log("presionado botón nro: " + index);
+                //console.log("presionado botón nro: " + index);
                 switch (index) {
                     case 0:
                         $scope.getPhoto(navigator.camera.PictureSourceType.CAMARA, imageType);
@@ -61,6 +62,7 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
                 imageType: imageType
             }).success(function(profile, status, headers, config) {
                 $scope.showMessage("Exito", "La imagen ha sido cargada exitosamente.");
+
                 //TODO actualizar imagen con la carga reciente
             }).error(function(err, status, headers, config) {
                 console.dir(err);
@@ -70,6 +72,7 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
         }, function(err) {
             $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
         }, options);
+        $window.location.reload();
         return false;
     };
     $scope.showMessage = function(title, message, callback) {

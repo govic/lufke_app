@@ -1,11 +1,11 @@
 <ion-view title="Editar">	
 <ion-content class="padding">
 	<div>
-        <img id="profile-img" ng-src="{{model.backgroundImgUrl}}" />
+        <img id="profile-img" no-cache-src="{{url + model.backgroundImgUrl}}" />
         <button ng-click="showImagesOptions('background')">Editar</button>
     </div>
 	<div>
-        <img id="profile-img" ng-src="{{model.profileImgUrl}}" />
+        <img id="profile-img" no-cache-src="{{url + model.profileImgUrl}}" />
         <button ng-click="showImagesOptions('profile')">Editar</button>
     </div>
     <form name="editForm" ng-submit="editForm.$valid && editProfile()">
