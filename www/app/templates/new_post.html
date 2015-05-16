@@ -1,24 +1,34 @@
 <ion-view title="Nueva Publicación">
-	
-		<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
-			<textarea id="experienceTextArea" 
-					  ng-model="model.experienceText" 
-					  ng-blur="model.isExperienceTextFocus = false" 
-					  ng-focus="model.isExperienceTextFocus = true" 
-					  placeholder="Comparte tu experiencia...">
-			</textarea>
-			<div class="padding">
+	<ion-content>
+		<div class="row">
+			<ion-header-bar class="bar bar-header item-input-inset">
+				
+				<textarea id="experienceTextArea" 
+						  ng-model="model.experienceText" 
+						  ng-blur="model.isExperienceTextFocus = false" 
+						  ng-focus="model.isExperienceTextFocus = true" 
+						  placeholder="Comparte tu experiencia...">
+				</textarea>	
+			</ion-header-bar>			
+		</div>	
+		<div class="row">
+			<div class="col">
 				<button class="button button-positive ion-camera" 
 						ng-click="getPhoto()">
 				</button>
 			</div>
-			
-			<div class="padding">
+			<div class="col">	
 				<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
 						class="button button-positive ion-edit" 
 						ng-click="shareExperience()">
 				</button>
-			</div>
-		</ion-header-bar>	
-	
+			</div>			
+		</div>
+		<div class="row">
+			<div class="col">	
+				<img ng-show="model.mediaSelected" src="data:image/jpeg;base64,{{model.imageBase64}}"/>	
+			</div>			
+		</div>
+		
+	</ion-content>
 </ion-view>

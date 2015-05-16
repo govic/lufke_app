@@ -1,5 +1,5 @@
-//var url_files = 'http://192.168.0.118:8080'; //sirve para local y celular
-var url_files = 'http://localhost:8080'; //sirve para local y celular
+var url_files = 'http://192.168.0.102:8080'; //sirve para local y celular
+//var url_files = 'http://localhost:8080'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 

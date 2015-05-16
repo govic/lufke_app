@@ -56,28 +56,7 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
                 });
             });
         }
-    };
-    $scope.getPhoto = function() {
-        var options = {
-            quality: 75,
-            correctOrientation: true,
-            destinationType: navigator.camera.DestinationType.DATA_URL, //DATA_URL,FILE_URI
-            encodingType: navigator.camera.EncodingType.JPEG, //PNG,JPEG
-            sourceType: navigator.camera.PictureSourceType.CAMARA, //CAMARA,PHOTOLIBRARY
-            allowEdit: true,
-            targetWidth: 420,
-            targetHeight: 420
-        };
-        navigator.camera.getPicture(function(imageBase64) {
-            $scope.model.mediaSelected = true;
-            $scope.model.imageBase64 = imageBase64;
-        }, function(err) {
-            alert("Ha ocurrido un error al intentar cargar la imagen.");
-            $scope.model.mediaSelected = false;
-            $scope.model.imageBase64 = "";
-        }, options);
-        return false;
-    };
+    };    
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,

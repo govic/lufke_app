@@ -13,19 +13,7 @@
 					  ng-blur="model.isExperienceTextFocus = false" 
 					  ng-focus="model.isExperienceTextFocus = true" 
 					  placeholder="Comparte tu experiencia...">
-			</textarea>
-			<div class="padding">
-				<button class="button button-positive ion-camera" 
-						ng-click="getPhoto()">
-				</button>
-			</div>
-			
-			<div class="padding">
-				<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
-						class="button button-positive ion-edit" 
-						ng-click="shareExperience()">
-				</button>
-			</div>
+			</textarea>			
 		</ion-header-bar>
 	</div>
 

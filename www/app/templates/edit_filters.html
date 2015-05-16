@@ -1,56 +1,56 @@
 <ion-view title="Editar">
-<ion-content class="padding">
-<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateEditFilters()">
-</ion-refresher>
-<div class="row">
-    <div class="col">
-    	<div class="list list-inset">
-    		<div class="item filters-gray item-button-right" show-delete="false" show-reorder="false" can-swipe="false">
-        		TOP
-        		<div class="buttons">
-                    <button class="button button-clear" ng-click="optionDeleteClick()">
-						<i class="icon ion-minus-circled"></i>
-					</button>
-					<button class="button button-clear" ng-click="editInterests()">
-						<i class="icon ion-checkmark-circled"></i>
-					</button>
-					<button class="button button-clear" ng-click="optionReorderClick()">
-						<i class="icon ion-navicon-round"></i>
-					</button>
-                </div>
-        	</div>
-    	</div>
-        <ion-list show-delete="model.shouldShowDelete" show-reorder="model.shouldShowReorder" can-swipe="model.listCanSwipe">
-        	<ion-item ng-repeat="item in model.topInterests" class="filters-no-padding filters-font-interests-text">
-        		<div class="row filters-no-padding filters-font-interests-text">
-                    <div class="col col-10 filters-color-links filters-no-padding">
-                        <span class="fitros-ranking-borders">
-                        #{{item.interestRanking}}
-                        </span>
-                    </div>
-                    <div class="col col-70 filters-no-padding filters-fix-padding-name">
-                        {{item.interestName}}
-                    </div>
-                    <div class="col col-20 filters-align-right filters-gray filters-no-padding">
-                        {{item.interestPercentage}}%
-                    </div>
-                </div>
-        		<ion-delete-button class="ion-minus-circled" ng-click="removeItem(item)"></ion-delete-button>
-        		<ion-reorder-button class="ion-navicon-round" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
-        	</ion-item>
-        	<div class="item item-divider">INTERESES</div>
-        	<ion-item ng-repeat="item in model.interests" class="filters-no-padding filters-font-interests-text">
-        		<div class="row filters-no-padding filters-font-interests-text">
-                    <div class="col col-10 filters-color-links filters-no-padding">
-                    </div>
-                    <div class="col col-70 filters-no-padding filters-fix-padding-name">
-                        {{item.interestName}}
-                    </div>
-                </div>
-        		<ion-option-button class="ion-plus-circled" ng-click="addItem(item)"></ion-option-button>
-        	</ion-item>
-        </ion-list>
-    </div>
-</div>
-</ion-content>
+    <ion-content class="padding">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateEditFilters()">
+        </ion-refresher>
+        <div class="row">
+            <div class="col">
+            	<div class="list list-inset">
+            		<div class="item filters-gray item-button-right" show-delete="false" show-reorder="false" can-swipe="false">
+                		TOP
+                		<div class="buttons">
+                            <button class="button button-clear" ng-click="optionDeleteClick()">
+        						<i class="icon ion-minus-circled"></i>
+        					</button>
+        					<button class="button button-clear" ng-click="editInterests()">
+        						<i class="icon ion-checkmark-circled"></i>
+        					</button>
+        					<button class="button button-clear" ng-click="optionReorderClick()">
+        						<i class="icon ion-navicon-round"></i>
+        					</button>
+                        </div>
+                	</div>
+            	</div>
+                <ion-list show-delete="model.shouldShowDelete" show-reorder="model.shouldShowReorder" can-swipe="model.listCanSwipe">
+                	<ion-item ng-repeat="item in model.topInterests" class="filters-no-padding filters-font-interests-text">
+                		<div class="row filters-no-padding filters-font-interests-text">
+                            <div class="col col-10 filters-color-links filters-no-padding">
+                                <span class="fitros-ranking-borders">
+                                #{{item.interestRanking}}
+                                </span>
+                            </div>
+                            <div class="col col-70 filters-no-padding filters-fix-padding-name">
+                                {{item.interestName}}
+                            </div>
+                            <div class="col col-20 filters-align-right filters-gray filters-no-padding">
+                                {{item.interestPercentage}}%
+                            </div>
+                        </div>
+                		<ion-delete-button class="ion-minus-circled" ng-click="removeItem(item)"></ion-delete-button>
+                		<ion-reorder-button class="ion-navicon-round" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                	</ion-item>
+                	<div class="item item-divider">INTERESES</div>
+                	<ion-item ng-repeat="item in model.interests" class="filters-no-padding filters-font-interests-text">
+                		<div class="row filters-no-padding filters-font-interests-text">
+                            <div class="col col-10 filters-color-links filters-no-padding">
+                            </div>
+                            <div class="col col-70 filters-no-padding filters-fix-padding-name">
+                                {{item.interestName}}
+                            </div>
+                        </div>
+                		<ion-option-button class="ion-plus-circled" ng-click="addItem(item)"></ion-option-button>
+                	</ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

@@ -1,5 +1,11 @@
 angular.module('lufke').controller('NewPostController', function(lodash, $http, $state, $scope, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
-    console.log('Inicia ... NewPostController'); 
+    console.log('Inicia ... NewPostController');
+    $scope.url = url_files;
+     $scope.model = {            
+            mediaSelected: false,
+            imageBase64: "",
+            experienceText: "",            
+    };
     $scope.shareExperience = function() {
         if ($scope.model.mediaSelected || $scope.model.experienceText.length) {
             var post = {
@@ -36,6 +42,13 @@ angular.module('lufke').controller('NewPostController', function(lodash, $http, 
         navigator.camera.getPicture(function(imageBase64) {
             $scope.model.mediaSelected = true;
             $scope.model.imageBase64 = imageBase64;
+            if(imageBase64){
+                alert('ok');
+            }
+            else{
+                alert('no ok');
+            }
+            
         }, function(err) {
             alert("Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
