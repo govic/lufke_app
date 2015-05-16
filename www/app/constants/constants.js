@@ -37,7 +37,8 @@ var api = {
     filters: {
         getFilters: url_base + '/filter/getfiltersdata',
         saveFilters: url_base + '/filter/savefiltersdata',
-        getTopInterests: url_base + '/filter/gettopinterestdata'
+        getTopInterests: url_base + '/filter/gettopinterestdata',
+        editTopInterests: url_base + '/filter/edittopinterests'
     }
 };
 

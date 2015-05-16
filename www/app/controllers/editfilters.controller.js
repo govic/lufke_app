@@ -27,16 +27,23 @@ angular.module('lufke').controller('EditFiltersController', function(lodash, $sc
         $scope.model.shouldShowReorder = !$scope.model.shouldShowReorder;
     };
     $scope.editInterests = function(item) {
-        alert("editInterests");
+        $http.post(api.filters.editTopInterests, $scope.model).success(function(data, status, headers, config) {
+            $scope.model = data;
+            $scope.showMessage("Exito", "Sus preferencias se guardaron exitosamente.");
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
+            console.log(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al guardar los filtros y preferencias.");
+        });
     };
     $scope.addItem = function(item) {
-    	if ($scope.model.topInterests.length >= $scope.model.max) {
+        if ($scope.model.topInterests.length >= $scope.model.max) {
             $scope.showMessage("Alerta", "El ranking de intereses está completo, debe quitar alguno para ingresar el actual.");
         } else {
-        	$scope.model.interests.splice($scope.model.interests.indexOf(item), 1);
-		    item.interestRanking = 999;
-		    $scope.model.topInterests.push(item);//inserta al final
-		    $scope.orderTop();
+            $scope.model.interests.splice($scope.model.interests.indexOf(item), 1);
+            item.interestRanking = 999;
+            $scope.model.topInterests.push(item); //inserta al final
+            $scope.orderTop();
         }
     };
     $scope.orderTop = function() {
@@ -54,8 +61,6 @@ angular.module('lufke').controller('EditFiltersController', function(lodash, $sc
             case 4:
                 percentages = $scope.model.percentagesTop4;
                 break;
-            default:
-                $scope.showMessage("Error", "Ha ocurrido un error al ordenar el top de intereses.");
         }
         if (percentages.length > 0) {
             $scope.model.topInterests = lodash.sortBy($scope.model.topInterests, function(i) {
@@ -77,7 +82,12 @@ angular.module('lufke').controller('EditFiltersController', function(lodash, $sc
         item.interestRanking = 0;
         item.interestPercentage = 0;
         $scope.model.interests.push(item);
-        $scope.orderTop();
+        if ($scope.model.topInterests.length <= 0) {
+            $scope.model.shouldShowDelete = false;
+            $scope.model.shouldShowReorder = false;
+        } else {
+            $scope.orderTop();
+        }
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
