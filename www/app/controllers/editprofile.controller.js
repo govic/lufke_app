@@ -12,7 +12,6 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
         console.log(status);
         $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
     });
-
     $scope.updateEditProfile = function(){
         $http.post(api.user.getEditProfile).success(function(profile, status, headers, config) {
             $scope.model = profile;
@@ -91,8 +90,6 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
             }).success(function(profile, status, headers, config) {
                 $scope.updateEditProfile();
                 $scope.showMessage("Exito", "La imagen ha sido cargada exitosamente.");
-
-                //TODO actualizar imagen con la carga reciente
             }).error(function(err, status, headers, config) {
                 console.dir(err);
                 console.log(status);

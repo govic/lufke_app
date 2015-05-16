@@ -1,39 +1,43 @@
-angular.module('lufke').controller('FiltersController', function ($scope) {
-	console.log('Inicia ... FiltersController');
-	$scope.model = {
-		interests: [
-			{
-				interestId: 1,
-				interestRanking: 1,
-				interestName: "SKATEBOARDING",
-				interestPercentage: 40
-			}, {
-				interestId: 2,
-				interestRanking: 2,
-				interestName: "SURFING",
-				interestPercentage: 30
-			}, {
-				interestId: 3,
-				interestRanking: 3,
-				interestName: "TRAVELLING",
-				interestPercentage: 20
-			}, {
-				interestId: 4,
-				interestRanking: 4,
-				interestName: "FOOTBALL",
-				interestPercentage: 10
-			}
-		],
-		proportions: {
-			percentagePhotos: 50,
-			percentageVideos: 25,
-			percentageLinks: 25
-		},
-		distance: 100,
-		distanceUnit: "KM"
-	};
-
-	$scope.editInterests = function () {
-		alert("Editar intereses!")
-	};
+angular.module('lufke').controller('FiltersController', function($scope, $ionicPopup, $http, $state) {
+    console.log('Inicia ... FiltersController');
+    $http.post(api.filters.getFilters).success(function(data, status, headers, config) {
+        $scope.model = data;
+    }).error(function(err, status, headers, config) {
+        console.dir(err);
+        console.log(status);
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar los filtros y preferencias.");
+    });
+    $scope.updateFiltersData = function() {
+        $http.post(api.filters.getFilters).success(function(data, status, headers, config) {
+            $scope.model = data;
+            $scope.$broadcast('scroll.refreshComplete');
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
+            console.log(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar los filtros y preferencias.");
+        });
+    };
+    $scope.saveFilters = function() {
+        $http.post(api.filters.saveFilters, $scope.model).success(function(data, status, headers, config) {
+            $scope.model = data;
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
+            console.log(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al guardar los filtros y preferencias.");
+        });
+    };
+    $scope.editInterests = function() {
+        $state.go('editfilters');
+    };
+    $scope.showMessage = function(title, message, callback) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: message,
+            okText: "Aceptar"
+        });
+        alertPopup.then(function(res) {
+            if (callback) callback();
+            return;
+        });
+    };
 });

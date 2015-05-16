@@ -1,5 +1,6 @@
 angular.module('lufke').controller('PostController', function(lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
     console.log('Inicia ... PostController');
+    $scope.url = url_files;
     $http.post(api.post.get, {
         id: $stateParams.postId
     }).success(function(post) {        
@@ -15,14 +16,12 @@ angular.module('lufke').controller('PostController', function(lodash, $http, $sc
             return;
         });
     });
-    $scope.url = url_files;
     $scope.updatePost = function() {
         $http.post(api.post.get, {
             id: $stateParams.postId
         }).success(function(post) {
-            //post.backgroundImgUrl = getPostBackgroundUlr(post);
-            $scope.$broadcast('scroll.refreshComplete');
             $scope.model.post = post;
+            $scope.$broadcast('scroll.refreshComplete');
         }).error(function(data) {
             console.dir(data);
             $scope.showMessage("Error", "Ha ocurrido un error al refrescar la publicación.");

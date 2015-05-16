@@ -1,63 +1,61 @@
-<ion-view title="Editar">	
+<ion-view title="Editar">
 <ion-content class="padding">
-	<div>
-        <img id="profile-img" no-cache-src="{{url + model.backgroundImgUrl}}" />
-        <button ng-click="showImagesOptions('background')">Editar</button>
-    </div>
-	<div>
-        <img id="profile-img" no-cache-src="{{url + model.profileImgUrl}}" />
-        <p>{{url + model.profileImgUrl}}</p>
-        <button ng-click="showImagesOptions('profile')">Editar</button>
-    </div>
-    <form name="editForm" ng-submit="editForm.$valid && editProfile()">
-        <div class="list">
-        	Nombre de usuario
-            <label class="item item-input">
-            	<input name="editUserName" type="text" ng-model="model.profileUserName" required> 
-            	<i ng-show="editForm.editUserName.$touched && editForm.editUserName.$invalid" class="icon assertive ion-alert"></i>                  
-            </label>
-            Nombre
-            <label class="item item-input">
-                <input name="editFirstName" type="text" ng-model="model.profileFirstName" required>
-                <i ng-show="editForm.editFirstName.$touched && editForm.editFirstName.$invalid" class="icon assertive ion-alert"></i>                  
-            </label>
-            Apellidos
-             <label class="item item-input">
-                <input name="editLastName" type="text" ng-model="model.profileLastName" required>
-                <i ng-show="editForm.editLastName.$touched && editForm.editLastName.$invalid" class="icon assertive ion-alert"></i>                 
-            </label>
-            Ubicación
-            <label class="item item-input">
-                <input name="editLocation" type="text" ng-model="model.profileLocation" required>
-                <i ng-show="editForm.editLocation.$touched && editForm.editLocation.$invalid" class="icon assertive ion-alert"></i>                  
-            </label>                
-            Correo electrónico
-            <label class="item item-input">
-                <input name="editEmail" type="text" ng-model="model.profileEmail" required>
-                <i ng-show="editForm.editEmail.$touched && editForm.editEmail.$invalid" class="icon assertive ion-alert"></i>                  
-            </label>  
-        </div>
-        Cambiar Contraseña
-        <div class="list">
-        	Actual
-            <label class="item item-input">
-            	<input type="password" ng-model="model.oldPassword">
-            </label>
-            Nueva
-            <label class="item item-input">
-                <input type="password" ng-model="model.newPassword">
-            </label>
-            Repetir
-             <label class="item item-input">
-                <input type="password" ng-model="model.repeatPassword">
-            </label>
-                         
-        </div>
-        
-        <div class="padding">
+<div class="row">
+    <div class="col">
+        <form name="editForm" ng-submit="editForm.$valid && editProfile()">
+            <div>
+                <img id="profile-img" no-cache-src="{{url + model.backgroundImgUrl}}" />
+                <button ng-click="showImagesOptions('background')">Editar</button>
+            </div>
+            <div>
+                <img id="profile-img" no-cache-src="{{url + model.profileImgUrl}}" />
+                <button ng-click="showImagesOptions('profile')">Editar</button>
+            </div>
+            <div class="list">
+                <label class="item item-input item-stacked-label">HOLI</label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nombre de usuario</span>
+                    <input name="editUserName" type="text" ng-model="model.profileUserName" required>
+                    <i ng-show="editForm.editUserName.$touched && editForm.editUserName.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nombre</span>
+                    <input name="editFirstName" type="text" ng-model="model.profileFirstName" required>
+                    <i ng-show="editForm.editFirstName.$touched && editForm.editFirstName.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Apellidos</span>
+                    <input name="editLastName" type="text" ng-model="model.profileLastName" required>
+                    <i ng-show="editForm.editLastName.$touched && editForm.editLastName.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Ubicación</span>
+                    <input name="editLocation" type="text" ng-model="model.profileLocation" required>
+                    <i ng-show="editForm.editLocation.$touched && editForm.editLocation.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Correo electrónico</span>
+                    <input name="editEmail" type="email" ng-model="model.profileEmail" required>
+                    <i ng-show="editForm.editEmail.$touched && editForm.editEmail.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+            </div>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Actual</span>
+                    <input type="password" ng-model="model.oldPassword">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nueva</span>
+                    <input type="password" ng-model="model.newPassword">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Repetir</span>
+                    <input type="password" ng-model="model.repeatPassword">
+                </label>
+            </div>
             <input ng-disabled="editForm.$invalid" type="submit" class="button button-block button-positive" value="Editar">
-        </div>
-        
-    </form>
-   </ion-content>
+        </form>
+    </div>
+</div>
+</ion-content>
 </ion-view>
