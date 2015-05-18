@@ -38,6 +38,21 @@
                             <input name="editEmail" type="email" ng-model="model.profileEmail" required>
                             <i ng-show="editForm.editEmail.$touched && editForm.editEmail.$invalid" class="icon assertive ion-alert"></i>
                         </label>
+                         <label class="item item-input item-stacked-label">
+                            <span class="input-label">Social Link Text</span>
+                            <input name="editSocialText" type="text" ng-model="model.socialLinkText" required>
+                            <i ng-show="editForm.editSocialText.$touched && editForm.editSocialText.$invalid" class="icon assertive ion-alert"></i>
+                        </label>
+                         <label class="item item-input item-stacked-label">
+                            <span class="input-label">Social Link Url</span>
+                            <input name="editSocialUrl" type="text" ng-model="model.socialLinkUrl" required>
+                            <i ng-show="editForm.editSocialUrl.$touched && editForm.editSocialUrl.$invalid" class="icon assertive ion-alert"></i>
+                        </label>
+                         <label class="item item-input item-stacked-label">
+                            <span class="input-label">Summary</span>
+                            <input name="editSummary" type="text" ng-model="model.summaryText" required>
+                            <i ng-show="editForm.editSummary.$touched && editForm.editSummary.$invalid" class="icon assertive ion-alert"></i>
+                        </label>
                     </div>
                     <div class="list">
                         <label class="item item-input item-stacked-label">

@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewPostController', function(lodash, $http, $state, $scope, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function(lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
     $scope.url = url_files;
      $scope.model = {            
@@ -28,13 +28,39 @@ angular.module('lufke').controller('NewPostController', function(lodash, $http, 
             });
         }
     };
-    $scope.getPhoto = function() {
+    $scope.showImagesOptions = function() {
+        var options = $ionicActionSheet.show({
+            buttons: [{
+                text: '<i class="ion-share"></i> <span>Photo</span>'
+            }, {
+                text: '<i class="ion-flag"></i> <span>Gallery</span>'
+            }],
+            cancelText: 'Cancelar',
+            cancel: function() {},
+            buttonClicked: function(index) {
+                //console.log("presionado botón nro: " + index);
+                switch (index) {
+                    case 0:
+                        $scope.getPhoto(navigator.camera.PictureSourceType.CAMARA);
+                        break;
+                    case 1:
+                        $scope.getPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+                        break;
+                    default:
+                        $scope.showMessage("Error", "Un error desconocido ha ocurrido.");
+                        break;
+                }
+                return true;
+            }
+        });
+    };
+    $scope.getPhoto = function(source) {
         var options = {
             quality: 75,
             correctOrientation: true,
             destinationType: navigator.camera.DestinationType.DATA_URL, //DATA_URL,FILE_URI
             encodingType: navigator.camera.EncodingType.JPEG, //PNG,JPEG
-            sourceType: navigator.camera.PictureSourceType.CAMARA, //CAMARA,PHOTOLIBRARY
+            sourceType: source, //CAMARA,PHOTOLIBRARY,SAVEDPHOTOALBUM
             allowEdit: true,
             targetWidth: 420,
             targetHeight: 420
@@ -42,13 +68,6 @@ angular.module('lufke').controller('NewPostController', function(lodash, $http, 
         navigator.camera.getPicture(function(imageBase64) {
             $scope.model.mediaSelected = true;
             $scope.model.imageBase64 = imageBase64;
-            if(imageBase64){
-                alert('ok');
-            }
-            else{
-                alert('no ok');
-            }
-            
         }, function(err) {
             alert("Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
