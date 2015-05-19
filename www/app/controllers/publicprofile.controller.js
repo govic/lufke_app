@@ -3,7 +3,7 @@ angular.module('lufke').controller('PublicProfileController', function(lodash, $
     $scope.url = url_files;
     console.dir($stateParams.profileId);
     $http.post(api.user.getPublicProfile, {
-    	profileId: $stateParams.profileId
+        profileId: $stateParams.profileId
     }).success(function(publicProfile, status, headers, config) {
         $scope.model = publicProfile;
     }).error(function(data, status, headers, config) {
@@ -12,8 +12,10 @@ angular.module('lufke').controller('PublicProfileController', function(lodash, $
         $scope.showMessage("Error", "Ha ocurrido un error al cargar los datos del perfil.");
     });
     $scope.updateProfileData = function() {
-    	console.dir($stateParams.profileId);
-        $http.post(api.user.getPublicProfile).success(function(publicProfile, status, headers, config) {
+        console.dir($stateParams.profileId);
+        $http.post(api.user.getPublicProfile, {
+            profileId: $stateParams.profileId
+        }).success(function(publicProfile, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = publicProfile;
         }).error(function(data, status, headers, config) {
