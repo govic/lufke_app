@@ -1,7 +1,7 @@
 <div class="item post-summary" ng-style="{'background-image':'url({{url + post.backgroundImgUrl}})'}">
     <div class="row row-top">
         <div class="post-summary-user-img-container">
-            <img class="post-summary-user-img" no-cache-src="{{url + post.authorUrlImage}}" alt="Foto de perfil" ui-sref="publicprofile({'profileId': post.authorId})"/>
+            <img class="post-summary-user-img" src="{{url + post.authorUrlImage}}" alt="Foto de perfil" ui-sref="publicprofile({'profileId': post.authorId})"/>
         </div>
         <div class="col post-summary-user-data">
             <span class="post-summary-user-name">{{post.authorName}}<br/></span>
