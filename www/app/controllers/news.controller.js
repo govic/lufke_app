@@ -1,20 +1,21 @@
-angular.module('lufke').controller('NewsController', function(lodash, $http, $scope, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function(lodash, $http, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
-    $http.post(api.post.getAll).success(function(data) {        
+    $http.post(api.post.getAll).success(function(data) {
         $scope.model = {
             posts: data.news,
             isExperienceTextFocus: false,
             mediaSelected: false,
             imageBase64: "",
-            experienceText: "",            
+            experienceText: "",
         };
     });
+    $scope.noMoreItemsAvailable = false;
     $scope.updateNews = function() {
         //TODO: hay que sacar el uso de localstorage, es solo para el dummy
         $localStorage.newsUpdateNumber++;
         $scope.$broadcast('scroll.refreshComplete');
-        $http.post(api.post.getAll).success(function(data) {           
+        $http.post(api.post.getAll).success(function(data) {
             $scope.model = {
                 posts: data.news,
                 isExperienceTextFocus: false,
@@ -56,7 +57,24 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
                 });
             });
         }
-    };    
+    };
+    $scope.moreNews = function() {
+        if($scope.model !== undefined){
+            var last = lodash.last($scope.model.posts);
+        }
+        console.dir(last);        
+        $http.post(api.post.getAll, {
+            lastId: last.id,
+            lastTimestamp: last.postTimestamp
+        })
+        .success(function(data) {
+            console.dir(data);
+            lodash.forEach(data.news, function(post) {
+                $scope.model.posts.push(post);
+            });  
+            $scope.$broadcast('scroll.infiniteScrollComplete'); 
+        });
+    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
