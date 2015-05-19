@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NotificationsController', function($scope, $http, $ionicPopup) {
+angular.module('lufke').controller('NotificationsController', function($scope, $http, $ionicPopup, $state) {
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
     $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
@@ -54,7 +54,14 @@ angular.module('lufke').controller('NotificationsController', function($scope, $
     };
     //metodo para redirigir haca notificacion
     $scope.viewNotification = function(notification) {
-        alert("Ver notificacion id = " + notification.notificationId); //TODO falta link hacia post o perfil usuario
+        //TODO falta link hacia post o perfil usuario
+        console.dir(notification);
+        if(notification.notificationType === "Like" || notification.notificationType === "Comment"){
+            $state.go('post', {postId: notification.postId});
+        }
+        else if(notification.notificationType === "Tracking"){
+            $state.go('publicprofile', {profileId: notification.profileId});
+        }
     };
     //mensajes de alerta
     $scope.showMessage = function(title, message, callback) {
