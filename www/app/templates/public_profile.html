@@ -1,7 +1,4 @@
-<ion-view hide-back-button="true" view-title="Perfil">
-    <ion-nav-buttons side="right">
-        <a class="button button-icon icon ion-levels" ui-sref="filters"></a>
-    </ion-nav-buttons>
+<ion-view view-title="Perfil">
     <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()">
         </ion-refresher>
@@ -16,11 +13,6 @@
                             <div class="col">
                                 <div class="profile-name-text">{{model.profileFirstName}}</div>
                                 <div class="profile-name-text">{{model.profileLastName}}</div>
-                            </div>
-                            <div class="col profile-button-edit">
-                                <a class="button button-light button-small" ng-click="editProfile()">
-                                    Editar perfil
-                                </a>
                             </div>
                         </div>
                         <div class="row profile-text-center light">
@@ -44,11 +36,10 @@
                         <div ng-repeat="item in model.interests">
                             {{item.interestText}}
                         </div>
-                        <a ui-sref="dna">ADN</a>
                     </div>
                 </div>
             </div>
-        </div>		
+        </div>      
         <div class="row">
             <div class="col profile-text-center">
                 <p>{{model.summaryText}}</p>

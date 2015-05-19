@@ -1,8 +1,7 @@
 angular.module('lufke').controller('ProfileController', function($scope, PostsService, $state, $http) {
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
-    $http.post(api.user.getProfile)
-    .success(function(profile, status, headers, config) {
+    $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
     }).error(function(data, status, headers, config) {
         console.dir(data);
@@ -14,10 +13,8 @@ angular.module('lufke').controller('ProfileController', function($scope, PostsSe
         console.log("Entro a... ProfileController");
         //$scope.model.lastPosts = PostsService.getLastUserPosts($scope.model.profileId, 0);
     });
-
-    $scope.updateProfileData = function(){
-        $http.post(api.user.getProfile)
-        .success(function(profile, status, headers, config) {
+    $scope.updateProfileData = function() {
+        $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = profile;
         }).error(function(data, status, headers, config) {
@@ -26,8 +23,8 @@ angular.module('lufke').controller('ProfileController', function($scope, PostsSe
             $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
         });
     };
-    $scope.editProfile = function() {    	
-    	$state.go('editprofile');
+    $scope.editProfile = function() {
+        $state.go('editprofile');
     }
     $scope.viewTag = function(tag) {
         alert("Ver detalle tag id = " + tag.tagId);
