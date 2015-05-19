@@ -17,7 +17,7 @@
 		</ion-header-bar>
 	</div>
 
-    <ion-content padding="true">
+    <ion-content class="has-footer" padding="true">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()">
         </ion-refresher>
 		<ion-list>
@@ -27,6 +27,7 @@
 				<i class="icon ion-eye"></i>
 			</a>
             <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>
-        </ion-list>        
+        </ion-list>  
+        <button ng-click="moreNews()" >Mas</button>         
     </ion-content>
 </ion-view>
