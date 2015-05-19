@@ -10,7 +10,10 @@ var api = {
         getProfile: url_base + '/user/getprofile',
         getEditProfile: url_base + '/user/geteditprofile',
         editProfile: url_base + '/user/editprofile',
-        editProfileImage: url_base + '/user/editprofileimage'
+        editProfileImage: url_base + '/user/editprofileimage',
+        getInterests: url_base + '/user/getinterests',
+        deleteInterest: url_base + '/user/deleteinterest',
+        getPublicProfile: url_base + '/user/getpublicprofile'
     },
     post: {
         get: url_base + '/post/get',

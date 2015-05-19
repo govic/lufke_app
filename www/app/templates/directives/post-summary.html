@@ -1,18 +1,15 @@
 <div class="item post-summary" ng-style="{'background-image':'url({{url + post.backgroundImgUrl}})'}">
-    <div class="row row-top" ui-sref="post({'postId': post.id})">
+    <div class="row row-top">
         <div class="post-summary-user-img-container">
-            <img class="post-summary-user-img" no-cache-src="{{url + post.authorUrlImage}}" alt="Foto de perfil"/>
+            <img class="post-summary-user-img" no-cache-src="{{url + post.authorUrlImage}}" alt="Foto de perfil" ui-sref="publicprofile({'profileId': post.authorId})"/>
         </div>
-
         <div class="col post-summary-user-data">
             <span class="post-summary-user-name">{{post.authorName}}<br/></span>
-
-            <span ng-show="post.location !== ''" class="post-summary-location">
+            <span ng-show="post.location !== ''" class="post-summary-location" ui-sref="post({'postId': post.id})">
                 <i class="ion-location"></i> {{post.authorLocation}}
             </span>
         </div>
-
-        <div class="col post-summary-timestamp">
+        <div class="col post-summary-timestamp" ui-sref="post({'postId': post.id})">
             <i class="ion-clock"></i> <span am-time-ago="post.postTimestamp"></span>                        
         </div>
     </div>

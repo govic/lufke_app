@@ -1,0 +1,13 @@
+<ion-view title="ADN">
+    <ion-content class="padding">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
+        </ion-refresher>
+        <div class="row">
+            <div class="col list">
+            	<div class="item" ng-repeat="item in model.interests" on-hold="removeItem(item)">
+                    {{item.interestName}}
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
