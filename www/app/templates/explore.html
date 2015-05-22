@@ -16,8 +16,8 @@
 
 			<ion-item ng-repeat="item in model.topUsers" style="background-image: url('{{item.backgroundImgUrl}}');">
 				<div class="row">
-					<div class="col" ng-click="goToProfile(item.profileId)">
-						<img ng-src="{{item.profileImgUrl}}" class="explore-profile-img" />
+					<div class="col" ui-sref="publicprofile({'profileId': item.profileId})">
+						<img ng-src="{{url + item.profileImgUrl}}" class="explore-profile-img" />
 					</div>
 
 					<div class="col explore-font">

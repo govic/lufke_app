@@ -1,5 +1,6 @@
 angular.module('lufke').controller('ExploreController', function($scope, $http, $ionicPopup) {
     console.log('Inicia...ExploreController ');
+    $scope.url = url_files;
     $http.post(api.explore.getPopulars).success(function(data, status, headers, config) {
         $scope.model = data;
     }).error(function(data, status, headers, config) {
