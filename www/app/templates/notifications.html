@@ -9,10 +9,10 @@
 
             <ion-item ng-repeat="item in model.requests.requestsList">
                 <div class="row">
-                    <div class="col notification-profile-img-center">
-                        <img ng-src="{{item.profileImgUrl}}" class="notification-profile-request-img" />
+                    <div class="col notification-profile-img-center" ui-sref="publicprofile({'profileId': item.requestId})">
+                        <img ng-src="{{url + item.profileImgUrl}}" class="notification-profile-request-img" />
                     </div>
-                    <div class="col col-75">
+                    <div class="col col-75" ui-sref="publicprofile({'profileId': item.requestId})">
                         {{item.profileName}}
                         <br />
                         <span class="notification-text-request-muted">{{item.profileUser}}</span>
@@ -46,7 +46,7 @@
 
             <ion-item ng-repeat="item in model.notifications.notificationsList">
                 <div class="row">
-                    <div class="col notification-profile-img-center">
+                    <div class="col notification-profile-img-center" ui-sref="publicprofile({'profileId': item.profileId})">
                         <img ng-src="{{url + item.profileImgUrl}}" class="notification-profile-img" />
                     </div>
 
@@ -62,6 +62,7 @@
                     <div class="col notification-icon-align-go" ng-click="viewNotification(item)">
                         <i class="ion-chevron-right notification-icon-go"></i>
                     </div>
+
                 </div>
             </ion-item>
 

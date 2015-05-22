@@ -1,4 +1,4 @@
-angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'base64']).config(function($urlRouterProvider, $ionicConfigProvider) {
+angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'base64', 'ngCordova']).config(function($urlRouterProvider, $ionicConfigProvider) {
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
@@ -36,16 +36,6 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             StatusBar.styleDefault();
         }
     });
-}).directive('noCacheSrc', function($window) {
-  return {
-    priority: 99,
-    link: function(scope, element, attrs) {
-      attrs.$observe('noCacheSrc', function(noCacheSrc) {
-        noCacheSrc += '?' + (new Date()).getTime();
-        attrs.$set('src', noCacheSrc);
-      });
-    }
-  }
 });
 moment.locale('es', {
     relativeTime: {

@@ -1,6 +1,9 @@
 angular.module('lufke').controller('NewsController', function(lodash, $http, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
+    $scope.moreData = true;
+    var full_post = 0;
+    var full_post_aux = 0;
     $http.post(api.post.getAll).success(function(data) {
         $scope.model = {
             posts: data.news,
@@ -8,13 +11,11 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
             mediaSelected: false,
             imageBase64: "",
             experienceText: "",
-        };
+        };        
     });
-    $scope.noMoreItemsAvailable = false;
     $scope.updateNews = function() {
         //TODO: hay que sacar el uso de localstorage, es solo para el dummy
-        $localStorage.newsUpdateNumber++;
-        $scope.$broadcast('scroll.refreshComplete');
+        $localStorage.newsUpdateNumber++;        
         $http.post(api.post.getAll).success(function(data) {
             $scope.model = {
                 posts: data.news,
@@ -23,6 +24,10 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
                 imageBase64: "",
                 experienceText: ""
             };
+            full_post = 0;
+            full_post_aux = 0;
+            $scope.moreData = true;
+            $scope.$broadcast('scroll.refreshComplete');
         });
     };
     $scope.toggleLike = function(postId) {
@@ -59,21 +64,28 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
         }
     };
     $scope.moreNews = function() {
-        if($scope.model !== undefined){
-            var last = lodash.last($scope.model.posts);
-        }
-        console.dir(last);        
+        //console.dir($scope.model);        
+        var last = lodash.last($scope.model.posts);
+        full_post = $scope.model.posts.length;
+        //console.dir(last);        
         $http.post(api.post.getAll, {
             lastId: last.id,
             lastTimestamp: last.postTimestamp
         })
         .success(function(data) {
-            console.dir(data);
+            //console.dir(data);
             lodash.forEach(data.news, function(post) {
                 $scope.model.posts.push(post);
             });  
+            full_post_aux = $scope.model.posts.length;
+            console.dir(full_post);
+            console.dir(full_post_aux);
+            if (full_post === full_post_aux){
+                $scope.moreData = false;
+            }
             $scope.$broadcast('scroll.infiniteScrollComplete'); 
         });
+        
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
