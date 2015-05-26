@@ -9,7 +9,7 @@
 		
 		<div class="row row-top">
 			<div id="post-detail-user-img-container">
-				<img id="post-detail-user-img" src="{{url + model.post.authorImgUrl}}" alt="Foto de perfil"/>
+				<img id="post-detail-user-img" src="{{url + model.post.authorImgUrl}}" alt="Foto de perfil" ui-sref="publicprofile({'profileId': model.post.authorId})"/>
 			</div>
 
 			<div class="col post-detail-user-data">
@@ -59,7 +59,7 @@
 			<ion-item ng-repeat="comment in model.post.comments" class="post-detail-comment-container" on-hold="showDeleteComment(comment.id)">
 				<div class="row">
 					<div id="post-detail-comment-user-img-container">
-						<img id="post-detail-comment-user-img" ng-src="{{url + comment.authorUrlImage}}"/>
+						<img id="post-detail-comment-user-img" ng-src="{{url + comment.authorUrlImage}}" ui-sref="publicprofile({'profileId': comment.authorId})"/>
 					</div>
 
 					<div class="col col-top">
