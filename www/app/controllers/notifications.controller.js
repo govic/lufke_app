@@ -67,6 +67,16 @@ angular.module('lufke').controller('NotificationsController', function(profileSe
         profileService.viewprofile(requestId);
     };
     //mensajes de alerta
+    $scope.checkNotifications = function() {
+        $http.post(api.notifications.check).success(function(data, status, headers, config) {
+            //TODO efecto eliminar de lista
+            $scope.model.notifications.notificationsList = [];
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.dir(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al realizar la operación solicitada.");
+        });
+    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,

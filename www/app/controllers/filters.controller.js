@@ -20,6 +20,7 @@ angular.module('lufke').controller('FiltersController', function($scope, $ionicP
     $scope.saveFilters = function() {
         $http.post(api.filters.saveFilters, $scope.model).success(function(data, status, headers, config) {
             $scope.model = data;
+            $scope.showMessage("Exito", "Sus preferencias fueron guardadas exitosamente.");
         }).error(function(err, status, headers, config) {
             console.dir(err);
             console.log(status);

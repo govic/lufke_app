@@ -6,6 +6,7 @@
     "ngstorage": "*",
     "ng-lodash": "*",
     "angular-moment": "*",
-    "angular-base64": "*"
+    "angular-base64": "*",
+    "ngCordova": "*"
   }
 }

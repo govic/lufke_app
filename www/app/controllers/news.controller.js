@@ -14,8 +14,6 @@ angular.module('lufke').controller('NewsController', function(lodash, profileSer
         };        
     });
     $scope.updateNews = function() {
-        //TODO: hay que sacar el uso de localstorage, es solo para el dummy
-        $localStorage.newsUpdateNumber++;        
         $http.post(api.post.getAll).success(function(data) {
             $scope.model = {
                 posts: data.news,
