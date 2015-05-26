@@ -1,5 +1,5 @@
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-var url_files = 'http://192.168.0.107:8080'; //sirve para local y celular
+var url_files = 'http://localhost:8080'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 
@@ -35,7 +35,9 @@ var api = {
     notifications: {
         getNotifications: url_base + '/notification/getnotificationsdata',
         ignoreRequest: url_base + '/notification/ignorerequest',
-        acceptRequest: url_base + '/notification/acceptrequest'
+        acceptRequest: url_base + '/notification/acceptrequest',
+        check: url_base + '/notification/checknotifications',
+        getAllNotifications: url_base + '/notification/getallnotifications'
     },
     filters: {
         getFilters: url_base + '/filter/getfiltersdata',

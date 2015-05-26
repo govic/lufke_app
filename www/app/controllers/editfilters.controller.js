@@ -2,7 +2,6 @@ angular.module('lufke').controller('EditFiltersController', function(lodash, $sc
     console.log('Inicia ... EditFiltersController');
     $http.post(api.filters.getTopInterests).success(function(data, status, headers, config) {
         $scope.model = data;
-        console.dir(data);
     }).error(function(err, status, headers, config) {
         console.dir(err);
         console.log(status);
