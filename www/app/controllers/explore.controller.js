@@ -1,4 +1,4 @@
-angular.module('lufke').controller('ExploreController', function($scope, $http, $ionicPopup) {
+angular.module('lufke').controller('ExploreController', function(profileService, $scope, $http, $ionicPopup) {
     console.log('Inicia...ExploreController ');
     $scope.url = url_files;
     $http.post(api.explore.getPopulars).success(function(data, status, headers, config) {
@@ -45,8 +45,8 @@ angular.module('lufke').controller('ExploreController', function($scope, $http, 
             $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
         });
     };
-    $scope.goToProfile = function(profileId) {
-        alert('Go to: ' + profileId);
+    $scope.viewProfile = function(profileId){
+        profileService.viewprofile(profileId);
     };
     $scope.allTopUsers = function() {
         alert('All Top Users');

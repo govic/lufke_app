@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NotificationsController', function($scope, $http, $ionicPopup, $state) {
+angular.module('lufke').controller('NotificationsController', function(profileService, $scope, $http, $ionicPopup, $state) {
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
     $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
@@ -62,6 +62,9 @@ angular.module('lufke').controller('NotificationsController', function($scope, $
         else if(notification.notificationType === "Tracking"){
             $state.go('publicprofile', {profileId: notification.profileId});
         }
+    };
+    $scope.viewProfile = function(requestId){
+        profileService.viewprofile(requestId);
     };
     //mensajes de alerta
     $scope.showMessage = function(title, message, callback) {

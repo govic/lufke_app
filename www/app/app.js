@@ -2,7 +2,8 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
-}).factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
+})
+.factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
     return {
         response: function(response) {
             if (response.status === 401) {
@@ -20,7 +21,20 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             return $q.reject(rejection);
         }
     }
-}).config(['$httpProvider',
+})
+.factory('profileService', function($localStorage, $state){
+    return{
+        viewprofile: function(id){
+            if($localStorage.session === id){
+                $state.go('tab.profile');
+            }
+            else{
+                $state.go('publicprofile', {profileId: id});
+            }
+        }
+    }
+})
+.config(['$httpProvider',
     function($httpProvider) {
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
@@ -36,7 +50,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             StatusBar.styleDefault();
         }
     });
-});
+})
 moment.locale('es', {
     relativeTime: {
         future: 'en %s',

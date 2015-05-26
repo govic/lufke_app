@@ -1,4 +1,4 @@
-angular.module('lufke').controller('RegisterController', function($localStorage, $scope, $http, $base64) {
+angular.module('lufke').controller('RegisterController', function($state, $localStorage, $scope, $http, $base64) {
     console.log('Inicia ... RegisterController');
     //elimina datos sesion usuario activo
     $localStorage.session = null;
@@ -32,12 +32,12 @@ angular.module('lufke').controller('RegisterController', function($localStorage,
                 passwordHash: $base64.encode(unescape(encodeURIComponent($scope.model.user.password)))
             });
             $http.post(api.user.register, userModel).success(function(user, status, headers, config) {
-                alert("Usuario registrado exitosamente!");
+                $scope.showMessage("Éxito", "Usuario registrado exitosamente!");
                 var auth = 'Basic ' + user.credentialsHash;
                 $http.defaults.headers.common.Authorization = auth;//cabecera auth por defecto
                 $localStorage.basic = auth;//guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                $state.go('tab.news'); //redirige hacia news
+                $state.go('editprofile'); //redirige hacia editar perfil
                 return;
             }).error(function(data, status, headers, config) {
                 console.dir(data);
@@ -48,4 +48,5 @@ angular.module('lufke').controller('RegisterController', function($localStorage,
             });
         }
     };
+
 });

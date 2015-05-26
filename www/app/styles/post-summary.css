@@ -4,23 +4,31 @@
     background-size: cover;
     padding: 0;
 }
-
-.post-summary-body-text {
-    padding-top: 6.8em;
-	height: 1.5em;
-    font-size: 90%;
+.post-summary-text{
+    margin-top: 6em;
+    margin-bottom: 0.3em;
+    border-radius: 0.25em;
+    padding: 0em 0.3em;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .post-summary-footer {
-    padding-top: 0.5em;
-	height: 1.5em;
-    font-size: 85%;
-	color: #666666;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 0.25em;
+    width: 5em !important;
+	color: white;
+    font-size: 130%;
+    padding: 0.3em 0.3em;
 }
-
 .post-summary-timestamp {
-    padding-top: 0.7em;
-	text-align: right;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 0.25em;
+    padding: 0em 0.3em;
+    color: white;
+    float: right;
+    display: block;
+    clear: both;
 }
 
 .post-summary-user-name {
@@ -28,8 +36,12 @@
 }
 
 .post-summary-user-data{
-	padding-top: 0.7em;
-	text-align: left;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 0.25em;
+    color: white;
+    padding: 0em 0.3em;
+    margin-top: 0.5em;
+    margin-left: 0.4em;
 }
 
 .post-summary-location {
@@ -42,7 +54,6 @@
     height: 3.5em;
     width: 3.5em;
 }
-
-.post-summary-user-img-container {
-    padding: 0.3em;
+.ion-ios7-star{
+    color: yellow;
 }

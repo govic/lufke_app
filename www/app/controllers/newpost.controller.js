@@ -69,7 +69,7 @@ angular.module('lufke').controller('NewPostController', function(lodash, $http, 
             $scope.model.mediaSelected = true;
             $scope.model.imageBase64 = imageBase64;
         }, function(err) {
-            alert("Ha ocurrido un error al intentar cargar la imagen.");
+            $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
             $scope.model.imageBase64 = "";
         }, options);

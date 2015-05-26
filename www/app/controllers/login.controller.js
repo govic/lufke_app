@@ -1,5 +1,7 @@
 angular.module('lufke').controller('LoginController', function($rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64) {
     console.log('Inicia ... LoginController');
+    $scope.url = url_files;
+    $scope.loginImage = 'assets/img/login.png';
     //verificacion de datos estaticos de autenticacion
     if ($localStorage.basic && $localStorage.basic.trim() != "") {
         $http.post(api.user.login, {
