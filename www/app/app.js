@@ -56,15 +56,15 @@ moment.locale('es', {
         future: 'en %s',
         past: '%s',
         s: 'ahora',
-        m: '1 minuto',
-        mm: '%d minutos',
-        h: '1 hora',
-        hh: '%d horas',
-        d: '1 día',
-        dd: '%d días',
-        M: '1 mes',
-        MM: '%d meses',
-        y: '1 año',
-        yy: '%d años'
+        m: '1m',
+        mm: '%dm',
+        h: '1h',
+        hh: '%dh',
+        d: '1d',
+        dd: '%dd',
+        M: '1M',
+        MM: '%dM',
+        y: '1a',
+        yy: '%da'
     }
 });

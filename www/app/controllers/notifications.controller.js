@@ -53,15 +53,33 @@ angular.module('lufke').controller('NotificationsController', function(profileSe
         alert("Ver más notifications!");
     };
     //metodo para redirigir haca notificacion
-    $scope.viewNotification = function(notification) {
-        //TODO falta link hacia post o perfil usuario
-        console.dir(notification);
-        if(notification.notificationType === "Like" || notification.notificationType === "Comment"){
-            $state.go('post', {postId: notification.postId});
-        }
-        else if(notification.notificationType === "Tracking"){
-            $state.go('publicprofile', {profileId: notification.profileId});
-        }
+    $scope.viewNotification = function(item) {
+        //TODO falta link hacia post o perfil usuario 
+        //console.dir(item);       
+        $http.post(api.notifications.revised, {notificationId: item.notificationId})
+        .success(function(data, status, headers, config) {
+            //console.dir(data);
+            $http.post(api.notifications.getNotifications)
+            .success(function(data, status, headers, config) {
+                //console.dir(data);
+                $scope.model = data;
+                if(item.notificationType === "Like" || item.notificationType === "Comment"){
+                    $state.go('post', {postId: item.postId});
+                }
+                else if(item.notificationType === "Tracking"){
+                    $state.go('publicprofile', {profileId: item.profileId});
+                }
+            }).error(function(data, status, headers, config) {
+                console.dir(data);
+                console.dir(status);
+                $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
+            });
+            //TODO efecto eliminar de lista
+        }).error(function(data, status, headers, config) {
+            console.dir(data);
+            console.dir(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al realizar la operación solicitada.");
+        });
     };
     $scope.viewProfile = function(requestId){
         profileService.viewprofile(requestId);
@@ -76,7 +94,7 @@ angular.module('lufke').controller('NotificationsController', function(profileSe
             console.dir(status);
             $scope.showMessage("Error", "Ha ocurrido un error al realizar la operación solicitada.");
         });
-    };
+    };   
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
