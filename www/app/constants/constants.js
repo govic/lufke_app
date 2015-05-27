@@ -13,7 +13,9 @@ var api = {
         editProfileImage: url_base + '/user/editprofileimage',
         getInterests: url_base + '/user/getinterests',
         deleteInterest: url_base + '/user/deleteinterest',
-        getPublicProfile: url_base + '/user/getpublicprofile'
+        getPublicProfile: url_base + '/user/getpublicprofile',
+        searchInterests: url_base + '/user/searchinterests',
+        addInterestToProfile: url_base + '/user/addinterest'
     },
     post: {
         get: url_base + '/post/get',

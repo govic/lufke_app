@@ -1,12 +1,17 @@
 <ion-view title="ADN">
+    <ion-nav-buttons side="right">
+        <button class="button" ui-sref="editdna">Editar</button>
+    </ion-nav-buttons>
     <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
         </ion-refresher>
-        <div class="row">
-            <div class="col list">
-            	<div class="item" ng-repeat="item in model.interests" on-hold="removeItem(item)">
-                    {{item.interestName}}
-                </div>
+        <div class="list">
+        	<div class="item item-icon-right" ng-repeat="item in model.interests">
+                {{item.interestName}}
+                <i class="icon ion-minus-circled assertive" ng-click="removeItem(item)"></i>
+            </div>
+            <div class="item" ng-show="!model.interests || model.interests.lenght <= 0">
+                No has agregado intereses a tu perfil :(
             </div>
         </div>
     </ion-content>
