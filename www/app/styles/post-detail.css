@@ -23,8 +23,9 @@
 
 #post-detail-user-img {
     border-radius: 100%;
-    height: 4em;
-    width: 4em;
+    height: 5em;
+    width: 5em;
+    object-fit: cover;
 }
 
 #post-detail-user-img-container {

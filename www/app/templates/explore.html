@@ -14,9 +14,9 @@
 				</div>
 			</ion-item>
 
-			<ion-item ng-repeat="item in model.topUsers" style="background-image: url('{{item.backgroundImgUrl}}');">
+			<ion-item ng-repeat="item in model.topUsers" ng-style="{'background-image':'url({{url + item.backgroundImgUrl}})'}">
 				<div class="row">
-					<div class="col" ui-sref="publicprofile({'profileId': item.profileId})">
+					<div class="col" ng-click="viewProfile(item.profileId)">
 						<img ng-src="{{url + item.profileImgUrl}}" class="explore-profile-img" />
 					</div>
 
@@ -28,9 +28,7 @@
 						</button>
 					</div>
 
-					<div ng-repeat="pub in item.lastPosts"
-						 class="col post-content" 
-						 style="background-image: url('{{pub.postImgUrl}}');">
+					<div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{url + pub.postImgUrl}})'}">
 						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
 					</div>
 				</div>

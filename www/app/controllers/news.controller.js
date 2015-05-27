@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewsController', function(lodash, $http, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function(lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
     $scope.moreData = true;
@@ -84,6 +84,9 @@ angular.module('lufke').controller('NewsController', function(lodash, $http, $sc
             $scope.$broadcast('scroll.infiniteScrollComplete'); 
         });
         
+    };
+    $scope.viewProfile = function(authorId){
+        profileService.viewprofile(authorId);
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({

@@ -79,8 +79,8 @@ angular.module('lufke').controller('EditProfileController', function($http, $sco
             encodingType: navigator.camera.EncodingType.JPEG, //PNG,JPEG
             sourceType: source, //CAMARA,PHOTOLIBRARY,SAVEDPHOTOALBUM
             allowEdit: true,
-            targetWidth: 420,
-            targetHeight: 420
+            //targetWidth: 420,
+            //targetHeight: 420
         };
         navigator.camera.getPicture(function(imageBase64) {
             $http.post(api.user.editProfileImage, {

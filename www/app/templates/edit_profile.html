@@ -2,17 +2,17 @@
     <ion-content class="padding">
         <div class="row">
             <div class="col">
-                <form name="editForm" ng-submit="editForm.$valid && editProfile()">
+                <form name="editForm" ng-submit="editForm.$valid">
                     <div>
-                        <img id="profile-img" no-cache-src="{{url + model.backgroundImgUrl}}" />
+                        <img id="profile-img" src="{{url + model.backgroundImgUrl}}" />
                         <button ng-click="showImagesOptions('background')">Editar</button>
                     </div>
                     <div>
-                        <img id="profile-img" no-cache-src="{{url + model.profileImgUrl}}" />
+                        <img id="profile-img" src="{{url + model.profileImgUrl}}" />
                         <button ng-click="showImagesOptions('profile')">Editar</button>
                     </div>
                     <div class="list">
-                        <label class="item item-input item-stacked-label">HOLI</label>
+                        <label class="item item-input item-stacked-label">DATOS PERSONALES</label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de usuario</span>
                             <input name="editUserName" type="text" ng-model="model.profileUserName" required>
@@ -55,6 +55,7 @@
                         </label>
                     </div>
                     <div class="list">
+                        <label class="item item-input item-stacked-label">CAMBAIR CONTRASEÑA</label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Actual</span>
                             <input type="password" ng-model="model.oldPassword">

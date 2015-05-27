@@ -1,4 +1,4 @@
-angular.module('lufke').controller('PostController', function(lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
+angular.module('lufke').controller('PostController', function(profileService, lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
     console.log('Inicia ... PostController');
     $scope.url = url_files;
     $http.post(api.post.get, {
@@ -159,4 +159,7 @@ angular.module('lufke').controller('PostController', function(lodash, $http, $sc
             });
         }
     };
+    $scope.viewProfile = function(authorId){
+        profileService.viewprofile(authorId);
+    };    
 });

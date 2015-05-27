@@ -4,3 +4,8 @@
 	font-size: 85%;
 	color: #666666;
 }
+.loginimg{
+	background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}

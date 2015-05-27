@@ -1,12 +1,14 @@
 .notification-profile-request-img {
     border-radius: 100%;
-    height: 2.5em;
-    width: 2.5em;
+    height: 3em;
+    width: 3em;
+    object-fit: cover;
 }
 .notification-profile-img {
     border-radius: 100%;
-    height: 2.5em;
-    width: 2.5em;
+    height: 3em;
+    width: 3em;
+    object-fit: cover;
 }
 .notification-text-request-muted {
     color: #C8C8C8;
