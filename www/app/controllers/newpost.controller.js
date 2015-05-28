@@ -1,30 +1,30 @@
-angular.module('lufke').controller('NewPostController', function(lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function($rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
     $scope.url = url_files;
-     $scope.model = {            
-            mediaSelected: false,
-            imageBase64: "",
-            experienceText: "",            
+    $scope.model = {
+        mediaSelected: false,
+        imageBase64: "",
+        experienceText: "",
     };
     $scope.shareExperience = function() {
         if ($scope.model.mediaSelected || $scope.model.experienceText.length) {
-            var post = {
+            $http.post(api.post.create, {
                 authorId: $localStorage.session,
                 text: $scope.model.experienceText,
                 imgBase64: $scope.model.mediaSelected ? $scope.model.imageBase64 : "",
                 imgMimeType: "image/jpeg" //depende del metodo getPhoto en las opciones
-            };
-            console.dir(post);
-            $http.post(api.post.create, post)
-            .success(function(user) {
+            }).success(function(data, status, headers, config) {
                 $scope.model.experienceText = "";
                 $scope.model.mediaSelected = false;
                 $scope.model.imageBase64 = "";
-                $http.post(api.post.getAll)
-                .success(function(data) {
-                    $scope.model.posts = data.news;
+                $rootScope.$broadcast('newPost', {
+                    post: data
                 });
                 $state.go('tab.news'); //redirige hacia news
+            }).error(function(err, status, headers, config) {
+                console.dir(err);
+                console.log(status);
+                $scope.showMessage("Error", "Ha ocurrido un error al realizar la publicación.");
             });
         }
     };

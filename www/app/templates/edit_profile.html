@@ -2,7 +2,7 @@
     <ion-content class="padding">
         <div class="row">
             <div class="col">
-                <form name="editForm" ng-submit="editForm.$valid">
+                <form name="editForm" ng-submit="editForm.$valid && editProfile()">
                     <div>
                         <img id="profile-img" src="{{url + model.backgroundImgUrl}}" />
                         <button ng-click="showImagesOptions('background')">Editar</button>
@@ -40,17 +40,17 @@
                         </label>
                          <label class="item item-input item-stacked-label">
                             <span class="input-label">Social Link Text</span>
-                            <input name="editSocialText" type="text" ng-model="model.socialLinkText" required>
+                            <input name="editSocialText" type="text" ng-model="model.socialLinkText">
                             <i ng-show="editForm.editSocialText.$touched && editForm.editSocialText.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                          <label class="item item-input item-stacked-label">
                             <span class="input-label">Social Link Url</span>
-                            <input name="editSocialUrl" type="text" ng-model="model.socialLinkUrl" required>
+                            <input name="editSocialUrl" type="text" ng-model="model.socialLinkUrl">
                             <i ng-show="editForm.editSocialUrl.$touched && editForm.editSocialUrl.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                          <label class="item item-input item-stacked-label">
                             <span class="input-label">Summary</span>
-                            <input name="editSummary" type="text" ng-model="model.summaryText" required>
+                            <input name="editSummary" type="text" ng-model="model.summaryText">
                             <i ng-show="editForm.editSummary.$touched && editForm.editSummary.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                     </div>

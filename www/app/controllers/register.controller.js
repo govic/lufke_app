@@ -1,4 +1,4 @@
-angular.module('lufke').controller('RegisterController', function($state, $localStorage, $scope, $http, $base64) {
+angular.module('lufke').controller('RegisterController', function($state, $localStorage, $scope, $http, $base64, $ionicPopup) {
     console.log('Inicia ... RegisterController');
     //elimina datos sesion usuario activo
     $localStorage.session = null;
@@ -43,10 +43,20 @@ angular.module('lufke').controller('RegisterController', function($state, $local
                 console.dir(data);
                 console.dir(status);
                 $scope.model.registerError = true;
-                if (status == 404) $scope.model.registerErrorMsg = "El servidor de datos está sin conexión, por favor intente más tarde.";
-                else $scope.model.registerErrorMsg = data.ExceptionMessage;
+                if (status == 404) $scope.showMessage("Error", "El servidor de datos está sin conexión, por favor intente más tarde.");
+                else $scope.showMessage("Error", data.ExceptionMessage);
             });
         }
     };
-
+    $scope.showMessage = function(title, message, callback) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: message,
+            okText: "Aceptar"
+        });
+        alertPopup.then(function(res) {
+            if (callback) callback();
+            return;
+        });
+    };
 });
