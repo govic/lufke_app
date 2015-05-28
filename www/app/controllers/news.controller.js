@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewsController', function(lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function($rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
     $scope.moreData = true;
@@ -42,27 +42,8 @@ angular.module('lufke').controller('NewsController', function(lodash, profileSer
             $scope.showMessage("Error", "Ha ocurrido al hacer like.");
         });
     };
-    $scope.shareExperience = function() {
-        if ($scope.model.mediaSelected || $scope.model.experienceText.length) {
-            var post = {
-                authorId: $localStorage.session,
-                text: $scope.model.experienceText,
-                imgBase64: $scope.model.mediaSelected ? $scope.model.imageBase64 : "",
-                imgMimeType: "image/jpeg" //depende del metodo getPhoto en las opciones
-            };
-            console.dir(post);
-            $http.post(api.post.create, post).success(function(user) {
-                $scope.model.experienceText = "";
-                $scope.model.mediaSelected = false;
-                $scope.model.imageBase64 = "";
-                $http.post(api.post.getAll).success(function(data) {
-                    $scope.model.posts = data.news;
-                });
-            });
-        }
-    };
     $scope.moreNews = function() {
-        //console.dir($scope.model);        
+        //console.dir($scope.model);
         var last = lodash.last($scope.model.posts);
         full_post = $scope.model.posts.length;
         //console.dir(last);        
@@ -88,6 +69,9 @@ angular.module('lufke').controller('NewsController', function(lodash, profileSer
     $scope.viewProfile = function(authorId){
         profileService.viewprofile(authorId);
     };
+    $rootScope.$on('newPost', function(event, args){
+        $scope.model.posts.push(args.post);
+    });
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,

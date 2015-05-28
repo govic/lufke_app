@@ -1,6 +1,6 @@
 <ion-view title="ADN">
     <ion-nav-buttons side="right">
-        <button class="button" ui-sref="editdna">Editar</button>
+        <button class="button" ui-sref="editdna">Agregar</button>
     </ion-nav-buttons>
     <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
@@ -10,7 +10,7 @@
                 {{item.interestName}}
                 <i class="icon ion-minus-circled assertive" ng-click="removeItem(item)"></i>
             </div>
-            <div class="item" ng-show="!model.interests || model.interests.lenght <= 0">
+            <div class="item" ng-show="!model.interests.length">
                 No has agregado intereses a tu perfil :(
             </div>
         </div>
