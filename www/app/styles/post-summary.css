@@ -13,7 +13,7 @@
     padding: 0em 0.3em;
     color: white;
     background-color: rgba(0,0,0,0.4);
-    overflow:hidden;
+    overflow: hidden;
     text-overflow:ellipsis;
 }
 
