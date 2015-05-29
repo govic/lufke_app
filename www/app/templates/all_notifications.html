@@ -28,7 +28,7 @@
                 No tiene notificaciones para motrar
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll ng-if="moreData && model.notificationsList" on-infinite="moreNotifications()" distance="1%">
+        <ion-infinite-scroll ng-if="moreData && model.notificationsList" on-infinite="moreNotifications()" distance="1%" ng-show="model.notificationsList.lenght > 0">
         </ion-infinite-scroll>
         <div class="list">
             <div class="item" ng-if="!moreData">No hay más notificaciones para mostrar :(</div>

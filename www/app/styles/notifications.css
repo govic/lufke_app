@@ -15,7 +15,7 @@
     font-size: 95%;
 }
 .notification-request-icon-ok {
-    font-size: 2.2em;
+    font-size: 3em;
     color: #56BCC5;
 }
 .notification-icon-align-go {
@@ -42,4 +42,7 @@
 }
 .notification-timestamp-text {
     color: #C8C8C8;
+}
+.notification-list-no-pad .item-content {
+    padding:0px 10px 0px 0px;
 }

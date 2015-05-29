@@ -31,7 +31,7 @@
 			</a>
             <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>
         </ion-list> 
-        <ion-infinite-scroll ng-if="moreData && model.posts" on-infinite="moreNews()" distance="1%">
+        <ion-infinite-scroll ng-if="moreData && model.posts" on-infinite="moreNews()" distance="1%" ng-show="model.posts.lenght > 0">
         </ion-infinite-scroll>
         <div class="list">
             <div class="item item-icon-left item-icon-right" ng-if="!moreData">No hay más noticias que mostrar :(</div>

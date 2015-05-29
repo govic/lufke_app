@@ -6,7 +6,7 @@
             <ion-item class="item-divider">
 				Solicitudes de Seguimiento
             </ion-item>
-            <ion-item ng-repeat="item in model.requests.requestsList">
+            <ion-item ng-repeat="item in model.requests.requestsList" class="notification-list-no-pad">
                 <div class="row">
                     <div class="col notification-profile-img-center">
                         <img ng-src="{{item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"/>
@@ -32,7 +32,7 @@
             </ion-item>
 
             <ion-item class="item-divider" ng-show="model.requests.requestsList.length > 0" ng-click="viewRequests()">
-				Ver {{requests.totalMore}} más <i class="ion-chevron-down"></i>
+				Ver más <i class="ion-chevron-down"></i>
             </ion-item>
         </ion-list>
 		<br/>
@@ -61,8 +61,8 @@
             <ion-item ng-show="!model.notifications.notificationsList.length">
                 No tiene notificaciones para motrar
             </ion-item>
-            <ion-item class="item-divider" ui-sref="allnotifications">
-				Ver todas <i class="ion-chevron-down"></i>
+            <ion-item class="item-divider" ng-click="viewNotifications()">
+                Ver todas <i class="ion-chevron-down"></i>
             </ion-item>
         </ion-list>
     </ion-content>

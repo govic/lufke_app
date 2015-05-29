@@ -64,7 +64,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     /* Metodos para control de notifications */
     //metodo cargar todas las notificaciones
     $scope.viewNotifications = function() {
-        alert("Ver más notifications!");
+        $state.go('allnotifications');
     };
     //metodo para redirigir haca notificacion
     $scope.viewNotification = function(item) {
