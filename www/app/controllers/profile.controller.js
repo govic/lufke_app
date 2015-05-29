@@ -1,11 +1,19 @@
-angular.module('lufke').controller('ProfileController', function($scope, PostsService, $state, $http) {
+angular.module('lufke').controller('ProfileController', function($ionicLoading, $scope, PostsService, $state, $http) {
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
+    $scope.unknown_user = url_unknown;
+
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+    });
     $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
+        $ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.log(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
     });
     $scope.$on('$ionicView.afterEnter', function() {

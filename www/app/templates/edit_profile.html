@@ -8,7 +8,7 @@
                         <button ng-click="showImagesOptions('background')">Editar</button>
                     </div>
                     <div>
-                        <img id="profile-img" src="{{url + model.profileImgUrl}}" />
+                        <img id="profile-img" src="{{model.profileImgUrl !== '' && model.profileImgUrl !== null ? url + model.profileImgUrl : unknown_user}}" />
                         <button ng-click="showImagesOptions('profile')">Editar</button>
                     </div>
                     <div class="list">

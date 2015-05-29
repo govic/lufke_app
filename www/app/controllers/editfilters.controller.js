@@ -1,5 +1,6 @@
 angular.module('lufke').controller('EditFiltersController', function(lodash, $scope, $ionicPopup, $http) {
     console.log('Inicia ... EditFiltersController');
+    
     $http.post(api.filters.getTopInterests).success(function(data, status, headers, config) {
         $scope.model = data;
     }).error(function(err, status, headers, config) {

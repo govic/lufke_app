@@ -1,11 +1,16 @@
-angular.module('lufke').controller('ExploreController', function(profileService, $scope, $http, $ionicPopup) {
+angular.module('lufke').controller('ExploreController', function($ionicLoading, profileService, $scope, $http, $ionicPopup) {
     console.log('Inicia...ExploreController ');
     $scope.url = url_files;
-    $http.post(api.explore.getPopulars).success(function(data, status, headers, config) {
+    $scope.unknown_user = url_unknown;
+    $ionicLoading.show();
+    $http.post(api.explore.getPopulars)
+    .success(function(data, status, headers, config) {
         $scope.model = data;
+        $ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.dir(status);
+        $ionicLoading.hide(); 
         $scope.showMessage("Error", "Ha ocurrido un error al cargar los usuarios populares y las categorías.");
     });
     $scope.updateExploreData = function() {

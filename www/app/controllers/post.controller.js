@@ -1,6 +1,12 @@
-angular.module('lufke').controller('PostController', function(profileService, lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
+angular.module('lufke').controller('PostController', function($ionicLoading, profileService, lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
     console.log('Inicia ... PostController');
     $scope.url = url_files;
+    $scope.unknown_user = url_unknown;
+
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+    });
     $http.post(api.post.get, {
         id: $stateParams.postId
     }).success(function(post) {        
@@ -9,13 +15,16 @@ angular.module('lufke').controller('PostController', function(profileService, lo
             commentText: ""
         };
         console.dir(post);
+        $ionicLoading.hide(); 
     }).error(function(data) {
         console.dir(data);
+        $ionicLoading.hide(); 
         $scope.showMessage("Error", "Ha ocurrido un error al cargar la publicación.", function() {
             $state.go('tab.news');
             return;
         });
     });
+
     $scope.updatePost = function() {
         $http.post(api.post.get, {
             id: $stateParams.postId

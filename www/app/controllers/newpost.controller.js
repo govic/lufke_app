@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewPostController', function($rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function($ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
     $scope.url = url_files;
     $scope.model = {
@@ -7,6 +7,7 @@ angular.module('lufke').controller('NewPostController', function($rootScope, lod
         experienceText: "",
     };
     $scope.shareExperience = function() {
+        $ionicLoading.show();
         if ($scope.model.mediaSelected || $scope.model.experienceText.length) {
             $http.post(api.post.create, {
                 authorId: $localStorage.session,
@@ -21,9 +22,11 @@ angular.module('lufke').controller('NewPostController', function($rootScope, lod
                     post: data
                 });
                 $state.go('tab.news'); //redirige hacia news
+                $ionicLoading.hide();
             }).error(function(err, status, headers, config) {
                 console.dir(err);
                 console.log(status);
+                $ionicLoading.hide();
                 $scope.showMessage("Error", "Ha ocurrido un error al realizar la publicación.");
             });
         }
@@ -65,9 +68,14 @@ angular.module('lufke').controller('NewPostController', function($rootScope, lod
             targetWidth: 420,
             targetHeight: 420
         };
+         $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+        });
         navigator.camera.getPicture(function(imageBase64) {
             $scope.model.mediaSelected = true;
             $scope.model.imageBase64 = imageBase64;
+            $ionicLoading.hide();
         }, function(err) {
             $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
