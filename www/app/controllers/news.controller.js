@@ -1,17 +1,20 @@
-angular.module('lufke').controller('NewsController', function($rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
+    $scope.unknown_user = url_unknown;
     $scope.moreData = true;
     var full_post = 0;
     var full_post_aux = 0;
-    $http.post(api.post.getAll).success(function(data) {
+    $ionicLoading.show();
+    $http.post(api.post.getAll).success(function(data) {        
         $scope.model = {
             posts: data.news,
             isExperienceTextFocus: false,
             mediaSelected: false,
             imageBase64: "",
             experienceText: "",
-        };        
+        }; 
+        $ionicLoading.hide();     
     });
     $scope.updateNews = function() {
         $http.post(api.post.getAll).success(function(data) {

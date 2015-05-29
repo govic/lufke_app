@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="row">
                     <div>
-                        <img id="profile-img" src="{{url + model.profileImgUrl}}" />
+                        <img id="profile-img" src="{{model.profileImgUrl !== '' && model.profileImgUrl !== null ? url + model.profileImgUrl : unknown_user}}" />
                     </div>
                     <div class="col">
                         <div class="row light">

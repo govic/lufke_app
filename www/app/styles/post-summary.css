@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding: 0;
+    width: 100%;
 }
 .post-summary-text{
     margin-top: 5.6em;

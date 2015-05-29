@@ -8,16 +8,19 @@
 
     <div ui-sref="newpost">
 		<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
+
 			<textarea id="experienceTextArea" 
 					  ng-model="model.experienceText" 
 					  ng-blur="model.isExperienceTextFocus = false" 
 					  ng-focus="model.isExperienceTextFocus = true" 
 					  placeholder="Comparte tu experiencia...">
+
 			</textarea>
+            <i class="icon ion-chatbox-working"></i>
 		</ion-header-bar>
 	</div>
 
-    <ion-content class="has-footer" padding="true">
+    <ion-content class="has-footer">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()">
         </ion-refresher>
 		<ion-list>

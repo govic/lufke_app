@@ -1,15 +1,21 @@
-angular.module('lufke').controller('EditProfileController', function($http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
+angular.module('lufke').controller('EditProfileController', function($ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
     console.log('Inicia ... EditProfileController');
     $scope.url = url_files;
-    $http.post(api.user.getEditProfile).success(function(profile, status, headers, config) {
+    $scope.unknown_user = url_unknown;
+
+    $ionicLoading.show();
+    $http.post(api.user.getEditProfile)
+    .success(function(profile, status, headers, config) {
         $scope.model = profile;
         $scope.model.oldPassword = "";
         $scope.model.newPassword = "";
         $scope.model.repeatPassword = "";
+        $ionicLoading.hide();
         //console.dir($scope.model);
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.log(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
     });
     $scope.updateEditProfile = function(){

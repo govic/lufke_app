@@ -1,9 +1,49 @@
+#shareExperienceContainer{
+	background-color: #B3A646;
+	border: none;
+}
 #experienceTextArea{	
 	font-size: 120%;
+	background-color: #B3A646;
+	position: relative;
+
+}
+#experienceTextArea::-webkit-input-placeholder {
+   color: #EBE35A;
+   padding-left: 33px;
+   padding-top: 7px;
+}
+#experienceTextArea:-moz-placeholder { /* Firefox 18- */
+   color: #EBE35A; 
+   padding-left: 33px;
+   padding-top: 7px; 
+}
+
+#experienceTextArea::-moz-placeholder {  /* Firefox 19+ */
+   color: #EBE35A;
+   padding-left: 33px;
+   padding-top: 7px;  
+}
+
+#experienceTextArea:-ms-input-placeholder {  
+   color: #EBE35A;  
+   padding-left: 33px;
+   padding-top: 7px;
 }
 input {
-  width: 100%;  
+  	width: 100%;  
 }
-textarea {
-  width: 100%; 
+textarea {	
+  	width: 100%; 
+}
+.ion-chatbox-working{
+	position: absolute;
+	font-size: 140%;
+	left: 20px;
+	top: 12px;
+	color: #EBE35A;
+	z-index: 100;
+}
+.list{
+	background-color: #EAEEEF;
 }

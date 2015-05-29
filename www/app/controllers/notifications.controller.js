@@ -1,20 +1,34 @@
-angular.module('lufke').controller('NotificationsController', function(profileService, $scope, $http, $ionicPopup, $state) {
+angular.module('lufke').controller('NotificationsController', function($ionicLoading, profileService, $scope, $http, $ionicPopup, $state) {
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
-    $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
+    $scope.unknown_user = url_unknown;
+    $ionicLoading.show({
+         content: 'Loading',
+        animation: 'fade-in',
+    })
+    $http.post(api.notifications.getNotifications)
+    .success(function(data, status, headers, config) {
         $scope.model = data;
+        $ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.dir(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
     });
     $scope.updateNotificationsData = function() {
+        $ionicLoading.show({
+             content: 'Loading',
+            animation: 'fade-in',
+        })
         $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = data;
+            $ionicLoading.hide();
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.dir(status);
+            $ionicLoading.hide();
             $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
         });
     };
@@ -55,7 +69,8 @@ angular.module('lufke').controller('NotificationsController', function(profileSe
     //metodo para redirigir haca notificacion
     $scope.viewNotification = function(item) {
         //TODO falta link hacia post o perfil usuario 
-        //console.dir(item);       
+        //console.dir(item);  
+        $ionicLoading.show();  
         $http.post(api.notifications.revised, {notificationId: item.notificationId})
         .success(function(data, status, headers, config) {
             //console.dir(data);
@@ -69,9 +84,11 @@ angular.module('lufke').controller('NotificationsController', function(profileSe
                 else if(item.notificationType === "Tracking"){
                     $state.go('publicprofile', {profileId: item.profileId});
                 }
+                $ionicLoading.hide();
             }).error(function(data, status, headers, config) {
                 console.dir(data);
                 console.dir(status);
+                $ionicLoading.hide();
                 $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
             });
             //TODO efecto eliminar de lista

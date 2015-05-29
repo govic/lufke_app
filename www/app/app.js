@@ -39,7 +39,12 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }
-]).run(function($ionicPlatform) {
+])
+.constant('$ionicLoadingConfig', {
+    template: '<i class="icon ion-loading-c"></i>',
+    animation: 'fade-in'   
+})
+.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
