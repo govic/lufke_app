@@ -45,29 +45,32 @@ angular.module('lufke').controller('NewsController', function($ionicLoading, $ro
             $scope.showMessage("Error", "Ha ocurrido al hacer like.");
         });
     };
+
     $scope.moreNews = function() {
         //console.dir($scope.model);
-        var last = lodash.last($scope.model.posts);
-        full_post = $scope.model.posts.length;
-        //console.dir(last);        
-        $http.post(api.post.getAll, {
-            lastId: last.id,
-            lastTimestamp: last.postTimestamp
-        })
-        .success(function(data) {
-            //console.dir(data);
-            lodash.forEach(data.news, function(post) {
-                $scope.model.posts.push(post);
-            });  
-            full_post_aux = $scope.model.posts.length;
-            console.dir(full_post);
-            console.dir(full_post_aux);
-            if (full_post === full_post_aux){
-                $scope.moreData = false;
-            }
-            $scope.$broadcast('scroll.infiniteScrollComplete'); 
-        });
-        
+        if($scope.moreData === true){
+            var last = lodash.last($scope.model.posts);
+            full_post = $scope.model.posts.length;
+            //console.dir(last);        
+            $http.post(api.post.getAll, {
+                lastId: last.id,
+                lastTimestamp: last.postTimestamp
+            })
+            .success(function(data) {
+                //console.dir(data);
+                lodash.forEach(data.news, function(post) {
+                    $scope.model.posts.push(post);
+                });  
+                full_post_aux = $scope.model.posts.length;
+                console.dir(full_post);
+                console.dir(full_post_aux);
+                if (full_post == full_post_aux){
+                    $scope.moreData = false;
+                    console.dir($scope.moreData);
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete'); 
+            });
+        }        
     };
     $scope.viewProfile = function(authorId){
         profileService.viewprofile(authorId);
