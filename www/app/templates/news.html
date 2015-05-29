@@ -1,4 +1,4 @@
-<ion-view id="news" hide-back-button="true" view-title="Noticias">
+<ion-view id="news" hide-back-button="true" view-title="LUFKE">
     <ion-nav-buttons side="left">
         <a class="button button-icon icon ion-search" ui-sref="buscar"></a>
     </ion-nav-buttons>
@@ -8,7 +8,6 @@
 
     <div ui-sref="newpost">
 		<ion-header-bar id="shareExperienceContainer" class="bar bar-subheader item-input-inset">
-
 			<textarea id="experienceTextArea" 
 					  ng-model="model.experienceText" 
 					  ng-blur="model.isExperienceTextFocus = false" 
@@ -24,11 +23,6 @@
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()">
         </ion-refresher>
 		<ion-list>
-			<a ng-show="!model.posts.length" class="item item-icon-left item-icon-right" href="#/tab/explore">
-                No hay noticias que mostrar :(<br/>
-				Deberías seguir algunas personas<br>
-				<i class="icon ion-eye"></i>
-			</a>
             <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>
         </ion-list> 
         <ion-infinite-scroll ng-if="moreData && model.posts" on-infinite="moreNews()" distance="1%" ng-show="model.posts.lenght > 0">
