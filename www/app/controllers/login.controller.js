@@ -35,6 +35,24 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
         },
         foto: ""
     };
+    $rootScope.$on('logout', function(event, args) {
+        $ionicHistory.clearCache();
+        $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+        $http.defaults.headers.common.Authorization = null;
+        $localStorage.basic = null;
+        $localStorage.session = null;
+        $scope.model = {
+            user: {
+                name: "",
+                password: ""
+            },
+            recoveryData: {
+                emailError: false,
+                email: ""
+            },
+            foto: ""
+        };
+    });
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -90,7 +108,6 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-
                 /*console.log("cordovaPush.register");
                 $cordovaPush.register({
                     "senderID": "767122101153"
@@ -132,7 +149,6 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                     console.log("cordovaPush.unregister .. ERROR")
                     console.dir(err);
                 });*/
-
                 $state.go('tab.news'); //redirige hacia news
                 return;
             }).error(function(err, status, headers, config) {

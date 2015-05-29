@@ -1,5 +1,5 @@
-var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.0.104:8080'; //sirve para local y celular
+//var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
+var url_files = 'http://localhost:8080'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_unknown = 'assets/img/uknown_user.png'
@@ -16,7 +16,8 @@ var api = {
         deleteInterest: url_base + '/user/deleteinterest',
         getPublicProfile: url_base + '/user/getpublicprofile',
         searchInterests: url_base + '/user/searchinterests',
-        addInterestToProfile: url_base + '/user/addinterest'
+        addInterestToProfile: url_base + '/user/addinterest',
+        logout: url_base + 'user/logout'
     },
     post: {
         get: url_base + '/post/get',
