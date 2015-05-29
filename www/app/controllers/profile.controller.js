@@ -1,8 +1,7 @@
-angular.module('lufke').controller('ProfileController', function($ionicLoading, $scope, PostsService, $state, $http) {
+angular.module('lufke').controller('ProfileController', function($localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope) {
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_unknown;
-
     $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
@@ -39,6 +38,10 @@ angular.module('lufke').controller('ProfileController', function($ionicLoading, 
     }
     $scope.socialLink = function(link) {
         window.open(link, '_system', 'location=yes');
+    };
+    $scope.logout = function() {
+        $rootScope.$broadcast('logout');
+        $state.go('login');
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
