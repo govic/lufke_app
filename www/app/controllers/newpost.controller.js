@@ -1,11 +1,25 @@
 angular.module('lufke').controller('NewPostController', function($ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
     $scope.url = url_files;
+    $scope.unknown_user = url_unknown;
     $scope.model = {
         mediaSelected: false,
         imageBase64: "",
         experienceText: "",
     };
+    $ionicLoading.show();
+    $http.post(api.user.getProfile)
+    .success(function(profile, status, headers, config) {
+        $scope.user = profile;        
+        console.dir($scope.user); 
+        $ionicLoading.hide();        
+    }).error(function(data, status, headers, config) {
+        console.dir(data);
+        console.log(status);
+        $ionicLoading.hide();  
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
+    });
+       
     $scope.shareExperience = function() {
         $ionicLoading.show();
         if ($scope.model.mediaSelected || $scope.model.experienceText.length) {

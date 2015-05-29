@@ -1,36 +1,24 @@
-<ion-view title="Nueva Publicación">
-	<ion-content>
-		<div class="row">
+<ion-view title="Compatir Experiencia">
+ 	<ion-nav-buttons  side="right">
+        <a ng-disabled="!(model.experienceText.length || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
+    </ion-nav-buttons>
+	<ion-content>		
+		 <img id="share-experience-user-img" src="{{user.profileImgUrl !== '' && user.profileImgUrl !== null ? url + user.profileImgUrl : unknown_user}}" />
 
-			<ion-header-bar class="bar bar-header item-input-inset">
-				
-				<textarea id="experienceTextArea" 
-						  ng-model="model.experienceText" 
-						  ng-blur="model.isExperienceTextFocus = false" 
-						  ng-focus="model.isExperienceTextFocus = true" 
-						  placeholder="Comparte tu experiencia...">
-				</textarea>	
-
-			</ion-header-bar>			
-		</div>
-		<div class="row">
-			<div class="col">
-				<button class="button button-positive ion-camera" 
-						ng-click="showImagesOptions()">
-				</button>
-			</div>
-			<div class="col">	
-				<button ng-disabled="!(model.experienceText.length || model.mediaSelected)" 
-						class="button button-positive ion-edit" 
-						ng-click="shareExperience()">
-				</button>
-			</div>			
-		</div>
-		<div class="row">
-			<div class="col">	
-				<img ng-show="model.mediaSelected" src="data:image/jpeg;base64,{{model.imageBase64}}"/>	
-			</div>			
-		</div>
+		<textarea id="shareExperience" 
+				  ng-model="model.experienceText" 
+				  ng-blur="model.isExperienceTextFocus = false" 
+				  ng-focus="model.isExperienceTextFocus = true" 
+				  placeholder="Comparte tu experiencia...">
+		</textarea>	
+		<button class="button ion-camera camera" 
+				ng-click="showImagesOptions()">
+		</button>
+		<hr class="hr-share">		
+		
+		<img id="preview" ng-if="model.mediaSelected" src="data:image/jpeg;base64,{{model.imageBase64}}"/>	
+						
+		
 		
 	</ion-content>
 </ion-view>
