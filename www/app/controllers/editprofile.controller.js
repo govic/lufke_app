@@ -1,7 +1,8 @@
 angular.module('lufke').controller('EditProfileController', function($ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
     console.log('Inicia ... EditProfileController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
+    $scope.unknown_user = url_user;
+    $scope.unknown_background = url_background;
 
     $ionicLoading.show();
     $http.post(api.user.getEditProfile)

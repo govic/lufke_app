@@ -1,14 +1,17 @@
-angular.module('lufke').controller('AllNotificationsController', function(lodash, $state, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('AllNotificationsController', function($ionicLoading, lodash, $state, $scope, $ionicPopup, $http) {
     console.log('Inicia ... AllNotificationsController');
     $scope.url = url_files;
     $scope.moreData = true;
     var full_notification = 0;
     var full_notification_aux = 0;
+    $ionicLoading.show();
     $http.post(api.notifications.getAllNotifications).success(function(data, status, headers, config) {
         $scope.model = data;
+        $ionicLoading.hide();
     }).error(function(err, status, headers, config) {
         console.dir(err);
         console.log(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de notificaciones.");
     });
     $scope.updateData = function() {

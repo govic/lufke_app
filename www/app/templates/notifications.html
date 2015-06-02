@@ -1,6 +1,6 @@
 <ion-view  hide-back-button="true" view-title="Notificaciones">
-    <ion-content id="notifications" class="padding">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNotificationsData()">
+    <ion-content id="notifications" class="padding" class="has-footer">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNotificationsData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <ion-list>
             <ion-item class="item-divider">
@@ -9,7 +9,7 @@
             <ion-item ng-repeat="item in model.requests.requestsList" class="notification-list-no-pad">
                 <div class="row">
                     <div class="col notification-profile-img-center">
-                        <img ng-src="{{item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"/>
+                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"/>
                     </div>
                     <div class="col col-75" ui-sref="publicprofile({'profileId': item.requestId})">
                         {{item.profileName}}
@@ -59,7 +59,7 @@
                 </div>
             </ion-item>
             <ion-item ng-show="!model.notifications.notificationsList.length">
-                No tiene notificaciones para motrar
+                No tiene notificaciones para mostrar
             </ion-item>
             <ion-item class="item-divider" ng-click="viewNotifications()">
                 Ver todas <i class="ion-chevron-down"></i>

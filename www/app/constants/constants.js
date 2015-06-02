@@ -1,8 +1,10 @@
-//var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-var url_files = 'http://localhost:8080'; //sirve para local y celular
+var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
+//var url_files = 'http://192.168.0.106:8080'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
-var url_unknown = 'assets/img/uknown_user.png'
+var url_user = 'assets/img/uknown_user.png';
+var url_background = 'assets/img/unknown_background.png';
+var url_post = 'assets/img/unknown_post.png';
 
 var api = {
     user: {

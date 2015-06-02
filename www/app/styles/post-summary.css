@@ -2,6 +2,7 @@
     height: 14em;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     padding: 0;
     width: 100%;
     margin-bottom: 0.6em;
@@ -12,40 +13,43 @@
     border-radius: 0.25em;
     padding: 0em 0.3em;
     color: white;
-    background-color: rgba(0,0,0,0.4);
     overflow: hidden;
     text-overflow:ellipsis;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 
 .post-summary-footer {
-    background-color: rgba(0,0,0,0.4);
-    border-radius: 0.25em;
-    width: 5em !important;
+    background-color: rgba(0,0,0,0.6);
+    margin: 0px -5px;
+    width: 110%;
 	color: white;
-    font-size: 140%;
-    padding: 0.3em 0.3em;
+    font-size: 150%;
+    padding: 0.3em 1em;
 }
 .post-summary-timestamp {
-    background-color: rgba(0,0,0,0.4);
     border-radius: 0.25em;
     padding: 0em 0.3em;
     color: white;
     float: right;
     display: block;
     clear: both;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+
 }
 
 .post-summary-user-name {
     font-size: 110%;
+    font-weight: bold;
 }
 
 .post-summary-user-data{
-    background-color: rgba(0,0,0,0.4);
     border-radius: 0.25em;
     color: white;
     padding: 0em 0.3em;
     margin-top: 0.5em;
     margin-left: 0.4em;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+    font-weight: bold;
 }
 
 .post-summary-location {

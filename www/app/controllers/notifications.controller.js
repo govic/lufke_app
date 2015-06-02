@@ -1,11 +1,8 @@
 angular.module('lufke').controller('NotificationsController', function($ionicLoading, profileService, $scope, $http, $ionicPopup, $state) {
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
-    $ionicLoading.show({
-         content: 'Loading',
-        animation: 'fade-in',
-    })
+    $scope.unknown_user = url_user;
+    $ionicLoading.show();
     $http.post(api.notifications.getNotifications)
     .success(function(data, status, headers, config) {
         $scope.model = data;
@@ -16,19 +13,13 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
         $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
     });
-    $scope.updateNotificationsData = function() {
-        $ionicLoading.show({
-             content: 'Loading',
-            animation: 'fade-in',
-        })
+    $scope.updateNotificationsData = function() {        
         $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = data;
-            $ionicLoading.hide();
         }).error(function(data, status, headers, config) {
             console.dir(data);
-            console.dir(status);
-            $ionicLoading.hide();
+            console.dir(status);$ionicLoading.hide();
             $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
         });
     };

@@ -4,6 +4,36 @@
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
   color: #444;
 }
-i.ion-loading-c{
+.loading i.ion-loading-c{
 	font-size: 300%;
+	color: black;
 }
+.loading-container{
+	top: 3.1em;
+	margin-bottom: 3.4em;
+	background-color: white;
+}
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
+  color: #fff;
+  background-color: #515F60;
+  padding-top: 7px;
+
+}
+ion-tabs.tabs-color-active-positive .tab-item {
+  color: lightgrey;
+  background-color: #515F60;
+  opacity: 1;
+
+}
+.action-sheet {
+  margin-left: 6em;
+  margin-right: 6em;
+  width: auto;
+  z-index: 11;
+  overflow: hidden;
+}
+.action-sheet-wrapper {
+  bottom: 30%;  
+  width: 100%;
+}
+

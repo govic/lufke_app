@@ -1,6 +1,6 @@
 <ion-view title="Ver todas">
     <ion-content class="padding has-footer">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <ion-list>
             <ion-item class="item-divider">
@@ -25,7 +25,7 @@
                 </div>
             </ion-item>
             <ion-item ng-show="!model.notificationsList.length">
-                No tiene notificaciones para motrar
+                No tiene notificaciones para mostrar
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="moreData && model.notificationsList" on-infinite="moreNotifications()" distance="1%" ng-show="model.notificationsList.lenght > 0">

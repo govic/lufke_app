@@ -3,7 +3,7 @@
         <button class="button" ui-sref="editdna">Agregar</button>
     </ion-nav-buttons>
     <ion-content class="padding">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div class="list">
         	<div class="item item-icon-right" ng-repeat="item in model.interests">
