@@ -1,6 +1,6 @@
-//var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-var url_files = 'http://localhost:8080'; //sirve para local y celular
-var url_base = url_files + '/api'; //sirve para local y celular
+var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
+//var url_files = 'http://localhost:8080'; //sirve para local y celular
+var url_base = /*url_files*/'http://localhost:8080' + '/api'; //sirve para local y celular
 
 var url_unknown = 'assets/img/uknown_user.png'
 
@@ -34,7 +34,8 @@ var api = {
     explore: {
         getPopulars: url_base + '/explore/getexploredata',
         followCategory: url_base + '/explore/followcategory',
-        followUser: url_base + '/notification/followuser'
+        followUser: url_base + '/notification/followuser',
+        getSearchUsers: url_base + '/explore/getsearchusers'
     },
     notifications: {
         getNotifications: url_base + '/notification/getnotificationsdata',

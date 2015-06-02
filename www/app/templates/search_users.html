@@ -1,0 +1,21 @@
+<ion-view title="Usuarios">
+    <ion-content class="padding">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
+        </ion-refresher>
+        <div class="list">
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="Nombre del interés ..." ng-model="model.searchText">
+                </label>
+                <button class="button button-small icon ion-search" ng-click="search()">&nbsp;Buscar</button>
+            </div>
+        	<div class="item item-icon-right" ng-repeat="item in model.users">
+                {{item.profileUserName}}
+                <i class="icon ion-plus-circled balanced" ng-click="followUser(item)"></i>
+            </div>
+            <div class="item" ng-show="!model.users || model.users.lenght <= 0">
+                Sin resultados para mostrar ...
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

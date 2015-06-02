@@ -1,4 +1,4 @@
-angular.module('lufke').controller('ExploreController', function($ionicLoading, profileService, $scope, $http, $ionicPopup) {
+angular.module('lufke').controller('ExploreController', function($state, $ionicLoading, profileService, $scope, $http, $ionicPopup) {
     console.log('Inicia...ExploreController ');
     $scope.url = url_files;
     $scope.unknown_user = url_unknown;
@@ -54,7 +54,7 @@ angular.module('lufke').controller('ExploreController', function($ionicLoading, 
         profileService.viewprofile(profileId);
     };
     $scope.allTopUsers = function() {
-        alert('All Top Users');
+        $state.go('searchusers');
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({

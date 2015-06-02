@@ -2,10 +2,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
     $scope.unknown_user = url_unknown;
-    $ionicLoading.show({
-         content: 'Loading',
-        animation: 'fade-in',
-    })
+    $ionicLoading.show();
     $http.post(api.notifications.getNotifications)
     .success(function(data, status, headers, config) {
         $scope.model = data;

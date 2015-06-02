@@ -1,8 +1,9 @@
-angular.module('lufke').controller('LoginController', function($rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64) {
+angular.module('lufke').controller('LoginController', function($rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
     console.log('Inicia ... LoginController');
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
     //verificacion de datos estaticos de autenticacion
+    $ionicLoading.show();
     if ($localStorage.basic && $localStorage.basic.trim() != "") {
         $http.post(api.user.login, {
             credentialsHash: $localStorage.basic.split(" ")[1]
@@ -12,12 +13,16 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
             $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
             $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
             $scope.model.loginError = false;
+            $ionicLoading.hide();
             $state.go('tab.news'); //redirige hacia news
             return;
-        }).error(function(data, status, headers, config) {
-            console.dir(data);
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
             console.log(status);
+            $ionicLoading.hide();
         });
+    } else {
+        $ionicLoading.hide();
     }
     $ionicHistory.clearCache();
     $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -99,6 +104,7 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
     };
     $scope.validateUser = function() {
         console.log('LoginController ... validateUser');
+        $ionicLoading.show();
         if ($scope.model.user.email !== "" && $scope.model.user.password !== "") {
             var userModel = new User({
                 credentialsHash: $base64.encode(unescape(encodeURIComponent($scope.model.user.name + ":" + $scope.model.user.password)))
@@ -108,47 +114,7 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                /*console.log("cordovaPush.register");
-                $cordovaPush.register({
-                    "senderID": "767122101153"
-                }).then(function(result) {
-                    console.log("cordovaPush.register .. OK")
-                    console.dir(result);
-                }, function(err) {
-                    console.log("cordovaPush.register .. ERROR")
-                    console.dir(err);
-                })
-                $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-                    switch(notification.event) {
-                        case 'registered':
-                            if (notification.regid.length > 0 ) {
-                                console.log("cordovaPush:notificationReceived .. registered")
-                                console.log('registration ID = ' + notification.regid);
-                            }
-                            break;
-                        case 'message':
-                            // this is the actual push notification. its format depends on the data model from the push server
-                            console.log("cordovaPush:notificationReceived .. message")
-                            console.log('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-                            break;
-                        case 'error':
-                            console.log("cordovaPush:notificationReceived .. error")
-                            console.log('GCM error = ' + notification.msg);
-                            break;
-                        default:                            
-                            console.log("cordovaPush:notificationReceived .. default")
-                            console.log('An unknown GCM event has occurred');
-                            break;
-                    }
-                });*/
-                // WARNING: dangerous to unregister (results in loss of tokenID)
-                /*$cordovaPush.unregister().then(function(result) {
-                    console.log("cordovaPush.unregister .. OK")
-                    console.dir(result);
-                }, function(err) {
-                    console.log("cordovaPush.unregister .. ERROR")
-                    console.dir(err);
-                });*/
+                $ionicLoading.hide();
                 $state.go('tab.news'); //redirige hacia news
                 return;
             }).error(function(err, status, headers, config) {
@@ -158,12 +124,14 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $localStorage.session = null;
                 $localStorage.basic = null;
                 $scope.model.user.password = "";
+                $ionicLoading.hide();
                 if (status == 500) $scope.showMessage("Error", "El nombre de usuario o la contraseña no son correctos.");
                 else $scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");
             });
         } else {
             $localStorage.session = null;
             $scope.model.user.password = "";
+            $ionicLoading.hide();
         }
     };
 });
