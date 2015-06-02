@@ -1,7 +1,7 @@
 angular.module('lufke').controller('NewPostController', function($ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, PostsService /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
+    $scope.unknown_user = url_user;
     $scope.model = {
         mediaSelected: false,
         imageBase64: "",

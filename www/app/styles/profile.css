@@ -1,8 +1,14 @@
 #profile-img {
     border-radius: 100%;
-    height: 9em;
-    width: 9em;
+    height: 7em;
+    width: 7em;
     object-fit: cover;
+}
+#background-img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
 }
 
 .tag-social-link-text {
@@ -10,25 +16,64 @@
 }
 .profile-text-center {
     text-align: center;
+    margin-top: 0.6em !important;
+    padding: 0px;
 }
-.profile-background-img {
-	height: 60vh;
+#profile-background-img {
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 .profile-number {
-    text-shadow: 1px 0px #56BCC5;
-    font-size: 120%;
+    font-size: 160%;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 .profile-number-text-under {
     font-weight: bold;
-    font-size: 70%;
+    font-size: 80%;
+    height: 1.4em;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 .profile-name-text {
-    font-size: 110%;
+    font-size: 130%;
 	font-weight: bold;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 .profile-button-edit {
     text-align: right;
+    padding-right: 0px;
+}
+.edit-profile-button{
+    font-size: 110%;
+    background-color: rgba(255,255,255,0.2) !important;
+    border-radius: 0.4em;
+    border: 2px solid white;
+    color: white !important;
+    font-weight: bold;
+    padding: 0.2em 0.8em;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+#edit-profile-edit-img{
+    position: absolute;
+    top: 14%;
+}
+.profile-interest{
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+    color: white;
+    font-size: 100%;
+}
+.dna-button{
+    margin-top: 0.5em;
+    font-size: 110%;
+    background-color: rgba(255,255,255,0.2) !important;
+    border-radius: 0.4em;
+    border: 2px solid white;
+    color: white !important;
+    font-weight: bold;
+    padding: 0.2em 0.8em;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+.no-side-padding{
+    padding-left: 0px;
     padding-right: 0px;
 }

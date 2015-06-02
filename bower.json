@@ -7,6 +7,7 @@
     "ng-lodash": "*",
     "angular-moment": "*",
     "angular-base64": "*",
-    "ngCordova": "*"
+    "ngCordova": "~0.1.17-alpha",
+    "ionic-service-push": "~0.1.4"
   }
 }

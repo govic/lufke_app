@@ -1,15 +1,15 @@
 <ion-view id="postDetail" view-title="Publicación">
-    <ion-content class="padding">
+    <ion-content class="padding" class="has-footer">
 
-		<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updatePost()">
+		<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updatePost()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
 
-		<div id="post-detail-content-container" class="item" ng-style="{'background-image':'url(' + url + model.post.backgroundImgUrl + ')'}">
+		<div id="post-detail-content-container" class="item" ng-style="{'background-image':'url(' + post_url + ')'}">
 		</div>
 		
 		<div class="row row-top">
 			<div id="post-detail-user-img-container">
-				<img id="post-detail-user-img" src="{{model.post.authorImgUrl !== '' ? url + model.post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(model.post.authorId)"/>
+				<img id="post-detail-user-img" src="{{model.post.authorImgUrl !== null && model.post.authorImgUrl !== '' ? url + model.post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(model.post.authorId)"/>
 			</div>
 
 			<div class="col post-detail-user-data">
@@ -22,14 +22,14 @@
 		</div>
 
 		<div class="row row-bottom">
-			<div class="col">{{model.post.text}}</div>
+			<div class="col post-detail-text">{{model.post.text}}</div>
 		</div>
 
 		<div class="row">
 			<div class="col">
 				<span ng-click="toggleLike()">
-					<i ng-show="model.post.isLiked" class="ion-ios7-star"></i> 
-					<i ng-show="!model.post.isLiked" class="ion-ios7-star-outline"></i> 
+					<i ng-show="model.post.isLiked" class="ion-ios7-star star-size"></i> 
+					<i ng-show="!model.post.isLiked" class="ion-ios7-star-outline star-size"></i> 
 					{{model.post.totalStars}}
 				</span>
 			</div>
@@ -47,19 +47,17 @@
 						  ng-focus="model.isCommentTextFocus = true" 
 						  placeholder="Agrega un comentario...">
 				</textarea>
-				<div class="padding">
-					<button ng-show="model.isCommentTextFocus || model.commentText.length"
-							ng-disabled="!model.commentText.length" 
-							class="button button-positive button-small ion-edit" 
-							ng-click="addComment()">
-					</button>
-				</div>
+				<button ng-show="model.isCommentTextFocus || model.commentText.length"
+						ng-disabled="!model.commentText.length" 
+						class="button button-positive button-small ion-edit comment-button" 
+						ng-click="addComment()">
+				</button>
 			</ion-item>
 
 			<ion-item ng-repeat="comment in model.post.comments" class="post-detail-comment-container" on-hold="showDeleteComment(comment.id)">
 				<div class="row">
 					<div id="post-detail-comment-user-img-container">
-						<img id="post-detail-comment-user-img" ng-src="{{url + comment.authorUrlImage}}" ng-click="viewProfile(comment.authorId)"/>
+						<img id="post-detail-comment-user-img" ng-src="{{comment.authorUrlImage !== '' && comment.authorUrlImage !== null ? url + comment.authorUrlImage : unknown_user}}" ng-click="viewProfile(comment.authorId)"/>
 					</div>
 
 					<div class="col col-top">

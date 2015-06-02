@@ -1,11 +1,14 @@
-angular.module('lufke').controller('DnaController', function(lodash, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('DnaController', function($ionicLoading, lodash, $scope, $ionicPopup, $http) {
     console.log('Inicia ... DnaController');
+    $ionicLoading.show();
     $http.post(api.user.getInterests).success(function(data, status, headers, config) {
         $scope.model = data;
+        $ionicLoading.hide();
         console.dir(data);
     }).error(function(err, status, headers, config) {
         console.dir(err);
         console.log(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
     });
     $scope.updateData = function() {

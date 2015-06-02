@@ -3,7 +3,7 @@
         <a ng-disabled="!(model.experienceText.length || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
 	<ion-content>		
-		 <img id="share-experience-user-img" src="{{user.profileImgUrl !== '' && user.profileImgUrl !== null ? url + user.profileImgUrl : unknown_user}}" />
+		 <img id="share-experience-user-img" src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
 
 		<textarea id="shareExperience" 
 				  ng-model="model.experienceText" 

@@ -1,10 +1,12 @@
 angular.module('lufke').controller('ExploreController', function($state, $ionicLoading, profileService, $scope, $http, $ionicPopup) {
     console.log('Inicia...ExploreController ');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
+    $scope.unknown_user = url_user;
+    $scope.unknown_background = url_background;
     $ionicLoading.show();
     $http.post(api.explore.getPopulars)
     .success(function(data, status, headers, config) {
+        console.dir(data);
         $scope.model = data;
         $ionicLoading.hide();
     }).error(function(data, status, headers, config) {

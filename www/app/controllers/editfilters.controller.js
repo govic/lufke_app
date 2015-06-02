@@ -1,11 +1,13 @@
-angular.module('lufke').controller('EditFiltersController', function(lodash, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('EditFiltersController', function($ionicLoading, lodash, $scope, $ionicPopup, $http) {
     console.log('Inicia ... EditFiltersController');
-    
+    $ionicLoading.show();
     $http.post(api.filters.getTopInterests).success(function(data, status, headers, config) {
         $scope.model = data;
+        $ionicLoading.hide();
     }).error(function(err, status, headers, config) {
         console.dir(err);
         console.log(status);
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar los filtros y preferencias.");
     });
     $scope.updateEditFilters = function() {

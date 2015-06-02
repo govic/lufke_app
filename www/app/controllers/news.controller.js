@@ -1,7 +1,9 @@
 angular.module('lufke').controller('NewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
+    $scope.unknown_user = url_user;
+    $scope.unknown_background = url_background;
+    $scope.unknown_post = url_post;
     $ionicLoading.show();
     $http.post(api.post.getAll).success(function(data) {
         $scope.model = {
@@ -42,6 +44,7 @@ angular.module('lufke').controller('NewsController', function($ionicLoading, $ro
             $scope.showMessage("Error", "Ha ocurrido un error al hacer like.");
         });
     };
+
     $scope.moreNews = function() {
         console.log('$scope.moreNews .........');
         console.log("inicia carga: " + $scope.model.moreData);

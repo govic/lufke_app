@@ -1,15 +1,15 @@
 <ion-view hide-back-button="true" view-title="Perfil">
     <ion-nav-buttons side="right">
-        <a class="button button-icon icon ion-levels" ui-sref="filters"></a>
+        <a class="button button-icon icon ion-gear-b" ui-sref="filters"></a>
     </ion-nav-buttons>
-    <ion-content class="padding">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()">
+    <ion-content class="has-footer">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
-        <div class="row profile-background-img" class="item" ng-style="{'background-image': 'url('+ url + model.backgroundImgUrl + ')'}">
+        <div id="profile-background-img" ng-style="{'background-image': 'url('+ background + ')'}">
             <div class="col">
                 <div class="row">
                     <div>
-                        <img id="profile-img" src="{{model.profileImgUrl !== '' && model.profileImgUrl !== null ? url + model.profileImgUrl : unknown_user}}" />
+                        <img id="profile-img" src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" />
                     </div>
                     <div class="col">
                         <div class="row light">
@@ -18,15 +18,15 @@
                                 <div class="profile-name-text">{{model.profileLastName}}</div>
                             </div>
                             <div class="col profile-button-edit">
-                                <a class="button button-light button-small" ng-click="editProfile()">
-                                    Editar perfil
+                                <a class="button button-light button-small edit-profile-button" ng-click="editProfile()">
+                                    Editar
                                 </a>
                             </div>
                         </div>
                         <div class="row profile-text-center light">
-                            <div class="col">
+                            <div class="col no-side-padding">
                                 <div class="profile-number">{{model.postsUnit}}</div>
-                                <div class="profile-number-text-under">Publicaciones</div>
+                                <div class="profile-number-text-under">Experiencias</div>
                             </div>
                             <div class="col">
                                 <div class="profile-number">{{model.followersUnit}}</div>
@@ -40,11 +40,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="profile-interest">
                         <div ng-repeat="item in model.interests">
                             {{item.interestText}}
                         </div>
-                        <a ui-sref="dna">ADN</a>
+                        <a ui-sref="dna">
+                            <button class="dna-button">
+                                ADN
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

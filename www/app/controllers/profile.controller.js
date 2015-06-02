@@ -1,13 +1,17 @@
 angular.module('lufke').controller('ProfileController', function($localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope) {
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
-    $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-    });
+    $scope.unknown_user = url_user;
+    $scope.unknown_background = url_background;
+    $ionicLoading.show();
     $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
+        if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
+            $scope.background = $scope.url + $scope.model.backgroundImgUrl;
+        }
+        else{
+            $scope.background = $scope.unknown_background;
+        }
         $ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
@@ -24,6 +28,12 @@ angular.module('lufke').controller('ProfileController', function($localStorage, 
         $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = profile;
+            if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
+                $scope.background = $scope.url + $scope.model.backgroundImgUrl;
+            }
+            else{
+                $scope.background = $scope.unknown_background;
+            }
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.log(status);

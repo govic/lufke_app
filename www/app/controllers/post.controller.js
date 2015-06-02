@@ -1,12 +1,10 @@
 angular.module('lufke').controller('PostController', function($ionicLoading, profileService, lodash, $http, $scope, $state, $localStorage, $stateParams, $ionicHistory, $ionicPopup, $ionicActionSheet) {
     console.log('Inicia ... PostController');
     $scope.url = url_files;
-    $scope.unknown_user = url_unknown;
+    $scope.unknown_user = url_user;
+    $scope.unknown_post = url_post;
 
-    $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-    });
+    $ionicLoading.show();
     $http.post(api.post.get, {
         id: $stateParams.postId
     }).success(function(post) {        
@@ -15,6 +13,12 @@ angular.module('lufke').controller('PostController', function($ionicLoading, pro
             commentText: ""
         };
         console.dir(post);
+        if($scope.model.post.backgroundImgUrl !== null && $scope.model.post.backgroundImgUrl !== ''){
+            $scope.post_url = $scope.url + $scope.model.post.backgroundImgUrl;
+        }
+        else{
+            $scope.post_url = $scope.unknown_post;
+        }
         $ionicLoading.hide(); 
     }).error(function(data) {
         console.dir(data);

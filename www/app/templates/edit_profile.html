@@ -1,16 +1,15 @@
 <ion-view title="Editar">
-    <ion-content class="padding">
-        <div class="row">
-            <div class="col">
+    <ion-content>
+        <div class="row no-side-padding">
+            <div class="col no-side-padding">
+                 <div>
+                    <img id="background-img"  src="{{model.backgroundImgUrl !== null  && model.backgroundImgUrl !== '' ? url + model.backgroundImgUrl : unknown_background}}" ng-click="showImagesOptions('background')"/>
+                </div>
+                <div id="edit-profile-edit-img">
+                    <img id="profile-img" src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" ng-click="showImagesOptions('profile')" />
+                </div>
                 <form name="editForm" ng-submit="editForm.$valid && editProfile()">
-                    <div>
-                        <img id="profile-img" src="{{url + model.backgroundImgUrl}}" />
-                        <button ng-click="showImagesOptions('background')">Editar</button>
-                    </div>
-                    <div>
-                        <img id="profile-img" src="{{model.profileImgUrl !== '' && model.profileImgUrl !== null ? url + model.profileImgUrl : unknown_user}}" />
-                        <button ng-click="showImagesOptions('profile')">Editar</button>
-                    </div>
+                   
                     <div class="list">
                         <label class="item item-input item-stacked-label">DATOS PERSONALES</label>
                         <label class="item item-input item-stacked-label">
@@ -55,7 +54,7 @@
                         </label>
                     </div>
                     <div class="list">
-                        <label class="item item-input item-stacked-label">CAMBAIR CONTRASEÑA</label>
+                        <label class="item item-input item-stacked-label">CAMBIAR CONTRASEÑA</label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Actual</span>
                             <input type="password" ng-model="model.oldPassword">
