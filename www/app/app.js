@@ -2,8 +2,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
-})
-.factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
+}).factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
     return {
         response: function(response) {
             if (response.status === 401) {
@@ -21,30 +20,27 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             return $q.reject(rejection);
         }
     }
-})
-.factory('profileService', function($localStorage, $state){
-    return{
-        viewprofile: function(id){
-            if($localStorage.session === id){
+}).factory('profileService', function($localStorage, $state) {
+    return {
+        viewprofile: function(id) {
+            if ($localStorage.session === id) {
                 $state.go('tab.profile');
-            }
-            else{
-                $state.go('publicprofile', {profileId: id});
+            } else {
+                $state.go('publicprofile', {
+                    profileId: id
+                });
             }
         }
     }
-})
-.config(['$httpProvider',
+}).config(['$httpProvider',
     function($httpProvider) {
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }
-])
-.constant('$ionicLoadingConfig', {
+]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
-    animation: 'fade-in'   
-})
-.run(function($ionicPlatform) {
+    animation: 'fade-in'
+}).run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)

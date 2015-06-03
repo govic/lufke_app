@@ -2,20 +2,36 @@
     <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
         </ion-refresher>
-        <div class="list">
-            <div class="item item-input-inset">
+        <ion-list>
+        	<ion-item class="item-input-inset">
                 <label class="item-input-wrapper">
                     <input type="text" placeholder="Nombre del interés ..." ng-model="model.searchText">
                 </label>
                 <button class="button button-small icon ion-search" ng-click="search()">&nbsp;Buscar</button>
-            </div>
-        	<div class="item item-icon-right" ng-repeat="item in model.users">
-                {{item.profileUserName}}
-                <i class="icon ion-plus-circled balanced" ng-click="followUser(item)"></i>
-            </div>
-            <div class="item" ng-show="!model.users || model.users.lenght <= 0">
-                Sin resultados para mostrar ...
-            </div>
-        </div>
+            </ion-item>
+
+			<ion-item class="explore-background-container" ng-repeat="item in model.users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
+				<div class="row">
+					<div ng-click="viewProfile(item.profileId)">
+						<img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+					</div>
+
+					<div class="explore-font">
+						<div class="col explore-user-name">
+							{{item.profileFirstName}}<br/>
+							{{item.profileLastName}}<br/>
+						</div>
+						<button class="button button-light button-small follow-button" ng-click="followUser(item)">
+							<i class="ion-plus active"></i>SEGUIR
+						</button>
+					</div>
+
+					<div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{url + pub.postImgUrl}})'}">
+						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+		<button class="button button-block button-positive" ng-click="loadMore()">Cargar más resultados ...</button>
     </ion-content>
 </ion-view>

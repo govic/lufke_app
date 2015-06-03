@@ -39,16 +39,18 @@ angular.module('lufke').controller('ExploreController', function($state, $ionicL
             $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
         });
     };
-    $scope.followUser = function(userToFollowId) {
+    $scope.followUser = function(item) {
+        $ionicLoading.show();
         $http.post(api.explore.followUser, {
-            id: userToFollowId
+            id: item.profileId
         }).success(function(data, status, headers, config) {
-            $scope.showMessage("Mensaje", "Solicitud realizada!", function() {
-                //TODO falta hacer efecto visual
-            });
+            $scope.model.topUsers.splice($scope.model.topUsers.indexOf(item), 1);
+            $ionicLoading.hide();
+            $scope.showMessage("Exito", "Solicitud realizada exitosamente!");
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.dir(status);
+            $ionicLoading.hide();
             $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
         });
     };

@@ -114,6 +114,44 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+                /* ****************************** */
+                /*       Notificaciones push      */
+                /* ****************************** */
+                var androidConfig = {
+                    "senderID": "767122101153"
+                };
+                $cordovaPush.register(androidConfig);
+                $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+                    switch (notification.event) {
+                        case 'registered':
+                            console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. registered");
+                            if (notification.regid.length > 0) {
+                                console.log('registration ID = ' + notification.regid);
+                            }
+                            break;
+                        case 'message':
+                            console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. message");
+                            // this is the actual push notification. its format depends on the data model from the push server
+                            console.log('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+                            break;
+                        case 'error':
+                            console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. error");
+                            console.log('GCM error = ' + notification.msg);
+                            break;
+                        default:
+                            console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. default");
+                            console.log('An unknown GCM event has occurred');
+                            break;
+                    }
+                });
+                /*
+                // WARNING: dangerous to unregister (results in loss of tokenID)
+                $cordovaPush.unregister(options).then(function(result) {
+                    // Success!
+                }, function(err) {
+                    // Error
+                })
+                */
                 $ionicLoading.hide();
                 $state.go('tab.news'); //redirige hacia news
                 return;

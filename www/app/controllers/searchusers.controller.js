@@ -1,10 +1,14 @@
 angular.module('lufke').controller('SearchUsersController', function(lodash, $scope, $ionicPopup, $http, $ionicLoading) {
     console.log('Inicia ... SearchUsersController');
+    $scope.url = url_files;
+    $scope.unknown_user = url_user;
+    $scope.unknown_background = url_background;
     $ionicLoading.show();
     $http.post(api.explore.getSearchUsers, {
         page: 0
     }).success(function(data, status, headers, config) {
         $scope.model = data;
+        $scope.model.moreData = true;
         $ionicLoading.hide();
     }).error(function(err, status, headers, config) {
         console.dir(err);
@@ -53,6 +57,29 @@ angular.module('lufke').controller('SearchUsersController', function(lodash, $sc
             console.dir(status);
             $ionicLoading.hide();
             $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
+        });
+    };
+    $scope.loadMore = function() {
+        $ionicLoading.show();
+        $http.post(api.explore.getSearchUsers, {
+            page: $scope.model.page + 1, //una pagina mas
+            searchText: $scope.model.searchText
+        }).success(function(data, status, headers, config) {
+            if (data.users && data.users.length > 0) {
+                $scope.model.page = data.page;
+                lodash.forEach(data.users, function(item) { //agrega todos mas usuarios encontrados
+                    $scope.model.users.push(item);
+                });
+                $ionicLoading.hide();
+            } else {
+                $ionicLoading.hide();
+                $scope.showMessage("Mensaje", "No existen mas resultados para mostrar.");
+            }
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
+            console.dir(status);
+            $ionicLoading.hide();
+            $scope.showMessage("Error", "Ha ocurrido un error al realizar la búsqueda solicitada.");
         });
     };
     $scope.showMessage = function(title, message, callback) {
