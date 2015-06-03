@@ -40,15 +40,50 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
 ]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in'
-}).run(function($ionicPlatform) {
+}).run(function($ionicPlatform, $rootScope, $http, $cordovaLocalNotification) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
-        if (window.StatusBar) {
-            StatusBar.styleDefault();
+    });
+    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+        switch (notification.event) {
+            case 'registered':
+                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. registered");
+                if (notification.regid.length > 0) {
+                    $http.post(api.user.setRegistrationKey, {
+                        registrationKey: notification.regid
+                    }).success(function(user, status, headers, config) {
+                        console.log("setRegistrationKey .. OK");
+                    }).error(function(err, status, headers, config) {
+                        console.log("setRegistrationKey .. ERROR");
+                        console.dir(err);
+                        console.log(status);
+                    });
+                }
+                break;
+            case 'message':
+                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. message");
+                // this is the actual push notification. its format depends on the data model from the push server
+                console.log('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+                alert(notification.message);
+                $cordovaLocalNotification.schedule({
+                    id: 987654987,
+                    title: 'Lufke',
+                    text: notification.message
+                });
+                console.log("$cordovaLocalNotification.schedule .. PASO ...");
+                break;
+            case 'error':
+                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. error");
+                console.log('GCM error = ' + notification.msg);
+                break;
+            default:
+                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. default");
+                console.log('An unknown GCM event has occurred');
+                break;
         }
     });
 })

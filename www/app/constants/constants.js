@@ -19,7 +19,8 @@ var api = {
         getPublicProfile: url_base + '/user/getpublicprofile',
         searchInterests: url_base + '/user/searchinterests',
         addInterestToProfile: url_base + '/user/addinterest',
-        logout: url_base + 'user/logout'
+        logout: url_base + '/user/logout',
+        setRegistrationKey: url_base + '/user/setregistrationkey'
     },
     post: {
         get: url_base + '/post/get',
