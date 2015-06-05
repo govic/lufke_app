@@ -2,14 +2,21 @@ angular.module('lufke').controller('EditDnaController', function(lodash, $scope,
     console.log('Inicia ... EditDnaController');
     $scope.model = {};
     $scope.model.searchText = "";
+    $http.post(api.user.getSuggestedInterests).success(function(data, status, headers, config) {
+        $scope.model = data;
+    }).error(function(err, status, headers, config) {
+        console.dir(err);
+        console.log(status);
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
+    });
     $scope.updateData = function() {
-    	$scope.model.searchText = "";
-    	$scope.$broadcast('scroll.refreshComplete');
+        $scope.model.searchText = "";
+        $scope.$broadcast('scroll.refreshComplete');
     };
     $scope.search = function() {
-    	$http.post(api.user.searchInterests, {
-    		searchText: $scope.model.searchText
-    	}).success(function(data, status, headers, config) {
+        $http.post(api.user.searchInterests, {
+            searchText: $scope.model.searchText
+        }).success(function(data, status, headers, config) {
             $scope.model = data;
         }).error(function(err, status, headers, config) {
             console.dir(err);
@@ -18,9 +25,9 @@ angular.module('lufke').controller('EditDnaController', function(lodash, $scope,
         });
     };
     $scope.add = function(item) {
-    	$http.post(api.user.addInterestToProfile, {
-    		interestId: item.interestId
-    	}).success(function(data, status, headers, config) {
+        $http.post(api.user.addInterestToProfile, {
+            interestId: item.interestId
+        }).success(function(data, status, headers, config) {
             $scope.model.interests.splice($scope.model.interests.indexOf(item), 1);
             $scope.showMessage("Exito", "El interés seleccionado ha sido agregado a su perfil.");
         }).error(function(err, status, headers, config) {

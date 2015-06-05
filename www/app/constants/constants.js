@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
 var url_files = 'http://betalufkegovic.azurewebsites.net';
 
+=======
+var url_files = 'http://betalufkegovic.azurewebsites.net/'; //sirve para local y celular
+//var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
+>>>>>>> ef1a880e892f8e9bfe731a5513472be12111be55
 //var url_files = 'http://localhost:8080'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
@@ -23,7 +28,8 @@ var api = {
         searchInterests: url_base + '/user/searchinterests',
         addInterestToProfile: url_base + '/user/addinterest',
         logout: url_base + '/user/logout',
-        setRegistrationKey: url_base + '/user/setregistrationkey'
+        setRegistrationKey: url_base + '/user/setregistrationkey',
+        getSuggestedInterests: url_base + '/user/suggestedtnterests'
     },
     post: {
         get: url_base + '/post/get',
