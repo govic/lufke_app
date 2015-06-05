@@ -3,6 +3,8 @@ angular.module('lufke').controller('SearchUsersController', function(lodash, $sc
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
+    $scope.unknown_post = url_post;
+
     $ionicLoading.show();
     $http.post(api.explore.getSearchUsers, {
         page: 0
@@ -69,6 +71,8 @@ angular.module('lufke').controller('SearchUsersController', function(lodash, $sc
                 $scope.model.page = data.page;
                 lodash.forEach(data.users, function(item) { //agrega todos mas usuarios encontrados
                     $scope.model.users.push(item);
+                    console.dir($scope.model.users);
+                    $scope.model.users = lodash.uniq($scope.model.users, 'profileId');                    
                 });
                 $ionicLoading.hide();
             } else {

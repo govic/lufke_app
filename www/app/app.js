@@ -40,7 +40,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
 ]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in'
-}).run(function($ionicPlatform, $rootScope, $http, $cordovaLocalNotification) {
+}).run(function($ionicPlatform, $rootScope, $http/*, $cordovaLocalNotification*/) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -48,7 +48,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
     });
-    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+    /*$rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
         switch (notification.event) {
             case 'registered':
                 console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. registered");
@@ -85,7 +85,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
                 console.log('An unknown GCM event has occurred');
                 break;
         }
-    });
+    });*/
 })
 moment.locale('es', {
     relativeTime: {

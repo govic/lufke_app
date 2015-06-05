@@ -1,4 +1,4 @@
-angular.module('lufke').controller('LoginController', function($rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
+angular.module('lufke').controller('LoginController', function( $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
     console.log('Inicia ... LoginController');
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
@@ -13,9 +13,9 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
             $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
             $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
             $scope.model.loginError = false;
-            $cordovaPush.register({
+            /*$cordovaPush.register({
                 "senderID": "767122101153"
-            });
+            });*/
             $ionicLoading.hide();
             $state.go('tab.news'); //redirige hacia news
             return;
@@ -61,6 +61,13 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
             foto: ""
         };
     });
+    $scope.goToRegister = function(){
+        $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+        });
+        $state.go('register');
+    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -116,9 +123,9 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                $cordovaPush.register({
+                /*$cordovaPush.register({
                     "senderID": "767122101153"
-                });
+                });*/
                 $ionicLoading.hide();
                 $state.go('tab.news'); //redirige hacia news
                 return;

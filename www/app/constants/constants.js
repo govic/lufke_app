@@ -5,6 +5,7 @@ var url_base = url_files + '/api'; //sirve para local y celular
 var url_user = 'assets/img/uknown_user.png';
 var url_background = 'assets/img/unknown_background.png';
 var url_post = 'assets/img/unknown_post.png';
+var url_adn = 'assets/img/adn.png'
 
 var api = {
     user: {

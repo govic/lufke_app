@@ -1,12 +1,12 @@
 <ion-view hide-back-button="true" view-title="Perfil">
-    <ion-nav-buttons side="right">
+    <ion-nav-buttons side="right" ng-if="false">
         <a class="button button-icon icon ion-gear-b" ui-sref="filters"></a>
     </ion-nav-buttons>
     <ion-content class="has-footer">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div id="profile-background-img" ng-style="{'background-image': 'url('+ background + ')'}">
-            <div class="col">
+            <div >
                 <div class="row">
                     <div>
                         <img id="profile-img" src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" />
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="profile-interest">
                         <div ng-repeat="item in model.interests">
                             {{item.interestText}}
@@ -50,22 +50,38 @@
                             </button>
                         </a>
                     </div>
-                </div>
+                </div>-->
+                <ion-scroll direction="x" ui-sref="dna" class="dna">
+                    <div class="profile-interest" ng-style="{'background-image': 'url(' + adn + ')'}">
+                        <div class="up-dna-container">
+                            <div class="up-dna" ng-repeat="item in even">
+                                <div class="dna-text">
+                                    <p>{{item.interestText}}</p>
+                                </div>  
+                            </div>  
+                        </div>  
+                        <br>
+                         <div class="down-dna-container">
+                            <div class="down-dna" ng-repeat="item in odd">
+                                <div class="dna-text">
+                                    <p>{{item.interestText}}</p>
+                                </div>  
+                            </div>  
+                        </div>                       
+                    </div>
+                </ion-scroll>
             </div>
         </div>		
         <div class="row">
             <div class="col profile-text-center">
                 <p>{{model.summaryText}}</p>
-                <p>
-                    <span>|</span>
-                    <span ng-repeat="item in model.tags">
-                        <span class="tag-social-link-text" ng-click="viewTag(item)">{{item.tagText}}</span>
-                        <span>|</span>
-                    </span>
-                </p>
-                <p class="tag-social-link-text" ng-click="socialLink(model.socialLinkUrl)">
+                
+                <p class="tag-social-link-text">
                     {{model.socialLinkText}}
                 </p>
+                <!--<p class="tag-social-link-url" ng-click="socialLink(model.socialLinkUrl)">
+                    {{model.socialLinkUrl}}
+                </p>-->
             </div>
         </div>
         <div class="row">

@@ -10,6 +10,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    padding: 0px;
 }
 #explore .item-divider .row{
 	padding: 0; 
@@ -42,7 +43,7 @@
 
 .post-content {
     height: 4em;
-    width: 4em;
+    width: 33%;
     background-size: cover;
 	background-position: center;
     background-repeat: no-repeat;
@@ -53,8 +54,7 @@
 .post-icon {
     font-size: 2em;
 	display: block;
-	margin: auto auto;
-    vertical-align: middle;
+    margin-top:0.3em;	
     text-align: center;
 }
 .category-content {

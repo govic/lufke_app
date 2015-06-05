@@ -30,7 +30,7 @@
 						</button>
 					</div>
 
-					<div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{url + pub.postImgUrl}})'}">
+					<div ng-repeat="pub in item.lastPosts" ui-sref="post({'postId': pub.id})" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}">
 						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 
 		<br/>
 
-        <ion-list>
+        <ion-list ng-if="false">
 			<ion-item class="item-divider">
 				<div class="row">
 					<div class="col">

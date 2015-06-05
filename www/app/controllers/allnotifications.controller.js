@@ -1,6 +1,7 @@
 angular.module('lufke').controller('AllNotificationsController', function($ionicLoading, lodash, $state, $scope, $ionicPopup, $http) {
     console.log('Inicia ... AllNotificationsController');
     $scope.url = url_files;
+    $scope.unknown_user = url_user;
     $scope.moreData = true;
     var full_notification = 0;
     var full_notification_aux = 0;
@@ -24,8 +25,7 @@ angular.module('lufke').controller('AllNotificationsController', function($ionic
             $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de notificaciones.");
         });
     };
-    $scope.viewNotification = function(notification) {
-        //TODO falta link hacia post o perfil usuario
+    $scope.viewNotification = function(notification) {//TODO falta link hacia post o perfil usuario
         console.dir(notification);
         if (notification.notificationType === "Like" || notification.notificationType === "Comment") {
             $state.go('post', {

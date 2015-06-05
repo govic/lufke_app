@@ -1,6 +1,6 @@
 <ion-view title="Usuarios">
     <ion-content class="padding">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <ion-list>
         	<ion-item class="item-input-inset">
@@ -26,12 +26,12 @@
 						</button>
 					</div>
 
-					<div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{url + pub.postImgUrl}})'}">
+					<div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}">
 						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
 					</div>
 				</div>
 			</ion-item>
 		</ion-list>
-		<button class="button button-block button-positive" ng-click="loadMore()">Cargar más resultados ...</button>
+		<button ng-show="model.users && model.users.length > 0" class="button button-block login-button" ng-click="loadMore()">Cargar más resultados ...</button>
     </ion-content>
 </ion-view>
