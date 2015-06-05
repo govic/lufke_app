@@ -89,7 +89,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
 })
 moment.locale('es', {
     relativeTime: {
-        future: 'en %s',
+        future: '%s',
         past: '%s',
         s: 'ahora',
         m: '1m',
