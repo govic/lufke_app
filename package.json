@@ -21,7 +21,10 @@
     {
       "locator": "https://github.com/phonegap-build/PushPlugin.git",
       "id": "com.phonegap.plugins.PushPlugin"
-    }
+    },
+    "de.appplant.cordova.plugin.local-notification",
+    "org.apache.cordova.dialogs",
+    "jp.wizcorp.phonegap.plugin.localNotificationPlugin"
   ],
   "cordovaPlatforms": [
     "android"

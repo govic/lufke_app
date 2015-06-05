@@ -13,9 +13,11 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
             $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
             $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
             $scope.model.loginError = false;
-            $cordovaPush.register({
-                "senderID": "767122101153"
-            });
+            if (ionic.Platform.platform() != "win32") {
+                $cordovaPush.register({
+                    "senderID": "767122101153"
+                });
+            }
             $ionicLoading.hide();
             $state.go('tab.news'); //redirige hacia news
             return;
@@ -116,9 +118,11 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                $cordovaPush.register({
-                    "senderID": "767122101153"
-                });
+                if (ionic.Platform.platform() != "win32") {
+                    $cordovaPush.register({
+                        "senderID": "767122101153"
+                    });
+                }
                 $ionicLoading.hide();
                 $state.go('tab.news'); //redirige hacia news
                 return;

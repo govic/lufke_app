@@ -40,7 +40,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
 ]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in'
-}).run(function($ionicPlatform, $rootScope, $http, $cordovaLocalNotification) {
+}).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -51,8 +51,8 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
         switch (notification.event) {
             case 'registered':
-                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. registered");
                 if (notification.regid.length > 0) {
+                    console.log("GCM registered = " + notification.regid);
                     $http.post(api.user.setRegistrationKey, {
                         registrationKey: notification.regid
                     }).success(function(user, status, headers, config) {
@@ -65,23 +65,23 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
                 }
                 break;
             case 'message':
-                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. message");
-                // this is the actual push notification. its format depends on the data model from the push server
-                console.log('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-                alert(notification.message);
-                $cordovaLocalNotification.schedule({
-                    id: 987654987,
-                    title: 'Lufke',
-                    text: notification.message
+                console.log('GCM message = ' + notification.message);
+                //alert(notification.message);
+                $cordovaDialogs.alert(notification.message, 'Notificación', 'Aceptar').then(function(){
+                    $state.go('notification');
                 });
-                console.log("$cordovaLocalNotification.schedule .. PASO ...");
+                //navigator.notification.alert(notification.message);
+                //console.dir(cordova.plugins);
+                /*window.cordova.plugins.notification.local.schedule.add({
+                    id: 417546,
+                    title: 'Title here 7y987987',
+                    text: 'Text here h987'
+                });*/
                 break;
             case 'error':
-                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. error");
                 console.log('GCM error = ' + notification.msg);
                 break;
             default:
-                console.log("$rootScope.$on('$cordovaPush:notificationReceived') .. default");
                 console.log('An unknown GCM event has occurred');
                 break;
         }
