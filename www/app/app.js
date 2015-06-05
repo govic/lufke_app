@@ -85,7 +85,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
                 console.log('An unknown GCM event has occurred');
                 break;
         }
-    });
+    });    
 })
 moment.locale('es', {
     relativeTime: {
