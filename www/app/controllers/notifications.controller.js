@@ -26,13 +26,16 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     /* Metodo para control de requests */
     //metodo que realiza la logica para ignorar una solicitud
     $scope.ignoreRequest = function(request) {
+        $ionicLoading.show();
         $http.post(api.notifications.ignoreRequest, {
             requestId: request.requestId
         }).success(function(data, status, headers, config) {
-            alert("Solicitud ingnorada id = " + request.requestId); //TODO .. falta efectos en la vista
+            $ionicLoading.hide();
+            $scope.showMessage("Éxito", "Solicitus rechazada."); //TODO .. falta efectos en la vista
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.dir(status);
+            $ionicLoading.hide();
             $scope.showMessage("Error", "Ha ocurrido un error al realizar la operación solicitada.");
         });
     };

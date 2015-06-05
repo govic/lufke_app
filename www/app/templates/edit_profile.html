@@ -38,17 +38,17 @@
                             <i ng-show="editForm.editEmail.$touched && editForm.editEmail.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                          <label class="item item-input item-stacked-label">
-                            <span class="input-label">Social Link Text</span>
+                            <span class="input-label">Biografía</span>
                             <input name="editSocialText" type="text" ng-model="model.socialLinkText">
                             <i ng-show="editForm.editSocialText.$touched && editForm.editSocialText.$invalid" class="icon assertive ion-alert"></i>
                         </label>
-                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Social Link Url</span>
+                        <!--<label class="item item-input item-stacked-label">
+                            <span class="input-label">Url social</span>
                             <input name="editSocialUrl" type="text" ng-model="model.socialLinkUrl">
                             <i ng-show="editForm.editSocialUrl.$touched && editForm.editSocialUrl.$invalid" class="icon assertive ion-alert"></i>
-                        </label>
+                        </label>-->
                          <label class="item item-input item-stacked-label">
-                            <span class="input-label">Summary</span>
+                            <span class="input-label">Estado</span>
                             <input name="editSummary" type="text" ng-model="model.summaryText">
                             <i ng-show="editForm.editSummary.$touched && editForm.editSummary.$invalid" class="icon assertive ion-alert"></i>
                         </label>
@@ -68,7 +68,7 @@
                             <input type="password" ng-model="model.repeatPassword">
                         </label>
                     </div>
-                    <input ng-disabled="editForm.$invalid" type="submit" class="button button-block button-positive" value="Editar">
+                    <input ng-disabled="editForm.$invalid" type="submit" class="button button-block login-button" value="Editar">
                 </form>
             </div>
         </div>

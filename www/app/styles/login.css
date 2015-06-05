@@ -10,3 +10,39 @@
     width: 100%;
     z-index: 99999;
 }
+.register-tab, .login-tab{
+	width: 50%;
+	background-color: #171717;
+	color: white;
+	height: 3.5em;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	margin-top: -0.4em;
+}
+.register-tab-active, .login-tab-active{
+	width: 50%;
+	background-color: #171717;
+	color: white;
+	height: 3.5em;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 0.3em solid #02B8C1;
+	margin-top: -0.4em;
+}
+.no-padding-login{
+	padding: 0px;
+}
+.login-input{
+	height: 3.5em !important;
+	border-top: none !important;
+	border-left: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+}
+.login-button, .register-button{
+	background-color: #171717;
+	color: white;
+}

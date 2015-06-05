@@ -1,5 +1,6 @@
-angular.module('lufke').controller('RegisterController', function($state, $localStorage, $scope, $http, $base64, $ionicPopup) {
+angular.module('lufke').controller('RegisterController', function( $ionicHistory, $state, $localStorage, $scope, $http, $base64, $ionicPopup) {
     console.log('Inicia ... RegisterController');
+    $scope.loginImage = 'assets/img/login.png';
     //elimina datos sesion usuario activo
     $localStorage.session = null;
     $localStorage.basic = null;
@@ -47,6 +48,13 @@ angular.module('lufke').controller('RegisterController', function($state, $local
                 else $scope.showMessage("Error", data.ExceptionMessage);
             });
         }
+    };
+    $scope.goToLogin = function(){
+        $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+        });
+        $state.go('login');
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({

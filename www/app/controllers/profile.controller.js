@@ -1,8 +1,11 @@
-angular.module('lufke').controller('ProfileController', function($localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope) {
+angular.module('lufke').controller('ProfileController', function(lodash, $localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope) {
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
+    $scope.adn = url_adn;
+    $scope.even = [];
+    $scope.odd = [];
     $ionicLoading.show();
     $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
         $scope.model = profile;
@@ -12,6 +15,16 @@ angular.module('lufke').controller('ProfileController', function($localStorage, 
         else{
             $scope.background = $scope.unknown_background;
         }
+        lodash.forEach($scope.model.interests, function(interest){
+            if(lodash.indexOf($scope.model.interests, interest) % 2 === 0){
+                $scope.odd.push(interest);
+            }
+            else{
+                $scope.even.push(interest);
+            }
+        });
+        console.dir($scope.odd);
+        console.dir($scope.even);
         $ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
@@ -27,6 +40,8 @@ angular.module('lufke').controller('ProfileController', function($localStorage, 
     $scope.updateProfileData = function() {
         $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
+            $scope.even = [];
+            $scope.odd = [];
             $scope.model = profile;
             if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
                 $scope.background = $scope.url + $scope.model.backgroundImgUrl;
@@ -34,6 +49,16 @@ angular.module('lufke').controller('ProfileController', function($localStorage, 
             else{
                 $scope.background = $scope.unknown_background;
             }
+            lodash.forEach($scope.model.interests, function(interest){
+                if(lodash.indexOf($scope.model.interests, interest) % 2 === 0){
+                    $scope.odd.push(interest);
+                }
+                else{
+                    $scope.even.push(interest);
+                }
+            });
+            console.dir($scope.odd);
+            console.dir($scope.even);
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.log(status);

@@ -20,7 +20,7 @@
 }
 .notification-icon-align-go {
     text-align: right;
-    vertical-align: middle;
+    margin-top: 0.6em;
 }
 .notification-profile-img-center {
     padding-right: 2.5em;
@@ -45,4 +45,8 @@
 }
 .notification-list-no-pad .item-content {
     padding:0px 10px 0px 0px;
+}
+.ignore{
+    border-color: #C64E51 !important;
+    background-color: #C64E51 !important;
 }

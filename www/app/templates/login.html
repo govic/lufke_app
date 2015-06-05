@@ -1,14 +1,18 @@
-<ion-view  hide-back-button="true">
-    <ion-content class="has-footer">
+<ion-view hide-back-button="false" hide-nav-bar="true" view-title="Entrar" animation="no-animation">
+    <ion-content>
         <img class="loginimg" src="{{loginImage}}">
-        <form name="loginForm" ng-submit="loginForm.$valid && validateUser()" class="content has-header css-form">
+        <div class="row no-padding-login">
+            <button class="register-tab" ng-click="goToRegister()">REGISTRO</button>
+            <button class="login-tab-active">ENTRAR</button>
+        </div>
+        <form name="loginForm" ng-submit="loginForm.$valid && validateUser()" class="content css-form">
             <div class="list">
                 <label class="item item-input">
-                    <input name="loginName" ng-model="model.user.name" type="text" placeholder="Usuario" required>
+                    <input class="login-input" name="loginName" ng-model="model.user.name" type="text" placeholder="Usuario" required>
                     <i ng-show="loginForm.loginName.$touched && loginForm.loginName.$invalid" class="icon assertive ion-alert"></i>
                 </label>
                 <label class="item item-input">
-                    <input name="loginPassword" ng-model="model.user.password" type="password" placeholder="Contraseña" required>
+                    <input class="login-input" name="loginPassword" ng-model="model.user.password" type="password" placeholder="Contraseña" required>
                     <i ng-show="loginForm.loginPassword.$touched && loginForm.loginPassword.$invalid" class="icon assertive ion-alert"></i>
                 </label>
                 <div id="login-forgot-password" ng-click="showRememberPassword()">
@@ -16,13 +20,8 @@
                 </div>
             </div>
             <div class="padding">
-                <input ng-disabled="loginForm.$invalid" type="submit" class="button button-block button-positive" value="Iniciar sesión">
-            </div>
-            <div class="padding">
-                <button class="button button-block button-positive" ui-sref="register">
-                Registro de usuario
-                </button>
-            </div>
+                <input ng-disabled="loginForm.$invalid" type="submit" class="button button-block login-button" value="Iniciar sesión">
+            </div>            
         </form>
     </ion-content>
 </ion-view>

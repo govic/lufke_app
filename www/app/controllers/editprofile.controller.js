@@ -1,4 +1,4 @@
-angular.module('lufke').controller('EditProfileController', function($ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
+angular.module('lufke').controller('EditProfileController', function($state, $ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
     console.log('Inicia ... EditProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -42,6 +42,7 @@ angular.module('lufke').controller('EditProfileController', function($ionicLoadi
             var auth = 'Basic ' + profile.credentialsHash;
             $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
             $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
+            $state.go('tab.profile');
             $scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");
         }).error(function(err, status, headers, config) {
             console.dir(err);

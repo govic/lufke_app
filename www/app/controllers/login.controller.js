@@ -1,4 +1,4 @@
-angular.module('lufke').controller('LoginController', function($rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
+angular.module('lufke').controller('LoginController', function( $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
     console.log('Inicia ... LoginController');
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
@@ -63,6 +63,13 @@ angular.module('lufke').controller('LoginController', function($rootScope, $cord
             foto: ""
         };
     });
+    $scope.goToRegister = function(){
+        $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+        });
+        $state.go('register');
+    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
