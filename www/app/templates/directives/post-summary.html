@@ -1,35 +1,38 @@
 <div class="item post-summary" class="item" ng-style="{'background-image':'url({{post.backgroundImgUrl !== '' && post.backgroundImgUrl !== null ? url + post.backgroundImgUrl : unknown_post}})'}">
-    <div class="row row-top">
-        <img class="post-summary-user-img" src="{{post.authorUrlImage !== null  &&  post.authorUrlImage !== '' ? url + post.authorUrlImage : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(post.authorId)"/>
-        
-        <div class="post-summary-user-data" ng-click="viewProfile(post.authorId)">
-            <span class="post-summary-user-name">{{post.authorName}}<br/></span>
-            <span ng-show="post.location !== ''" class="post-summary-location">
-                <i class="ion-location"></i> {{post.authorLocation}}
-            </span>
-        </div>
-        <div class="col" >
-            <span class="post-summary-timestamp" ui-sref="post({'postId': post.id})">
-                <i class="ion-clock"></i> <span am-time-ago="post.postTimestamp"></span> 
-            </span>                       
-        </div>
-    </div>
+    <div class="gradient">
+        <div class="row row-top">
+            <img class="post-summary-user-img" ng-src="{{post.authorUrlImage !== null  &&  post.authorUrlImage !== '' ? url + post.authorUrlImage : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(post.authorId)"/>
 
-    <div class="row" ui-sref="post({'postId': post.id})">
-        <div class="post-summary-text">
-            {{post.text}}
+            <div class="post-summary-user-data" ng-click="viewProfile(post.authorId)">
+                <span class="post-summary-user-name">{{post.authorName}}<br/></span>
+                <span ng-show="post.location !== ''" class="post-summary-location">
+                    <i class="ion-location"></i> {{post.authorLocation}}
+                </span>
+            </div>
+            <div class="col" >
+                <span class="post-summary-timestamp" ui-sref="post({'postId': post.id})">
+                    <i class="ion-clock"></i> <span am-time-ago="post.postTimestamp"></span> 
+                </span>                       
+            </div>
         </div>
-    </div>
 
-    <div class="row row-bottom">
-        <span class="col post-summary-footer">
-			<span ng-click="toggleLike(post.id); $event.stopPropagation()">
-				<i ng-show="post.isLiked" class="ion-ios7-star"></i> 
-				<i ng-show="!post.isLiked" class="ion-ios7-star-outline"></i> 
-				{{post.totalStars}}
-			</span>
-			&nbsp;
-            <span><i class="ion-chatbox" ui-sref="post({'postId': post.id})"></i> {{post.totalComments}}</span>
+        <div class="row" ui-sref="post({'postId': post.id})">
+            <div class="post-summary-text">
+                {{post.text}}
+            </div>
+        </div>
+
+        <div class="row row-bottom">
+            <div class="col post-summary-footer">
+                <div ng-click="toggleLike(post); $event.stopPropagation()">
+                    <div ng-class="{'like': post.isLiked, 'dont-like': !post.isLiked}"></div>
+                    <div class="counter">{{post.totalStars}}</div>
+                </div>
+                <div>
+                    <div class="comments" ui-sref="post({'postId': post.id})"></div>
+                    <div class="counter">{{post.totalComments}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

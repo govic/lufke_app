@@ -9,7 +9,7 @@
 		
 		<div class="row row-top">
 			<div id="post-detail-user-img-container">
-				<img id="post-detail-user-img" src="{{model.post.authorImgUrl !== null && model.post.authorImgUrl !== '' ? url + model.post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(model.post.authorId)"/>
+				<img id="post-detail-user-img" ng-src="{{model.post.authorImgUrl !== null && model.post.authorImgUrl !== '' ? url + model.post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(model.post.authorId)"/>
 			</div>
 
 			<div class="col post-detail-user-data">

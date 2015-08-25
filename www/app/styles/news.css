@@ -1,36 +1,3 @@
-#shareExperienceContainer{
-	background-color: #B3A646;
-	border: none;
-}
-#experienceTextArea{	
-	font-size: 120%;
-	background-color: #B3A646;
-	position: relative;
-	width: 100%; 
-  	resize: none;
-}
-#experienceTextArea::-webkit-input-placeholder {
-   color: #EBE35A;
-   padding-left: 2em;
-   padding-top: 0.45em;
-}
-#experienceTextArea:-moz-placeholder { /* Firefox 18- */
-   color: #EBE35A; 
-   padding-left: 2em;
-   padding-top: 0.45em;
-}
-
-#experienceTextArea::-moz-placeholder {  /* Firefox 19+ */
-   color: #EBE35A;
-   padding-left: 2em;
-   padding-top: 0.45em; 
-}
-
-#experienceTextArea:-ms-input-placeholder {  
-   color: #EBE35A;  
-   padding-left: 2em;
-   padding-top: 0.45em;
-}
 .ion-chatbox-working{
 	position: absolute;
 	font-size: 140%;
@@ -46,41 +13,112 @@
 	background-color: #EAEEEF;
 }
 #shareExperience{
-	font-size: 120%; 
-	position: absolute;
+    color: #3c3c3c;
+	font-size: 0.9em;
+	/*position: absolute;
 	left: 20%;
-	top: 1em;
-	width: 55%; 
-	height: 4em;
+	top: 1em;*/
+	height: 6em;
   	resize: none;
+    vertical-align: top;
+	width: 60%;
 }
 #share-experience-user-img{
-	position: absolute;
+	/*position: absolute;*/
 	border-radius: 100%;
     height: 4em;
     width: 4em;
-    top: 1em;
-    left: 0.7em;
+    /*top: 1em;
+    left: 0.7em;*/
     z-index: 12;
 }
-.ion-camera{
-	font-size: 500%;
-	color: white;
-}
-.camera{
-	position: absolute;
-	background-color: #BBBEBF;
-	left: 78%;
-	top: 0.1em;
-}
 .hr-share{
-	position: absolute;
-	top: 6em;
+	/*position: absolute;
+	top: 6em;*/
 	width: 95%;
-	left: 2.5%;
-	color: #BBBEBF;
+	/*left: 2.5%;*/
+	color: #00bcc7;
 }
 #preview{
 	position: absolute;
 	top: 7em;
+}
+.news-title{
+    padding-top: 0.5em;
+}
+.news-title img{
+    height: 70%;
+}
+.button-camera{
+	background-color: #BBBEBF;
+	color: white;
+	font-size: 500%;
+	/*left: 78%;
+	position: absolute;
+	top: 0.1em;*/
+    float: right;
+    
+    background-image: url('../../assets/img/new-post/shareexperienceaddpictureplaceholder.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1.1em;
+    width: 1.1em;
+}
+
+.experience-text, .experience-tools{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 100%;
+}
+.experience-text>*{
+    display: inline-block;
+}
+.experience-text{
+    padding-top: 1em;
+}
+.experience-tools{
+    
+}
+.experience-tools .add-friends, .experience-tools .share-location{
+    background-color: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 0px;
+    margin-right: 1em;
+    height: 2.5em;
+    width: 2.5em;
+}
+.experience-tools .add-friends{
+    background-image: url('../../assets/img/new-post/shareexperiencefriendtag_3x.png');
+}
+.experience-tools .share-location{
+    background-image: url('../../assets/img/new-post/shareexperiencelocation_3x.png');
+}
+.experience-tools .experience-text-length{
+    color: #00bcc7;
+    float: right;
+}
+.add-categories{
+}
+.add-categories .title{
+}
+.add-categories .categories{
+    height: 2em;
+}
+.share{    
+}
+.share .title{
+}
+.share .items{
+    height: 2em;
+}
+
+.add-categories .title, .share .title{
+    background-color: #f0f0f0;
+    border-bottom: 0.1em solid #c7c7c7;
+    border-top: 0.1em solid #c7c7c7;
+    color: #919191;
+    padding: 0.5em;
 }

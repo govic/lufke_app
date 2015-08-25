@@ -2,23 +2,29 @@
  	<ion-nav-buttons  side="right">
         <a ng-disabled="!(model.experienceText.length || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
-	<ion-content>		
-		 <img id="share-experience-user-img" src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
-
-		<textarea id="shareExperience" 
+	<ion-content>
+        <div class="experience-text">
+            <img id="share-experience-user-img" ng-src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
+            <textarea id="shareExperience" 
 				  ng-model="model.experienceText" 
 				  ng-blur="model.isExperienceTextFocus = false" 
 				  ng-focus="model.isExperienceTextFocus = true" 
 				  placeholder="Comparte tu experiencia...">
-		</textarea>	
-		<button class="button ion-camera camera" 
-				ng-click="showImagesOptions()">
-		</button>
-		<hr class="hr-share">		
-		
-		<img id="preview" ng-if="model.mediaSelected" src="data:image/jpeg;base64,{{model.imageBase64}}"/>	
-						
-		
-		
+            </textarea>
+            <button class="button button-camera" ng-click="showImagesOptions()"></button>
+            <hr class="hr-share">		
+        </div>
+        <div class="experience-tools">
+            <button class="add-friends"></button><button class="share-location"></button>
+            <span class="experience-text-length">140</span>
+        </div>
+        <div class="add-categories">
+            <div class="title">CATEGORIAS</div>
+            <div class="categories"></div>
+        </div>
+        <div class="share">
+            <div class="title">COMPARTIR</div>
+            <div class="items"></div>
+        </div>
 	</ion-content>
 </ion-view>

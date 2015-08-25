@@ -1,0 +1,29 @@
+<ion-view view-title="Seguidos">
+    <ion-content>
+        <!--<ion-refresher pulling-text="Soltar para refrescar" on-refresh="update()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
+        </ion-refresher>-->
+		<ion-list>
+            <ion-item class="explore-background-container" ng-show="following.length" ng-repeat="user in following" ng-style="{'background-image':'url(' + (user.backgroundImgUrl ? url + user.backgroundImgUrl : unknown_background) + ')'}">
+                <div class="row">
+                    <div ng-click="viewProfile(user.profileId)">
+                        <img ng-src="{{user.profileImgUrl !== null  && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+                    </div>
+                    <div class="explore-font">
+                        <div class="col explore-user-name">
+                            {{user.profileFirstName}}<br/>
+                            {{user.profileLastName}}<br/>
+                        </div>
+                    </div>
+                    <div ng-repeat="pub in user.lastPosts" ui-sref="post({'postId': pub.id})" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}">
+                        <i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list> 
+        <ion-infinite-scroll ng-if="moreData" on-infinite="more()"></ion-infinite-scroll>
+        <div class="list">
+            <div ng-show="following.length && following.length > 0" class="item item-icon-left item-icon-right" ng-if="!moreData">No hay más a quien sigas</div>
+            <div ng-show="sinSeguiendo" class="item item-icon-left item-icon-right">No te est&aacute; siguiendo nadie</div>
+        </div>
+    </ion-content>
+</ion-view>

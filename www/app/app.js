@@ -1,4 +1,4 @@
-angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'base64', 'ngCordova']).config(function($urlRouterProvider, $ionicConfigProvider) {
+angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'base64', 'ngCordova', 'ngAnimate']).config(function($urlRouterProvider, $ionicConfigProvider) {
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
@@ -32,21 +32,37 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             }
         }
     }
-}).config(['$httpProvider',
-    function($httpProvider) {
+}).config(['$httpProvider', function($httpProvider) {
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }
 ]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in'
-}).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state) {
-    $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
+}).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state, $cordovaPush, $ionicHistory, $localStorage) {
+	$ionicPlatform.ready(function() {
+		
+		$ionicPlatform.onHardwareBackButton(function(e) {
+			console.log("$localStorage");
+			console.log($localStorage.basic);
+			if("tab.news" === $ionicHistory.currentStateName()){
+				ionic.Platform.exitApp()
+				e.preventDefault();
+				e.stopPropagation();
+				
+				return false;
+			}
+			return true;
+		});
+		
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
+		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if (ionic.Platform.platform() != "win32") {
+			$cordovaPush.register({ "senderID": "767122101153" });
+		}
     });
     $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
         switch (notification.event) {
@@ -85,7 +101,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
                 console.log('An unknown GCM event has occurred');
                 break;
         }
-    });    
+    });
 })
 moment.locale('es', {
     relativeTime: {

@@ -1,5 +1,8 @@
 <ion-view  hide-back-button="true" view-title="Explorar">
-    <ion-content id="explore" class="padding" class="has-footer">
+	<div ui-sref="newpost({ next: 'tab.news' })">
+		<share-experience css-class="bar bar-subheader item-input-inset share-experience-container"></share-experience>
+	</div>
+    <ion-content id="explore" class="padding has-footer has-header has-subheader">
     	<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateExploreData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
 		<ion-list>
@@ -31,7 +34,7 @@
 					</div>
 
 					<div ng-repeat="pub in item.lastPosts" ui-sref="post({'postId': pub.id})" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}">
-						<i class="{{pub.postType == 'PHOTO' ? 'ion-camera' : 'ion-play'}} light post-icon"></i>
+                        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
 					</div>
 				</div>
 			</ion-item>

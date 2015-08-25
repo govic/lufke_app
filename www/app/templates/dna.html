@@ -1,10 +1,15 @@
-<ion-view title="ADN">
-    <ion-nav-buttons side="right">
+<ion-view title="ADN" hide-nav-bar="true">
+    <!--<ion-nav-buttons side="right">
         <button class="button" ui-sref="editdna">Agregar</button>
-    </ion-nav-buttons>
-    <ion-content class="padding">
+    </ion-nav-buttons>-->
+    <div class="custom-header">
+        <div class="back" ui-sref="tab.profile"><span class="label">Atrás</span></div>
+        <div class="add-interest" ui-sref="editdna" ng-click="nextState=true" ng-class="{'add-interest-clicked': nextState}"></div>
+    </div>
+    <ion-content>
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
+        <!--
         <div class="list">
         	<div class="item item-icon-right" ng-repeat="item in model.interests">
                 {{item.interestName}}
@@ -13,6 +18,29 @@
             <div class="item" ng-show="!model.interests.length">
                 No has agregado intereses a tu perfil :(
             </div>
-        </div>
+        </div>-->
+        <ion-list>
+            <div class="dna-vertical">
+                <div class="fade-in fade-out interest item" ng-repeat="interest in interests" ng-class="{'item-icon-right': $index%2 === 0, 'item-icon-left': $index%2 === 1}">
+                    <div ng-if="$index%2===0">
+                        <div class="texto">
+                            <span>{{interest.interestName}}</span>
+                        </div>
+                        <div class="ico">
+                            <i class="icon ion-minus-circled assertive" ng-click="remove(interest)"></i>
+                        </div>
+                    </div>
+                    <div ng-if="$index%2!==0">
+                        <div class="ico">
+                            <i class="icon ion-minus-circled assertive" ng-click="remove(interest)"></i>
+                        </div>
+                        <div class="texto">
+                            <span>{{interest.interestName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </ion-list>
+        <ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="more"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

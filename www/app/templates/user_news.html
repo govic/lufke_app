@@ -1,0 +1,18 @@
+<ion-view view-title="Tus experiencias">
+    <div ui-sref="newpost">
+		<share-experience></share-experience>
+	</div>
+
+    <ion-content>
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
+        </ion-refresher>
+		<ion-list>
+            <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>
+        </ion-list>
+        <ion-infinite-scroll ng-if="model.moreData" on-infinite="moreNews()">
+        </ion-infinite-scroll>
+        <div class="list">
+            <div class="item item-icon-left item-icon-right" ng-if="!model.moreData">No hay más noticias que mostrar :(</div>
+        </div>
+    </ion-content>
+</ion-view>

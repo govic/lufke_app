@@ -1,37 +1,14 @@
-angular.module('lufke').controller('ProfileController', function(lodash, $localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope) {
+angular.module('lufke').controller('ProfileController', function(lodash, $localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope, $ionicPopup, UserInterestsSrv){
+	
+	var self = this;
+	
     console.log('Inicia ... ProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
     $scope.adn = url_adn;
-    $scope.even = [];
-    $scope.odd = [];
-    $ionicLoading.show();
-    $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
-        $scope.model = profile;
-        if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
-            $scope.background = $scope.url + $scope.model.backgroundImgUrl;
-        }
-        else{
-            $scope.background = $scope.unknown_background;
-        }
-        lodash.forEach($scope.model.interests, function(interest){
-            if(lodash.indexOf($scope.model.interests, interest) % 2 === 0){
-                $scope.odd.push(interest);
-            }
-            else{
-                $scope.even.push(interest);
-            }
-        });
-        console.dir($scope.odd);
-        console.dir($scope.even);
-        $ionicLoading.hide();
-    }).error(function(data, status, headers, config) {
-        console.dir(data);
-        console.log(status);
-        $ionicLoading.hide();
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
-    });
+	
+	
     $scope.$on('$ionicView.afterEnter', function() {
         //TODO: el servicio debe encargarse de actualizar cambios en la lista de noticias
         console.log("Entro a... ProfileController");
@@ -40,8 +17,6 @@ angular.module('lufke').controller('ProfileController', function(lodash, $localS
     $scope.updateProfileData = function() {
         $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
-            $scope.even = [];
-            $scope.odd = [];
             $scope.model = profile;
             if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
                 $scope.background = $scope.url + $scope.model.backgroundImgUrl;
@@ -49,16 +24,8 @@ angular.module('lufke').controller('ProfileController', function(lodash, $localS
             else{
                 $scope.background = $scope.unknown_background;
             }
-            lodash.forEach($scope.model.interests, function(interest){
-                if(lodash.indexOf($scope.model.interests, interest) % 2 === 0){
-                    $scope.odd.push(interest);
-                }
-                else{
-                    $scope.even.push(interest);
-                }
-            });
-            console.dir($scope.odd);
-            console.dir($scope.even);
+			
+            GetInterest();
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.log(status);
@@ -89,4 +56,43 @@ angular.module('lufke').controller('ProfileController', function(lodash, $localS
             return;
         });
     };
+
+    $scope.followers = function(){
+        $state.go('followers', { userid: $scope.model.profileId });
+    }
+    $scope.following = function(){
+        $state.go('following', { userid: $scope.model.profileId });
+    }
+    $scope.news = function(){
+        $state.go("usernews", { userId: $scope.model.profileId });
+    }
+	
+    
+	$ionicLoading.show();
+	
+    $http.post(api.user.getProfile).success(function(profile, status, headers, config) {
+        delete profile.interests;
+        $scope.model = profile;
+        if($scope.model.backgroundImgUrl !== null && $scope.model.backgroundImgUrl !== ''){
+            $scope.background = $scope.url + $scope.model.backgroundImgUrl;
+        }
+        else{
+            $scope.background = $scope.unknown_background;
+        }
+		
+		var promise = UserInterestsSrv.get();
+        
+        promise.then(function(data){
+            $scope.model.interests = data;
+        }, function(err){
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
+        });
+		
+        $ionicLoading.hide();
+    }).error(function(data, status, headers, config) {
+        console.dir(data);
+        console.log(status);
+        $ionicLoading.hide();
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
+    });	
 });

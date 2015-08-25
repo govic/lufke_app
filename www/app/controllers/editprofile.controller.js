@@ -4,6 +4,8 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
 
+    $scope.model = {};
+    
     $ionicLoading.show();
     $http.post(api.user.getEditProfile)
     .success(function(profile, status, headers, config) {
@@ -12,7 +14,6 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
         $scope.model.newPassword = "";
         $scope.model.repeatPassword = "";
         $ionicLoading.hide();
-        //console.dir($scope.model);
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.log(status);
@@ -32,7 +33,46 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
             $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
         });
     };
-    $scope.editProfile = function() {
+    $scope.validarPass = function($form){
+        //Si alguno de los campos no es vacio, valido de que existan todos los campos necesarios.
+        if(($form.newPassword.$modelValue && $form.newPassword.$modelValue.length > 0) ||
+           ($form.oldPassword.$modelValue && $form.oldPassword.$modelValue.length > 0) ||
+           ($form.repeatPassword.$modelValue && $form.repeatPassword.$modelValue.length > 0)){
+            [$form.newPassword, $form.oldPassword, $form.repeatPassword].forEach(function(campo){
+                if(!campo.$modelValue || campo.$modelValue.length <= 0){
+                    campo.$invalid = true;
+                    campo.$touched = true;
+                    $form.$valid = false;
+                    $form.$invalid = true;
+                }
+            });
+        }else{
+            [$form.newPassword, $form.oldPassword, $form.repeatPassword].forEach(function(campo){
+                if(!campo.$modelValue || campo.$modelValue.length <= 0){
+                    campo.$invalid = false;
+                    campo.$touched = false;
+                }
+            });
+        }
+    }
+    $scope.editProfile = function($form) {
+        //validar cambio de password en caso de que exista algún campo con datos.
+        
+        //Si alguno de los campos no es vacio, valido de que existan todos los campos necesarios.
+        if(($form.newPassword.$modelValue && $form.newPassword.$modelValue.length > 0) ||
+           ($form.oldPassword.$modelValue && $form.oldPassword.$modelValue.length > 0) ||
+           ($form.repeatPassword.$modelValue && $form.repeatPassword.$modelValue.length > 0)){
+            [$form.newPassword, $form.oldPassword, $form.repeatPassword].forEach(function(campo){
+                if(!campo.$modelValue || campo.$modelValue.length <= 0){
+                    campo.$invalid = true;
+                    campo.$touched = true;
+                    $form.$valid = false;
+                    $form.$invalid = true;
+                }
+            });
+            if($form.$invalid) return false;
+        }
+        
         //encripta variables para cambio de password
         $scope.model.oldPasswordHash = $scope.model.oldPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.oldPassword))) : "";
         $scope.model.newPasswordHash = $scope.model.newPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.newPassword))) : "";

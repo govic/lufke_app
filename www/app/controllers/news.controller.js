@@ -1,22 +1,27 @@
-angular.module('lufke').controller('NewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function($ionicPlatform, $ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
     $scope.unknown_post = url_post;
     $ionicLoading.show();
-    $http.post(api.post.getAll).success(function(data) {
-        $scope.model = {
-            posts: data.news,
-            isExperienceTextFocus: false,
-            mediaSelected: false,
-            imageBase64: "",
-            experienceText: "",
-            moreData: true
-        };
-        $ionicLoading.hide();
-        $scope.$broadcast('scroll.refreshComplete');
+	
+	$http.post(api.post.getAll, { cache: false }).success(function(data) {
+		$scope.model = {
+			posts: data.news,
+			isExperienceTextFocus: false,
+			mediaSelected: false,
+			imageBase64: "",
+			experienceText: "",
+			moreData: true
+		};
+		$ionicLoading.hide();
+		$scope.$broadcast('scroll.refreshComplete');
+    }).error(function(){
+		$ionicLoading.hide();
+		$scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error en Lufke.");
     });
+	
     $scope.updateNews = function() {
         $http.post(api.post.getAll).success(function(data) {
             $scope.model = {
@@ -30,19 +35,33 @@ angular.module('lufke').controller('NewsController', function($ionicLoading, $ro
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-    $scope.toggleLike = function(postId) {
+    $scope.toggleLike = function(post) {
+
+        var postId = post.id;
+        var original = {
+            isLiked: post.isLiked,
+            totalStars: post.totalStars
+        };
+
         $http.post(api.post.toggleLike, {
             id: postId
         }).success(function(data) {
-            var post = lodash.find($scope.model.posts, {
-                id: postId
-            });
-            post.totalStars = data.likes;
-            post.isLiked = data.isLiked;
+            //var post = lodash.find($scope.model.posts, { id: postId });
+            //post.totalStars = data.likes;
+            //post.isLiked = data.isLiked;
         }).error(function(data) {
             console.dir(data);
             $scope.showMessage("Error", "Ha ocurrido un error al hacer like.");
+            post.isLiked = original.isLiked;
+            post.totalStars = original.totalStars;
         });
+
+        //Cambio el valor del Like.
+        post.isLiked = !post.isLiked;
+
+        //Con el nuevo valor del Like, actualizo el contador de Likes.
+        if(post.isLiked) post.totalStars++;
+        else post.totalStars--;
     };
 
     $scope.moreNews = function() {

@@ -1,48 +1,29 @@
-angular.module('lufke').controller('DnaController', function($ionicLoading, lodash, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('DnaController', function($ionicLoading, lodash, $scope, $ionicPopup, $http, UserInterestsSrv) {
     console.log('Inicia ... DnaController');
-    $ionicLoading.show();
-    $http.post(api.user.getInterests).success(function(data, status, headers, config) {
-        $scope.model = data;
-        $ionicLoading.hide();
-        console.dir(data);
-    }).error(function(err, status, headers, config) {
-        console.dir(err);
-        console.log(status);
-        $ionicLoading.hide();
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
-    });
+    
     $scope.updateData = function() {
-        $http.post(api.user.getInterests).success(function(data, status, headers, config) {
-            $scope.model = data;
-            console.dir(data);
+        
+        var promise = UserInterestsSrv.get();
+        
+        promise.then(function(data){
+            $scope.interests = data;
             $scope.$broadcast('scroll.refreshComplete');
-        }).error(function(err, status, headers, config) {
+        },function(err){
             console.dir(err);
-            console.log(status);
-            $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses.");
         });
     };
-    $scope.removeItem = function(item) {
-        $ionicPopup.confirm({
-            title: 'Eliminar',
-            template: '¿Está seguro de querer eliminar este elemento?',
-            okText: 'Eliminar',
-            cancelText: 'Cancelar'
-        }).then(function(res) {
-            if (res) {
-            	console.dir(item);
-                $http.post(api.user.deleteInterest, {
-                	interestId: item.interestId
-                }).success(function(data, status, headers, config) {
-                    $scope.model = data;
-                }).error(function(err, status, headers, config) {
-                    console.dir(err);
-                    console.log(status);
-                    $scope.showMessage("Error", "Ha ocurrido un error al eliminar el elemento.");
-                });
-            }
+    $scope.remove = function(item) {
+        var promise = UserInterestsSrv.remove(item); //la promise no la utilizamos en este caso, actualizamos de inmediato.
+        
+        UserInterestsSrv.get().then(function(data){
+            $scope.interests = data;
+        }, function(err){
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses.");
         });
     };
+    
+    $scope.more = true;
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -54,4 +35,24 @@ angular.module('lufke').controller('DnaController', function($ionicLoading, loda
             return;
         });
     };
+    $scope.load = function() {
+        $scope.more = false;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+    };
+    $scope.$on('$stateChangeSuccess', function() {
+        $scope.load();
+    });
+
+    $ionicLoading.show();
+    var promise = UserInterestsSrv.get();
+
+    promise.then(function(data){
+        $scope.interests = data;
+        $scope.$broadcast('scroll.refreshComplete');
+        $ionicLoading.hide();
+    },function(err){
+        console.dir(err);
+        $ionicLoading.hide();
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses.");
+    });
 });

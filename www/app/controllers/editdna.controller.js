@@ -1,4 +1,4 @@
-angular.module('lufke').controller('EditDnaController', function(lodash, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('EditDnaController', function(lodash, $scope, $ionicPopup, $http, UserInterestsSrv) {
     console.log('Inicia ... EditDnaController');
     $scope.model = {};
     $scope.model.searchText = "";
@@ -25,6 +25,18 @@ angular.module('lufke').controller('EditDnaController', function(lodash, $scope,
         });
     };
     $scope.add = function(item) {
+        var promise = UserInterestsSrv.add(item);
+        var index = $scope.model.interests.indexOf(item);
+        
+        $scope.model.interests.splice(index, 1);
+        
+        promise.then(function(data){
+            
+        }, function(err){
+            self.model.interests.splice( index, 0, item );
+        });
+        
+        /*
         $http.post(api.user.addInterestToProfile, {
             interestId: item.interestId
         }).success(function(data, status, headers, config) {
@@ -35,6 +47,7 @@ angular.module('lufke').controller('EditDnaController', function(lodash, $scope,
             console.log(status);
             $scope.showMessage("Error", "Ha ocurrido un error al agregar el interés seleccionado a su perfil.");
         });
+        */
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({

@@ -3,12 +3,12 @@
         <div class="row no-side-padding">
             <div class="col no-side-padding">
                  <div>
-                    <img id="background-img"  src="{{model.backgroundImgUrl !== null  && model.backgroundImgUrl !== '' ? url + model.backgroundImgUrl : unknown_background}}" ng-click="showImagesOptions('background')"/>
+                    <img id="background-img"  ng-src="{{model.backgroundImgUrl !== null  && model.backgroundImgUrl !== '' ? url + model.backgroundImgUrl : unknown_background}}" ng-click="showImagesOptions('background')"/>
                 </div>
                 <div id="edit-profile-edit-img">
-                    <img id="profile-img" src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" ng-click="showImagesOptions('profile')" />
+                    <img id="profile-img" ng-src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" ng-click="showImagesOptions('profile')" />
                 </div>
-                <form name="editForm" ng-submit="editForm.$valid && editProfile()">
+                <form name="editForm" ng-submit="editForm.$valid && editProfile(editForm)">
                    
                     <div class="list">
                         <label class="item item-input item-stacked-label">DATOS PERSONALES</label>
@@ -57,18 +57,21 @@
                         <label class="item item-input item-stacked-label">CAMBIAR CONTRASEÑA</label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Actual</span>
-                            <input type="password" ng-model="model.oldPassword">
+                            <input name="oldPassword" type="password" ng-model="model.oldPassword" ng-change="validarPass(editForm)">
+                            <i ng-show="editForm.oldPassword.$touched && editForm.oldPassword.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nueva</span>
-                            <input type="password" ng-model="model.newPassword">
+                            <input name="newPassword" type="password" ng-model="model.newPassword" ng-change="validarPass(editForm)">
+                            <i ng-show="editForm.newPassword.$touched && editForm.newPassword.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Repetir</span>
-                            <input type="password" ng-model="model.repeatPassword">
+                            <input name="repeatPassword" type="password" ng-model="model.repeatPassword" ng-change="validarPass(editForm)">
+                            <i ng-show="editForm.repeatPassword.$touched && editForm.repeatPassword.$invalid" class="icon assertive ion-alert"></i>
                         </label>
                     </div>
-                    <input ng-disabled="editForm.$invalid" type="submit" class="button button-block login-button" value="Editar">
+                    <input type="submit" class="button button-block login-button" value="Guardar">
                 </form>
             </div>
         </div>

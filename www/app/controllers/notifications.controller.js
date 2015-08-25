@@ -3,6 +3,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $ionicLoading.show();
+	
     $http.post(api.notifications.getNotifications)
     .success(function(data, status, headers, config) {
         $scope.model = data;
@@ -44,7 +45,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
         $http.post(api.notifications.acceptRequest, {
             requestId: request.requestId
         }).success(function(data, status, headers, config) {
-            alert("Solicitud aceptada id = " + request.requestId); //TODO .. falta efectos en la vista
+            //alert("Solicitud aceptada id = " + request.requestId); //TODO .. falta efectos en la vista
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.dir(status);
@@ -53,7 +54,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     };
     //metodo cargar todas las requests
     $scope.viewRequests = function() {
-        alert("Ver más requests!");
+        //alert("Ver más requests!");
     };
     /* Metodos para control de notifications */
     //metodo cargar todas las notificaciones

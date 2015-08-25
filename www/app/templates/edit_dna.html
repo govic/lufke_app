@@ -9,7 +9,7 @@
                 </label>
                 <button class="button button-small icon ion-search" ng-click="search()">&nbsp;Buscar</button>
             </div>
-        	<div class="item item-icon-right" ng-repeat="item in model.interests" on-hold="removeItem(item)">
+        	<div class="fade-in fade-out item item-icon-right" ng-repeat="item in model.interests" on-hold="removeItem(item)">
                 {{item.interestText}}
                 <i class="icon ion-plus-circled balanced" ng-click="add(item)"></i>
             </div>

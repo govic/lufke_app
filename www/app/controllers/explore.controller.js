@@ -5,6 +5,7 @@ angular.module('lufke').controller('ExploreController', function($state, $ionicL
     $scope.unknown_background = url_background;
     $scope.unknown_post = url_post;
     $ionicLoading.show();
+	
     $http.post(api.explore.getPopulars)
     .success(function(data, status, headers, config) {
         console.dir(data);

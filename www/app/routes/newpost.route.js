@@ -1,6 +1,7 @@
 angular.module('lufke').config(function ($stateProvider) {
 	$stateProvider.state('newpost', {
-		url: '/newpost',
+		cache: false,
+		url: '/newpost?next',
 		templateUrl: 'app/templates/new_post.html',
 		controller: 'NewPostController'
 	});

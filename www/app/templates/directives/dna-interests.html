@@ -1,0 +1,20 @@
+<ion-scroll direction="x" class="dna" ng-click="toDna()">
+	<div class="profile-interest" ng-style="{'background-image': 'url(' + adn + ')', 'width': widthDna}">
+		<div class="up-dna-container">
+			<div class="up-dna" ng-repeat="item in even">
+				<div class="dna-text">
+					<p>{{item.interestName}}</p>
+				</div>
+				<div ng-class="{'dna-punto-par': $index%2===0, 'dna-punto-impar': $index%2===1}"></div>
+			</div>
+		</div>
+		 <div class="down-dna-container">
+			<div class="down-dna" ng-repeat="item in odd">
+				<div class="dna-text">
+					<p>{{item.interestName}}</p>
+				</div>
+				<div ng-class="{'dna-punto-par': $index%2===0, 'dna-punto-impar': $index%2===1}"></div>
+			</div>
+		</div>
+	</div>
+</ion-scroll>

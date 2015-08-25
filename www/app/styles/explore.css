@@ -42,14 +42,15 @@
 }
 
 .post-content {
-    height: 4em;
-    width: 33%;
     background-size: cover;
 	background-position: center;
     background-repeat: no-repeat;
+    border: 1px solid rgba(255,255,255, 0.5);
+    height: 4em;
     margin: 0 0.2em;
     margin-top: 0.3em;
-    border: 1px solid rgba(255,255,255, 0.5);
+    padding: 0px;
+    width: 33%;
 }
 .post-icon {
     font-size: 2em;
@@ -82,4 +83,17 @@
     font-weight: bold;
     padding: 0em 0.3em;
     text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+.post-content .photo-content, .post-content .video-content{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    width: 100%
+}
+.post-content .photo-content{
+    background-image: url('../../assets/img/popularusersamplepostphoto_v2.png');
+}
+.post-content .video-content{
+    background-image: url('../../assets/img/popularusersamplepostvideo_v2.png');
 }

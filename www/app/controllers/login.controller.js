@@ -1,39 +1,50 @@
-angular.module('lufke').controller('LoginController', function( $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading) {
+angular.module('lufke').controller('LoginController', function( $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv) {
     console.log('Inicia ... LoginController');
+    
+    UserInterestsSrv.reset();
+    
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
+		
+    $ionicHistory.clearCache();
+    $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+    $http.defaults.headers.common.Authorization = null;
+    $localStorage.basic = null;
+    $localStorage.session = null;
     //verificacion de datos estaticos de autenticacion
     $ionicLoading.show();
     if ($localStorage.basic && $localStorage.basic.trim() != "") {
         $http.post(api.user.login, {
-            credentialsHash: $localStorage.basic.split(" ")[1]
-        }).success(function(user, status, headers, config) {
-            var auth = 'Basic ' + user.credentialsHash;
-            $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
-            $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
-            $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-            $scope.model.loginError = false;
-            if (ionic.Platform.platform() != "win32") {
-                $cordovaPush.register({
-                    "senderID": "767122101153"
-                });
-            }
-            $ionicLoading.hide();
-            $state.go('tab.news'); //redirige hacia news
-            return;
-        }).error(function(err, status, headers, config) {
-            console.dir(err);
-            console.log(status);
-            $ionicLoading.hide();
-        });
-    } else {
-        $ionicLoading.hide();
-    }
-    $ionicHistory.clearCache();
-    $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-    $http.defaults.headers.common.Authorization = null;
-    $localStorage.basic = null;
-    $localStorage.session = null;
+			credentialsHash: $localStorage.basic.split(" ")[1]
+		}).success(function(user, status, headers, config) {
+			var auth = 'Basic ' + user.credentialsHash;
+			$http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
+			$localStorage.basic = auth; //guarda cabecera auth en var global localstorage
+			$localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+			$scope.model.loginError = false;
+			/* if (ionic.Platform.platform() != "win32") {
+				$cordovaPush.register({ "senderID": "767122101153" });
+			} */
+			$ionicLoading.hide();
+            
+            UserInterestsSrv.setUserId(user.id);
+            UserInterestsSrv.get();
+            
+			$state.go('tab.news'); //redirige hacia news
+		}).error(function(err, status, headers, config) {
+			console.dir(err);
+			console.log(status);
+			$ionicLoading.hide();
+			$scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");
+		});
+
+	} else {
+		$ionicLoading.hide();
+		$localStorage.basic = null;
+		$localStorage.session = null;
+	}
+	
     $scope.model = {
         user: {
             name: "",
@@ -45,6 +56,7 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
         },
         foto: ""
     };
+	
     $rootScope.$on('logout', function(event, args) {
         $ionicHistory.clearCache();
         $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -116,23 +128,29 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
     };
     $scope.validateUser = function() {
         console.log('LoginController ... validateUser');
+
         $ionicLoading.show();
         if ($scope.model.user.email !== "" && $scope.model.user.password !== "") {
             $http.post(api.user.login, {
                 credentialsHash: $base64.encode(unescape(encodeURIComponent($scope.model.user.name + ":" + $scope.model.user.password)))
             }).success(function(user, status, headers, config) {
+			
                 var auth = 'Basic ' + user.credentialsHash;
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
                 $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
-                if (ionic.Platform.platform() != "win32") {
-                    $cordovaPush.register({
-                        "senderID": "767122101153"
-                    });
-                }
+
+                /* if (ionic.Platform.platform() != "win32") {
+                    $cordovaPush.register({ "senderID": "767122101153" });
+                } */
+
                 $ionicLoading.hide();
+                
+                UserInterestsSrv.setUserId(user.id);
+                UserInterestsSrv.get();
+                
                 $state.go('tab.news'); //redirige hacia news
-                return;
+
             }).error(function(err, status, headers, config) {
                 console.dir(err);
                 console.log(status);

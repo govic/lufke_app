@@ -1,4 +1,4 @@
-<ion-view hide-back-button="true" view-title="Perfil">
+<ion-view hide-back-button="true" view-title="Perfil" hide-nav-bar="true">
     <ion-nav-buttons side="right" ng-if="false">
         <a class="button button-icon icon ion-gear-b" ui-sref="filters"></a>
     </ion-nav-buttons>
@@ -6,87 +6,58 @@
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div id="profile-background-img" ng-style="{'background-image': 'url('+ background + ')'}">
-            <div >
+            <div class="profile-subheader row">
+                <div class="col btn-left"></div>
+                <div class="col col-50 user-name">{{model.profileUserName}}</div>
+                <div class="col btn-right" ng-click="logout()"></div>
+            </div>
+            <div ui-sref="newpost({ next: 'tab.news' })">
+                <share-experience css-class="bar item-input-inset profile-share-experience"></share-experience>
+            </div>
+            <div class="degrade">
                 <div class="row">
                     <div>
-                        <img id="profile-img" src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" />
+                        <img id="profile-img" ng-src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" />
                     </div>
-                    <div class="col">
-                        <div class="row light">
+                    <div class="col no-padding">
+                        <div class="row light profile-name">
                             <div class="col">
                                 <div class="profile-name-text">{{model.profileFirstName}}</div>
                                 <div class="profile-name-text">{{model.profileLastName}}</div>
                             </div>
                             <div class="col profile-button-edit">
-                                <a class="button button-light button-small edit-profile-button" ng-click="editProfile()">
-                                    Editar
-                                </a>
+                                <a class="button button-light button-small edit-profile-button" ng-click="editProfile()">Editar perfil</a>
                             </div>
                         </div>
                         <div class="row profile-text-center light">
-                            <div class="col no-side-padding">
+                            <div class="col no-side-padding" ng-click="news()">
                                 <div class="profile-number">{{model.postsUnit}}</div>
                                 <div class="profile-number-text-under">Experiencias</div>
                             </div>
-                            <div class="col">
+                            <div class="col" ng-click="followers()">
                                 <div class="profile-number">{{model.followersUnit}}</div>
                                 <div class="profile-number-text-under">Seguidores</div>
                             </div>
-                            <div class="col">
+                            <div class="col" ng-click="following()">
                                 <div class="profile-number">{{model.followingUnit}}</div>
                                 <div class="profile-number-text-under">Siguiendo</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<div class="row">
-                    <div class="profile-interest">
-                        <div ng-repeat="item in model.interests">
-                            {{item.interestText}}
-                        </div>
-                        <a ui-sref="dna">
-                            <button class="dna-button">
-                                ADN
-                            </button>
-                        </a>
-                    </div>
-                </div>-->
-                <ion-scroll direction="x" ui-sref="dna" class="dna">
-                    <div class="profile-interest" ng-style="{'background-image': 'url(' + adn + ')'}">
-                        <div class="up-dna-container">
-                            <div class="up-dna" ng-repeat="item in even">
-                                <div class="dna-text">
-                                    <p>{{item.interestText}}</p>
-                                </div>  
-                            </div>  
-                        </div>  
-                        <br>
-                         <div class="down-dna-container">
-                            <div class="down-dna" ng-repeat="item in odd">
-                                <div class="dna-text">
-                                    <p>{{item.interestText}}</p>
-                                </div>  
-                            </div>  
-                        </div>                       
-                    </div>
-                </ion-scroll>
+				<dna-interests interests="model.interests" read-only="false"></dna-interests>
             </div>
-        </div>		
+        </div>
         <div class="row">
             <div class="col profile-text-center">
                 <p>{{model.summaryText}}</p>
-                
+
                 <p class="tag-social-link-text">
                     {{model.socialLinkText}}
                 </p>
                 <!--<p class="tag-social-link-url" ng-click="socialLink(model.socialLinkUrl)">
                     {{model.socialLinkUrl}}
                 </p>-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col profile-text-center">
-                <button class="button" ng-click="logout()">Cerrar sesión</button>
             </div>
         </div>
     </ion-content>
