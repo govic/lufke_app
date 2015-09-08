@@ -1,12 +1,20 @@
-<ion-view id="postDetail" view-title="Publicación">
-    <ion-content class="padding" class="has-footer">
+<ion-view id="postDetail" view-title="Publicación" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding publicacion" class="has-footer">
 
 		<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updatePost()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
 
 		<div id="post-detail-content-container" class="item" ng-style="{'background-image':'url(' + post_url + ')'}">
 		</div>
-		
+
 		<div class="row row-top">
 			<div id="post-detail-user-img-container">
 				<img id="post-detail-user-img" ng-src="{{model.post.authorImgUrl !== null && model.post.authorImgUrl !== '' ? url + model.post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(model.post.authorId)"/>
@@ -16,26 +24,41 @@
 				<span id="post-detail-user-name">{{model.post.authorName}}<br/></span>
 				<span ng-show="model.post.authorLocation !== ''" id="post-detail-location">
 					<i class="ion-location"></i> {{model.post.authorLocation}}<br/>
-				</span>				
+				</span>
 				<span><i class="ion-clock"></i> </span><span am-time-ago="model.post.postTimestamp"></span>
+                <div class="more" ng-click="showMore()">
+                    <i class="ion-more"></i>
+                </div>
+                <div class="stars" ng-click="toggleLike()">
+                    <div ng-class="{'like': model.post.isLiked, 'dont-like': !model.post.isLiked}"></div>
+                    <div class="counter">{{model.post.totalStars}}</div>
+                </div>
 			</div>
 		</div>
 
 		<div class="row row-bottom">
-			<div class="col post-detail-text">{{model.post.text}}</div>
+			<div class="col post-detail-text">{{model.post.text}}
+                <span class="with" ng-repeat-start="f in model.post.Friends" ng-if="$first"> - con <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-if="!$last && !$first">,&nbsp;<span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-repeat-end ng-if="$last && !$first">&nbsp;y <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span>
+            </div>
 		</div>
 
-		<div class="row">
+        <div class="categories" ng-if="model.post.Interests.length > 0">
+            <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
+            <div class="category" ng-repeat="userInterest in model.post.Interests" ui-sref="category-profile({ interestId: userInterest.interestId })">
+                <span class="btn-text">{{userInterest.interestText | initCap}}</span>
+            </div>
+        </div>
+
+		<div ng-if="false" class="row">
 			<div class="col">
 				<span ng-click="toggleLike()">
-					<i ng-show="model.post.isLiked" class="ion-ios7-star star-size"></i> 
-					<i ng-show="!model.post.isLiked" class="ion-ios7-star-outline star-size"></i> 
+					<i ng-if="model.post.isLiked" class="ion-ios7-star star-size"></i>
+					<i ng-if="!model.post.isLiked" class="ion-ios7-star-outline star-size"></i>
 					{{model.post.totalStars}}
 				</span>
 			</div>
-
-			<div class="col" id="post-detail-more" ng-click="showMore()">
-				<i class="ion-more"></i>
+			<div class="col" id="post-detail-more">
+				<i class="ion-more" ng-click="showMore()"></i>
 			</div>
 		</div>
 
@@ -43,13 +66,13 @@
 			<ion-item id="commentTextContainer" class="item-input-inset">
 				<textarea id="commentTextArea"
 						  ng-model="model.commentText"
-						  ng-blur="model.isCommentTextFocus = false" 
-						  ng-focus="model.isCommentTextFocus = true" 
+						  ng-blur="model.isCommentTextFocus = false"
+						  ng-focus="model.isCommentTextFocus = true"
 						  placeholder="Agrega un comentario...">
 				</textarea>
 				<button ng-show="model.isCommentTextFocus || model.commentText.length"
-						ng-disabled="!model.commentText.length" 
-						class="button button-positive button-small ion-edit comment-button" 
+						ng-disabled="!model.commentText.length || model.commentText.length > 255"
+						class="button button-positive button-small ion-edit comment-button"
 						ng-click="addComment()">
 				</button>
 			</ion-item>

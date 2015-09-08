@@ -1,0 +1,17 @@
+<div class="row">
+    <div ng-click="viewProfile()">
+        <img ng-src="{{user.profileImgUrl !== null  && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+    </div>
+    <div class="explore-font">
+        <div class="col explore-user-name">
+            {{user.profileFirstName}}<br/>
+            {{user.profileLastName}}<br/>
+        </div>
+        <button ng-if="followEnabled" class="button button-light button-small follow-button" ng-click="followUser(user)">
+            <i class="ion-plus active"></i>SEGUIR
+        </button>
+    </div>
+    <div ng-repeat="pub in user.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ng-click="viewPost(pub)">
+        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
+    </div>
+</div>

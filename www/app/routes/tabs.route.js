@@ -22,7 +22,7 @@ angular.module('lufke')
 						controller: 'NotificationsController'
 					})
 					.state('tab.profile', {
-                        cache: false,
+						cache: true,
 						url: '/profile',
 						templateUrl: 'app/templates/profile.html',
 						controller: 'ProfileController'

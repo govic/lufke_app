@@ -3,108 +3,42 @@
     background-image: url('../../assets/img/profiledna_vertical.png');
     background-position: center 0em;
     background-repeat: repeat-y;
-    
+
     padding-top: 6em;
     padding-bottom: 7.1em;
 }
-.dna-vertical, .interest{
+.dna-vertical, .dna-vertical .interest{
     border-width: 0em;
 }
-.interest{
+.dna-vertical .interest{
     background-color: transparent;
     margin-bottom: 3.5em;
 }
-.interest .texto{
+.dna-vertical .interest .texto{
     color: #fed970;
     font-size: 0.8em;
 }
-.interest.item-icon-right{
+.dna-vertical .interest.item-icon-right{
     text-align: right;
 }
-.interest.item-icon-left{
+.dna-vertical .interest.item-icon-left{
     text-align: left;
 }
-.interest.item-icon-right .texto{
+.dna-vertical .interest.item-icon-right .texto{
     margin-right: 60%;
 }
-.interest.item-icon-left .texto{
+.dna-vertical .interest.item-icon-left .texto{
     margin-left: 60%;
 }
-.interest .icon{
+.dna-vertical .interest .icon{
     color: #aaa;
 }
-.interest.item-icon-right .ico .icon{
+.dna-vertical .interest.item-icon-right .ico .icon{
     right: 25%;
 }
-.interest.item-icon-left .ico .icon{
+.dna-vertical .interest.item-icon-left .ico .icon{
     left: 25%;
 }
-
-.add-interest{
-    background-image: url("../../assets/img/profilednaaddicon_2x.png");
-    background-position: center;
-    float: right;
-    margin-right: 0.5em;
-    width: 3.86em;
-}
 .add-interest-clicked{
     background-color: #fff;
 }
-.back{
-    background-image: url("../../assets/img/navigationbarbackwhite_2x.png");
-    background-position: center left;
-    float: left;
-    line-height: 3.5em;
-    margin-left: 0.5em;
-    padding-left: 2em;
-}
-.back .label{
-    color: #fff;
-    font-size: 1.5em;
-}
-.back, .add-interest{
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    height: 3.9em;
-    margin-top: 0.5em;
-}
-.custom-header{
-    background-color: transparent;
-    height: 5em;
-    overflow: auto;
-    position: fixed;
-    width: 100%;
-    z-index: 101;
-}
-
-
-/*
-.add-interest{
-    background-image: url("../../assets/img/profilednaaddicon_2x.png");
-    background-position: center;
-    right: 1em;
-    width: 3.86em;
-}
-.add-interest-clicked{
-    background-color: #fff;
-}
-.back{
-    background-image: url("../../assets/img/navigationbarbackwhite_2x.png");
-    background-position: center left;
-    left: 1em;
-    line-height: 3.5em;
-    padding-left: 2em;
-}
-.back .label{
-    color: #fff;
-    font-size: 1.5em;
-}
-.back, .add-interest{
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    height: 3.9em;
-    position: fixed;
-    top: 1em;
-    z-index: 101;
-}
-*/

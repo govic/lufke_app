@@ -1,0 +1,74 @@
+.category-profile{
+
+}
+.category-profile .profile-img{
+    background-color: rgba(0,0,0,0.3);
+    background-position: center;
+    height: 20em;
+    width: 100%;
+}
+.category-profile .profile-img .profile-nav-bar{
+}
+.category-profile .profile-img .profile-nav-bar .back-button{
+}
+.category-profile .profile-img .custom-header .title{
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 2em;
+
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+.category-profile .profile-img .custom-header .search-button{
+    background-image: none;
+    text-align: right;
+}
+.category-profile .profile-img .custom-header .search-button i{
+    color: #fff;
+    font-size: 3.2em;
+}
+.category-profile .profile-img .category-profile-footer{
+    background-color: rgba(0,0,0,0.5);
+    border-top: 0.08em solid rgba(255, 255, 255, 0.2);
+    height: 4em;
+    padding: 0.5em;
+    position: relative;
+    top: 16em;
+    width: 100%;
+}
+.category-profile .profile-img .category-profile-footer>*{
+    color: #fff;
+    display: inline-block;
+}
+.category-profile .profile-img .category-profile-footer .star{
+    background-image: url('../../assets/img/like/poststarbuttonactive.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 0.08em solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    height: 3em;
+    vertical-align: top;
+    width: 3em;
+}
+.category-profile .profile-img .category-profile-footer .label{
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+}
+.category-profile .profile-img .category-profile-footer .number{
+    font-size: 1.1em;
+    text-align: center;
+}
+.category-profile .profile-img .category-profile-footer .ranking{
+    margin-left: 5%;
+}
+.category-profile .profile-img .category-profile-footer .ranking, .category-profile .profile-img .category-profile-footer .posts, .category-profile .profile-img .category-profile-footer .followers{
+    width: 25%;
+}
+.category-profile .profile-img .category-profile-footer .ranking>div, .category-profile .profile-img .category-profile-footer .posts>div, .category-profile .profile-img .category-profile-footer .followers>div{
+    display: block;
+}
+.category-profile .profile-img .category-profile-footer .posts{
+}
+.category-profile .profile-img .category-profile-footer .followers{
+}
+.category-profile .category-profile-users{
+}

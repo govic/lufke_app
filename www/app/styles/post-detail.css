@@ -23,6 +23,12 @@
 .post-detail-text{
 	font-size: 120%;
 }
+.post-detail-text .with{
+    color: #3c3c3c;
+}
+.post-detail-text .with span.name{
+    color: #56bcc5;
+}
 
 #post-detail-user-img {
     border-radius: 100%;
@@ -40,14 +46,35 @@
 }
 
 #postDetail #commentTextContainer {
-	padding: 0.2em 0 0 0.5em;
-	height: 2.9em;
+	/*padding: 0.2em 0 0 0.5em;*/
+    padding: 0.5em 0.5em;
+	/*height: 2.9em;*/
 }
 
-#commentTextArea{
-	resize: none;
+#postDetail #commentTextContainer #commentTextArea{
 	font-size: 100%;
+    resize: none;
+    width: 90%;
 }
+#postDetail #commentTextContainer #commentTextArea::-webkit-input-placeholder {
+   vertical-align: middle;
+}
+#postDetail #commentTextContainer #commentTextArea:-moz-placeholder { /* Firefox 18- */
+   vertical-align: middle;
+}
+#postDetail #commentTextContainer #commentTextArea::-moz-placeholder {  /* Firefox 19+ */
+    vertical-align: center;vertical-align: middle;
+}
+#postDetail #commentTextContainer #commentTextArea:-ms-input-placeholder {
+    vertical-align: center;vertical-align: middle;
+}
+
+
+#postDetail #commentTextContainer .comment-button{
+	margin: auto 0.5em auto 0.5em;
+    vertical-align: middle;
+}
+
 
 #post-detail-comment-user-img {
     border-radius: 100%;
@@ -88,6 +115,42 @@
 .star-size{
 	font-size: 160%;
 }
-.comment-button{
-	margin: 0.3em 0.5em 0.5em 0.5em;
+
+/* (+) listado de categorias */
+.publicacion .categories{
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.5em;
+    width: 100%;
+}
+.publicacion .categories .category{
+	background-image: url('../../assets/img/new-post/shareexperiencecategorytagplaceholder.png');
+}
+.publicacion .categories .category{
+    background-color: #fff;
+    background-position: top;
+    background-repeat: no-repeat;
+    border: 0px;
+    display: inline-block;
+    min-width: 4.5em;
+    padding-top: 2.2em;
+    text-align: center;
+}
+.publicacion .categories .category .btn-text{
+    font-size: 0.8em;
+}
+/* (-) listado de categorias */
+
+.publicacion .stars{
+    margin-left: 1em;
+}
+.publicacion .stars, .publicacion .stars>div{
+    display: inline-block;
+}
+.publicacion .stars, .publicacion .more{
+    float: right;
+}
+.publicacion .more{
+    margin-left: 1em;
 }

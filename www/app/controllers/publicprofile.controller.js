@@ -6,12 +6,12 @@ angular.module('lufke').controller('PublicProfileController', function($ionicLoa
     $scope.adn = url_adn;
     $scope.background;
     $ionicLoading.show();
-	
+
     console.dir($stateParams.profileId);
-    
+
     $scope.updateProfileData = function() {
         console.dir($stateParams.profileId);
-        
+
         GetPublicProfile();
     };
     $scope.showMessage = function(title, message, callback) {
@@ -35,7 +35,7 @@ angular.module('lufke').controller('PublicProfileController', function($ionicLoa
     $scope.news = function(){
         $state.go("usernews", { userId: $scope.model.profileId });
     }
-    
+
     function GetPublicProfile(){
         $http.post(api.user.getPublicProfile, {
             profileId: $stateParams.profileId
@@ -55,16 +55,16 @@ angular.module('lufke').controller('PublicProfileController', function($ionicLoa
             $ionicLoading.hide();
             $scope.showMessage("Error", "Ha ocurrido un error al cargar los datos del perfil.");
         });
-    }
-    
 
-    $http.get(api.user.interests + "?userId=" + $stateParams.profileId.toString()).success(function(data, status, headers, config) {
-        $scope.interests = data || [];
-    }).error(function(err, status, headers, config) {
-        console.dir(err);
-        console.log(status);
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar los datos del perfil.");
-    });
-    
+        $http.get(api.user.interests + "?userId=" + $stateParams.profileId.toString()).success(function(data, status, headers, config) {
+            $scope.interests = data || [];
+        }).error(function(err, status, headers, config) {
+            console.dir(err);
+            console.log(status);
+            $scope.showMessage("Error", "Ha ocurrido un error al cargar los datos del perfil.");
+        });
+    }
+
+
     GetPublicProfile();
 });

@@ -33,7 +33,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
   overflow: hidden;
 }
 .action-sheet-wrapper {
-  bottom: 30%;  
+  bottom: 30%;
   width: 100%;
 }
 .splash{
@@ -146,7 +146,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
 	background-color: #B3A646;
 	border: none;
 }
-.share-experience-container .label{	
+.share-experience-container .label{
     background-color: #B3A646;
     color: #EBE35A;
     font-size: 120%;
@@ -154,6 +154,50 @@ ion-tabs.tabs-color-active-positive .tab-item {
     padding-left: 2em;
 }
 /* (-) Barra compartir experiencia */
+
+/* (+) utilizqdo en perfil de categoria y edicion de adn. */
+.custom-header{
+    background-color: transparent;
+    height: 5em;
+    overflow: auto;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    position: fixed;
+    width: 100%;
+    z-index: 101;
+}
+.custom-header>*{
+    float:left;
+}
+.custom-header .left-button, .custom-header .right-button, .custom-header .title{
+    background-position: center left;
+    background-repeat: no-repeat;
+    height: 3.9em;
+    margin-top: 0.5em;
+    width: 30%;
+}
+.custom-header .left-button{
+    background-image: url("../../assets/img/navigationbarbackwhite_2x.png");
+    background-position: left;
+}
+.custom-header .left-button .label{
+    color: #fff;
+    font-size: 1.5em;
+    margin-left: 1em;
+    margin-top: 0.8em;
+}
+.custom-header .right-button{
+    background-image: url("../../assets/img/profilednaaddicon_2x.png");
+    background-position: right;
+}
+.custom-header .title{
+    color: #fff;
+    font-size: 2.5em;
+    text-align: center;
+    width: 40%;
+}
+
+/* (-) utilizqdo en perfil de categoria y edicion de adn. */
 
 /* (+) transiciones */
 .fade-in.ng-enter {
@@ -188,3 +232,28 @@ ion-tabs.tabs-color-active-positive .tab-item {
     opacity: 0;
 }
 /* (-) transiciones */
+
+
+/* (+) subtitulos */
+.custom-subtitle{
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.55em;
+}
+.custom-subtitle>*{
+    display: inline-block;
+}
+.custom-subtitle .ver-todos{
+    background-image: url('../../assets/img/navigationbarbackblack_right.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    float: right;
+    font-size: 0.8em;
+    padding-right: 1em;
+}
+.custom-subtitle span{
+    color: #3c3c3c;
+    font-weight: bold;
+}
+/* (-) subtitulos */

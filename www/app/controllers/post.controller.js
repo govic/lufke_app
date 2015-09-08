@@ -4,31 +4,10 @@ angular.module('lufke').controller('PostController', function($ionicLoading, pro
     $scope.unknown_user = url_user;
     $scope.unknown_post = url_post;
 
-    $ionicLoading.show();
-    $http.post(api.post.get, {
-        id: $stateParams.postId
-    }).success(function(post) {        
-        $scope.model = {
-            post: post,
-            commentText: ""
-        };
-        console.dir(post);
-        if($scope.model.post.backgroundImgUrl !== null && $scope.model.post.backgroundImgUrl !== ''){
-            $scope.post_url = $scope.url + $scope.model.post.backgroundImgUrl;
-        }
-        else{
-            $scope.post_url = $scope.unknown_post;
-        }
-        $ionicLoading.hide(); 
-    }).error(function(data) {
-        console.dir(data);
-        $ionicLoading.hide(); 
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar la publicación.", function() {
-            $state.go('tab.news');
-            return;
-        });
-    });
-
+    $scope.cancel = function(){
+        $scope.model.commentText = "";
+        $ionicHistory.goBack(1);
+    }
     $scope.updatePost = function() {
         $http.post(api.post.get, {
             id: $stateParams.postId
@@ -56,10 +35,15 @@ angular.module('lufke').controller('PostController', function($ionicLoading, pro
     $scope.toggleLike = function() {
         $http.post(api.post.toggleLike, {
             id: $scope.model.post.id
-        }).success(function(data) {
-            $scope.model.post.totalStars = data.likes;
-            $scope.model.post.isLiked = data.isLiked;
+        }).error(function(data) {
+            $scope.showMessage("Error", "Ha ocurrido un error al realizar tu petición. Revisa tu conexión a internet.");
         });
+        $scope.model.post.isLiked = !$scope.model.post.isLiked;
+        if($scope.model.post.isLiked === true){
+            $scope.model.post.totalStars++;
+        }else{
+            $scope.model.post.totalStars--;
+        }
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
@@ -174,5 +158,30 @@ angular.module('lufke').controller('PostController', function($ionicLoading, pro
     };
     $scope.viewProfile = function(authorId){
         profileService.viewprofile(authorId);
-    };    
+    };
+
+    $ionicLoading.show();
+    $http.post(api.post.get, {
+        id: $stateParams.postId
+    }).success(function(post) {
+        $scope.model = {
+            post: post,
+            commentText: ""
+        };
+        console.dir(post);
+        if($scope.model.post.backgroundImgUrl !== null && $scope.model.post.backgroundImgUrl !== ''){
+            $scope.post_url = $scope.url + $scope.model.post.backgroundImgUrl;
+        }
+        else{
+            $scope.post_url = $scope.unknown_post;
+        }
+        $ionicLoading.hide();
+    }).error(function(data) {
+        console.dir(data);
+        $ionicLoading.hide();
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar la publicación.", function() {
+            $state.go('tab.news');
+            return;
+        });
+    });
 });

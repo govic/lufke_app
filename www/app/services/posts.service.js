@@ -1,4 +1,16 @@
-angular.module('lufke').factory('PostsService', function($localStorage, lodash) {
+angular.module('lufke')
+.factory("GetUri", function(){
+    return function(uri, obj){
+        var _uri = uri;
+        var regexp = null;
+        for(var attr in obj){
+            regexp = new RegExp(":" + attr)
+            _uri = _uri.replace(regexp, obj[attr]);
+        }
+        return _uri;
+    }
+})
+.factory('PostsService', function($localStorage, lodash) {
     return {
         getPosts: function() {
             //TODO: debe mergear noticias nuevas, eliminar las no existentes, y mantener las antiguas.

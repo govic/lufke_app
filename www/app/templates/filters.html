@@ -1,11 +1,9 @@
 <ion-view title="Filtros">
-<ion-content class="padding" class="has-footer">
-<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateFiltersData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
-</ion-refresher>
-<div class="row">
-    <div class="col">
+    <ion-content class="has-footer filters-view">
+        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateFiltersData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
+        </ion-refresher>
         <div class="list">
-            <div class="item item-button-right filters-gray">
+            <div class="item item-button-right filters-gray title">
                 ¿QUÉ QUIERO VER?
                 <button class="button button-clear" ng-click="editInterests()">
                 <i class="icon ion-edit"></i>
@@ -28,7 +26,7 @@
             </div>
         </div>
         <div class="list">
-            <div class="item item-button-right filters-gray">
+            <div class="item item-button-right filters-gray title">
                 PROPORCIONES
                 <button class="button button-clear" ng-click="saveFilters()">
                 <i class="icon ion-checkmark-circled"></i>
@@ -49,16 +47,12 @@
                 <input type="range" ng-model="model.proportions.percentageLinks" min="0" max="100">
                 <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentageLinks}}%</span>
             </div>
-            <div class="item filters-gray">
-                DISTANCIA
-            </div>
+            <div class="item filters-gray title">DISTANCIA</div>
             <div class="item range range-calm">
                 <i class="ion-earth filters-icon-size"></i>
                 <input type="range" ng-model="model.distance" min="0" max="1000">
                 <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.distance}} {{model.distanceUnit}}</span>
             </div>
         </div>
-    </div>
-</div>
-</ion-content>
+    </ion-content>
 </ion-view>

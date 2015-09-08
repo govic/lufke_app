@@ -71,4 +71,9 @@ angular.module('lufke').controller('AllNotificationsController', function($ionic
             return;
         });
     };
+    $scope.viewDetail = function(item){
+        if(item.notificationType === "Mentioned"){
+            $state.go("post", {'postId': item.postId});
+        }
+    }
 });

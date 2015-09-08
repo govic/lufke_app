@@ -1,11 +1,11 @@
-angular.module('lufke').controller('EditProfileController', function($state, $ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage) {
+angular.module('lufke').controller('EditProfileController', function($rootScope, $state, $ionicLoading, $http, $scope, $stateParams, $ionicActionSheet, $ionicPopup, $base64, $localStorage, ShowMessageSrv) {
     console.log('Inicia ... EditProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
 
     $scope.model = {};
-    
+
     $ionicLoading.show();
     $http.post(api.user.getEditProfile)
     .success(function(profile, status, headers, config) {
@@ -57,7 +57,7 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
     }
     $scope.editProfile = function($form) {
         //validar cambio de password en caso de que exista algún campo con datos.
-        
+
         //Si alguno de los campos no es vacio, valido de que existan todos los campos necesarios.
         if(($form.newPassword.$modelValue && $form.newPassword.$modelValue.length > 0) ||
            ($form.oldPassword.$modelValue && $form.oldPassword.$modelValue.length > 0) ||
@@ -72,7 +72,7 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
             });
             if($form.$invalid) return false;
         }
-        
+
         //encripta variables para cambio de password
         $scope.model.oldPasswordHash = $scope.model.oldPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.oldPassword))) : "";
         $scope.model.newPasswordHash = $scope.model.newPassword ? $base64.encode(unescape(encodeURIComponent($scope.model.newPassword))) : "";
@@ -84,6 +84,7 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
             $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
             $state.go('tab.profile');
             $scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");
+            $rootScope.$emit("profile-updated");
         }).error(function(err, status, headers, config) {
             console.dir(err);
             console.log(status);
@@ -149,15 +150,5 @@ angular.module('lufke').controller('EditProfileController', function($state, $io
         $window.location.reload();
         return false;
     };
-    $scope.showMessage = function(title, message, callback) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: message,
-            okText: "Aceptar"
-        });
-        alertPopup.then(function(res) {
-            if (callback) callback();
-            return;
-        });
-    };
+    $scope.showMessage = ShowMessageSrv;
 });

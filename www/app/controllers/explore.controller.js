@@ -5,7 +5,7 @@ angular.module('lufke').controller('ExploreController', function($state, $ionicL
     $scope.unknown_background = url_background;
     $scope.unknown_post = url_post;
     $ionicLoading.show();
-	
+
     $http.post(api.explore.getPopulars)
     .success(function(data, status, headers, config) {
         console.dir(data);
@@ -14,7 +14,7 @@ angular.module('lufke').controller('ExploreController', function($state, $ionicL
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.dir(status);
-        $ionicLoading.hide(); 
+        $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar los usuarios populares y las categorías.");
     });
     $scope.updateExploreData = function() {
@@ -73,4 +73,17 @@ angular.module('lufke').controller('ExploreController', function($state, $ionicL
             return;
         });
     };
+
+    $scope.topCategories = [
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Hiking", id: 1 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Treking", id: 2 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "XC", id: 3 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Andinismo", id: 4 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Surf", id: 5 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Fútbol", id: 6 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Cicloturismo", id: 7 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Tenis", id: 8 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Down Hill", id: 9 },
+        { categoryImgUrl: "assets/img/unknown_post.png", categoryName: "Escalada", id: 10 }
+    ];
 });

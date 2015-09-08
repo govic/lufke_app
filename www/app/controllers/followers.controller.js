@@ -5,7 +5,7 @@ angular
     $scope.unknown_user = url_user;
     $scope.unknown_background = "/" + url_background;
     $scope.unknown_post = url_post;
-    
+
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -17,7 +17,7 @@ angular
             return;
         });
     };
-    
+
     $scope.more = function(){
         GetFollowers(paginador, function(err){
             if(err){
@@ -29,11 +29,7 @@ angular
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
     }
-    
-    $scope.viewProfile = function(userId){
-        profileService.viewprofile(userId);
-    }
-    
+
     function GetFollowers(obj, cb){
         $http
             .get( api.user.followers + "?page=" + obj.currentPage.toString() + "&limit=" + obj.limit.toString() + "&userId=" + $stateParams.userid, { cache: false }
@@ -41,20 +37,20 @@ angular
                 $scope.followers = $scope.followers.concat( followers );
                 $scope.moreFollowers = followers.length > 0;
                 $scope.sinSeguidores = $scope.followers.length === 0;
-            
+
                 cb( null );
             }).error(function(){
                 cb( arguments );
             });
     }
-    
+
     var paginador = { currentPage: 1, limit: 10 };
-    
+
     $scope.followers = [];
     $scope.moreFollowers = false;
     $scope.sinSeguidores = false;
     $ionicLoading.show();
-    
+
     GetFollowers(paginador, function(err){
         if(err){
             console.error(err);
@@ -64,6 +60,6 @@ angular
         }
         $ionicLoading.hide();
     });
-    
-    
+
+
 });

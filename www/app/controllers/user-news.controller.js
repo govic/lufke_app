@@ -1,4 +1,4 @@
-angular.module('lufke').controller('UserNewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, $stateParams /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('UserNewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, $stateParams, ShowMessageSrv /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... UserNewsController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -106,15 +106,5 @@ angular.module('lufke').controller('UserNewsController', function($ionicLoading,
     $rootScope.$on('newPost', function(event, args) {
         $scope.model.posts.push(args.post);
     });
-    $scope.showMessage = function(title, message, callback) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: message,
-            okText: "Aceptar"
-        });
-        alertPopup.then(function(res) {
-            if (callback) callback();
-            return;
-        });
-    };
+    $scope.showMessage = ShowMessageSrv;
 });

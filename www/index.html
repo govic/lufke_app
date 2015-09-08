@@ -19,6 +19,7 @@
         <link href="app/styles/filters.css" rel="stylesheet">
         <link href="app/styles/general.css" rel="stylesheet">
         <link href="app/styles/dna.css" rel="stylesheet">
+        <link href="app/styles/category-profile.css" rel="stylesheet">
         <!-- Dependencies -->
         <script src="lib/ionic/js/ionic.bundle.js"></script>
         <script src="lib/moment/moment.js"></script>
@@ -37,12 +38,15 @@
         <!-- Servicios -->
         <script src="app/services/posts.service.js"></script>
         <script src="app/services/user-interests.service.js"></script>
+        <script src="app/services/show-message.service.js"></script>
+        <script src="app/services/filters.js"></script>
         <!-- Constantes -->
         <script src="app/constants/constants.js"></script>
         <!-- Directivas -->
         <script src="app/directives/post.directive.js"></script>
 		<script src="app/directives/shareExperience.directive.js"></script>
 		<script src="app/directives/dna-interests.directive.js"></script>
+        <script src="app/directives/user-row.directive.js"></script>
         <!-- Controladores -->
         <script src="app/controllers/start.controller.js"></script>
         <script src="app/controllers/register.controller.js"></script>
@@ -64,6 +68,8 @@
         <script src="app/controllers/followers.controller.js"></script>
         <script src="app/controllers/following.controller.js"></script>
         <script src="app/controllers/user-news.controller.js"></script>
+        <script src="app/controllers/search.controller.js"></script>
+        <script src="app/controllers/category-profile.controller.js"></script>
         <!-- Routes -->
         <script src="app/routes/login.route.js"></script>
         <script src="app/routes/start.route.js"></script>
@@ -82,6 +88,8 @@
         <script src="app/routes/followers.route.js"></script>
         <script src="app/routes/following.route.js"></script>
         <script src="app/routes/user_news.route.js"></script>
+        <script src="app/routes/search.route.js"></script>
+        <script src="app/routes/category-profile.route.js"></script>
     </head>
     <body ng-app="lufke">
         <!--

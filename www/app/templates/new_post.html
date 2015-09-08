@@ -1,30 +1,52 @@
-<ion-view title="Compatir Experiencia">
- 	<ion-nav-buttons  side="right">
-        <a ng-disabled="!(model.experienceText.length || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
+<ion-view title="Compatir Experiencia" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <a class="button button-icon icon" ng-click="cancel()">Cancelar</a>
+    </ion-nav-buttons>
+ 	<ion-nav-buttons side="right">
+        <a ng-disabled="!(model.experienceText.length > 0 || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
 	<ion-content>
         <div class="experience-text">
             <img id="share-experience-user-img" ng-src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
-            <textarea id="shareExperience" 
-				  ng-model="model.experienceText" 
-				  ng-blur="model.isExperienceTextFocus = false" 
-				  ng-focus="model.isExperienceTextFocus = true" 
-				  placeholder="Comparte tu experiencia...">
-            </textarea>
-            <button class="button button-camera" ng-click="showImagesOptions()"></button>
-            <hr class="hr-share">		
+            <div class="textarea">
+                <textarea id="shareExperience"
+    				  ng-model="model.experienceText"
+    				  ng-blur="model.isExperienceTextFocus = false"
+    				  ng-focus="model.isExperienceTextFocus = true"
+                      ng-change="validate()"
+    				  placeholder="Comparte tu experiencia...">
+                </textarea>
+                <div>
+                    <span class="with" ng-repeat-start="f in friends" ng-if="$first"> - con <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-if="!$last && !$first">,&nbsp;<span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-repeat-end ng-if="$last && !$first">&nbsp;y <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span>
+                </div>
+            </div>
+            <button class="button button-camera" ng-if="!model.mediaSelected" ng-click="showImagesOptions()"></button>
+            <button class="button button-camera" ng-if="model.mediaSelected" ng-style="{'background-image': 'url(data:image/jpeg;base64,{{model.imageBase64}})'}" ng-click="showImagesOptions()"></button>
         </div>
+        <hr class="hr-share">
         <div class="experience-tools">
-            <button class="add-friends"></button><button class="share-location"></button>
-            <span class="experience-text-length">140</span>
+            <button class="add-friends" ng-click="addFriends()"></button><button class="share-location"></button>
+            <span class="experience-text-length">{{experienceTextCounter}}</span>
         </div>
         <div class="add-categories">
             <div class="title">CATEGORIAS</div>
-            <div class="categories"></div>
+            <div class="categories">
+                <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
+                <div class="category" ng-repeat="userInterest in interests">
+                    <span class="btn-text">{{userInterest.interestText | initCap}}</span>
+                </div>
+                <div class="add-category" ng-click="addCategory()">
+                    <span class="btn-text">Agregar</span>
+                </div>
+            </div>
         </div>
         <div class="share">
-            <div class="title">COMPARTIR</div>
-            <div class="items"></div>
+            <div class="title">COMPARTIR A</div>
+            <div class="items">
+                <button class="share-to-facebook"></button>
+                <button class="share-to-twitter"></button>
+            </div>
         </div>
+        <div class="footer"></div>
 	</ion-content>
 </ion-view>

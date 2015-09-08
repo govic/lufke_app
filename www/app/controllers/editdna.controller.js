@@ -1,8 +1,8 @@
-angular.module('lufke').controller('EditDnaController', function(lodash, $scope, $ionicPopup, $http, UserInterestsSrv) {
+    angular.module('lufke').controller('EditDnaController', function(lodash, $scope, $ionicPopup, $http, UserInterestsSrv) {
     console.log('Inicia ... EditDnaController');
     $scope.model = {};
     $scope.model.searchText = "";
-    $http.post(api.user.getSuggestedInterests).success(function(data, status, headers, config) {
+    $http.get(api.user.getSuggestedInterests.replace(":limit", 20).replace(":page", 1)).success(function(data, status, headers, config) {
         $scope.model = data;
     }).error(function(err, status, headers, config) {
         console.dir(err);
@@ -27,15 +27,15 @@ angular.module('lufke').controller('EditDnaController', function(lodash, $scope,
     $scope.add = function(item) {
         var promise = UserInterestsSrv.add(item);
         var index = $scope.model.interests.indexOf(item);
-        
+
         $scope.model.interests.splice(index, 1);
-        
+
         promise.then(function(data){
-            
+
         }, function(err){
             self.model.interests.splice( index, 0, item );
         });
-        
+
         /*
         $http.post(api.user.addInterestToProfile, {
             interestId: item.interestId

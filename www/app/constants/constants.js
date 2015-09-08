@@ -1,6 +1,6 @@
 //var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.0.105:50608'; //sirve para local y celular
+//var url_files = 'http://192.168.0.109:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -24,11 +24,12 @@ var api = {
         addInterestToProfile: url_base + '/user/addinterest',
         logout: url_base + '/user/logout',
         setRegistrationKey: url_base + '/user/setregistrationkey',
-        getSuggestedInterests: url_base + '/user/suggestedinterests',
+        getSuggestedInterests: url_base + '/user/suggestedinterests?limit=:limit&page=:page',
         following: url_base + '/user/following',
         followers: url_base + '/user/followers',
         myNews: url_base + '/user/getnews',
-		interests: url_base + '/user/interests'
+		interests: url_base + '/user/interests',
+        friends: url_base + '/user/friends?userid=:userid&limit=:limit&page=:page&orderby=:orderby'
     },
     post: {
         get: url_base + '/post/get',
@@ -61,6 +62,9 @@ var api = {
         saveFilters: url_base + '/filter/savefiltersdata',
         getTopInterests: url_base + '/filter/gettopinterestdata',
         editTopInterests: url_base + '/filter/edittopinterests'
+    },
+    interest: {
+        get: "/interest/:id"
     }
 };
 
@@ -84,3 +88,7 @@ var User = function(params) {
     self.createdAt = params.createdAt;
     self.role = params.role;
 };
+
+angular
+.module("lufke")
+.constant("maxExperienceTextSize", 140);

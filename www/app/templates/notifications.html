@@ -49,7 +49,7 @@
                     <div class="col notification-profile-img-center">
                         <img ng-src="{{item.profileImgUrl !== '' && item.profileImgUrl !== null ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-img" ng-click="viewProfile(item.profileId)"/>
                     </div>
-                    <div class="col col-75">
+                    <div class="col col-75" ng-click="viewDetail(item)">
                         <span class="notification-container-text">
                             <span class="notification-user-go">{{item.profileUser}}</span>
                             {{item.notificationText}}

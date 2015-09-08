@@ -1,0 +1,41 @@
+<!-- Vista utilizada en new_post para la busqueda de usuarios e intereses -->
+<ion-view hide-back-button="true" view-title="{{title}}">
+ 	<ion-nav-buttons side="left">
+        <a class="button button-icon icon" ng-click="back()">Cancelar</a>
+    </ion-nav-buttons>
+ 	<ion-nav-buttons side="right">
+        <a class="button button-icon icon" ng-click="done()" ng-disabled="doneIsDisabled()">Hecho</a>
+    </ion-nav-buttons>
+    <div class="agregar-interes-filter">
+        <div class="search-field">
+            <div class="ico-search">
+                <i class="ion-search"></i>
+            </div>
+            <div class="input">
+                <input type="text" ng-model="query" placeholder="{{placeholder}}" />
+            </div>
+        </div>
+    </div>
+    <ion-content class="agregar-interes">
+        <div class="lista">
+            <div ng-repeat="letra in dictionary | orderBy: 'letra'">
+                <div class="interest" ng-repeat="interest in letra.array | orderBy: orderBy | filter: query as filtered track by customTrackFunction(interest)">
+                    <div class="title" ng-if="$first">{{letra.letra}}</div>
+                    <div class="content">
+                        <div class="add" ng-class="{'selected': interest.selected}" ng-click="toggleSelect(interest)">
+                            <i class="ion-checkmark-circled"></i>
+                        </div>
+                        <div class="ico" ng-style="{'background-image': 'url(' + getImage(interest) + ')'}"></div>
+                        <span>{{getText(interest)}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            <div class="item item-icon-left item-icon-right" ng-if="searchText">{{searchText}}</div>
+            <div class="item item-icon-left item-icon-right" ng-if="moreData === false && dictionary.length <= 0">{{empty}}</div>
+        </div>
+        <ion-infinite-scroll ng-if="moreData" on-infinite="loadMoreData()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

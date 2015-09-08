@@ -3,8 +3,9 @@
         <button class="button" ui-sref="editdna">Agregar</button>
     </ion-nav-buttons>-->
     <div class="custom-header">
-        <div class="back" ui-sref="tab.profile"><span class="label">Atrás</span></div>
-        <div class="add-interest" ui-sref="editdna" ng-click="nextState=true" ng-class="{'add-interest-clicked': nextState}"></div>
+        <div class="left-button" ng-click="back()"><div class="label">Atrás</div></div>
+        <div class="title"></div>
+        <div class="right-button " ui-sref="editdna" ng-click="nextState=true" ng-class="{'add-interest-clicked': nextState}"></div>
     </div>
     <ion-content>
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
@@ -39,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         </ion-list>
         <ion-infinite-scroll on-infinite="load()" distance="1%" ng-if="more"></ion-infinite-scroll>
     </ion-content>

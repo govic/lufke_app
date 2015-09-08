@@ -3,7 +3,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $ionicLoading.show();
-	
+
     $http.post(api.notifications.getNotifications)
     .success(function(data, status, headers, config) {
         $scope.model = data;
@@ -14,7 +14,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
         $ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error al cargar las notificaciones.");
     });
-    $scope.updateNotificationsData = function() {        
+    $scope.updateNotificationsData = function() {
         $http.post(api.notifications.getNotifications).success(function(data, status, headers, config) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.model = data;
@@ -63,9 +63,9 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     };
     //metodo para redirigir haca notificacion
     $scope.viewNotification = function(item) {
-        //TODO falta link hacia post o perfil usuario 
-        //console.dir(item);  
-        $ionicLoading.show();  
+        //TODO falta link hacia post o perfil usuario
+        //console.dir(item);
+        $ionicLoading.show();
         $http.post(api.notifications.revised, {notificationId: item.notificationId})
         .success(function(data, status, headers, config) {
             //console.dir(data);
@@ -106,7 +106,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
             console.dir(status);
             $scope.showMessage("Error", "Ha ocurrido un error al realizar la operación solicitada.");
         });
-    };   
+    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -118,4 +118,9 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
             return;
         });
     };
+    $scope.viewDetail = function(item){
+        if(item.notificationType === "Mentioned"){
+            $state.go("post", {'postId': item.postId});
+        }
+    }
 });

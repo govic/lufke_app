@@ -5,7 +5,7 @@ angular.module("lufke")
         var cargado = null; //Si esta nulo, no se ha terminado de obtener los intereses.
         var _data = null;
         var userid = null;
-        
+
         //Creamos una promesa en caso de que se consulte antes de terminar la consulta.
         var deffered = $q.defer();
         var promise = deffered.promise;
@@ -19,20 +19,20 @@ angular.module("lufke")
                 _deffered.reject(err);
             });
         });
-        
+
         //Consultamos por los intereses del usuario.
         Query(deffered);
-        
+
         self.setUserId = function(_userid){
             userid = _userid;
         }
         self.add = function(item){
             var _deffered = $q.defer();
-            
+
             if(userid === null){
                 _def.reject(new Error("userid no ha sido definido"));
             }
-            
+
             $http.post(api.user.addInterestToProfile, {
                 interestId: item.interestId
             }).success(function(data, status, headers, config) {
@@ -46,17 +46,17 @@ angular.module("lufke")
                 console.dir(err);
                 console.log(status);
             });
-            
+
             return _deffered.promise;
         }
         self.remove = function(interest){
             var deferred = $q.defer();
             var index = _data.indexOf( interest );
-            
+
             if(userid === null){
                 _def.reject(new Error("userid no ha sido definido"));
             }
-            
+
             $http.post(api.user.deleteInterest, {
                 interestId: interest.interestId
             }).success(function(data){
@@ -70,16 +70,16 @@ angular.module("lufke")
             });
             //El elemento lo eliminanos de inmediato, no esperamos la respuesta del servidor.
             _data.splice( index, 1 );
-            
+
             return deferred.promise;
         }
         self.get = function(){
             var _def = $q.defer();
-            
+
             if(userid === null){
                 _def.reject(new Error("userid no ha sido definido"));
             }
-            
+
             //Si los intereses del usuario aun no han sido cargados, insertamos una promesa en el stack;
             if(cargado === null){
                 stack.push( _def );
@@ -92,14 +92,14 @@ angular.module("lufke")
             if(cargado === true){
                 _def.resolve( _data );
             }
-            
+
             return _def.promise;
         }
         self.reset = function(){
             cargado = false;
             _data = null;
         }
-        
+
         function Query(_def){
             if(!userid) return;
             $http.get(api.user.interests + "?userId=" + userid.toString()).success(function(data, status, headers, config) {
