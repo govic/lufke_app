@@ -4,6 +4,10 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $ionicConfigProvider.navBar.alignTitle('center');
 }).factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
     return {
+        request: function(config){
+            config.headers["Authorization"] = $localStorage.basic;
+            return config;
+        },
         response: function(response) {
             if (response.status === 401) {
                 console.log("Response 401");
@@ -41,20 +45,17 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     animation: 'fade-in'
 }).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state, $cordovaPush, $ionicHistory, $localStorage) {
 	$ionicPlatform.ready(function() {
-		
 		$ionicPlatform.onHardwareBackButton(function(e) {
-			console.log("$localStorage");
-			console.log($localStorage.basic);
 			if("tab.news" === $ionicHistory.currentStateName()){
-				ionic.Platform.exitApp()
 				e.preventDefault();
 				e.stopPropagation();
-				
+                ionic.Platform.exitApp()
+
 				return false;
 			}
 			return true;
 		});
-		
+
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

@@ -1,0 +1,59 @@
+<ion-view view-title="Buscar" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons  button-clear header-item" ng-click="back()">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text">
+                <span class="default-title">Volver</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding has-header news-search">
+        <ion-list>
+            <ion-item class="item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="{{placeholder}}" ng-model="query">
+                </label>
+                <button class="button button-small icon ion-search" ng-click="find(query)">&nbsp;Buscar</button>
+            </ion-item>
+        </ion-list>
+		<ion-list>
+			<div class="custom-subtitle">
+                <span>USUARIOS ENCONTRADOS</span><span ng-show="usersLength !== null">{{" : " + usersLength}}</span>
+            </div>
+			<ion-item class="explore-background-container" ng-repeat="item in users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
+                <div class="row">
+                    <div ng-click="viewProfile(item.profileId)">
+                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+                    </div>
+                    <div class="explore-font">
+                        <div class="col explore-user-name">
+                            {{item.profileFirstName}}<br/>
+                            {{item.profileLastName}}<br/>
+                        </div>
+                        <button class="button button-light button-small follow-button" ng-click="followUser(item)">
+                            <i class="ion-plus active"></i>SEGUIR
+                        </button>
+                    </div>
+                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ui-sref="post({'postId': pub.id})">
+                        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
+                    </div>
+                </div>
+			</ion-item>
+            <ion-item ng-show="buscandoUsuarios">buscando...</ion-item>
+		</ion-list>
+        <button ng-show="moreUsers" class="button button-block login-button" ng-click="loadMoreUsers()">Cargar más usuarios...</button>
+        <br />
+		<ion-list>
+			<div class="custom-subtitle">
+                <span>CATEGORÍAS ENCONTRADAS</span><span ng-show="interstsLength !== null">{{" : " + interstsLength}}</span>
+            </div>
+			<div class="categories">
+				<div class="padding light category-content" ng-style="{'background-image': 'url(' + (interest.categoryImgUrl || 'assets/img/unknown_post.png') + ')' }" ng-repeat="interest in interests track by interest.interestId" ui-sref="category-profile({ interestId: interest.interestId })">
+					{{interest.interestText | uppercase}}
+				</div>
+			</div>
+            <ion-item ng-show="buscandoIntereses">buscando...</ion-item>
+		</ion-list>
+        <button ng-show="moreInterests" class="button button-block login-button" ng-click="loadMoreInterests()">Cargar más categorías...</button>
+    </ion-content>
+</ion-view>

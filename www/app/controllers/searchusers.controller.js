@@ -72,7 +72,7 @@ angular.module('lufke').controller('SearchUsersController', function(lodash, $sc
                 lodash.forEach(data.users, function(item) { //agrega todos mas usuarios encontrados
                     $scope.model.users.push(item);
                     console.dir($scope.model.users);
-                    $scope.model.users = lodash.uniq($scope.model.users, 'profileId');                    
+                    $scope.model.users = lodash.uniq($scope.model.users, 'profileId');
                 });
                 $ionicLoading.hide();
             } else {

@@ -11,7 +11,24 @@
             </ion-item>
 
 			<ion-item class="explore-background-container" ng-repeat="item in model.users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-                <user-row follow-enabled="true" posts-navegable="false" user="item"></user-row>
+                <!--<user-row follow-enabled="true" posts-navegable="false" user="item"></user-row>-->
+                <div class="row">
+                    <div ng-click="viewProfile()">
+                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+                    </div>
+                    <div class="explore-font">
+                        <div class="col explore-user-name">
+                            {{item.profileFirstName}}<br/>
+                            {{item.profileLastName}}<br/>
+                        </div>
+                        <button class="button button-light button-small follow-button" ng-click="followUser(item)">
+                            <i class="ion-plus active"></i>SEGUIR
+                        </button>
+                    </div>
+                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ng-click="viewPost(pub)">
+                        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
+                    </div>
+                </div>
 			</ion-item>
 		</ion-list>
 		<button ng-show="model.users && model.users.length > 0" class="button button-block login-button" ng-click="loadMore()">Cargar más resultados ...</button>

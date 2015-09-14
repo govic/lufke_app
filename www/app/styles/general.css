@@ -96,15 +96,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
 .buscar div{
     background-image: url('../../assets/img/navigationbarsearch.png');
 }
-
-.custom-header{
-    background-color: transparent;
-    height: 5em;
-    overflow: auto;
-    position: fixed;
-    width: 100%;
-    z-index: 101;
-}
 .no-padding{
     padding: 0em;
 }

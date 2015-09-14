@@ -1,25 +1,22 @@
 angular.module('lufke').controller('LoginController', function( $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv) {
     console.log('Inicia ... LoginController');
-    
+
     UserInterestsSrv.reset();
-    
+
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
-		
+
     $ionicHistory.clearCache();
     $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-    $http.defaults.headers.common.Authorization = null;
-    $localStorage.basic = null;
-    $localStorage.session = null;
     //verificacion de datos estaticos de autenticacion
     $ionicLoading.show();
+
     if ($localStorage.basic && $localStorage.basic.trim() != "") {
         $http.post(api.user.login, {
 			credentialsHash: $localStorage.basic.split(" ")[1]
 		}).success(function(user, status, headers, config) {
 			var auth = 'Basic ' + user.credentialsHash;
-			$http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
 			$localStorage.basic = auth; //guarda cabecera auth en var global localstorage
 			$localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
 			$scope.model.loginError = false;
@@ -27,10 +24,11 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
 				$cordovaPush.register({ "senderID": "767122101153" });
 			} */
 			$ionicLoading.hide();
-            
-            UserInterestsSrv.setUserId(user.id);
-            UserInterestsSrv.get();
-            
+
+            UserInterestsSrv.get();console.log("Init UserInterestsSrv")
+
+            $rootScope.$emit("profile-updated");
+
 			$state.go('tab.news'); //redirige hacia news
 		}).error(function(err, status, headers, config) {
 			console.dir(err);
@@ -44,7 +42,7 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
 		$localStorage.basic = null;
 		$localStorage.session = null;
 	}
-	
+
     $scope.model = {
         user: {
             name: "",
@@ -56,8 +54,9 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
         },
         foto: ""
     };
-	
+
     $rootScope.$on('logout', function(event, args) {
+        console.log("logout event")
         $ionicHistory.clearCache();
         $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
         $http.defaults.headers.common.Authorization = null;
@@ -134,7 +133,7 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
             $http.post(api.user.login, {
                 credentialsHash: $base64.encode(unescape(encodeURIComponent($scope.model.user.name + ":" + $scope.model.user.password)))
             }).success(function(user, status, headers, config) {
-			
+
                 var auth = 'Basic ' + user.credentialsHash;
                 $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
                 $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
@@ -145,10 +144,11 @@ angular.module('lufke').controller('LoginController', function( $ionicHistory, $
                 } */
 
                 $ionicLoading.hide();
-                
-                UserInterestsSrv.setUserId(user.id);
-                UserInterestsSrv.get();
-                
+
+                UserInterestsSrv.get();console.log("validateUser UserInterestsSrv")
+
+                $rootScope.$emit("profile-updated");
+
                 $state.go('tab.news'); //redirige hacia news
 
             }).error(function(err, status, headers, config) {

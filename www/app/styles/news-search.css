@@ -1,0 +1,8 @@
+.news-search.agregar-interes-filter{
+    position: relative;
+    top: 0em;
+    margin-bottom: 0.5em;
+}
+.news-search .categories, .news-search .categories .category-content{
+    text-align: center;
+}

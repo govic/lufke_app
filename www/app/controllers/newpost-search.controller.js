@@ -5,7 +5,7 @@ angular
 
     $scope.title = "Agregar Categoría";
     $scope.searchText = "buscando intereses...";
-    $scope.placeholder = "buscar categoría";
+    $scope.placeholder = "buscar...";
     $scope.orderBy = "interestText";
     $scope.moreData = false;
     $scope.showMessage = ShowMessageSrv;
@@ -49,14 +49,14 @@ angular
             if(_interest){ buffer.splice(buffer.indexOf( _interest ), 1 ); }
         }
     }
-    var uri = GetUri(api.user.getSuggestedInterests, { limit: "", page: "" });
+    var uri = GetUri(api.explore.interest, { limit: "1000", page: "1", orderby: "name" });
     $http.get(uri, { cache: true }).success(function(data, status, headers, config) {
         //Obtengo los intereses seleccionados.
         var selected = SelectedCategoriesSrv.get();
 
         //marco como true los seleccionados.
         selected.forEach(function(interest){
-            var _interest = lodash.find( data.interests, function(_interest){
+            var _interest = lodash.find( data, function(_interest){
                 return _interest.interestText === interest.interestText;
             });
             _interest.selected = true;
@@ -64,7 +64,7 @@ angular
         });
 
         //finalmente los ordeno para mostrarlos.
-        $scope.dictionary = OrderByLetter( data.interests.concat( [] ), "interestText" );
+        $scope.dictionary = OrderByLetter( data.concat( [] ), "interestText" );
 
         $scope.searchText = null;
 
@@ -80,7 +80,7 @@ angular
 
     $scope.title = "Agregar Amigos";
     $scope.searchText = "buscando...";
-    $scope.placeholder = "ingresa un texto";
+    $scope.placeholder = "buscar...";
     $scope.orderBy = "profileFirstName";
     $scope.empty = "no se encontraron personas";
     $scope.moreData = false;

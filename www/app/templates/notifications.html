@@ -1,8 +1,5 @@
 <ion-view  hide-back-button="true" view-title="Notificaciones">
-	<div ui-sref="newpost({ next: 'tab.news' })">
-		<share-experience css-class="bar bar-subheader item-input-inset share-experience-container"></share-experience>
-	</div>
-    <ion-content id="notifications" class="padding has-footer has-header has-subheader">
+    <ion-content id="notifications" class="padding has-footer has-header">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNotificationsData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <ion-list>

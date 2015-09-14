@@ -1,6 +1,6 @@
 //var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
-var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.0.109:50608'; //sirve para local y celular
+//var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
+var url_files = 'http://192.168.0.108:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -11,25 +11,25 @@ var adn_vertical = "assets/img/profiledna_vertical.png";
 
 var api = {
     user: {
-        login: url_base + '/user/login',
-        register: url_base + '/user/register',
-        getProfile: url_base + '/user/getprofile',
-        getEditProfile: url_base + '/user/geteditprofile',
+        addInterestToProfile: url_base + '/user/addinterest',
+        deleteInterest: url_base + '/user/deleteinterest',
         editProfile: url_base + '/user/editprofile',
         editProfileImage: url_base + '/user/editprofileimage',
-        getInterests: url_base + '/user/getinterests',
-        deleteInterest: url_base + '/user/deleteinterest',
-        getPublicProfile: url_base + '/user/getpublicprofile',
-        searchInterests: url_base + '/user/searchinterests',
-        addInterestToProfile: url_base + '/user/addinterest',
-        logout: url_base + '/user/logout',
-        setRegistrationKey: url_base + '/user/setregistrationkey',
-        getSuggestedInterests: url_base + '/user/suggestedinterests?limit=:limit&page=:page',
-        following: url_base + '/user/following',
         followers: url_base + '/user/followers',
+        following: url_base + '/user/following',
+        friends: url_base + '/user/friends?userid=:userid&limit=:limit&page=:page&orderby=:orderby',
+        getEditProfile: url_base + '/user/geteditprofile',
+        getProfile: url_base + '/user/getprofile',
+        getPublicProfile: url_base + '/user/getpublicprofile',
+        getSuggestedInterests: url_base + '/user/suggestedinterests?limit=:limit&page=:page',
+        interests: url_base + '/user/interests',
+        login: url_base + '/user/login',
+        logout: url_base + '/user/logout',
         myNews: url_base + '/user/getnews',
-		interests: url_base + '/user/interests',
-        friends: url_base + '/user/friends?userid=:userid&limit=:limit&page=:page&orderby=:orderby'
+        register: url_base + '/user/register',
+        search: url_base + "/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&orderby=:orderby",
+        searchInterests: url_base + '/user/searchinterests',
+        setRegistrationKey: url_base + '/user/setregistrationkey'
     },
     post: {
         get: url_base + '/post/get',
@@ -44,10 +44,11 @@ var api = {
         }
     },
     explore: {
-        getPopulars: url_base + '/explore/getexploredata',
         followCategory: url_base + '/explore/followcategory',
         followUser: url_base + '/notification/followuser',
-        getSearchUsers: url_base + '/explore/getsearchusers'
+        getPopulars: url_base + '/explore/getexploredata',
+        getSearchUsers: url_base + '/explore/getsearchusers',
+        interest: url_base + "/explore/interest?limit=:limit&page=:page&name=:name&orderby=:orderby"
     },
     notifications: {
         getNotifications: url_base + '/notification/getnotificationsdata',

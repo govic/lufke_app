@@ -145,6 +145,7 @@ angular.module('lufke').controller('EditProfileController', function($rootScope,
                 $scope.showMessage("Error", "Error al cargar imagen.");
             });
         }, function(err) {
+            console.log(err);
             $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
         }, options);
         $window.location.reload();

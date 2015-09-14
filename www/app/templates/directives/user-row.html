@@ -7,7 +7,7 @@
             {{user.profileFirstName}}<br/>
             {{user.profileLastName}}<br/>
         </div>
-        <button ng-if="followEnabled" class="button button-light button-small follow-button" ng-click="followUser(user)">
+        <button ng-if="follow()" class="button button-light button-small follow-button" ng-click="followUser(user)">
             <i class="ion-plus active"></i>SEGUIR
         </button>
     </div>

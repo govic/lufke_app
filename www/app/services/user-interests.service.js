@@ -1,10 +1,10 @@
 angular.module("lufke")
-.factory("UserInterestsSrv", function($q, $http){
+.factory("UserInterestsSrv", function($q, $http, $localStorage){
     return new function(){
         var self = this;
         var cargado = null; //Si esta nulo, no se ha terminado de obtener los intereses.
         var _data = null;
-        var userid = null;
+        var userid = $localStorage.session ? $localStorage.session : "";
 
         //Creamos una promesa en caso de que se consulte antes de terminar la consulta.
         var deffered = $q.defer();
@@ -23,15 +23,9 @@ angular.module("lufke")
         //Consultamos por los intereses del usuario.
         Query(deffered);
 
-        self.setUserId = function(_userid){
-            userid = _userid;
-        }
         self.add = function(item){
             var _deffered = $q.defer();
 
-            if(userid === null){
-                _def.reject(new Error("userid no ha sido definido"));
-            }
 
             $http.post(api.user.addInterestToProfile, {
                 interestId: item.interestId
@@ -53,10 +47,6 @@ angular.module("lufke")
             var deferred = $q.defer();
             var index = _data.indexOf( interest );
 
-            if(userid === null){
-                _def.reject(new Error("userid no ha sido definido"));
-            }
-
             $http.post(api.user.deleteInterest, {
                 interestId: interest.interestId
             }).success(function(data){
@@ -75,10 +65,6 @@ angular.module("lufke")
         }
         self.get = function(){
             var _def = $q.defer();
-
-            if(userid === null){
-                _def.reject(new Error("userid no ha sido definido"));
-            }
 
             //Si los intereses del usuario aun no han sido cargados, insertamos una promesa en el stack;
             if(cargado === null){
@@ -101,7 +87,9 @@ angular.module("lufke")
         }
 
         function Query(_def){
+            var userid = $localStorage.session ? $localStorage.session.toString() : "";
             if(!userid) return;
+            console.log("obteniendo intereses: ", userid.toString())
             $http.get(api.user.interests + "?userId=" + userid.toString()).success(function(data, status, headers, config) {
                 cargado = true;
                 _data = data ? data : [];

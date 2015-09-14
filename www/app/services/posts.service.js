@@ -7,6 +7,12 @@ angular.module('lufke')
             regexp = new RegExp(":" + attr)
             _uri = _uri.replace(regexp, obj[attr]);
         }
+
+        //Se eliminan los parametros que no fueron definidos.
+        while(_uri.search(/[a-zA-Z]+=:[a-zA-Z0-9]+/) >= 0){ _uri = _uri.replace(/[a-zA-Z]+=:[a-zA-Z0-9]+/, '') }
+
+        _uri = _uri.replace(/\&*$/, '')
+
         return _uri;
     }
 })

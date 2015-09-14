@@ -1,4 +1,4 @@
-angular.module('lufke').controller('ProfileController', function(lodash, $localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope, $ionicPopup, UserInterestsSrv){
+angular.module('lufke').controller('ProfileController', function(lodash, $ionicHistory, $localStorage, $ionicLoading, $scope, PostsService, $state, $http, $rootScope, $ionicPopup, UserInterestsSrv){
 
 	var self = this;
 
@@ -36,7 +36,9 @@ angular.module('lufke').controller('ProfileController', function(lodash, $localS
         window.open(link, '_system', 'location=yes');
     };
     $scope.logout = function() {
-        $rootScope.$broadcast('logout');
+		console.log("logout event")
+        $localStorage.basic = null;
+        $localStorage.session = null;
         $state.go('login');
     };
     $scope.showMessage = function(title, message, callback) {
@@ -66,6 +68,11 @@ angular.module('lufke').controller('ProfileController', function(lodash, $localS
         promise.then(function(data){
             $scope.model.interests = data;
         }, function(err){
+			console.log("UserInterestsSrv");
+			for(var attr in err){
+				console.log(attr)
+				console.log(err[attr])
+			}
             $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
         });
 	}
