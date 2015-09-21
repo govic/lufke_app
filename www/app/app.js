@@ -6,6 +6,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     return {
         request: function(config){
             config.headers["Authorization"] = $localStorage.basic;
+            config.headers['Access-Control-Allow-Origin'] = '*';
             return config;
         },
         response: function(response) {

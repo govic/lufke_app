@@ -1,3 +1,83 @@
+@font-face {
+    font-family: 'Solomon Sans Black';
+    src: url('./fonts/Solomon Sans Black.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans Bold';
+    src: url('./fonts/Solomon Sans Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans Book';
+    src: url('./fonts/Solomon Sans Book.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans Light';
+    src: url('./fonts/Solomon Sans Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans Normal';
+    src: url('./fonts/Solomon Sans Normal.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans SemiBold';
+    src: url('./fonts/Solomon Sans SemiBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Solomon Sans Thin';
+    src: url('./fonts/Solomon Sans Thin.ttf') format('truetype');
+}
+
+
+input[type="text"]::-webkit-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+input[type="text"]:-moz-placeholder { /* Firefox 18- */
+   font-family: "Solomon Sans Normal";
+}
+input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+   font-family: "Solomon Sans Normal";
+}
+input[type="text"]:-ms-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+
+input[type="password"]::-webkit-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+input[type="password"]:-moz-placeholder { /* Firefox 18- */
+   font-family: "Solomon Sans Normal";
+}
+input[type="password"]::-moz-placeholder {  /* Firefox 19+ */
+   font-family: "Solomon Sans Normal";
+}
+input[type="password"]:-ms-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+
+textarea::-webkit-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+textarea:-moz-placeholder { /* Firefox 18- */
+   font-family: "Solomon Sans Normal";
+}
+textarea::-moz-placeholder {  /* Firefox 19+ */
+   font-family: "Solomon Sans Normal";
+}
+textarea:-ms-input-placeholder {
+   font-family: "Solomon Sans Normal";
+}
+
+body *{
+    font-family: "Solomon Sans Normal";
+}
+.font-bold{
+    font-family: "Solomon Sans Bold";
+}
+.bar-header .title-center{
+    font-family: "Solomon Sans Bold";
+}
+
+
 .bar.bar-stable {
   border-color: #b2b2b2;
   background-color: #F5E85B;

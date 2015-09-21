@@ -14,7 +14,7 @@ angular
 
             $scope.viewPost = function(post){
                 if($scope.postsNavegable === true){
-                    $state.go("post", { 'postId': pub.id });
+                    $state.go("post", { 'postId': post.id });
                 }
             }
         },

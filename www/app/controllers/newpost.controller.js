@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewPostController', function($ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function(fb, $base64, $ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
 
     $scope.url = url_files;
@@ -27,6 +27,7 @@ angular.module('lufke').controller('NewPostController', function($ionicLoading, 
         $scope.model.experienceText = "";
         $scope.model.mediaSelected = false;
         $scope.model.imageBase64 = "";
+        $scope.shareToFacebook = false;
     }
 
 
@@ -59,7 +60,6 @@ angular.module('lufke').controller('NewPostController', function($ionicLoading, 
             });
 
             $http.post(api.post.create, _newPost).success(function(data, status, headers, config) {
-                Reset();
                 $rootScope.$emit('newPost', { post: data });
 
 				if(typeof $stateParams.next === "undefined"){
@@ -67,6 +67,32 @@ angular.module('lufke').controller('NewPostController', function($ionicLoading, 
 				}else{
 					$state.go($stateParams.next);
 				}
+
+                if(loginData && $scope.shareToFacebook === true){
+                    var _params = { access_token: loginData.access_token };
+                    
+                    if(typeof data["backgroundImgUrl"] !== "undefined" && typeof data["backgroundImgUrl"] !== "null" && data["backgroundImgUrl"].trim().length > 0){
+                        var _url = fb.postMessage.replace(/feed$/, "photos");
+                        _params.caption = _newPost.text;
+                        _params.url = url_files + data["backgroundImgUrl"];
+                    }else{
+                        var _url = fb.postMessage;
+                        _params.message = _newPost.text;
+                    }
+                    $http
+                        .post(_url, {}, { params: _params })
+                        .success(function(user, status, headers, config) {
+                            //Retorna el id del posts.
+                            Reset();
+                        })
+                        .error(function(data){
+                            console.log(data);
+                            $scope.showMessage("Error", "Ha ocurrido un error al publicar tu estado en facebook.");
+                            Reset();
+                        });
+                }else{
+                    Reset();
+                }
 
                 SelectedCategoriesSrv.reset();
                 SelectedUsersSrv.reset();
@@ -79,6 +105,9 @@ angular.module('lufke').controller('NewPostController', function($ionicLoading, 
             });
         }
     };
+    $scope.ShareToFacebook = function(){
+        $scope.shareToFacebook = !$scope.shareToFacebook;
+    }
     $scope.showImagesOptions = function() {
         var options = $ionicActionSheet.show({
             buttons: [{
@@ -139,6 +168,19 @@ angular.module('lufke').controller('NewPostController', function($ionicLoading, 
     $scope.addFriends = function(){
         $state.go("SearchUser", { profileid: $scope.user.profileId });
     }
+    $scope.shareToFacebook = false;
+    $scope.enableToShare = false;
+
+    var loginData = $localStorage["login-data"];
+    if(loginData){
+        try{
+            loginData = JSON.parse( $base64.decode( loginData ) );
+            $scope.enableToShare = true;
+        }catch(e){
+            $scope.enableToShare = false;
+        }
+    }
+
     var $onIntersetsAdded = $rootScope.$on("new-post-interest-added", function(){
         SetInterests();
     });

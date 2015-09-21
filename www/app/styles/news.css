@@ -152,26 +152,28 @@
     background-origin: content-box;
     background-position: center;
     background-repeat: no-repeat;
-    border-color: #c7c7c7;
+	border-width: 0em;
+    /*border-color: #c7c7c7;
     border-bottom-width: 0em;
     border-style: solid;
-    border-top-width: 0em;
+    border-top-width: 0em;*/
     height: 4em;
-    width: 49%;
+    /*width: 49%;*/
 }
 .share .items .share-to-facebook{
     background-image: url('../../assets/img/new-post/shareexperiencesocialfacebookactive.png');
-    border-left-width: 0em;
-    border-right-width: 0.08em;
-    float: left;
-    margin-left: 1%;
+    /*border-left-width: 0em;*/
+    /*border-right-width: 0.08em;*/
+    /*float: left;*/
+    /*margin-left: 1%;*/
+	width: 95%;
 }
 .share .items .share-to-twitter{
     background-image: url('../../assets/img/new-post/shareexperiencesocialtwitteractive.png');
     border-left-width: 0.08em;
     border-right-width: 0em;
     float: right;
-    margin-right: 1%;
+    /*margin-right: 1%;*/
 }
 .add-categories .title, .share .title, .footer{
 	border-top: 0.1em solid #c7c7c7;
@@ -181,6 +183,21 @@
     border-bottom: 0.1em solid #c7c7c7;
     color: #919191;
     padding: 0.5em;
+}
+.share-to-facebook{
+	background-image: url('../../assets/img/new-post/shareexperiencesocialfacebookactive.png');
+	background-color: #fff;
+    background-origin: content-box;
+    background-position: center;
+    background-repeat: no-repeat;
+	border-width: 0em;
+    height: 2em;
+	width: 90%;
+}
+.share .list .item{
+	border-width: 0em;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 }
 
 

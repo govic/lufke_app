@@ -40,11 +40,26 @@
                 </div>
             </div>
         </div>
-        <div class="share">
+        <div ng-if="enableToShare" class="share">
+            <div class="title">COMPARTIR A</div>
+            <div class="row">
+                <div class="col col-80 col-offset-10">
+                    <ul class="list">
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-checked="shareToFacebook" ng-click="ShareToFacebook()"/>
+                            </label>
+                            <div class="share-to-facebook"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div ng-if="false" class="share">
             <div class="title">COMPARTIR A</div>
             <div class="items">
                 <button class="share-to-facebook"></button>
-                <button class="share-to-twitter"></button>
+                <!--<button class="share-to-twitter"></button>-->
             </div>
         </div>
         <div class="footer"></div>

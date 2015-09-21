@@ -39,6 +39,7 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
 		console.log("logout event")
         $localStorage.basic = null;
         $localStorage.session = null;
+		$localStorage["login-data"] = null;
         $state.go('login');
     };
     $scope.showMessage = function(title, message, callback) {

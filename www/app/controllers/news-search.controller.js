@@ -97,8 +97,7 @@ angular
         queryUsers.texttofind = texttofind;
         queryUsers.page = 1;
         var uri = GetUri(api.user.search, queryUsers);
-        // "/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&orderby=:orderby"
-        console.log(uri)
+
         $scope.buscandoUsuarios = true;
         $scope.moreUsers = null;
         $scope.usersLength = null;
