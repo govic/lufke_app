@@ -123,8 +123,8 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
                 $http
                     .get(fb.srv, { params: { access_token: result.access_token, fields: fb.fields, format: "json" } })
                     .success(GetData)
-                    .error(function(err){ $scope.err=err; Error(err); })
-            }, function(err){ $scope.err=err; Error(err); });
+                    .error(Error)
+            }, Error);
     }
 
     function GetData(data){
@@ -174,9 +174,9 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
                     //Una ves registrado se redirige a "news"
                     $state.go('tab.news');
                     return;
-                }).error(function(err){ $scope.err=err; Error(err); });
+                }).error(Error);
             }else{
-                $scope.err=err; Error(err);
+                Error(err);
             }
         });
     }
