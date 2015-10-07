@@ -9,32 +9,23 @@
     background-size: cover;
     width: 100%;
     z-index: 99999;
+	vertical-align: top;
 }
-.register-tab, .login-tab{
-	width: 50%;
+.row-login{
 	background-color: #171717;
-	color: white;
-	height: 3.5em;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	border-bottom: none;
-	margin-top: -0.4em;
-}
-.register-tab-active, .login-tab-active{
-	width: 50%;
-	background-color: #171717;
-	color: white;
-	height: 3.5em;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	border-bottom: 0.3em solid #02B8C1;
-	margin-top: -0.4em;
-}
-.no-padding-login{
+	color: #fff;
 	padding: 0px;
 }
+.row-login div.col{
+	border-bottom: 0.3em solid #171717;
+	padding-bottom: 0.7em;
+	padding-top: 0.7em;
+	text-align: center;
+}
+.row-login div.col.active{
+	border-bottom: 0.3em solid #02B8C1;
+}
+.
 .login-input{
 	height: 3.5em !important;
 	border-top: none !important;
@@ -45,4 +36,10 @@
 .login-button, .register-button{
 	background-color: #171717;
 	color: white;
+}
+.facebook-login{
+	background-image: url("../../assets/img/landingfacebookicon.png");
+	background-position: left;
+	background-repeat: no-repeat;
+	background-origin: content-box;
 }

@@ -1,22 +1,12 @@
 angular.module('lufke').controller('DnaController', function($rootScope, $ionicLoading, lodash, $scope, $ionicPopup, $http, $state, UserInterestsSrv) {
     console.log('Inicia ... DnaController');
 
-    $scope.updateData = function() {
-        var promise = UserInterestsSrv.get();
-
-        promise.then(function(data){
-            $scope.interests = data;
-            $scope.$broadcast('scroll.refreshComplete');
-        },function(err){
-            console.dir(err);
-            $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses.");
-        });
-    };
     $scope.remove = function(item) {
         var promise = UserInterestsSrv.remove(item); //la promise no la utilizamos en este caso, actualizamos de inmediato.
 
         UserInterestsSrv.get().then(function(data){
             $scope.interests = data;
+            $rootScope.$emit("interest-removed");
         }, function(err){
             $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses.");
         });

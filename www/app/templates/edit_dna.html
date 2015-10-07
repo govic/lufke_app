@@ -1,4 +1,12 @@
-<ion-view title="Editar">
+<ion-view title="Editar" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
     <ion-content class="padding" class="has-footer">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
@@ -13,9 +21,7 @@
                 {{item.interestText}}
                 <i class="icon ion-plus-circled balanced" ng-click="add(item)"></i>
             </div>
-            <div class="item" ng-show="!model.interests || model.interests.lenght <= 0">
-                Sin resultados para mostrar ...
-            </div>
+            <div class="item" ng-show="msg">{{msg}}</div>
         </div>
     </ion-content>
 </ion-view>

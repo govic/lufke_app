@@ -33,7 +33,7 @@ angular
         return interest.interestText;
     }
     $scope.getImage = function(interest){
-        return "";
+        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
     }
 
     $scope.toggleSelect = function(interes){
@@ -132,14 +132,16 @@ angular
     }
     $scope.$on('$stateChangeSuccess', function() {
         $scope.loadMoreData();
-  });
+    });
 
     function loadFriends(_page, fc){
         var _fc = fc || function(){};
 
         var uri = GetUri(api.user.friends, { limit: 15, page: _page, orderby: "firstname", userid: $stateParams.profileid });
 
+        $scope.searchText = "buscando...";
         $http.get(uri, { cache: true }).success(function(data, status, headers, config) {
+            $scope.searchText = null;
             if(!data || 0 >= data.length){
                 $scope.moreData = false;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -175,11 +177,10 @@ angular
                 $scope.dictionary = _data;
             }
 
-            $scope.searchText = null;
-
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
         }).error(function(err, status, headers, config) {
+            $scope.searchText = null;
             console.dir(err);
             console.log(status);
             $scope.showMessage("Error", "Ha ocurrido un error al completar la operación. Revisa tu conexión a internet.");

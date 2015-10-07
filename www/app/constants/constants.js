@@ -1,6 +1,6 @@
 var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.0.108:50608'; //sirve para local y celular
+//var url_files = 'http://192.168.1.51:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -14,6 +14,7 @@ var api = {
         addInterestToProfile: url_base + '/user/addinterest',
         deleteInterest: url_base + '/user/deleteinterest',
         editProfile: url_base + '/user/editprofile',
+        editPass: url_base + '/user/editpass',
         editProfileImage: url_base + '/user/editprofileimage',
         followers: url_base + '/user/followers',
         following: url_base + '/user/following',
@@ -30,7 +31,9 @@ var api = {
         register: url_base + '/user/register',
         search: url_base + "/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&username=:username&firstname=:firstname&lastname=:lastname&clientid=:clientid&socialnetwork=:socialnetwork&orderby=:orderby",
         searchInterests: url_base + '/user/searchinterests',
-        setRegistrationKey: url_base + '/user/setregistrationkey'
+        setRegistrationKey: url_base + '/user/setregistrationkey',
+        validateEmail:  url_base + "/user/validateemail?email=:email",
+        validateUserName:  url_base + "/user/validateuser?username=:userName",
     },
     post: {
         get: url_base + '/post/get',
@@ -49,7 +52,9 @@ var api = {
         followUser: url_base + '/notification/followuser',
         getPopulars: url_base + '/explore/getexploredata',
         getSearchUsers: url_base + '/explore/getsearchusers',
-        interest: url_base + "/explore/interest?limit=:limit&page=:page&name=:name&orderby=:orderby"
+        interest: url_base + "/explore/interest?limit=:limit&page=:page&name=:name&orderby=:orderby",
+        getInterest: url_base + "/explore/interest?id=:id",
+        getPosts: url_base + "/explore/post?limit=:limit&page=:page&orderby=:orderby&interestid=:interestid"
     },
     notifications: {
         getNotifications: url_base + '/notification/getnotificationsdata',
@@ -64,9 +69,6 @@ var api = {
         saveFilters: url_base + '/filter/savefiltersdata',
         getTopInterests: url_base + '/filter/gettopinterestdata',
         editTopInterests: url_base + '/filter/edittopinterests'
-    },
-    interest: {
-        get: "/interest/:id"
     }
 };
 
@@ -102,6 +104,9 @@ angular
     "srv": "https://graph.facebook.com/v2.4/me",
     "fields": "id,email,location,first_name,last_name,cover,picture",
     "postMessage": "https://graph.facebook.com/v2.4/me/feed"
+})
+.constant("ImagesPath", {
+    login: 'assets/img/login.png'
 });
 
 /*

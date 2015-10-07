@@ -7,13 +7,13 @@
             </span>
         </button>
     </ion-nav-buttons>
-    <ion-content class="padding publicacion" class="has-footer">
+    <ion-content class="padding publicacion">
 
-		<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updatePost()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
-        </ion-refresher>
-
-		<div id="post-detail-content-container" class="item" ng-style="{'background-image':'url(' + post_url + ')'}">
-		</div>
+        <div class="card imagen">
+            <div class="item item-body">
+                <img id="post-detail-content-container" ng-src="{{post_url}}" />
+            </div>
+        </div>
 
 		<div class="row row-top">
 			<div id="post-detail-user-img-container">
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 
-		<div class="row row-bottom">
+        <div class="row row-bottom">
 			<div class="col post-detail-text">{{model.post.text}}
                 <span class="with" ng-repeat-start="f in model.post.Friends" ng-if="$first"> - con <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-if="!$last && !$first">,&nbsp;<span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-repeat-end ng-if="$last && !$first">&nbsp;y <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span>
             </div>
@@ -44,23 +44,12 @@
 
         <div class="categories" ng-if="model.post.Interests.length > 0">
             <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
-            <div class="category" ng-repeat="userInterest in model.post.Interests" ui-sref="category-profile({ interestId: userInterest.interestId })">
+            <div class="category" ng-repeat="userInterest in model.post.Interests" ui-sref="category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
+                <div ng-if="userInterest.previewPath" class="image" ng-style="{'background-image':'url({{url + userInterest.previewPath}})' }"></div>
+                <div ng-if="!userInterest.previewPath" class="image"></div>
                 <span class="btn-text">{{userInterest.interestText | initCap}}</span>
             </div>
         </div>
-
-		<div ng-if="false" class="row">
-			<div class="col">
-				<span ng-click="toggleLike()">
-					<i ng-if="model.post.isLiked" class="ion-ios7-star star-size"></i>
-					<i ng-if="!model.post.isLiked" class="ion-ios7-star-outline star-size"></i>
-					{{model.post.totalStars}}
-				</span>
-			</div>
-			<div class="col" id="post-detail-more">
-				<i class="ion-more" ng-click="showMore()"></i>
-			</div>
-		</div>
 
 		<ion-list>
 			<ion-item id="commentTextContainer" class="item-input-inset">

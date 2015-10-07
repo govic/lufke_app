@@ -1,3 +1,7 @@
+.adn #right-button.custom-right-button{
+    background-image: url("../../assets/img/profilednaaddicon_2x.png");
+    width: 1.5em;
+}
 .dna-vertical{
     background-color: #1b2031;
     background-image: url('../../assets/img/profiledna_vertical.png');
@@ -41,4 +45,21 @@
 }
 .add-interest-clicked{
     background-color: #fff;
+}
+.content-background .text-pulling{
+    color: #fff;
+}
+.content-background, .content-background .list{
+    background-color: #1b2031;
+    border-width: 0px;
+}
+.content-background .list{
+    padding: 0px;
+}
+.content-background .scroll{
+    background-image: url('../../assets/img/profiledna_vertical.png');
+    background-position: center 0em;
+    background-repeat: repeat-y;
+    border-width: 0px;
+    min-height: 100%;
 }

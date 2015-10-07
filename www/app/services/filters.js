@@ -2,6 +2,7 @@ angular
 .module("lufke")
 .filter("initCap", function(){
     return function initCap(_string){
+        if(!_string) return "";
         _string = _string.toLowerCase();
         var _1 = _string.charAt(0).toUpperCase();
         return _1 + _string.substr(1);

@@ -1,15 +1,9 @@
-angular.module('lufke').controller('FiltersController', function($ionicLoading, $scope, $ionicPopup, $http, $state) {
+angular.module('lufke').controller('FiltersController', function($ionicHistory, $ionicLoading, $scope, $ionicPopup, $http, $state, ShowMessageSrv) {
     console.log('Inicia ... FiltersController');
     $ionicLoading.show();
-    $http.post(api.filters.getFilters).success(function(data, status, headers, config) {
-        $scope.model = data;
-         $ionicLoading.hide();
-    }).error(function(err, status, headers, config) {
-        console.dir(err);
-        console.log(status);
-        $ionicLoading.hide();
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar los filtros y preferencias.");
-    });
+    $scope.cancel = function(){
+        $ionicHistory.goBack();
+    }
     $scope.updateFiltersData = function() {
         $http.post(api.filters.getFilters).success(function(data, status, headers, config) {
             $scope.model = data;
@@ -33,15 +27,14 @@ angular.module('lufke').controller('FiltersController', function($ionicLoading, 
     $scope.editInterests = function() {
         $state.go('editfilters');
     };
-    $scope.showMessage = function(title, message, callback) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: message,
-            okText: "Aceptar"
-        });
-        alertPopup.then(function(res) {
-            if (callback) callback();
-            return;
-        });
-    };
+    $scope.showMessage = ShowMessageSrv;
+    $http.post(api.filters.getFilters).success(function(data, status, headers, config) {
+        $scope.model = data;
+         $ionicLoading.hide();
+    }).error(function(err, status, headers, config) {
+        console.dir(err);
+        console.log(status);
+        $ionicLoading.hide();
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar los filtros y preferencias.");
+    });
 });

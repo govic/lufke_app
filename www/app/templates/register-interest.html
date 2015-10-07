@@ -1,0 +1,41 @@
+<ion-view hide-back-button="true" hide-nav-bar="false" view-title="Registrarse">
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons button-clear header-item" ui-sref="personal-info" nav-direction="back">
+            <i class="icon ion-chevron-left"></i>
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Volver</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button back-button buttons button-clear header-item" ng-disabled="interests.length < 3 || sending" ng-click="save()">
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Hecho</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="register register-interest">
+        <div class="">
+            <div class="title">¡FALTA POCO!</div>
+            <div class="body">
+                Agrega al menos tres intereses que son parte de tu ADN. ¡Esto te permitir&aacute; descubrir nuevas experiencias!
+            </div>
+            <div>
+                <i class="ion-plus-circled" ui-sref="SearchInterest"></i>
+            </div>
+            <div class="foot">
+                Toca aqu&iacute; para agregar
+            </div>
+            <div class="publicacion">
+                <div class="categories" ng-if="interests.length > 0">
+                    <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
+                    <div class="category" ng-repeat="interest in interests">
+                        <div ng-if="interest.previewPath" class="image" ng-style="{'background-image':'url(' + getImage(interest) + ')' }"></div>
+                        <div ng-if="!interest.previewPath" class="image"></div>
+                        <span class="btn-text">{{interest.interestText | initCap}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

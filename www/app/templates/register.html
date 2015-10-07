@@ -1,37 +1,49 @@
-<ion-view  hide-back-button="false" hide-nav-bar="true" view-title="Registro" animation="no-animation">
+<ion-view hide-back-button="true" hide-nav-bar="false" view-title="Registrarse">
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons button-clear header-item" ui-sref="login" nav-direction="back" ng-click="resetRegisterData()">
+            <i class="icon ion-chevron-left"></i>
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Volver</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button back-button buttons button-clear header-item" ui-sref="personal-info" nav-direction="forward" ng-click="next($event)">
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Siguiente</span>
+            </span>
+            <i class="icon ion-chevron-right"></i>
+        </button>
+    </ion-nav-buttons>
     <ion-content>
-        <img class="loginimg" ng-src="{{loginImage}}">
-        <div class="row no-padding-login">
-            <button class="register-tab-active">REGISTRO</button>
-            <button class="login-tab" ng-click="goToLogin()">ENTRAR</button>
-        </div>
-        <form name="registerForm" ng-submit="registerForm.$valid && register()" class="content css-form">
+        <form name="registerForm.form" class="content css-form">
             <div class="list">
+                <label class="item item-divider">Cuenta</label>
                 <label class="item item-input">
-                    <input class="login-input" name="registerName" ng-model="model.user.name" type="text" placeholder="Usuario" required>
-                    <i ng-show="registerForm.registerName.$touched && registerForm.registerName.$invalid" class="icon assertive ion-alert"></i>
+                    <input name="registerEmail" ng-model="model.email" type="email" placeholder="Correo electrónico" ng-blur="validateEmail(registerForm.form)" required />
+                    <i ng-show="registerForm.form.registerEmail.$touched && registerForm.form.registerEmail.$invalid" class="icon assertive ion-alert"></i>
                 </label>
+                <label ng-show="model.emailError">{{model.emailError}}</label>
                 <label class="item item-input">
-                    <input class="login-input" name="registerEmail" ng-model="model.user.email" type="email" placeholder="Correo" required>
-                    <i ng-show="registerForm.registerEmail.$touched && registerForm.registerEmail.$invalid" class="icon assertive ion-alert"></i>
+                    <input name="registerName" ng-model="model.name" type="text" placeholder="Usuario" ng-blur="validateUserName(registerForm.form)" required />
+                    <i ng-show="registerForm.form.registerName.$touched && registerForm.form.registerName.$invalid" class="icon assertive ion-alert"></i>
                 </label>
+                <label ng-show="model.nameError">{{model.nameError}}</label>
                 <label class="item item-input">
-                    <input class="login-input" name="registerPassword" ng-model="model.user.password" type="password" placeholder="Contraseña" required>
-                    <i ng-show="registerForm.registerPassword.$touched && registerForm.registerPassword.$invalid" class="icon assertive ion-alert"></i>
+                    <input name="registerPassword" ng-model="model.password" type="password" placeholder="Contraseña" ng-blur="validatePassword(registerForm.form)" required />
+                    <i ng-show="registerForm.form.registerPassword.$touched && registerForm.form.registerPassword.$invalid" class="icon assertive ion-alert"></i>
                 </label>
+                <label ng-show="model.passwordError">{{model.passwordError}}</label>
                 <label class="item item-input">
-                    <input class="login-input" name="registerPasswordVerify" ng-model="model.user.passwordVerify" type="password" placeholder="Confirma tu contraseña" required>
-                    <i ng-show="passwordVerify() || (registerForm.registerPasswordVerify.$touched && registerForm.registerPasswordVerify.$invalid)" class="icon assertive ion-alert"></i>
+                    <input name="registerPasswordVerify" ng-model="model.passwordVerify" type="password" placeholder="Confirma tu contraseña" ng-blur="validatePasswordVerify(registerForm.form)" required />
+                    <i ng-show="registerForm.form.registerPasswordVerify.$touched && registerForm.form.registerPasswordVerify.$invalid" class="icon assertive ion-alert"></i>
                 </label>
-                <p>{{verifyPassword()}}</p>
+                <label ng-show="model.passwordVerifyError">{{model.passwordVerifyError}}</label>
             </div>
             <div class="card" ng-show="model.registerError">
                 <div class="item item-text-wrap assertive">
                     {{model.registerErrorMsg}}
                 </div>
-            </div>
-            <div class="padding">
-                <input ng-disabled="registerForm.$invalid || passwordVerify()" type="submit" class="button button-block register-button" value="Regístrame">
             </div>
         </form>
     </ion-content>

@@ -5,7 +5,7 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
     $scope.unknown_background = url_background;
     $scope.unknown_post = url_post;
     $ionicLoading.show();
-	
+
 	$http.post(api.post.getAll, { cache: false }).success(function(data) {
 		$scope.model = {
 			posts: data.news,
@@ -21,7 +21,7 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
 		$ionicLoading.hide();
 		$scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error en Lufke.");
     });
-	
+
     $scope.updateNews = function() {
         $http.post(api.post.getAll).success(function(data) {
             $scope.model = {

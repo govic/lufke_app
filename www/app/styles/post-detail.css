@@ -1,10 +1,23 @@
 #post-detail-content-container {
+    /*border-width: 0px;*/
+    /*height: 15em;
     height: 40vh;
 	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+	background-size: contain;
+	background-position: center;*/
+
+    max-height: 15em;
+    max-height: 40vh;
+    max-width: 100%;
 }
 
+.publicacion .card.imagen{
+    margin-top: 0px;
+    text-align: center;
+}
+.publicacion .card.imagen .item-body{
+    padding: 5px;
+}
 #post-detail-user-name {
     font-size: 120%;
 	font-weight: bold;
@@ -21,7 +34,7 @@
 }
 
 .post-detail-text{
-	font-size: 120%;
+	font-size: 0.9em;
 }
 .post-detail-text .with{
     color: #3c3c3c;
@@ -52,7 +65,7 @@
 }
 
 #postDetail #commentTextContainer #commentTextArea{
-	font-size: 100%;
+	font-size: 0.9em;
     resize: none;
     width: 90%;
 }
@@ -119,23 +132,34 @@
 /* (+) listado de categorias */
 .publicacion .categories{
     padding-bottom: 0.5em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
     padding-top: 0.5em;
     width: 100%;
 }
 .publicacion .categories .category{
-	background-image: url('../../assets/img/new-post/shareexperiencecategorytagplaceholder.png');
-}
-.publicacion .categories .category{
-    background-color: #fff;
-    background-position: top;
-    background-repeat: no-repeat;
-    border: 0px;
     display: inline-block;
-    min-width: 4.5em;
-    padding-top: 2.2em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
     text-align: center;
+    vertical-align: top;
+    width: 6em;
+}
+.publicacion .categories .category .image{
+    background-color: #fff;
+    background-image: url('../../assets/img/unknown_post.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border: 0px;
+    border-radius: 50%;
+    height: 3.5em;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+
+    width: 3.5em;
 }
 .publicacion .categories .category .btn-text{
     font-size: 0.8em;

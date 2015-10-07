@@ -1,45 +1,72 @@
 angular
 .module("lufke")
-.controller("CategoryProfileController", function($stateParams, $http, $scope, $ionicLoading, $ionicHistory, ShowMessageSrv){
+.controller("CategoryProfileController", function($stateParams, $http, $scope, $ionicLoading, $ionicHistory, $ionicHistory, ShowMessageSrv, GetUri){
+
+    $scope.url = url_files;
+    $scope.unknown_post = url_post;
 
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
 
     $scope.showMessage = ShowMessageSrv;
 
-    //Consultar datos (nombre, ranking, cantidad de posts, cantidad de seguidores)
-    $scope.interest = {
-        name: "Hiking",
-        ranking: 1,
-        posts: 50173,
-        followers: 38768453
-    };
+    $scope.msgUsers = "buscando usuarios destacados...";
+    $scope.msgPosts = "buscando publicaciones populares...";
+
+    $scope.interestName = $stateParams.name;
+    $scope.interestId = $stateParams.id;
+
+
+
+    //Achicar mas las fotos.
+    //Obtener datos del interes.
+    $http.get(api.explore.getInterest.replace(/:id/, $stateParams.id))
+        .success(function(interest){
+            interest.previewPath = interest.previewPath ? (url_files + interest.previewPath) : url_background;
+            $scope.interest = interest;
+        })
+        .error(function(err){
+            console.log(err);
+            $scope.showMessage("Error", "Ha ocurrido un error. Revisa tu conexión a internet.");
+        });
 
     $scope.back = function(){ $ionicHistory.goBack(); }
 
-    //Consultar usuarios destacados (estos no son los usuarios destacados para la categoría, hay que implementar el servicio).
-    $ionicLoading.show();
-    $http.post(api.explore.getPopulars)
+    /* Consultar usuarios destacados (estos no son los usuarios destacados para la categoría. */
+    /* Los usuarios destacados son en base al numero de seguidores que este tiene. */
+    //"/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&username=:username&firstname=:firstname&lastname=:lastname&clientid=:clientid&socialnetwork=:socialnetwork&orderby=:orderby",
+    var uri = GetUri(api.user.search, { interestid: $stateParams.id, orderby: "followers desc", limit: 3,page: 1 });
+
+    //$ionicLoading.show();
+    $http.get( uri )
     .success(function(data, status, headers, config) {
-        $scope.populars = data.topUsers;
-        $ionicLoading.hide();
+        $scope.users = data;
+        $scope.msgUsers = null;
+        //$ionicLoading.hide();
     }).error(function(data, status, headers, config) {
         console.dir(data);
         console.dir(status);
-        $ionicLoading.hide();
+        $scope.msgUsers = "no se encontraron usuarios destacados";
+        //$ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error. Revisa tu conexión a internet.");
     });
 
-    //Consultar posts populares
+    /* Consultar posts populares */
 
-    return;
+    //getPosts: url_base + "/explore/post?limit=:limit&page=:page&orderby=:orderby&interestid=:interestid"
+    var uriposts = GetUri(api.explore.getPosts, { limit: 3, page: 1, orderby: "likes desc", interestid: $stateParams.id });
 
-    $http.get(api.interest.get.replace(":id", $stateParams.interestId)).succes(function(profile, status, headers, config){
-
-    }).error(function(data, status, headers, config){
-        console.log(data);
-        console.log(header);
+    //$ionicLoading.show();
+    $http.get( uriposts )
+    .success(function(data, status, headers, config) {
+        $scope.posts = data;
+        $scope.msgPosts = null;
+        //$ionicLoading.hide();
+    }).error(function(data, status, headers, config) {
+        console.dir(data);
+        console.dir(status);
+        $scope.msgPosts = "no se encontraron publicaciones populares";
+        //$ionicLoading.hide();
         $scope.showMessage("Error", "Ha ocurrido un error. Revisa tu conexión a internet.");
     });
-
 });

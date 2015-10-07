@@ -26,21 +26,11 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
             $scope.showMessage("Error", "Ha ocurrido un error al cargar sus datos de perfil.");
         });
     };
-    $scope.editProfile = function() {
-        $state.go('editprofile');
-    }
     $scope.viewTag = function(tag) {
         alert("Ver detalle tag id = " + tag.tagId);
     }
     $scope.socialLink = function(link) {
         window.open(link, '_system', 'location=yes');
-    };
-    $scope.logout = function() {
-		console.log("logout event")
-        $localStorage.basic = null;
-        $localStorage.session = null;
-		$localStorage["login-data"] = null;
-        $state.go('login');
     };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
@@ -78,6 +68,9 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
         });
 	}
 
+	var $followingUser = $rootScope.$on("following-user", function(){
+        $scope.model.followingUnit++;
+    });
 	var $afterEnter = $scope.$on('$ionicView.afterEnter', function() {
         //TODO: el servicio debe encargarse de actualizar cambios en la lista de noticias
         console.log("Entro a... ProfileController");
@@ -96,6 +89,7 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
 		$destroy()
 		$newPost();
 		$profileUpdated();
+		$followingUser();
 	});
 
 	function GetProfile(){

@@ -6,7 +6,7 @@
             <ion-item class="item-divider">
 				Solicitudes de Seguimiento
             </ion-item>
-            <ion-item ng-repeat="item in model.requests.requestsList" class="notification-list-no-pad">
+            <ion-item ng-repeat="item in model.requests.requestsList" class="fade-in fade-out notification-list-no-pad">
                 <div class="row">
                     <div class="col notification-profile-img-center">
                         <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"/>

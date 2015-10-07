@@ -26,6 +26,5 @@ angular.module('lufke')
 						url: '/profile',
 						templateUrl: 'app/templates/profile.html',
 						controller: 'ProfileController'
-					})
-					;
+					});
 		});

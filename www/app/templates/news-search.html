@@ -3,7 +3,7 @@
         <button class="button back-button buttons  button-clear header-item" ng-click="back()">
             <i class="icon ion-ios7-arrow-back"></i>
             <span class="back-text">
-                <span class="default-title">Volver</span>
+                <span class="default-title">Atr&aacute;s</span>
             </span>
         </button>
     </ion-nav-buttons>
@@ -21,23 +21,24 @@
                 <span>USUARIOS ENCONTRADOS</span><span ng-show="usersLength !== null">{{" : " + usersLength}}</span>
             </div>
 			<ion-item class="explore-background-container" ng-repeat="item in users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-                <div class="row">
+                <user-row posts-navegable="false" user="item"></user-row>
+                <!--<div class="row">
                     <div ng-click="viewProfile(item.profileId)">
-                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
+                        <div ng-style="{'background-image': 'url(' + (item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user) + ')'}" class="explore-profile-img"></div>
                     </div>
                     <div class="explore-font">
                         <div class="col explore-user-name">
                             {{item.profileFirstName}}<br/>
                             {{item.profileLastName}}<br/>
                         </div>
-                        <button class="button button-light button-small follow-button" ng-click="followUser(item)">
+                        <button class="button button-light button-small follow-button" ng-click="followUser(item)" ng-if="!item.BeingFollowed">
                             <i class="ion-plus active"></i>SEGUIR
                         </button>
                     </div>
                     <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ui-sref="post({'postId': pub.id})">
                         <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
                     </div>
-                </div>
+                </div>-->
 			</ion-item>
             <ion-item ng-show="buscandoUsuarios">buscando...</ion-item>
 		</ion-list>
@@ -48,7 +49,7 @@
                 <span>CATEGORÍAS ENCONTRADAS</span><span ng-show="interstsLength !== null">{{" : " + interstsLength}}</span>
             </div>
 			<div class="categories">
-				<div class="padding light category-content" ng-style="{'background-image': 'url(' + (interest.categoryImgUrl || 'assets/img/unknown_post.png') + ')' }" ng-repeat="interest in interests track by interest.interestId" ui-sref="category-profile({ interestId: interest.interestId })">
+				<div class="padding light category-content" ng-style="{'background-image': 'url(' + GetUriBackground(interest) + ')' }" ng-repeat="interest in interests track by interest.interestId" ui-sref="category-profile({ id: interest.interestId, name: interest.interestText })">
 					{{interest.interestText | uppercase}}
 				</div>
 			</div>

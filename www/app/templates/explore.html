@@ -8,8 +8,8 @@
                 <div class="ver-todos" ng-click="allTopUsers()">VER TODOS</div>
             </div>
 			<ion-item class="explore-background-container" ng-repeat="item in model.topUsers" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-				<!--<user-row follow-enabled="true" posts-navegable="true" user="item"></user-row>-->
-                <div class="row">
+				<user-row posts-navegable="true" user="item"></user-row>
+                <!--<div class="row">
                     <div ng-click="viewProfile(item.profileId)">
                         <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
                     </div>
@@ -25,7 +25,7 @@
                     <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ui-sref="post({'postId': pub.id})">
                         <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
                     </div>
-                </div>
+                </div>-->
 			</ion-item>
 		</ion-list>
 
@@ -47,8 +47,10 @@
 				&nbsp;
 			</div>-->
 			<div class="categories">
-				<div class="padding light category-content" style="background-image: url('{{category.categoryImgUrl}}');" ng-repeat="category in topCategories track by category.id" ui-sref="category-profile({ interestId: category.id })">
-					{{category.categoryName | uppercase}}<br />
+				<!--<div class="padding light category-content" style="background-image: url('{{category.categoryImgUrl}}');" ng-repeat="category in topCategories track by category.id" ui-sref="category-profile({ id: category.id, name: category.categoryName })">
+					{{category.categoryName | uppercase}}<br />-->
+                <div class="light category-content" ng-style="{'background-image': 'url(' + GetImageInteret(interest) + ')'}" ng-repeat="interest in model.topInterests track by interest.interestId" ui-sref="category-profile({ id: interest.interestId, name: interest.interestText })">
+					{{interest.interestText | uppercase}}<br />
 					<!--<button class="follow-button button button-light button-small" ng-click="followCategory(category.id, category.categoryName)">
 						<i class="ion-plus active"></i> SEGUIR
 					</button>-->

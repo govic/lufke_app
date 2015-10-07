@@ -1,4 +1,14 @@
-<ion-view title="Usuarios">
+<!-- Esta vista la utiliza tanto SearchUsersController como SearchCategoryUser. -->
+<ion-view title="Buscar personas" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons  button-clear header-item" ng-click="back()">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text">
+                <span class="default-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+
     <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
@@ -10,10 +20,10 @@
                 <button class="button button-small icon ion-search" ng-click="search()">&nbsp;Buscar</button>
             </ion-item>
 
-			<ion-item class="explore-background-container" ng-repeat="item in model.users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-                <!--<user-row follow-enabled="true" posts-navegable="false" user="item"></user-row>-->
-                <div class="row">
-                    <div ng-click="viewProfile()">
+			<ion-item class="explore-background-container" ng-repeat="item in model.users track by item.profileId" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
+                <user-row posts-navegable="false" user="item"></user-row>
+                <!--<div class="row">
+                    <div ng-click="viewProfile(item.profileId)">
                         <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
                     </div>
                     <div class="explore-font">
@@ -21,16 +31,17 @@
                             {{item.profileFirstName}}<br/>
                             {{item.profileLastName}}<br/>
                         </div>
-                        <button class="button button-light button-small follow-button" ng-click="followUser(item)">
+                        <button class="button button-light button-small follow-button" ng-click="followUser(item)" ng-if="!item.BeingFollowed">
                             <i class="ion-plus active"></i>SEGUIR
                         </button>
                     </div>
-                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ng-click="viewPost(pub)">
+                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url(' + (pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post) + ')'}" ng-click="viewPost(pub)">
                         <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
                     </div>
-                </div>
+                </div>-->
 			</ion-item>
+            <ion-item ng-if="msg" class="message">{{msg}}</ion-item>
 		</ion-list>
-		<button ng-show="model.users && model.users.length > 0" class="button button-block login-button" ng-click="loadMore()">Cargar más resultados ...</button>
+		<button ng-show="model.users && model.users.length > 0 && model.moreData" class="button button-block login-button" ng-click="loadMore()">Cargar más resultados ...</button>
     </ion-content>
 </ion-view>

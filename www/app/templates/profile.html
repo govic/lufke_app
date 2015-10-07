@@ -1,23 +1,24 @@
 <ion-view hide-back-button="true" view-title="Perfil" hide-nav-bar="true">
-    <ion-nav-buttons side="right" ng-if="false">
-        <a class="button button-icon icon ion-gear-b" ui-sref="filters"></a>
-    </ion-nav-buttons>
     <ion-content class="has-footer">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div id="profile-background-img" ng-style="{'background-image': 'url('+ background + ')'}">
-            <div class="profile-subheader row">
-                <div class="col btn-left"></div>
-                <div class="col col-50 user-name">{{model.profileUserName}}</div>
-                <div class="col btn-right" ng-click="logout()"></div>
-            </div>
-            <div ui-sref="newpost({ next: 'tab.news' })">
-                <share-experience css-class="bar item-input-inset profile-share-experience"></share-experience>
-            </div>
             <div class="degrade">
+                <div class="custom-bar">
+                    <div class="bar bar-header bar-light">
+                        <!--<button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>-->
+                        <h1 class="title">{{model.profileUserName}}</h1>
+                        <button class="button custom-right-button" nav-direction="forward" ui-sref="menu-profile">
+                            <i class="ion-gear-a"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="share-experience profile-info" ui-sref="newpost({ next: 'tab.news' })">
+                    <share-experience css-class="bar item-input-inset profile-share-experience"></share-experience>
+                </div>
                 <div class="row">
-                    <div>
-                        <img id="profile-img" ng-src="{{model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user}}" />
+                    <div id="profile-img">
+                        <div ng-style="{'background-image': 'url(' + (model.profileImgUrl !== null  && model.profileImgUrl !== '' ? url + model.profileImgUrl : unknown_user) + ')'}"></div>
                     </div>
                     <div class="col no-padding">
                         <div class="row light profile-name">
@@ -26,7 +27,7 @@
                                 <div class="profile-name-text font-bold">{{model.profileLastName}}</div>
                             </div>
                             <div class="col profile-button-edit">
-                                <a class="button button-light button-small edit-profile-button" ng-click="editProfile()">Editar perfil</a>
+                                <a class="button button-light button-small edit-profile-button" ui-sref="editprofile">Editar perfil</a>
                             </div>
                         </div>
                         <div class="row profile-text-center light">
@@ -38,7 +39,7 @@
                                 <div class="profile-number">{{model.followersUnit}}</div>
                                 <div class="profile-number-text-under">Seguidores</div>
                             </div>
-                            <div class="col" ng-click="following()">
+                            <div class="col no-side-padding" ng-click="following()">
                                 <div class="profile-number">{{model.followingUnit}}</div>
                                 <div class="profile-number-text-under">Siguiendo</div>
                             </div>

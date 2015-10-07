@@ -1,22 +1,16 @@
 angular
 .module("lufke")
-.controller("FollowingController", function($ionicLoading, $ionicPopup, $http, $scope, $stateParams, profileService){
+.controller("FollowingController", function($ionicHistory, $ionicLoading, $ionicPopup, $http, $scope, $stateParams, profileService, ShowMessageSrv){
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = "/" + url_background;
     $scope.unknown_post = url_post;
+    $scope.msg = "buscando...";
 
-    $scope.showMessage = function(title, message, callback) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: message,
-            okText: "Aceptar"
-        });
-        alertPopup.then(function(res) {
-            if (callback) callback();
-            return;
-        });
-    };
+    $scope.cancel = function(){
+        $ionicHistory.goBack();
+    }
+    $scope.showMessage = ShowMessageSrv;
 
     $scope.more = function(){
         GetFollowing(paginador, function(err){
@@ -39,8 +33,10 @@ angular
             .get( api.user.following + "?page=" + obj.currentPage.toString() + "&limit=" + obj.limit.toString() + "&userId=" + $stateParams.userid, { cache: false }
             ).success(function(following){
                 $scope.following = $scope.following.concat( following );
-                $scope.morefollowing = following.length > 0;
-                $scope.sinSeguiendo = $scope.following.length === 0;
+                $scope.moreData = following.length > 0;
+
+                $scope.msg = following && following.length > 0 ? null : "No hay más personas";
+                $scope.msg = $scope.following && $scope.following.length > 0 ? null : "Sin personas a quien se siga";
 
                 cb( null );
             }).error(function(){
@@ -51,8 +47,7 @@ angular
     var paginador = { currentPage: 1, limit: 10 };
 
     $scope.following = [];
-    $scope.morefollowing = false;
-    $scope.sinSeguiendo = false;
+    $scope.moreData = false;
     $ionicLoading.show();
 
     GetFollowing(paginador, function(err){

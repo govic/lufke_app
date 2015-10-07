@@ -1,9 +1,13 @@
-<ion-view hide-back-button="false" hide-nav-bar="true" view-title="Entrar" animation="no-animation" cache-view="false">
+<ion-view hide-back-button="false" hide-nav-bar="true" view-title="Entrar" cache-view="false">
     <ion-content>
-        <img class="loginimg" ng-src="{{loginImage}}">
-        <div class="row no-padding-login">
-            <button class="register-tab" ng-click="goToRegister()">REGISTRO</button>
-            <button class="login-tab-active">ENTRAR</button>
+        <img class="loginimg" ng-src="{{loginImage}}" />
+        <div class="row row-login">
+            <div class="col" nav-direction="forward" ui-sref="register">
+                <span>REGISTRO</span>
+            </div>
+            <div class="col active">
+                <span>ENTRAR</span>
+            </div>
         </div>
         <form name="loginForm" ng-submit="loginForm.$valid && validateUser()" class="content css-form">
             <div class="list">
@@ -20,10 +24,12 @@
                 </div>
             </div>
             <div class="padding">
-                <input type="submit" class="button button-block login-button" value="Iniciar sesión">
+                <input type="submit" class="button button-block login-button" value="Iniciar sesión" />
             </div>
             <div class="padding">
-                <input type="submit" class="button button-block login-button" value="Iniciar sesión con Facebook" ng-click="facebook()">
+                <button class="button button-block facebook-login" ng-click="facebook()">
+                    Iniciar sesi&oacute;n con Facebook
+                </button>
             </div>
         </form>
     </ion-content>

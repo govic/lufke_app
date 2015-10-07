@@ -79,7 +79,9 @@
 .experience-text{
     padding-top: 1em;
 }
-.experience-tools, .add-categories .categories{
+
+/* (+) Botones para agregar amigos */
+.experience-tools{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
@@ -110,35 +112,16 @@
     font-size: 1.1em;
     padding-top: 0.2em;
 }
-.add-categories{
-}
-.add-categories .title{
-}
-.add-categories .categories{
+/* (-) Botones para agregar amigos */
 
+.categories .category .image.add-category{
+	background-image: none;
 }
-.add-categories .categories .add-category{
-    background-image: url('../../assets/img/new-post/shareexperiencecategorytagplaceholder.png');
-    color: #919191;
+.categories .category .image.add-category i{
+	color: #ccc;
+	font-size: 3.5em;
 }
-.add-categories .categories .category{
-	background-image: url('../../assets/img/new-post/shareexperiencecategorytagplaceholder.png');
-}
-.add-categories .categories .add-category, .add-categories .categories .category{
-    background-color: #fff;
-    background-position: top;
-    background-repeat: no-repeat;
 
-    border: 0px;
-    display: inline-block;
-
-    padding-top: 2.2em;
-    text-align: center;
-    min-width: 4.5em;
-}
-.add-categories .categories .add-category .btn-text, .add-categories .categories .category .btn-text{
-    font-size: 0.8em;
-}
 .share{
 }
 .share .title{
@@ -289,8 +272,9 @@
     position: relative;
 }
 .agregar-interes .lista .interest .ico{
+	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
     vertical-align: middle;
 }
 /* (-) Agregar intereses a post */

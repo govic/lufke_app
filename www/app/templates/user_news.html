@@ -1,5 +1,14 @@
-<ion-view view-title="Tus experiencias">
-    <div ui-sref="newpost">
+<ion-view view-title="Tus experiencias" hide-back-button="true" >
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>>
+
+    <div ng-if="false" ui-sref="newpost">
 		<share-experience></share-experience>
 	</div>
 

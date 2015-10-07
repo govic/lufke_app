@@ -10,11 +10,11 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
 
     $scope.experienceTextCounter = maxExperienceTextSize;
     Object.defineProperty($scope.model, "experienceText", {
-        get: function(){ return this.value; },
+        get: function(){ return this._experienceTextValue; },
         set: function(_val){
             if(typeof _val === "string" && _val.length <= maxExperienceTextSize){
-                this.value = _val;
-                $scope.experienceTextCounter = maxExperienceTextSize - this.value.length;
+                this._experienceTextValue = _val;
+                $scope.experienceTextCounter = maxExperienceTextSize - this._experienceTextValue.length;
             }
         }
     });
@@ -33,7 +33,7 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
 
     $scope.cancel = function(){
         Reset();
-        $ionicHistory.goBack(1);
+        $ionicHistory.goBack();
     }
     $scope.shareExperience = function() {
         $ionicLoading.show();
@@ -70,7 +70,7 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
 
                 if(loginData && $scope.shareToFacebook === true){
                     var _params = { access_token: loginData.access_token };
-                    
+
                     if(typeof data["backgroundImgUrl"] !== "undefined" && typeof data["backgroundImgUrl"] !== "null" && data["backgroundImgUrl"].trim().length > 0){
                         var _url = fb.postMessage.replace(/feed$/, "photos");
                         _params.caption = _newPost.text;
@@ -109,7 +109,7 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         $scope.shareToFacebook = !$scope.shareToFacebook;
     }
     $scope.showImagesOptions = function() {
-        var options = $ionicActionSheet.show({
+        var hideSheet = $ionicActionSheet.show({
             buttons: [{
                 text: '<i class="ion-share"></i> <span>Photo</span>'
             }, {
@@ -121,10 +121,10 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
                 //console.log("presionado botón nro: " + index);
                 switch (index) {
                     case 0:
-                        $scope.getPhoto(navigator.camera.PictureSourceType.CAMARA);
+                        GetPhoto(navigator.camera.PictureSourceType.CAMARA);
                         break;
                     case 1:
-                        $scope.getPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+                        GetPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
                         break;
                     default:
                         $scope.showMessage("Error", "Un error desconocido ha ocurrido.");
@@ -134,14 +134,14 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
             }
         });
     };
-    $scope.getPhoto = function(source) {
+    function GetPhoto(source) {
         var options = {
-            quality: 75,
+            allowEdit: false,
             correctOrientation: true,
             destinationType: navigator.camera.DestinationType.DATA_URL, //DATA_URL,FILE_URI
             encodingType: navigator.camera.EncodingType.JPEG, //PNG,JPEG
+            quality: 75,
             sourceType: source, //CAMARA,PHOTOLIBRARY,SAVEDPHOTOALBUM
-            allowEdit: true,
             targetWidth: 420,
             targetHeight: 420
         };
@@ -154,7 +154,8 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
             $scope.model.imageBase64 = imageBase64;
             $ionicLoading.hide();
         }, function(err) {
-            $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
+            console.log(err)
+            if(!/cancel/.test(err)) $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
             $scope.model.imageBase64 = "";
             $ionicLoading.hide();

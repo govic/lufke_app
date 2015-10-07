@@ -1,0 +1,44 @@
+<ion-view view-title="Menu" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button nav-direction="back" ui-sref="tab.profile" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="menu-view">
+        <div class="list botones">
+            <div class="item item-divider">
+                Configurar
+            </div>
+            <a class="item item-icon-left" href="#">
+                <i class="ion-person-stalker"></i>
+                Privacidad
+            </a>
+            <a class="item item-icon-left" ui-sref="editprofile">
+                <i class="ion-edit"></i>
+                Editar perfil
+            </a>
+            <a class="item item-icon-left" ui-sref="editpass">
+                <i class="ion-key"></i>
+                Cambiar contraseña
+            </a>
+            <div class="item item-divider">
+                Acerca de
+            </div>
+            <a class="item item-icon-left" href="http://lufke.com/privacy.html">
+                <i class="ion-person"></i>
+                Pol&iacute;tica de privacidad
+            </a>
+            <a class="item item-icon-left" href="http://lufke.com/terms.html">
+                <i class="ion-information"></i>
+                T&eacute;rminos y condiciones
+            </a>
+            <a class="item item-icon-left" href="#" ng-click="logout()">
+                <i class="ion-log-out"></i>
+                Cerrar sesi&oacute;n
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

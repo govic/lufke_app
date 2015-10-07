@@ -1,23 +1,13 @@
-angular.module('lufke').controller('UserNewsController', function($ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, $stateParams, ShowMessageSrv /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('UserNewsController', function($ionicHistory, $ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, $stateParams, ShowMessageSrv /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... UserNewsController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
     $scope.unknown_post = url_post;
-    $ionicLoading.show();
 
-    $http.get(api.user.myNews, { params: { userId: $stateParams.userId } }, { cache: false }).success(function(data) {
-        $scope.model = {
-            posts: data.news,
-            isExperienceTextFocus: false,
-            mediaSelected: false,
-            imageBase64: "",
-            experienceText: "",
-            moreData: true
-        };
-        $ionicLoading.hide();
-        $scope.$broadcast('scroll.refreshComplete');
-    });
+    $scope.cancel = function(){
+        $ionicHistory.goBack();
+    }
     $scope.updateNews = function() {
         $http.get(api.user.myNews, { params: { userId: $stateParams.userId } }).success(function(data) {
             $scope.model = {
@@ -32,13 +22,11 @@ angular.module('lufke').controller('UserNewsController', function($ionicLoading,
         });
     };
     $scope.toggleLike = function(post) {
-
         var postId = post.id;
         var original = {
             isLiked: post.isLiked,
             totalStars: post.totalStars
         };
-
         $http.post(api.post.toggleLike, {
             id: postId
         }).success(function(data) {
@@ -107,4 +95,18 @@ angular.module('lufke').controller('UserNewsController', function($ionicLoading,
         $scope.model.posts.push(args.post);
     });
     $scope.showMessage = ShowMessageSrv;
+    $ionicLoading.show();
+
+    $http.get(api.user.myNews, { params: { userId: $stateParams.userId } }, { cache: false }).success(function(data) {
+        $scope.model = {
+            posts: data.news,
+            isExperienceTextFocus: false,
+            mediaSelected: false,
+            imageBase64: "",
+            experienceText: "",
+            moreData: true
+        };
+        $ionicLoading.hide();
+        $scope.$broadcast('scroll.refreshComplete');
+    });
 });

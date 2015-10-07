@@ -226,49 +226,36 @@ ion-tabs.tabs-color-active-positive .tab-item {
 }
 /* (-) Barra compartir experiencia */
 
-/* (+) utilizqdo en perfil de categoria y edicion de adn. */
-.custom-header{
+
+/* (+) bar de profile, category-profile y public-profile */
+.custom-bar .bar{
     background-color: transparent;
-    height: 5em;
-    overflow: auto;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    position: fixed;
-    width: 100%;
-    z-index: 101;
+    border-width: 0em;
 }
-.custom-header>*{
-    float:left;
+.custom-bar .bar-header .title{
+    color: #fff;
+    font-size: 1.2em;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
-.custom-header .left-button, .custom-header .right-button, .custom-header .title{
-    background-position: center left;
-    background-repeat: no-repeat;
-    height: 3.9em;
-    margin-top: 0.5em;
-    width: 30%;
-}
-.custom-header .left-button{
+.custom-bar .bar .custom-back-button{
     background-image: url("../../assets/img/navigationbarbackwhite_2x.png");
     background-position: left;
-}
-.custom-header .left-button .label{
     color: #fff;
-    font-size: 1.5em;
-    margin-left: 1em;
-    margin-top: 0.8em;
+    padding-left: 1em;
+    font-size: 1.2em;
 }
-.custom-header .right-button{
-    background-image: url("../../assets/img/profilednaaddicon_2x.png");
-    background-position: right;
-}
-.custom-header .title{
+.custom-bar .bar .custom-right-button{
     color: #fff;
-    font-size: 2.5em;
-    text-align: center;
-    width: 40%;
+    font-size: 2em;
 }
+.custom-bar .bar .custom-right-button, .custom-bar .bar .custom-back-button{
+    background-repeat: no-repeat;;
+    background-color: transparent;
+    background-size: contain;
+    border-width: 0em;
+}
+/* (-) bar de category-profile y public-profile */
 
-/* (-) utilizqdo en perfil de categoria y edicion de adn. */
 
 /* (+) transiciones */
 .fade-in.ng-enter {
@@ -328,3 +315,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     font-weight: bold;
 }
 /* (-) subtitulos */
+
+.edit-pass .list.list-inset, .edit-profile .list.list-inset{
+    margin: 0px;
+}

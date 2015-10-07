@@ -1,16 +1,23 @@
-<ion-view view-title="Seguidores">
+<ion-view view-title="Seguidores" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <!--<ion-refresher pulling-text="Soltar para refrescar" on-refresh="update()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>-->
 		<ion-list>
             <ion-item class="explore-background-container" ng-show="followers.length" ng-repeat="user in followers" ng-style="{'background-image':'url(' + (user.backgroundImgUrl ? url + user.backgroundImgUrl : unknown_background) + ')'}">
-                <user-row follow-enabled="false" posts-navegable="true" user="user"></user-row>
+                <user-row follow-disabled="user.BeingFollowed" posts-navegable="true" user="user"></user-row>
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll ng-if="moreFollowers" on-infinite="more()"></ion-infinite-scroll>
+        <ion-infinite-scroll ng-if="moreData" on-infinite="more()"></ion-infinite-scroll>
         <div class="list">
-            <div ng-show="followers.length && followers.length > 0" class="item item-icon-left item-icon-right" ng-if="!moreData">No hay más seguidores</div>
-            <div ng-show="sinSeguidores" class="item item-icon-left item-icon-right">No est&aacute;s siguiendo a nadie</div>
+            <div ng-show="msg" class="item item-icon-left item-icon-right">{{msg}}</div>
         </div>
     </ion-content>
 </ion-view>

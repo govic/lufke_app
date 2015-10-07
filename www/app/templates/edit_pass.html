@@ -1,0 +1,38 @@
+<ion-view title="Cambiar contraseña" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="edit-pass">
+        <form name="editForm" ng-submit="editPass(editForm)">
+            <div class="list list-inset">
+                <label class="item item-divider">CAMBIAR CONTRASEÑA</label>
+                <label class="item item-divider">Actual</label>
+                <label class="item item-input">
+                    <!--<span class="input-label">Actual</span>-->
+                    <input name="oldPassword" type="password" ng-model="model.oldPassword" ng-change="validarPass(editForm)" required />
+                    <i ng-show="editForm.oldPassword.$touched && editForm.oldPassword.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-divider">Nueva</label>
+                <label class="item item-input">
+                    <!--<span class="input-label">Nueva</span>-->
+                    <input name="newPassword" type="password" ng-model="model.newPassword" ng-change="validarPass(editForm)" required />
+                    <i ng-show="editForm.newPassword.$touched && editForm.newPassword.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-divider">Repetir</label>
+                <label class="item item-input">
+                    <!--<span class="input-label">Repetir</span>-->
+                    <input name="repeatPassword" type="password" ng-model="model.repeatPassword" ng-change="validarPass(editForm)" required />
+                    <i ng-show="editForm.repeatPassword.$touched && editForm.repeatPassword.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+            </div>
+            <button type="submit" class="button button-block login-button">
+                {{btnGuardarText}}
+            </button>
+        </form>
+    </ion-content>
+</ion-view>

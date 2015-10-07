@@ -1,13 +1,14 @@
 <ion-view title="PERFIL DE CATEGORÍA" hide-nav-bar="true">
-    <ion-content class="category-profile">
-        <div class="profile-img" ng-style="{'background-image': 'url(' + unknown_background + ')'}">
-            <div class="custom-header">
-                <div class="left-button" ng-click="back()"><div class="label">Atr&aacute;s</div></div>
-                <div class="title">{{interest.name}}</div>
-                <div class="right-button search-button">
-                    <i class="ion-search"></i>
-                </div>
-            </div>
+    <ion-content class="category-profile custom-bar">
+        <div class="bar bar-header bar-light">
+            <button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>
+            <h1 class="title">{{interestName}}</h1>
+            <button class="button custom-right-button" ui-sref="search-user-category({ id: interestId })">
+                <i class="ion-search"></i>
+            </button>
+        </div>
+        <div class="profile-img" ng-style="{'background-image': 'url(' + interest.previewPath + ')'}">
+        <!--<div class="profile-img">-->
             <div class="category-profile-footer">
                 <div class="star"></div>
                 <div class="ranking">
@@ -15,25 +16,29 @@
                     <div class="label">TOP MUNDIAL</div>
                 </div>
                 <div class="posts">
-                    <div class="number">{{50210 | shrinkNumber}}</div>
+                    <div class="number">{{interest.posts | shrinkNumber}}</div>
                     <div class="label">POSTS</div>
                 </div>
                 <div class="followers">
-                    <div class="number">{{38785146 | shrinkNumber}}</div>
+                    <div class="number">{{interest.followers | shrinkNumber}}</div>
                     <div class="label">SEGUIDORES</div>
                 </div>
+            </div>
+            <div class="loading-image">
+                cargando...
             </div>
         </div>
         <div class="category-profile-users">
             <div class="custom-subtitle">
                 <span>USUARIOS DESTACADOS</span>
-                <div class="ver-todos">VER TODOS</div>
+                <div class="ver-todos" ui-sref="search-user-category({ id: interestId })">VER TODOS</div>
             </div>
             <ion-list>
                 <!-- Consultar por usuarios populares -->
-                <ion-item class="explore-background-container" ng-repeat="item in populars" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-    				<user-row follow-enabled="true" posts-navegable="true" user="item"></user-row>
+                <ion-item ng-if="users.length > 0" class="explore-background-container" ng-repeat="item in users" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
+    				<user-row follow-disabled="item.BeingFollowed" posts-navegable="true" user="item"></user-row>
     			</ion-item>
+                <ion-item ng-if="msgUsers">{{msgUsers}}</ion-item>
             </ion-list>
         </div>
         <div class="category-profile-post">
@@ -42,6 +47,11 @@
             </div>
             <!-- Consultar por publicaciones populares -->
             <!--<post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>-->
+            <ion-list>
+                <!-- Consultar por usuarios populares -->
+                <post-summary ng-show="posts.length" ng-repeat="post in posts | orderBy:'-postTimestamp'"></post-summary>
+                <ion-item ng-if="msgPosts">{{msgPosts}}</ion-item>
+            </ion-list>
         </div>
     </ion-content>
 </ion-view>

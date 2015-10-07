@@ -1,9 +1,8 @@
-.category-profile{
-
-}
 .category-profile .profile-img{
     background-color: rgba(0,0,0,0.3);
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 20em;
     width: 100%;
 }
@@ -11,18 +10,17 @@
 }
 .category-profile .profile-img .profile-nav-bar .back-button{
 }
-.category-profile .profile-img .custom-header .title{
-    font-size: 2em;
-
-    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
-}
-.category-profile .profile-img .custom-header .search-button{
-    background-image: none;
-    text-align: right;
-}
-.category-profile .profile-img .custom-header .search-button i{
+.category-profile .loading-image{
+    background-color: #000;
     color: #fff;
-    font-size: 3.2em;
+    height: 20em;
+    padding-top: 40%;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    vertical-align: bottom;
+    width: 100%;
+    z-index: -1;
 }
 .category-profile .profile-img .category-profile-footer{
     background-color: rgba(0,0,0,0.5);

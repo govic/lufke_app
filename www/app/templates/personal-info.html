@@ -1,0 +1,59 @@
+<ion-view hide-back-button="true" hide-nav-bar="false" view-title="Registrarse">
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons button-clear header-item" ui-sref="register" nav-direction="back">
+            <i class="icon ion-chevron-left"></i>
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Volver</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button back-button buttons button-clear header-item" ui-sref="register-interest" nav-direction="forward" ng-click="next($event)">
+            <span class="back-text header-button" style="transform: translate3d(0px, 0px, 0px);">
+                <span>Siguiente</span>
+            </span>
+            <i class="icon ion-chevron-right"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="register personal-info">
+        <div class="background-img">
+           <div class="image" ng-style="{'background-image': 'url(' + backgroundImage + ')'}" ng-click="showImagesOptions('background')"></div>
+           <div class="label" ng-click="showImagesOptions('background')">
+               toca para editar
+               <i class="ion-image"></i>
+           </div>
+       </div>
+       <div class="edit-profile-edit-img">
+           <div class="profile-img" ng-style="{'background-image': 'url(' + profileImage + ')'}" ng-click="showImagesOptions('profile')"></div>
+           <div class="label" ng-click="showImagesOptions('profile')">
+               toca para editar
+               <i class="ion-image"></i>
+           </div>
+       </div>
+        <form name="register.form" class="content css-form">
+            <div class="list">
+                <label class="item item-input">
+                    <input name="name" ng-model="model.name" type="text" placeholder="Nombre" required />
+                    <i ng-show="register.form.name.$touched && register.form.name.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input" ng-show="model.type === 'Persona'">
+                    <input name="lastname" ng-model="model.lastname" type="text" placeholder="Apellido" required />
+                    <i ng-show="register.form.lastname.$touched && register.form.lastname.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-input">
+                    <textarea name="bio" ng-model="model.bio" placeholder="Biografía" required></textarea>
+                    <i ng-show="register.form.bio.$touched && register.form.bio.$invalid" class="icon assertive ion-alert"></i>
+                </label>
+                <label class="item item-divider">Soy una...</label>
+                <div class="row tipo-persona">
+                    <div class="col col-50">
+                        <ion-radio ng-model="model.type" ng-value="'Persona'">Persona</ion-radio>
+                    </div>
+                    <div class="col col-50">
+                        <ion-radio ng-model="model.type" ng-value="'Compañía'">Compañía</ion-radio>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

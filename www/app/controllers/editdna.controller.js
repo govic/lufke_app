@@ -1,14 +1,14 @@
-    angular.module('lufke').controller('EditDnaController', function(lodash, $scope, $ionicPopup, $http, UserInterestsSrv) {
+    angular.module('lufke').controller('EditDnaController', function($ionicHistory, $rootScope, lodash, $scope, $ionicPopup, $http, UserInterestsSrv, ShowMessageSrv) {
     console.log('Inicia ... EditDnaController');
     $scope.model = {};
     $scope.model.searchText = "";
-    $http.get(api.user.getSuggestedInterests.replace(":limit", 20).replace(":page", 1)).success(function(data, status, headers, config) {
-        $scope.model = data;
-    }).error(function(err, status, headers, config) {
-        console.dir(err);
-        console.log(status);
-        $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
-    });
+    $scope.msg = "buscando intereses"
+
+    $scope.showMessage = ShowMessageSrv;
+
+    $scope.cancel = function(){
+        $ionicHistory.goBack();
+    }
     $scope.updateData = function() {
         $scope.model.searchText = "";
         $scope.$broadcast('scroll.refreshComplete');
@@ -18,9 +18,11 @@
             searchText: $scope.model.searchText
         }).success(function(data, status, headers, config) {
             $scope.model = data;
+            $scope.msg = 0 >= data.interests.length ? "no se encontraron intereses" : null;
         }).error(function(err, status, headers, config) {
             console.dir(err);
             console.log(status);
+            $scope.msg = null;
             $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
         });
     };
@@ -31,7 +33,7 @@
         $scope.model.interests.splice(index, 1);
 
         promise.then(function(data){
-
+            $rootScope.$emit("interest-added");
         }, function(err){
             self.model.interests.splice( index, 0, item );
         });
@@ -49,15 +51,14 @@
         });
         */
     };
-    $scope.showMessage = function(title, message, callback) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: message,
-            okText: "Aceptar"
-        });
-        alertPopup.then(function(res) {
-            if (callback) callback();
-            return;
-        });
-    };
+
+    $http.get(api.user.getSuggestedInterests.replace(":limit", 20).replace(":page", 1)).success(function(data, status, headers, config) {
+        $scope.model = data;
+        $scope.msg = 0 >= data.interests.length ? "no se encontraron intereses" : null;
+    }).error(function(err, status, headers, config) {
+        console.dir(err);
+        console.log(status);
+        $scope.msg = null;
+        $scope.showMessage("Error", "Ha ocurrido un error al cargar la lista de intereses del usuario.");
+    });
 });

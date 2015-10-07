@@ -24,12 +24,15 @@ angular
     $scope.viewProfile = function(profileId){
         profileService.viewprofile(profileId);
     }
+    $scope.GetUriBackground = function(interest){
+        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
+    }
     $scope.followUser = function(item){
         $ionicLoading.show();
         $http.post(api.explore.followUser, {
             id: item.profileId
         }).success(function(data, status, headers, config) {
-            $scope.model.topUsers.splice($scope.model.topUsers.indexOf(item), 1);
+            $scope.users.splice($scope.users.indexOf(item), 1);
             $ionicLoading.hide();
             $scope.showMessage("Exito", "Solicitud realizada exitosamente!");
         }).error(function(data, status, headers, config) {

@@ -11,7 +11,10 @@ angular.module('lufke')
         //Se eliminan los parametros que no fueron definidos.
         while(_uri.search(/[a-zA-Z]+=:[a-zA-Z0-9]+/) >= 0){ _uri = _uri.replace(/[a-zA-Z]+=:[a-zA-Z0-9]+/, '') }
 
-        _uri = _uri.replace(/\&*$/, '')
+        //_uri = _uri.replace(/\&*$/, '')
+        while(/&{2,}/.test(_uri)){
+            _uri = _uri.replace(/&{2,}/, "&");
+        }
 
         return _uri;
     }

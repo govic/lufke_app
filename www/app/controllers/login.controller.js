@@ -1,7 +1,9 @@
-angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth, $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv, GetUri) {
+angular.module('lufke').controller('LoginController', function($timeout, fb, $cordovaOauth, $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv, GetUri) {
     console.log('Inicia ... LoginController');
 
     UserInterestsSrv.reset();
+
+    var loginDisabled = false;
 
     $scope.url = url_files;
     $scope.loginImage = 'assets/img/login.png';
@@ -52,13 +54,6 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
             foto: ""
         };
     });
-    $scope.goToRegister = function(){
-        $ionicHistory.nextViewOptions({
-              disableAnimate: true,
-              disableBack: true
-        });
-        $state.go('register');
-    };
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,
@@ -104,6 +99,7 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
         }
     }
     $scope.validateUser = function() {
+        if(loginDisabled) return;
         console.log('LoginController ... validateUser');
         if ($scope.model.user.email !== "" && $scope.model.user.password !== "") {
             Login( $base64.encode( unescape( encodeURIComponent( $scope.model.user.name + ":" + $scope.model.user.password ) ) ) );
@@ -124,7 +120,11 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
                     .get(fb.srv, { params: { access_token: result.access_token, fields: fb.fields, format: "json" } })
                     .success(GetData)
                     .error(Error)
-            }, Error);
+            }, function(data){
+                console.log("Error...")
+                console.log(data)
+                if(!/cancel/.test(data)) $scope.showMessage("Error", "¡Ups!, ha ocurrido un error. Por favor intenta más tarde.");
+            });
     }
 
     function GetData(data){
@@ -190,6 +190,7 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
     function Login(credentialsHash){
         $ionicLoading.show();
 
+        loginDisabled = true;
         $http.post(api.user.login, {
             credentialsHash: credentialsHash
         })
@@ -201,6 +202,7 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
             $localStorage.session = null;
             $localStorage.basic = null;
             $scope.model.user.password = "";
+            loginDisabled = false;
             $ionicLoading.hide();
             if (status == 500) $scope.showMessage("Error", "El nombre de usuario o la contraseña no son correctos.");
             else $scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");
@@ -225,5 +227,6 @@ angular.module('lufke').controller('LoginController', function(fb, $cordovaOauth
         $rootScope.$emit("profile-updated");
 
         $state.go('tab.news'); //redirige hacia news
+        loginDisabled = false;
     }
 });

@@ -1,6 +1,8 @@
-angular.module('lufke').controller('StartController', function ($rootScope, $scope, $state, $timeout, $localStorage, $http, UserInterestsSrv) {
+angular.module('lufke').controller('StartController', function ($rootScope, $scope, $state, $timeout, $localStorage, $http, UserInterestsSrv, ShowMessageSrv) {
 	console.log('Inicia ... StartController');
 	//TODO: borrar esto y hacerlo de forma correcta
+
+	$scope.showMessage = ShowMessageSrv;
 
 	//Si existen credenciales, redirigir desde acá, para que no se vea el login.
 	if($localStorage.basic && $localStorage.basic.trim() != "") {
@@ -31,7 +33,6 @@ angular.module('lufke').controller('StartController', function ($rootScope, $sco
 			$http.defaults.headers.common.Authorization = null;
 			$localStorage.session = null;
 			$localStorage.basic = null;
-			$scope.model.user.password = "";
 
 			if (status == 500) $scope.showMessage("Error", "El nombre de usuario o la contraseña no son correctos.");
 			else $scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");
