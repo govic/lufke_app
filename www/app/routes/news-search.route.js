@@ -1,6 +1,6 @@
 angular.module('lufke').config(function ($stateProvider) {
-	$stateProvider.state('NewsSearch', {
-		cache: true,
+	$stateProvider.state('tab.NewsSearch', {
+		cache: false,
 		url: '/news-search',
 		templateUrl: 'app/templates/news-search.html',
 		controller: 'NewsSearch'

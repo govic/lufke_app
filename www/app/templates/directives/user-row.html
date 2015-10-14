@@ -8,8 +8,8 @@
             {{user.profileFirstName}}<br/>
             {{user.profileLastName}}<br/>
         </div>
-        <button ng-if="!user.BeingFollowed" class="button button-light button-small follow-button" ng-click="followUser(user)" ng-disabled="disabled">
-            <i class="ion-plus active" ng-show="!disabled"></i>{{btnSeguir}}
+        <button class="button button-light button-small follow-button" ng-click="followUser(user)" ng-disabled="disabled || user.BeingFollowed">
+            <i class="ion-plus active" ng-show="!disabled && !user.BeingFollowed"></i>{{user.BeingFollowed ? "siguiendo" : btnSeguir}}
         </button>
     </div>
     <div ng-repeat="pub in user.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ng-click="viewPost(pub)">

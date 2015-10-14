@@ -22,15 +22,6 @@ angular.module('lufke').controller('PublicProfileController', function($rootScop
     };
     $scope.showMessage = ShowMessageSrv;
 
-    $scope.followers = function(){
-        $state.go('followers', { userid: $stateParams.profileId });
-    }
-    $scope.following = function(){
-        $state.go('following', { userid: $stateParams.profileId });
-    }
-    $scope.news = function(){
-        $state.go("usernews", { userId: $scope.model.profileId });
-    }
     $scope.follow = function(){
         $scope.disabled = true;
         $scope.btnSeguir = "enviando...";

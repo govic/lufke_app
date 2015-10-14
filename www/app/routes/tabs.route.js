@@ -4,6 +4,7 @@ angular.module('lufke')
 					.state('tab', {
 						url: '/tab',
 						abstract: true,
+						controller: "TabsCtrl",
 						templateUrl: 'app/templates/tabs.html'
 					})
 					.state('tab.news', {

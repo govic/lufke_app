@@ -1,4 +1,4 @@
-<ion-view view-title="Menu" hide-back-button="true">
+<ion-view view-title="Ajustes" hide-back-button="true">
     <ion-nav-buttons side="left">
         <button nav-direction="back" ui-sref="tab.profile" class="button back-button buttons button-clear header-item">
             <i class="icon ion-ios7-arrow-back"></i>
@@ -20,8 +20,8 @@
                 <i class="ion-edit"></i>
                 Editar perfil
             </a>
-            <a class="item item-icon-left" ui-sref="editpass">
-                <i class="ion-key"></i>
+            <a class="item item-icon-left" ui-sref="editpass" ng-if="editPassEnabled">
+                <i class="ion-key" ng-if="editPassEnabled"></i>
                 Cambiar contraseña
             </a>
             <div class="item item-divider">

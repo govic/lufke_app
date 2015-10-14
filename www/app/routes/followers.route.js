@@ -1,7 +1,7 @@
 angular.module('lufke').config(function($stateProvider) {
-    $stateProvider.state("followers", {
-        url: "/user/:userid/followers",
+    $stateProvider.state("tab.followers", {
+        controller: "FollowersController",
         templateUrl: "app/templates/followers.html",
-        controller: "FollowersController"
+        url: "/user/:userid/followers"
     });
 });

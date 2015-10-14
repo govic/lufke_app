@@ -1,5 +1,5 @@
 <ion-view view-title="Perfil" hide-nav-bar="true">
-    <ion-content>
+    <ion-content class="has-footer">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div id="profile-background-img" class="custom-bar" ng-style="{'background-image': 'url(' + background + ')'}">
@@ -7,9 +7,6 @@
                 <div class="bar bar-header bar-light">
                     <button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>
                     <h1 class="title">{{model.profileUserName}}</h1>
-                    <!--<button class="button custom-right-button" ui-sref="search-user-category({ id: interestId })">
-                        <i class="ion-search"></i>
-                    </button>-->
                 </div>
                 <div class="row profile-info">
                     <div id="profile-img">
@@ -21,22 +18,22 @@
                                 <div class="profile-name-text">{{model.profileFirstName}}</div>
                                 <div class="profile-name-text">{{model.profileLastName}}</div>
                             </div>
-                            <div class="col profile-button-edit" ng-if="!model.BeingFollowed">
-                                <a class="button button-light button-small edit-profile-button" ng-click="follow()" ng-disabled="disabled">
-                                    <i class="ion-plus active" ng-show="!disabled"></i>{{btnSeguir}}
+                            <div class="col profile-button-edit">
+                                <a class="button button-light button-small edit-profile-button" ng-click="follow()" ng-disabled="disabled || model.BeingFollowed">
+                                    <i class="ion-plus active" ng-show="!disabled && !model.BeingFollowed"></i>{{model.BeingFollowed ? "siguiendo" : btnSeguir}}
                                 </a>
                             </div>
                         </div>
                         <div class="row profile-text-center light">
-                            <div class="col no-side-padding" ng-click="news()">
+                            <div class="col no-side-padding" ui-sref="tab.usernews({ userId: model.profileId })">
                                 <div class="profile-number">{{model.postsUnit}}</div>
                                 <div class="profile-number-text-under">Experiencias</div>
                             </div>
-                            <div class="col" ng-click="followers()">
+                            <div class="col" ui-sref="tab.followers({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followersUnit}}</div>
                                 <div class="profile-number-text-under">Seguidores</div>
                             </div>
-                            <div class="col no-side-padding" ng-click="following()">
+                            <div class="col no-side-padding" ui-sref="tab.following({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followingUnit}}</div>
                                 <div class="profile-number-text-under">Siguiendo</div>
                             </div>

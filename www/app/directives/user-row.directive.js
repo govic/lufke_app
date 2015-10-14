@@ -17,7 +17,7 @@ angular
 
             $scope.viewPost = function(post){
                 if($scope.postsNavegable === true){
-                    $state.go("post", { 'postId': post.id });
+                    $state.go("tab.post", { 'postId': post.id });
                 }
             }
             $scope.followUser = function(user){
@@ -27,9 +27,7 @@ angular
                     id: user.profileId
                 }).success(function(data, status, headers, config) {
                     $scope.btnSeguir = "siguiendo";
-                    $timeout(function(){
-                        user.BeingFollowed = true;
-                    }, 3000)
+                    user.BeingFollowed = true;
                 }).error(function(data, status, headers, config) {
                     console.dir(data);
                     console.dir(status);

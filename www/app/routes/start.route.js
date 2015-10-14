@@ -1,7 +1,8 @@
 angular.module('lufke').config(function ($stateProvider) {
 	$stateProvider.state('start', {
-		url: '/start',
+		cache: false,
+		controller: 'StartController',
 		templateUrl: 'app/templates/start.html',
-		controller: 'StartController'
+		url: '/start'
 	});
 });

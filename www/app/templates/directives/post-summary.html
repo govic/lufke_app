@@ -10,13 +10,13 @@
                 </span>
             </div>
             <div class="col" >
-                <span class="post-summary-timestamp" ui-sref="post({'postId': post.id})">
+                <span class="post-summary-timestamp" ui-sref="tab.post({'postId': post.id})">
                     <i class="ion-clock"></i> <span am-time-ago="post.postTimestamp"></span>
                 </span>
             </div>
         </div>
 
-        <div class="row" ui-sref="post({'postId': post.id})">
+        <div class="row" ui-sref="tab.post({'postId': post.id})">
             <div class="post-summary-text">
                 {{post.text}}
             </div>
@@ -29,7 +29,7 @@
                     <div class="counter">{{post.totalStars}}</div>
                 </div>
                 <div>
-                    <div class="comments" ui-sref="post({'postId': post.id})"></div>
+                    <div class="comments" ui-sref="tab.post({'postId': post.id})"></div>
                     <div class="counter">{{post.totalComments}}</div>
                 </div>
             </div>

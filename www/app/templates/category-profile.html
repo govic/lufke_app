@@ -1,13 +1,13 @@
 <ion-view title="PERFIL DE CATEGORÍA" hide-nav-bar="true">
-    <ion-content class="category-profile custom-bar">
+    <ion-content class="category-profile custom-bar has-footer">
         <div class="bar bar-header bar-light">
             <button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>
             <h1 class="title">{{interestName}}</h1>
-            <button class="button custom-right-button" ui-sref="search-user-category({ id: interestId })">
+            <button class="button custom-right-button" ui-sref="tab.search-user-category({ id: interestId })">
                 <i class="ion-search"></i>
             </button>
         </div>
-        <div class="profile-img" ng-style="{'background-image': 'url(' + interest.previewPath + ')'}">
+        <div class="profile-img" ng-style="{'background-image': 'url(' + interest.imagePath + ')'}">
         <!--<div class="profile-img">-->
             <div class="category-profile-footer">
                 <div class="star"></div>
@@ -31,7 +31,7 @@
         <div class="category-profile-users">
             <div class="custom-subtitle">
                 <span>USUARIOS DESTACADOS</span>
-                <div class="ver-todos" ui-sref="search-user-category({ id: interestId })">VER TODOS</div>
+                <div class="ver-todos" ui-sref="tab.search-user-category({ id: interestId })">VER TODOS</div>
             </div>
             <ion-list>
                 <!-- Consultar por usuarios populares -->

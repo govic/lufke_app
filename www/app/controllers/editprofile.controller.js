@@ -24,7 +24,7 @@ angular.module('lufke').controller('EditProfileController', function($ionicHisto
         if(guardarDisabled) return;
         $scope.btnGuardarText = "Guardando...";
         guardarDisabled = true;
-        if($scope.model.userType === 'Persona'){
+        if($scope.model.userType !== 'Persona'){
             $scope.model.profileLastName = null;
         }
         try{

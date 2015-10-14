@@ -1,4 +1,8 @@
-<ion-view  hide-back-button="true" view-title="Explorar">
+<ion-view hide-back-button="true" view-title="Explorar">
+    <ion-nav-buttons side="left">
+        <!--<a class="button button-icon icon ion-search" ui-sref="buscar"></a>-->
+        <a class="buscar" ui-sref="tab.NewsSearch"><div></div></a>
+    </ion-nav-buttons>
     <ion-content id="explore" class="padding has-footer has-header">
     	<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateExploreData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
@@ -9,23 +13,6 @@
             </div>
 			<ion-item class="explore-background-container" ng-repeat="item in model.topUsers" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
 				<user-row posts-navegable="true" user="item"></user-row>
-                <!--<div class="row">
-                    <div ng-click="viewProfile(item.profileId)">
-                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
-                    </div>
-                    <div class="explore-font">
-                        <div class="col explore-user-name">
-                            {{item.profileFirstName}}<br/>
-                            {{item.profileLastName}}<br/>
-                        </div>
-                        <button class="button button-light button-small follow-button" ng-click="followUser(item)">
-                            <i class="ion-plus active"></i>SEGUIR
-                        </button>
-                    </div>
-                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url({{pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post}})'}" ui-sref="post({'postId': pub.id})">
-                        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
-                    </div>
-                </div>-->
 			</ion-item>
 		</ion-list>
 
@@ -36,24 +23,9 @@
                 <span>CATEGORÍAS</span>
                 <div ng-if="false" class="ver-todos" ng-click="allCategories()">VER TODAS</div>
             </div>
-
-			<!--<div ng-if="false" class="row" ng-repeat="row in topCategories">
-				<div class="col padding light category-content" style="background-image: url('{{category.categoryImgUrl}}');" ng-repeat="category in row track by category.id">
-					{{category.categoryName}}<br />
-					<button class="button button-light button-small" ng-click="followCategory(category.id, category.categoryName)">
-						<i class="ion-plus active"></i> Seguir
-					</button>
-				</div>
-				&nbsp;
-			</div>-->
 			<div class="categories">
-				<!--<div class="padding light category-content" style="background-image: url('{{category.categoryImgUrl}}');" ng-repeat="category in topCategories track by category.id" ui-sref="category-profile({ id: category.id, name: category.categoryName })">
-					{{category.categoryName | uppercase}}<br />-->
-                <div class="light category-content" ng-style="{'background-image': 'url(' + GetImageInteret(interest) + ')'}" ng-repeat="interest in model.topInterests track by interest.interestId" ui-sref="category-profile({ id: interest.interestId, name: interest.interestText })">
+                <div class="light category-content" ng-style="{'background-image': 'url(' + GetImageInterest(interest) + ')'}" ng-repeat="interest in model.topInterests track by interest.interestId" ui-sref="tab.category-profile({ id: interest.interestId, name: interest.interestText })">
 					{{interest.interestText | uppercase}}<br />
-					<!--<button class="follow-button button button-light button-small" ng-click="followCategory(category.id, category.categoryName)">
-						<i class="ion-plus active"></i> SEGUIR
-					</button>-->
 				</div>
 			</div>
 

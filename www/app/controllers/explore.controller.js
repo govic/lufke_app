@@ -16,7 +16,7 @@ angular.module('lufke').controller('ExploreController', function($rootScope, $st
                 $scope.showMessage("Error", "Ha ocurrido un error al cargar los usuarios populares y las categorías.");
             });
     };
-    $scope.GetImageInteret = function(interest){
+    $scope.GetImageInterest = function(interest){
         return interest.previewPath ? (url_files + interest.previewPath) : url_post;
     }
     $scope.allCategories = function() {

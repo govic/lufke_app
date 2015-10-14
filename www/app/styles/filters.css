@@ -1,3 +1,6 @@
+.edit-filters{
+    float: right;
+}
 .filters-gray {
     color: #B5B5B5;
 }
@@ -7,7 +10,7 @@
 .filters-align-center {
     text-align: center;
 }
-.filters-color-links {
+.filters-color-links, .edit-filters {
     color: #56BCC5;
 }
 .filters-no-padding {
@@ -39,4 +42,24 @@
 .filters-view .title{
     padding-bottom: 0.5em;
     padding-top: 1.5em;
+}
+.filters-view .interest{
+    margin: 0px;
+    padding: 5px;
+}
+.filters-view .interest .ico{
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+    height: 2.3em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    width: 2.3em;
+}
+.filters-view .interest .interest-text{
+    font-size: 0.9em;
+}
+.item-divider.item-button-right button.button i:after{
+    vertical-align: top;
 }

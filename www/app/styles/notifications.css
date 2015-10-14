@@ -1,21 +1,16 @@
-.notification-profile-request-img {
+.notification-profile-request-img, .notification-profile-img {
+    background-position: center;
+    background-size: cover;
     border-radius: 100%;
     height: 3em;
     width: 3em;
-    object-fit: cover;
-}
-.notification-profile-img {
-    border-radius: 100%;
-    height: 3em;
-    width: 3em;
-    object-fit: cover;
 }
 .notification-text-request-muted {
     color: #C8C8C8;
-    font-size: 95%;
+    font-size: 0.9em;
 }
 .notification-request-icon-ok {
-    font-size: 3em;
+    font-size: 2.7em;
     color: #56BCC5;
 }
 .notification-icon-align-go {
@@ -30,11 +25,12 @@
     vertical-align: middle;
 }
 .notification-container-text {
+    font-size: 0.9em;
     white-space: normal;
 }
 .notification-icon-go {
-    font-size: 2em;
     color: #C8C8C8;
+    font-size: 2em;
 }
 .notification-user-go {
     color: #56BCC5;
@@ -44,7 +40,10 @@
     color: #C8C8C8;
 }
 .notification-list-no-pad .item-content {
-    padding:0px 10px 0px 0px;
+    padding:0px 0px 0px 0px;
+}
+.notification-list-no-pad .row>.col.action{
+    text-align: right;
 }
 .ignore{
     border-color: #C64E51 !important;

@@ -8,15 +8,15 @@
             </ion-item>
             <ion-item ng-repeat="item in model.requests.requestsList" class="fade-in fade-out notification-list-no-pad">
                 <div class="row">
-                    <div class="col notification-profile-img-center">
-                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"/>
+                    <div class="col col-20">
+                        <div ng-style="{'background-image': 'url(' + (item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user) + ')'}" class="notification-profile-request-img" ng-click="viewProfile(item.requestId)"></div>
                     </div>
-                    <div class="col col-75" ui-sref="publicprofile({'profileId': item.requestId})">
+                    <div class="col" ui-sref="tab.publicprofile({'profileId': item.requestId})">
                         {{item.profileName}}
                         <br />
                         <span class="notification-text-request-muted">{{item.profileUser}}</span>
                     </div>
-                    <div class="col request-button-align-ok">
+                    <div class="col col-20 action">
                         <span ng-click="acceptRequest(item)">
                             <i class="ion-checkmark-circled notification-request-icon-ok"></i>
                         </span>
@@ -43,17 +43,17 @@
             </ion-item>
             <ion-item ng-repeat="item in model.notifications.notificationsList" class="filters-no-padding">
                 <div class="row">
-                    <div class="col notification-profile-img-center">
-                        <img ng-src="{{item.profileImgUrl !== '' && item.profileImgUrl !== null ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-img" ng-click="viewProfile(item.profileId)"/>
+                    <div class="col col-20">
+                        <div ng-style="{'background-image': + 'url(' + (item.profileImgUrl !== '' && item.profileImgUrl !== null ? url + item.profileImgUrl : unknown_user) + ')'}" class="notification-profile-img" ng-click="viewProfile(item.profileId)"></div>
                     </div>
-                    <div class="col col-75" ng-click="viewDetail(item)">
+                    <div class="col" ng-click="viewDetail(item)">
                         <span class="notification-container-text">
                             <span class="notification-user-go">{{item.profileUser}}</span>
                             {{item.notificationText}}
                             <span class="notification-timestamp-text">hace&nbsp;<span am-time-ago="item.timestamp"></span></span>
                         </span>
                     </div>
-                    <div class="col notification-icon-align-go" ng-click="viewNotification(item)">
+                    <div class="col col-10" ng-click="viewNotification(item)">
                         <i class="ion-chevron-right notification-icon-go"></i>
                     </div>
                 </div>

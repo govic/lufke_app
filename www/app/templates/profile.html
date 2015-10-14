@@ -13,7 +13,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="share-experience profile-info" ui-sref="newpost({ next: 'tab.news' })">
+                <div class="share-experience profile-info" ui-sref="tab.newpost({ next: 'tab.news' })">
                     <share-experience css-class="bar item-input-inset profile-share-experience"></share-experience>
                 </div>
                 <div class="row">
@@ -31,15 +31,15 @@
                             </div>
                         </div>
                         <div class="row profile-text-center light">
-                            <div class="col no-side-padding" ng-click="news()">
+                            <div class="col no-side-padding" ui-sref="tab.usernews({ userId: model.profileId })">
                                 <div class="profile-number">{{model.postsUnit}}</div>
                                 <div class="profile-number-text-under">Experiencias</div>
                             </div>
-                            <div class="col" ng-click="followers()">
+                            <div class="col" ui-sref="tab.followers({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followersUnit}}</div>
                                 <div class="profile-number-text-under">Seguidores</div>
                             </div>
-                            <div class="col no-side-padding" ng-click="following()">
+                            <div class="col no-side-padding" ui-sref="tab.following({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followingUnit}}</div>
                                 <div class="profile-number-text-under">Siguiendo</div>
                             </div>

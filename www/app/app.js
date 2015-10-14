@@ -31,7 +31,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             if ($localStorage.session === id) {
                 $state.go('tab.profile');
             } else {
-                $state.go('publicprofile', {
+                $state.go('tab.publicprofile', {
                     profileId: id
                 });
             }
@@ -43,7 +43,8 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     }
 ]).constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-c"></i>',
-    animation: 'fade-in'
+    animation: 'fade-in',
+    noBackdrop: false
 }).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state, $cordovaPush, $ionicHistory, $localStorage) {
 	$ionicPlatform.ready(function() {
 		$ionicPlatform.onHardwareBackButton(function(e) {

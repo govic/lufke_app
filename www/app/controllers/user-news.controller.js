@@ -92,7 +92,7 @@ angular.module('lufke').controller('UserNewsController', function($ionicHistory,
         profileService.viewprofile(authorId);
     };
     $rootScope.$on('newPost', function(event, args) {
-        $scope.model.posts.push(args.post);
+        $scope.model.posts.unshift(args.post);
     });
     $scope.showMessage = ShowMessageSrv;
     $ionicLoading.show();

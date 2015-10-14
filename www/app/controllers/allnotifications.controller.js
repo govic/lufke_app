@@ -1,4 +1,4 @@
-angular.module('lufke').controller('AllNotificationsController', function($ionicLoading, lodash, $state, $scope, $ionicPopup, $http) {
+angular.module('lufke').controller('AllNotificationsController', function($ionicLoading, lodash, $state, $scope, $ionicPopup, $http, $ionicHistory) {
     console.log('Inicia ... AllNotificationsController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -28,11 +28,11 @@ angular.module('lufke').controller('AllNotificationsController', function($ionic
     $scope.viewNotification = function(notification) {//TODO falta link hacia post o perfil usuario
         console.dir(notification);
         if (notification.notificationType === "Like" || notification.notificationType === "Comment") {
-            $state.go('post', {
+            $state.go('tab.post', {
                 postId: notification.postId
             });
         } else if (notification.notificationType === "Tracking") {
-            $state.go('publicprofile', {
+            $state.go('tab.publicprofile', {
                 profileId: notification.profileId
             });
         }
@@ -73,7 +73,10 @@ angular.module('lufke').controller('AllNotificationsController', function($ionic
     };
     $scope.viewDetail = function(item){
         if(item.notificationType === "Mentioned"){
-            $state.go("post", {'postId': item.postId});
+            $state.go("tab.post", {'postId': item.postId});
         }
+    }
+    $scope.cancel = function(){
+        $ionicHistory.goBack();
     }
 });

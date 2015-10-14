@@ -1,11 +1,15 @@
 .post-summary {
-    height: 14em;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    border-width: 0px;
+    height: 14em;
+    margin-bottom: 0.6em;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
     padding: 0;
     width: 100%;
-    margin-bottom: 0.6em;
 }
 .post-summary .gradient{
     height: 100%;

@@ -43,15 +43,6 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
             return;
         });
     };
-    $scope.followers = function(){
-        $state.go('followers', { userid: $scope.model.profileId });
-    }
-    $scope.following = function(){
-        $state.go('following', { userid: $scope.model.profileId });
-    }
-    $scope.news = function(){
-        $state.go("usernews", { userId: $scope.model.profileId });
-    }
 
 	function GetInterests(){
 		var promise = UserInterestsSrv.get();

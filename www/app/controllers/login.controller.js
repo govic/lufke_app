@@ -1,4 +1,4 @@
-angular.module('lufke').controller('LoginController', function($timeout, fb, $cordovaOauth, $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv, GetUri) {
+angular.module('lufke').controller('LoginController', function($timeout, fb, $cordovaOauth, $ionicHistory, $rootScope, $cordovaPush, $localStorage, $http, $scope, $state, $ionicHistory, $ionicPopup, $base64, $ionicLoading, UserInterestsSrv, GetUri, FilterInterests) {
     console.log('Inicia ... LoginController');
 
     UserInterestsSrv.reset();
@@ -42,6 +42,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         $localStorage.basic = null;
         $localStorage.session = null;
         $localStorage["login-data"] = null;
+        FilterInterests.reset();
         $scope.model = {
             user: {
                 name: "",

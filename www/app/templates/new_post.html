@@ -6,7 +6,7 @@
         <a ng-disabled="!(model.experienceText.length > 0 || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
 	<ion-content>
-        <div class="experience-text">
+        <div class="experience-text has-footer">
             <img id="share-experience-user-img" ng-src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
             <div class="textarea">
                 <textarea id="shareExperience"
@@ -25,14 +25,14 @@
         </div>
         <hr class="hr-share">
         <div class="experience-tools">
-            <button class="add-friends" ng-click="addFriends()"></button><button class="share-location"></button>
+            <button class="add-friends" ui-sref="SearchUser({ profileid: user.profileId })"></button><button class="share-location"></button>
             <span class="experience-text-length">{{experienceTextCounter}}</span>
         </div>
         <div class="add-categories publicacion">
             <div class="title">CATEGORIAS</div>
             <div class="categories">
                 <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
-                <div class="category" ng-repeat="userInterest in interests" ui-sref="category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
+                <div class="category" ng-repeat="userInterest in interests" ui-sref="tab.category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
                     <div ng-if="userInterest.previewPath" class="image" ng-style="{'background-image':'url({{url + userInterest.previewPath}})' }"></div>
                     <div ng-if="!userInterest.previewPath" class="image"></div>
                     <span class="btn-text">{{userInterest.interestText | initCap}}</span>
@@ -40,7 +40,7 @@
                 <!--<div class="category" ng-repeat="userInterest in interests">
                     <span class="btn-text">{{userInterest.interestText | initCap}}</span>
                 </div>-->
-                <div class="category" ng-click="addCategory()">
+                <div class="category" ui-sref="SearchInterest">
                     <div class="image add-category">
                         <i class="ion-plus-circled"></i>
                     </div>

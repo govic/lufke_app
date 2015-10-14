@@ -7,7 +7,7 @@
             </span>
         </button>
     </ion-nav-buttons>
-    <ion-content class="padding publicacion">
+    <ion-content class="padding publicacion has-footer">
 
         <div class="card imagen">
             <div class="item item-body">
@@ -44,7 +44,7 @@
 
         <div class="categories" ng-if="model.post.Interests.length > 0">
             <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
-            <div class="category" ng-repeat="userInterest in model.post.Interests" ui-sref="category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
+            <div class="category" ng-repeat="userInterest in model.post.Interests" ui-sref="tab.category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
                 <div ng-if="userInterest.previewPath" class="image" ng-style="{'background-image':'url({{url + userInterest.previewPath}})' }"></div>
                 <div ng-if="!userInterest.previewPath" class="image"></div>
                 <span class="btn-text">{{userInterest.interestText | initCap}}</span>

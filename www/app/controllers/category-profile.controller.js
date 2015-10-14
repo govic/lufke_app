@@ -22,7 +22,7 @@ angular
     //Obtener datos del interes.
     $http.get(api.explore.getInterest.replace(/:id/, $stateParams.id))
         .success(function(interest){
-            interest.previewPath = interest.previewPath ? (url_files + interest.previewPath) : url_background;
+            interest.imagePath = interest.imagePath ? (url_files + interest.imagePath) : url_background;
             $scope.interest = interest;
         })
         .error(function(err){

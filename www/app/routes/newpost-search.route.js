@@ -1,7 +1,7 @@
 angular.module('lufke').config(function($stateProvider) {
     $stateProvider
         .state('SearchInterest', {
-            cache: true,
+            cache: false,
             controller: 'SearchInterestController',
             controllerAs: "siCtrl",
             templateUrl: 'app/templates/newpost-search.html',

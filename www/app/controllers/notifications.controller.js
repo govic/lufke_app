@@ -81,10 +81,10 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
                 //console.dir(data);
                 $scope.model = data;
                 if(item.notificationType === "Like" || item.notificationType === "Comment"){
-                    $state.go('post', {postId: item.postId});
+                    $state.go('tab.post', {postId: item.postId});
                 }
                 else if(item.notificationType === "Tracking"){
-                    $state.go('publicprofile', {profileId: item.profileId});
+                    $state.go('tab.publicprofile', {profileId: item.profileId});
                 }
                 $ionicLoading.hide();
             }).error(function(data, status, headers, config) {
@@ -127,7 +127,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
     };
     $scope.viewDetail = function(item){
         if(item.notificationType === "Mentioned"){
-            $state.go("post", {'postId': item.postId});
+            $state.go("tab.post", {'postId': item.postId});
         }
     }
 });

@@ -1,8 +1,9 @@
 angular.module('lufke')
 		.config(function ($stateProvider) {
-			$stateProvider.state('usernews', {
-                url: '/user/:userId/news',
+			$stateProvider.state('tab.usernews', {
+				cache: true,
+				controller: "UserNewsController",
                 templateUrl: 'app/templates/user_news.html',
-                controller: "UserNewsController"
+				url: '/user/:userId/news'
             });
         });

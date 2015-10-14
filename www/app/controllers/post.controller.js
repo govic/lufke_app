@@ -168,7 +168,7 @@ angular.module('lufke').controller('PostController', function($ionicLoading, pro
             post: post,
             commentText: ""
         };
-        console.dir(post);
+        
         if($scope.model.post.backgroundImgUrl !== null && $scope.model.post.backgroundImgUrl !== ''){
             $scope.post_url = $scope.url + $scope.model.post.backgroundImgUrl;
         }

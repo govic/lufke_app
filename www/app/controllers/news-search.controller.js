@@ -1,6 +1,6 @@
 angular
 .module("lufke")
-.controller("NewsSearch", function($scope, $http, $state, $ionicLoading, profileService, GetUri, ShowMessageSrv){
+.controller("NewsSearch", function($ionicHistory, $scope, $http, $state, $ionicLoading, profileService, GetUri, ShowMessageSrv){
     var queryUsers = { limit: 20, page: 1, texttofind: "", orderby: "firstname" };
     var queryInterest = { limit: 20, page: 1, name: "", orderby: "name" };
 
@@ -25,7 +25,7 @@ angular
         profileService.viewprofile(profileId);
     }
     $scope.GetUriBackground = function(interest){
-        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
+        return interest.imagePath ? (url_files + interest.imagePath) : url_post;
     }
     $scope.followUser = function(item){
         $ionicLoading.show();
@@ -43,7 +43,7 @@ angular
         });
     }
     $scope.back = function(){
-        $state.go("tab.news");
+        $ionicHistory.goBack();
     }
     $scope.find = function(str){
         console.log(str);

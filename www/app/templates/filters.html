@@ -7,59 +7,71 @@
             </span>
         </button>
     </ion-nav-buttons>
-    <ion-content class="has-footer filters-view">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateFiltersData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
-        </ion-refresher>
+    <ion-nav-buttons side="right">
+        <a  class="button button-icon icon" ng-click="saveFilters()">Hecho</a>
+    </ion-nav-buttons>
+    <ion-content class="filters-view">
+        <!--<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateFiltersData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
+        </ion-refresher>-->
         <div class="list">
-            <div class="item item-button-right filters-gray title">
-                ¿QUÉ QUIERO VER?
-                <button class="button button-clear" ng-click="editInterests()">
-                <i class="icon ion-edit"></i>
-                </button>
+            <div class="item item-divider">
+                <span>¿QUÉ QUIERO VER?</span>
+                <span class="edit-filters" ui-sref="SearchInterest" ng-click="editInterests()">
+                    Editar
+                </span>
             </div>
-            <div class="item" ng-repeat="item in model.interests">
+            <div class="item interest" ng-repeat="item in interests | orderBy: 'interestText' track by item.interestId" ng-show="$index < index">
                 <div class="row filters-no-padding filters-font-interests-text">
-                    <div class="col col-10 filters-color-links filters-no-padding">
+                    <!--<div class="col col-10 filters-color-links filters-no-padding">
                         <span class="fitros-ranking-borders">
-                        #{{item.interestRanking}}
+                            #{{item.interestRanking}}
                         </span>
+                    </div>-->
+                    <div class="col col-80 col-70 no-padding">
+                        <div class="content">
+                            <div class="ico" ng-style="{'background-image': 'url(' + getImage(item) + ')'}"></div>
+                            <span class="interest-text">{{item.interestText}}</span>
+                        </div>
                     </div>
-                    <div class="col col-70 filters-no-padding filters-fix-padding-name">
-                        {{item.interestName}}
-                    </div>
-                    <div class="col col-20 filters-align-right filters-gray filters-no-padding">
+                    <!--<div class="col col-20 filters-align-right filters-gray filters-no-padding">
                         {{item.interestPercentage}}%
-                    </div>
+                    </div>-->
                 </div>
+            </div>
+            <div class="item" ng-if="!interests || interests.length <= 0">
+                No hay intereses seleccionados
+            </div>
+            <div class="item item-divider" ng-show="interests.length >= 3 && index<interests.length" ng-click="index=index+3">
+                {{interests.length-index}} m&aacute;s
             </div>
         </div>
         <div class="list">
-            <div class="item item-button-right filters-gray title">
+            <div class="item item-divider">
                 PROPORCIONES
-                <button class="button button-clear" ng-click="saveFilters()">
-                <i class="icon ion-checkmark-circled"></i>
-                </button>
+                <!--<button class="button button-clear" ng-click="saveFilters()">
+                    <i class="icon ion-checkmark-circled"></i>
+                </button>-->
             </div>
             <div class="item range range-energized">
                 <i class="ion-camera filters-icon-size"></i>
-                <input type="range" ng-model="model.proportions.percentagePhotos" min="0" max="100" ng-change="test()">
-                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentagePhotos}}%</span>
+                <input type="range" ng-model="proportions.photos" min="0" max="100" ng-change="photosChanged()" />
+                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{proportions.photos}}%</span>
             </div>
             <div class="item range range-assertive">
                 <i class="ion-play filters-icon-size"></i>
-                <input type="range" ng-model="model.proportions.percentageVideos" min="0" max="100">
-                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentageVideos}}%</span>
+                <input type="range" ng-model="proportions.videos" min="0" max="100" ng-change="videosChanged()" />
+                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{proportions.videos}}%</span>
             </div>
             <div class="item range range-calm">
                 <i class="ion-link filters-icon-size"></i>
-                <input type="range" ng-model="model.proportions.percentageLinks" min="0" max="100">
-                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.proportions.percentageLinks}}%</span>
+                <input type="range" ng-model="proportions.links" min="0" max="100" ng-change="linksChanged()" />
+                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{proportions.links}}%</span>
             </div>
-            <div class="item filters-gray title">DISTANCIA</div>
-            <div class="item range range-calm">
+            <div ng-if="false" class="item filters-gray title">DISTANCIA</div>
+            <div ng-if="false" class="item range range-calm">
                 <i class="ion-earth filters-icon-size"></i>
-                <input type="range" ng-model="model.distance" min="0" max="1000">
-                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{model.distance}} {{model.distanceUnit}}</span>
+                <input type="range" ng-model="distance" min="0" max="1000" />
+                <span class="filters-gray filters-font-interests-text filters-fix-padding-prop">{{distance}} {{distanceUnit}}</span>
             </div>
         </div>
     </ion-content>

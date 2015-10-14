@@ -4,16 +4,16 @@
             <img src="assets/img/navigationbarlufkelogo.png" />
         </div>
     </ion-nav-title>
-    <div ui-sref="newpost">
+    <div ui-sref="tab.newpost">
 		<share-experience css-class="bar bar-subheader item-input-inset share-experience-container"></share-experience>
 	</div>
 
     <ion-nav-buttons side="left">
         <!--<a class="button button-icon icon ion-search" ui-sref="buscar"></a>-->
-        <a class="buscar" ui-sref="NewsSearch"><div></div></a>
+        <a class="buscar" ui-sref="tab.NewsSearch"><div></div></a>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <!--<a class="button button-icon icon ion-levels" ui-sref="filters"></a>-->
+        <!--<a class="button button-icon icon ion-levels" ui-sref="tab.filters"></a>-->
         <a class="filters" ui-sref="filters"><div></div></a>
     </ion-nav-buttons>
 
@@ -21,7 +21,7 @@
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateNews()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
 		<ion-list>
-            <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp'"></post-summary>
+            <post-summary ng-show="model.posts.length" ng-repeat="post in model.posts | orderBy:'-postTimestamp' track by post.id"></post-summary>
         </ion-list>
         <ion-infinite-scroll ng-if="model.moreData" on-infinite="moreNews()">
         </ion-infinite-scroll>

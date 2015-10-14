@@ -9,9 +9,7 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding">
-        <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
-        </ion-refresher>
+    <ion-content class="padding has-footer">
         <ion-list>
         	<ion-item class="item-input-inset">
                 <label class="item-input-wrapper">
@@ -21,24 +19,7 @@
             </ion-item>
 
 			<ion-item class="explore-background-container" ng-repeat="item in model.users track by item.profileId" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
-                <user-row posts-navegable="false" user="item"></user-row>
-                <!--<div class="row">
-                    <div ng-click="viewProfile(item.profileId)">
-                        <img ng-src="{{item.profileImgUrl !== null  && item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="explore-profile-img" />
-                    </div>
-                    <div class="explore-font">
-                        <div class="col explore-user-name">
-                            {{item.profileFirstName}}<br/>
-                            {{item.profileLastName}}<br/>
-                        </div>
-                        <button class="button button-light button-small follow-button" ng-click="followUser(item)" ng-if="!item.BeingFollowed">
-                            <i class="ion-plus active"></i>SEGUIR
-                        </button>
-                    </div>
-                    <div ng-repeat="pub in item.lastPosts" class="col post-content" ng-style="{'background-image':'url(' + (pub.postImgUrl !== null  && pub.postImgUrl !== '' ? url + pub.postImgUrl : unknown_post) + ')'}" ng-click="viewPost(pub)">
-                        <div ng-class="{'photo-content': (pub.postType == 'PHOTO'), 'video-content': (pub.postType == 'VIDEO')}"></div>
-                    </div>
-                </div>-->
+                <user-row posts-navegable="true" user="item"></user-row>
 			</ion-item>
             <ion-item ng-if="msg" class="message">{{msg}}</ion-item>
 		</ion-list>

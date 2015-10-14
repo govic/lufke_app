@@ -34,6 +34,7 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
     $scope.cancel = function(){
         Reset();
         $ionicHistory.goBack();
+        SelectedCategoriesSrv.reset();
     }
     $scope.shareExperience = function() {
         $ionicLoading.show();
@@ -163,12 +164,6 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         return false;
     };
     $scope.showMessage = ShowMessageSrv;
-    $scope.addCategory = function(){
-        $state.go("SearchInterest");
-    }
-    $scope.addFriends = function(){
-        $state.go("SearchUser", { profileid: $scope.user.profileId });
-    }
     $scope.shareToFacebook = false;
     $scope.enableToShare = false;
 

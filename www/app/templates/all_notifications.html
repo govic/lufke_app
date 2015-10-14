@@ -1,5 +1,13 @@
-<ion-view title="Ver todas">
-    <ion-content class="padding has-footer">
+<ion-view title="Ver todas" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button ng-click="cancel()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios7-arrow-back"></i>
+            <span class="back-text" style="transform: translate3d(0px, 0px, 0px);">
+                <span class="previous-title">Atr&aacute;s</span>
+            </span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <ion-list>
@@ -8,18 +16,18 @@
             </ion-item>
             <ion-item ng-repeat="item in model.notificationsList" class="filters-no-padding">
                 <div class="row">
-                    <div class="col notification-profile-img-center" ui-sref="publicprofile({'profileId': item.profileId})">
-                        <img ng-src="{{item.profileImgUrl !== null  &&  item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user}}" class="notification-profile-img" />
+                    <div class="col col-20" ui-sref="tab.publicprofile({'profileId': item.profileId})">
+                        <div ng-style="{'background-image': 'url(' + (item.profileImgUrl !== null  &&  item.profileImgUrl !== '' ? url + item.profileImgUrl : unknown_user) + ')'}" class="notification-profile-img"></div>
                     </div>
 
-                    <div class="col col-75" ng-click="viewDetail(item)">
+                    <div class="col" ng-click="viewDetail(item)">
                         <span class="notification-container-text">
                             <span class="notification-user-go">{{item.profileUser}}</span>
                             {{item.notificationText}}
                             <span class="notification-timestamp-text">hace&nbsp;<span am-time-ago="item.timestamp"></span></span>
                         </span>
                     </div>
-                    <div class="col notification-icon-align-go" ng-click="viewNotification(item)">
+                    <div class="col col-10" ng-click="viewNotification(item)">
                         <i class="ion-chevron-right notification-icon-go"></i>
                     </div>
                 </div>

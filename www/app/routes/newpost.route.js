@@ -1,5 +1,5 @@
 angular.module('lufke').config(function ($stateProvider) {
-	$stateProvider.state('newpost', {
+	$stateProvider.state('tab.newpost', {
 		cache: true,
 		url: '/newpost?next',
 		templateUrl: 'app/templates/new_post.html',
