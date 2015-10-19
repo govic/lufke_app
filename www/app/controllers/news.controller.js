@@ -1,5 +1,9 @@
-angular.module('lufke').controller('NewsController', function($ionicPlatform, $ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, FilterInterests /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewsController', function($ionicPlatform, $ionicLoading, $rootScope, lodash, profileService, $http, $state, $scope, $localStorage, $ionicPopup, PostsService, $timeout, FilterInterests, PageSize /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewsController');
+
+    var page = 0;
+
+
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = url_background;
@@ -14,32 +18,30 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         moreData: true
     };
 
-    /*$ionicLoading.show();
-	$http.post(api.post.getAll, FilterInterests, { cache: false }).success(function(data) {
-		$scope.model = {
-			posts: data.news,
-			isExperienceTextFocus: false,
-			mediaSelected: false,
-			imageBase64: "",
-			experienceText: "",
-			moreData: data.news.length > 0
-		};
-		$ionicLoading.hide();
-		$scope.$broadcast('scroll.refreshComplete');
-    }).error(function(){
-		$ionicLoading.hide();
-		$scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error en Lufke.");
-    });*/
+    function Clone(obj){
+        var _tmp = {};
+
+        for(var attr in obj){
+            _tmp[attr] = obj[attr];
+        }
+
+        return _tmp;
+    }
 
     $scope.updateNews = function() {
-        $http.post(api.post.getAll, FilterInterests).success(function(data) {
+
+        var _form = Clone(FilterInterests);
+        _form.page = page = 1;
+        _form.limit = PageSize;
+
+        $http.post(api.post.getAll, _form).success(function(data) {
             $scope.model = {
-                posts: data.news,
+                posts: data,
                 isExperienceTextFocus: false,
                 mediaSelected: false,
                 imageBase64: "",
                 experienceText: "",
-                moreData: data.news.length > 0
+                moreData: data.length > 0
             };
             $scope.$broadcast('scroll.refreshComplete');
         })
@@ -84,17 +86,14 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
             var last = lodash.last($scope.model.posts);
             var full_post = $scope.model.posts.length;
 
-            var _form = {};
-            lodash.forEach(FilterInterests, function(val, key){
-                _form[key] = val;
-            })
-
-            _form.lastId = last ? last.id : 0;
-            _form.lastTimestamp = last ? last.postTimestamp : "";
+            var _form = Clone(FilterInterests);
+            page = page || 0;
+            _form.page = ++page;
+            _form.limit = PageSize;
 
             $http.post(api.post.getAll, _form).success(function(data) {
-                if (data.news && data.news.length > 0) {
-                    $scope.model.posts = $scope.model.posts.concat( data.news );
+                if (data && data.length > 0) {
+                    $scope.model.posts = $scope.model.posts.concat( data );
                 } else {
                     $scope.model.moreData = false;
                 }
@@ -108,16 +107,21 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
     };
     var filtersSaved = $rootScope.$on("filters-saved", function(){
         console.log("filtros guardados.");
+
+        var _form = Clone(FilterInterests);
+        _form.page = page = 1;
+        _form.limit = PageSize;
+
         $ionicLoading.show();
-        $http.post(api.post.getAll, FilterInterests)
+        $http.post(api.post.getAll, _form)
             .success(function(data) {
                 $scope.model = {
-                    posts: data.news,
+                    posts: data,
                     isExperienceTextFocus: false,
                     mediaSelected: false,
                     imageBase64: "",
                     experienceText: "",
-                    moreData: data.news.length > 0
+                    moreData: data.length > 0
                 };
                 $ionicLoading.hide();
                 $scope.$broadcast('scroll.refreshComplete');

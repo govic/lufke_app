@@ -7,6 +7,7 @@ angular.module('lufke').controller('RegisterController', function($ionicHistory,
     //elimina datos sesion usuario activo
     $localStorage.session = null;
     $localStorage.basic = null;
+    $localStorage.public = null;
     $http.defaults.headers.common.Authorization = null;
     var registerForm = null;
 
@@ -264,6 +265,7 @@ angular.module('lufke').controller('RegisterController', function($ionicHistory,
             $http.defaults.headers.common.Authorization = auth;//cabecera auth por defecto
             $localStorage.basic = auth;//guarda cabecera auth en var global localstorage
             $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+            $localStorage.public = user.publicProfile;
             $state.go('tab.news'); //redirige hacia editar perfil
             $scope.showMessage("Registro", "Has sido registrado con éxito. Bienvenido a Lufke");
             SelectedCategoriesSrv.reset();

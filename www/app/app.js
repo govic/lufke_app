@@ -20,6 +20,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
                 console.log("Response Error 401", rejection);
                 $localStorage.basic = null;
                 $localStorage.session = null;
+                $localStorage.public = null;
                 $location.path('/login');
             }
             return $q.reject(rejection);
@@ -45,7 +46,7 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in',
     noBackdrop: false
-}).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state, $cordovaPush, $ionicHistory, $localStorage) {
+}).run(function($ionicPlatform, $rootScope, $http, $cordovaDialogs, $state, $cordovaPush, $ionicHistory, $localStorage, FilterInterests) {
 	$ionicPlatform.ready(function() {
 		$ionicPlatform.onHardwareBackButton(function(e) {
 			if("tab.news" === $ionicHistory.currentStateName()){
@@ -63,9 +64,33 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 		}
-		if (ionic.Platform.platform() != "win32") {
-			$cordovaPush.register({ "senderID": "767122101153" });
-		}
+
+        $rootScope.$on("login", function(){
+            if (ionic.Platform.platform() != "win32") {
+                try{
+                    $cordovaPush.register({ "senderID": "767122101153" });
+                }catch(e){
+                    console.log(e)
+                }
+    		}
+        });
+        $rootScope.$on("logout", function(){
+            console.log("logout event")
+            $ionicHistory.clearCache();
+            $http.defaults.headers.common.Authorization = null;
+            $localStorage.basic = null;
+            $localStorage.session = null;
+            $localStorage.public = null;
+            $localStorage["login-data"] = null;
+            FilterInterests.reset();
+            if (ionic.Platform.platform() != "win32") {
+                try{
+        			$cordovaPush.unregister({ "senderID": "767122101153" });
+                }catch(e){
+                    console.log(e)
+                }
+    		}
+        });
     });
     $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
         switch (notification.event) {

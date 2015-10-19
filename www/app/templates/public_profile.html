@@ -1,5 +1,5 @@
 <ion-view view-title="Perfil" hide-nav-bar="true">
-    <ion-content class="has-footer">
+    <ion-content class="has-footer" ng-show="model">
         <ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateProfileData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
         <div id="profile-background-img" class="custom-bar" ng-style="{'background-image': 'url(' + background + ')'}">

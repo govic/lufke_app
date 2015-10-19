@@ -1,6 +1,6 @@
-var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
+//var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.0.113:50608'; //sirve para local y celular
+var url_files = 'http://192.168.1.43:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -34,6 +34,7 @@ var api = {
         setRegistrationKey: url_base + '/user/setregistrationkey',
         validateEmail:  url_base + "/user/validateemail?email=:email",
         validateUserName:  url_base + "/user/validateuser?username=:userName",
+        editPrivacity: url_base + "/user/editprivacity"
     },
     post: {
         get: url_base + '/post/get',
@@ -96,6 +97,7 @@ var User = function(params) {
 angular
 .module("lufke")
 .constant("maxExperienceTextSize", 140)
+.constant("PageSize", 10)
 .constant("fb", {
     "id": 1,
     "appId": 421602958030686,

@@ -1,4 +1,4 @@
-angular.module('lufke').controller('EditProfileController', function($ionicHistory, $rootScope, $ionicLoading, $http, $scope, $ionicActionSheet, $ionicPopup, ShowMessageSrv) {
+angular.module('lufke').controller('EditProfileController', function($ionicHistory, $rootScope, $ionicLoading, $http, $scope, $ionicActionSheet, $ionicPopup, ShowMessageSrv, $localStorage) {
     console.log('Inicia ... EditProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -6,7 +6,6 @@ angular.module('lufke').controller('EditProfileController', function($ionicHisto
     $scope.btnGuardarText = "Guardar";
     var guardarDisabled = false;
 
-    $scope.model = {};
     $scope.cancel = function(){
         $ionicHistory.goBack();
     }
@@ -30,7 +29,10 @@ angular.module('lufke').controller('EditProfileController', function($ionicHisto
         try{
             $http.post(api.user.editProfile, $scope.model).success(function(profile, status, headers, config) {
                 $scope.model = profile;
-                $scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");
+                $http.defaults.headers.common.Authorization = 'Basic ' + profile.credentialsHash;
+                $localStorage.basic = 'Basic ' + profile.credentialsHash;
+                console.log(profile)
+                /*$scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");*/
                 $ionicHistory.goBack();
                 $rootScope.$emit("profile-updated");
 

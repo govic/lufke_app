@@ -16,6 +16,7 @@ angular.module('lufke').controller('StartController', function ($rootScope, $sco
 	        $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
 	        $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
 	        $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+			$localStorage.public = user.publicProfile;
 
 	        /* if (ionic.Platform.platform() != "win32") {
 	            $cordovaPush.register({ "senderID": "767122101153" });
@@ -33,6 +34,7 @@ angular.module('lufke').controller('StartController', function ($rootScope, $sco
 			$http.defaults.headers.common.Authorization = null;
 			$localStorage.session = null;
 			$localStorage.basic = null;
+			$localStorage.public = null;
 
 			if (status == 500) $scope.showMessage("Error", "El nombre de usuario o la contraseña no son correctos.");
 			else $scope.showMessage("Error", "No es posible contactar con el servidor en estos momentos, por favor intente más tarde.");

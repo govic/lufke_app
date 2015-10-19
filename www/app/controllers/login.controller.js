@@ -20,6 +20,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
 		$ionicLoading.hide();
 		$localStorage.basic = null;
 		$localStorage.session = null;
+        $localStorage.public = null;
 	}
     */
 
@@ -41,6 +42,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         $http.defaults.headers.common.Authorization = null;
         $localStorage.basic = null;
         $localStorage.session = null;
+        $localStorage.public = null;
         $localStorage["login-data"] = null;
         FilterInterests.reset();
         $scope.model = {
@@ -106,6 +108,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
             Login( $base64.encode( unescape( encodeURIComponent( $scope.model.user.name + ":" + $scope.model.user.password ) ) ) );
         } else {
             $localStorage.session = null;
+            $localStorage.public = null;
             $scope.model.user.password = "";
         }
     };
@@ -171,6 +174,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
                     var auth = 'Basic ' + user.credentialsHash;
                     $localStorage.basic = auth;//guarda cabecera auth en var global localstorage
                     $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+                    $localStorage.public = user.publicProfile;
 
                     //Una ves registrado se redirige a "news"
                     $state.go('tab.news');
@@ -202,6 +206,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
             $http.defaults.headers.common.Authorization = null;
             $localStorage.session = null;
             $localStorage.basic = null;
+            $localStorage.public = null;
             $scope.model.user.password = "";
             loginDisabled = false;
             $ionicLoading.hide();
@@ -216,6 +221,9 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         $http.defaults.headers.common.Authorization = auth; //cabecera auth por defecto
         $localStorage.basic = auth; //guarda cabecera auth en var global localstorage
         $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
+        $localStorage.public = user.publicProfile;
+
+        $rootScope.$emit("login");
 
         /* if (ionic.Platform.platform() != "win32") {
             $cordovaPush.register({ "senderID": "767122101153" });

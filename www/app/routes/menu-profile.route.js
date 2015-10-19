@@ -6,5 +6,11 @@ angular.module('lufke')
 						url: '/menu-profile',
 						templateUrl: 'app/templates/menu-profile.html',
 						controller: 'MenuProfileController'
+					})
+					.state("privacity", {
+						cache: false,
+						controller: "PrivacityCtrl",
+						templateUrl: "app/templates/privacity.html",
+						url: "/privacity"
 					});
 		});

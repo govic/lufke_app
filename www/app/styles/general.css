@@ -86,12 +86,14 @@ body *{
 }
 .loading i.ion-loading-c{
 	font-size: 300%;
-	color: black;
+    color: white;
+	/*color: black;*/
 }
 .loading-container{
-	top: 3.1em;
+    /* Quitar para modificacion */
+	/*top: 3.1em;
 	margin-bottom: 3.4em;
-	background-color: white;
+	background-color: white;*/
 }
 ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
   color: #fff;
@@ -318,4 +320,30 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .edit-pass .list.list-inset, .edit-profile .list.list-inset{
     margin: 0px;
+}
+
+/* Boton de privacidad en profile->menu->privacidad */
+.privacity-view .item-divider{
+    font-size: 0.9em;
+}
+.privacity-selected, .privacity-deselected{
+    font-weight: normal;
+    font-size: 0.9em;
+}
+.privacity-deselected{
+    opacity: 0.2;
+}
+.privacity-selected{
+    background-color: #387ef5;
+    border: #0c63ee solid 1px;
+    color: #fff;
+
+    -o-transition-property: 'background-color', 'color';
+    -o-transition-duration: 0.2s;
+    -moz-transition-property: 'background-color', 'color';
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-property: 'background-color', 'color';
+    -webkit-transition-duration: 0.2s;
+    transition-property: 'background-color', 'color';
+    transition-duration: 0.2s;
 }

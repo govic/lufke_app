@@ -7,27 +7,41 @@
     	<ion-refresher pulling-text="Soltar para refrescar" on-refresh="updateExploreData()" pulling-icon="ion-loading-c" refreshing-icon="ion-loading-c">
         </ion-refresher>
 		<ion-list>
-			<div class="custom-subtitle">
+			<!--<div class="custom-subtitle">
                 <span>USUARIOS POPULARES</span>
                 <div class="ver-todos" ng-click="allTopUsers()">VER TODOS</div>
-            </div>
+            </div>-->
+            <ion-item class="item item-divider">
+                <span>Usuarios Populares</span>
+                <div class="ver-todos" ng-click="allTopUsers()">VER TODOS</div>
+            </ion-item>
 			<ion-item class="explore-background-container" ng-repeat="item in model.topUsers" ng-style="{'background-image':'url({{item.backgroundImgUrl !== null  && item.backgroundImgUrl !== '' ? url + item.backgroundImgUrl : unknown_background}})' }">
 				<user-row posts-navegable="true" user="item"></user-row>
 			</ion-item>
+            <ion-item ng-show="!model.topUsers.length">
+                {{model.topUsers.length === 0 ? "no hay sugerencias" : "buscando..."}}
+            </ion-item>
 		</ion-list>
 
 		<br/>
 
         <ion-list>
-			<div class="custom-subtitle">
+			<!--<div class="custom-subtitle">
                 <span>CATEGORÍAS</span>
                 <div ng-if="false" class="ver-todos" ng-click="allCategories()">VER TODAS</div>
-            </div>
+            </div>-->
+            <ion-item class="item item-divider">
+                <span>Categor&iacute;as</span>
+                <div class="ver-todos" ng-click="allCategories()">VER TODOS</div>
+            </ion-item>
 			<div class="categories">
                 <div class="light category-content" ng-style="{'background-image': 'url(' + GetImageInterest(interest) + ')'}" ng-repeat="interest in model.topInterests track by interest.interestId" ui-sref="tab.category-profile({ id: interest.interestId, name: interest.interestText })">
 					{{interest.interestText | uppercase}}<br />
 				</div>
 			</div>
+            <ion-item ng-show="!model.topInterests.length">
+                {{model.topInterests.length === 0 ? "no hay sugerencias" : "buscando..."}}
+            </ion-item>
 
 		</ion-list>
     </ion-content>
