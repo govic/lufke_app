@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewPostController', function(fb, $base64, $ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function(fb, $base64, $ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv, YoutubeSrv /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
 
     $scope.url = url_files;
@@ -30,7 +30,23 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         $scope.shareToFacebook = false;
     }
 
-
+    $scope.validate = function(){
+        console.log('validate')
+        console.log($scope.model.experienceText)
+        if($scope.model.experienceText){
+            var id = YoutubeSrv.getVideoId($scope.model.experienceText);
+            console.log('id:', id)
+            if(id){
+                var promise = YoutubeSrv.getInfo( id );
+                promise.then(function(data){
+                    console.log('data:', data)
+                    $scope.infoVideo = data;
+                }, function(err){
+                    console.log("err:", err);
+                })
+            }
+        }
+    }
     $scope.cancel = function(){
         Reset();
         $ionicHistory.goBack();
@@ -61,8 +77,6 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
             });
 
             $http.post(api.post.create, _newPost).success(function(data, status, headers, config) {
-                $rootScope.$emit('newPost', { post: data });
-
 				if(typeof $stateParams.next === "undefined"){
 					$ionicHistory.goBack(1);
 				}else{
@@ -98,6 +112,8 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
                 SelectedCategoriesSrv.reset();
                 SelectedUsersSrv.reset();
                 $ionicLoading.hide();
+                
+                $rootScope.$emit('newPost', { post: data });
             }).error(function(err, status, headers, config) {
                 console.dir(err);
                 console.log(status);

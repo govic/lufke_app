@@ -5,7 +5,7 @@
  	<ion-nav-buttons side="right">
         <a ng-disabled="!(model.experienceText.length > 0 || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
-	<ion-content>
+	<ion-content ng-show="user">
         <div class="experience-text has-footer">
             <img id="share-experience-user-img" ng-src="{{user.profileImgUrl !== null && user.profileImgUrl !== '' ? url + user.profileImgUrl : unknown_user}}" />
             <div class="textarea">
@@ -13,7 +13,6 @@
     				  ng-model="model.experienceText"
     				  ng-blur="model.isExperienceTextFocus = false"
     				  ng-focus="model.isExperienceTextFocus = true"
-                      ng-change="validate()"
     				  placeholder="Comparte tu experiencia...">
                 </textarea>
                 <div>
@@ -48,6 +47,7 @@
                 </div>
             </div>
         </div>
+        {{infoVideo}}
         <div ng-if="enableToShare" class="share">
             <div class="title">COMPARTIR A</div>
             <div class="row">

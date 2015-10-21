@@ -80,8 +80,6 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
     };
 
     $scope.moreNews = function() {
-        console.log('$scope.moreNews .........');
-        console.log("inicia carga: " + $scope.model.moreData);
         if ($scope.model.moreData) {
             var last = lodash.last($scope.model.posts);
             var full_post = $scope.model.posts.length;
@@ -106,8 +104,6 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         }
     };
     var filtersSaved = $rootScope.$on("filters-saved", function(){
-        console.log("filtros guardados.");
-
         var _form = Clone(FilterInterests);
         _form.page = page = 1;
         _form.limit = PageSize;
@@ -137,7 +133,6 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         $destroy();
     })
     $scope.$on('$stateChangeSuccess', function() {
-        console.log("NewsController ... $stateChangeSuccess");
         $scope.$broadcast('scroll.infiniteScrollComplete');
     });
     $scope.viewProfile = function(authorId) {

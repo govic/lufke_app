@@ -36,27 +36,6 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         foto: ""
     };
 
-    $rootScope.$on('logout', function(event, args) {
-        console.log("logout event")
-        $ionicHistory.clearCache();
-        $http.defaults.headers.common.Authorization = null;
-        $localStorage.basic = null;
-        $localStorage.session = null;
-        $localStorage.public = null;
-        $localStorage["login-data"] = null;
-        FilterInterests.reset();
-        $scope.model = {
-            user: {
-                name: "",
-                password: ""
-            },
-            recoveryData: {
-                emailError: false,
-                email: ""
-            },
-            foto: ""
-        };
-    });
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({
             title: title,

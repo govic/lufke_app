@@ -1,6 +1,6 @@
 angular
 .module("lufke")
-.directive("userRow", function($state, profileService, $http, $timeout, ShowMessageSrv){
+.directive("userRow", function($rootScope, $state, profileService, $http, $timeout, ShowMessageSrv){
     return {
         link: function($scope, $element, $attrs){
             $scope.url = url_files;
@@ -28,6 +28,7 @@ angular
                 }).success(function(data, status, headers, config) {
                     $scope.btnSeguir = "siguiendo";
                     user.BeingFollowed = true;
+                    $rootScope.$emit("following-user");
                 }).error(function(data, status, headers, config) {
                     console.dir(data);
                     console.dir(status);

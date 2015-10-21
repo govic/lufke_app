@@ -1,6 +1,6 @@
-//var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
+var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-var url_files = 'http://192.168.1.43:50608'; //sirve para local y celular
+//var url_files = 'http://192.168.1.45:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -109,6 +109,9 @@ angular
 })
 .constant("ImagesPath", {
     login: 'assets/img/login.png'
+})
+.constant("yt", {
+    appKey: "AIzaSyBlNzuIuDkAtc9zk7abpkz_7a8OoRFh8ps"
 });
 
 /*

@@ -7,7 +7,7 @@ angular.module('lufke').config(function($stateProvider) {
             templateUrl: 'app/templates/newpost-search.html',
             url: '/search-interest/:profileid'
         }).state('SearchUser', {
-            cache: true,
+            cache: false,
             controller: 'SearchUserController',
             controllerAs: "suCtrl",
             templateUrl: 'app/templates/newpost-search.html',

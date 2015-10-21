@@ -1,4 +1,4 @@
-angular.module('lufke').controller('EditPassController', function($ionicHistory, $rootScope, $ionicLoading, $http, $scope, $ionicActionSheet, $ionicPopup, $localStorage, $base64, ShowMessageSrv) {
+angular.module('lufke').controller('EditPassController', function($ionicHistory, $ionicLoading, $http, $scope, $ionicActionSheet, $ionicPopup, $localStorage, $base64, ShowMessageSrv) {
     console.log('Inicia ... EditPassController');
 
     $scope.url = url_files;

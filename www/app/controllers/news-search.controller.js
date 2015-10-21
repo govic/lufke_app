@@ -46,7 +46,6 @@ angular
         $ionicHistory.goBack();
     }
     $scope.find = function(str){
-        console.log(str);
         if(str && str.length){
             var texttofind = str.replace(/^\s*/, "").replace(/\s*$/, "");
             if(texttofind){
@@ -59,7 +58,6 @@ angular
         queryUsers.page++;
         var uri = GetUri(api.user.search, queryUsers);
         // "/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&orderby=:orderby"
-        console.log(uri)
         $scope.buscandoUsuarios = true;
         $scope.moreUsers = null;
         $http.get(uri)
@@ -75,7 +73,7 @@ angular
         queryInterest.page++;
         var uri = GetUri(api.explore.interest, queryInterest);
         //"/explore/interest?limit=:limit&page=:page&name=:name&orderby=:orderby"
-        console.log(uri)
+
         $scope.buscandoIntereses = true;
         $scope.moreInterests = null;
         $http.get(uri)
@@ -133,7 +131,7 @@ angular
         queryInterest.page = 1;
         var uri = GetUri(api.explore.interest, queryInterest);
         // "/user/search?limit=:limit&page=:page&userid=:userid&interestid=:interestid&texttofind=:texttofind&orderby=:orderby"
-        console.log(uri)
+
         $scope.buscandoIntereses = true;
         $scope.moreInterests = null;
         $scope.interests = [];

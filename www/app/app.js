@@ -86,7 +86,9 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             if (ionic.Platform.platform() != "win32") {
                 try{
         			$cordovaPush.unregister({ "senderID": "767122101153" });
+                    console.log("unregistered")
                 }catch(e){
+                    console.log("unregister exception")
                     console.log(e)
                 }
     		}

@@ -27,7 +27,7 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
         });
     };
     $scope.viewTag = function(tag) {
-        alert("Ver detalle tag id = " + tag.tagId);
+        /*alert("Ver detalle tag id = " + tag.tagId);*/
     }
     $scope.socialLink = function(link) {
         window.open(link, '_system', 'location=yes');
@@ -50,7 +50,6 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
         promise.then(function(data){
             $scope.model.interests = data;
         }, function(err){
-			console.log("UserInterestsSrv");
 			for(var attr in err){
 				console.log(attr)
 				console.log(err[attr])
@@ -64,7 +63,7 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
     });
 	var $afterEnter = $scope.$on('$ionicView.afterEnter', function() {
         //TODO: el servicio debe encargarse de actualizar cambios en la lista de noticias
-        console.log("Entro a... ProfileController");
+
         //$scope.model.lastPosts = PostsService.getLastUserPosts($scope.model.profileId, 0);
     });
 	var $newPost = $rootScope.$on("newPost", function(){

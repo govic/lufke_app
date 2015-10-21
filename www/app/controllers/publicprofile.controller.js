@@ -16,8 +16,6 @@ angular.module('lufke').controller('PublicProfileController', function($rootScop
         $ionicHistory.goBack();
     }
     $scope.updateProfileData = function() {
-        console.dir($stateParams.profileId);
-
         GetPublicProfile();
     };
     $scope.showMessage = ShowMessageSrv;
@@ -28,11 +26,11 @@ angular.module('lufke').controller('PublicProfileController', function($rootScop
         $http.post(api.explore.followUser, {
             id: $stateParams.profileId
         }).success(function(data, status, headers, config) {
-            $rootScope.$emit("following-user");
             $scope.btnSeguir = "siguiendo";
             $timeout(function(){
                 $scope.model.BeingFollowed = true;
             }, 3000)
+            $rootScope.$emit("following-user");
         }).error(function(data, status, headers, config) {
             console.dir(data);
             console.dir(status);
