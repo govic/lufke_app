@@ -1,6 +1,6 @@
 var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.1.45:50608'; //sirve para local y celular
+//var url_files = 'http://192.168.1.41:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
