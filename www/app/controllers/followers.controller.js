@@ -24,6 +24,46 @@ angular
         });
     }
 
+    function Reload(){
+        paginador = { currentPage: 1, limit: 10 };
+        GetFollowers(paginador, function(err){
+            if(err){
+                console.error(err);
+                $scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error con Lufke.");
+            }else{
+                paginador.currentPage++;
+            }
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    }
+
+    var $userForsook = $rootScope.$on("user-forsook", function($event, userId){
+        userId = parseInt(userId);
+        if($scope.followers && $scope.followers.constructor === Array){
+            $scope.followers.forEach(function(follower, index){
+                if(follower.profileId === userId){
+                    follower.BeingFollowed = false;
+                }
+            });
+        }
+    });
+    var $followingUser = $rootScope.$on("following-user", function($event, userId){
+        userId = parseInt(userId);
+        if($scope.followers && $scope.followers.constructor === Array){
+            $scope.followers.forEach(function(follower, index){
+                if(follower.profileId === userId){
+                    follower.BeingFollowed = true;
+                }
+            });
+        }
+    });
+    var $destroy = $rootScope.$on("$destroy", function(){
+        $userForsook();
+        $followingUser();
+        $destroy();
+    });
+
+
     function GetFollowers(obj, cb){
         $http
             .get( api.user.followers + "?page=" + obj.currentPage.toString() + "&limit=" + obj.limit.toString() + "&userId=" + $stateParams.userid, { cache: false }
@@ -55,23 +95,4 @@ angular
         }
         $ionicLoading.hide();
     });
-
-    var followingUser = $rootScope.$on("following-user", function(){
-        paginador = { currentPage: 1, limit: 10 };
-        $scope.followers = [];
-        GetFollowers(paginador, function(err){
-            if(err){
-                console.error(err);
-                $scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error con Lufke.");
-            }else{
-                paginador.currentPage++;
-            }
-            $ionicLoading.hide();
-        });
-    });
-    var destroy = $rootScope.$on("$destroy", function(){
-        destroy();
-        followingUser();
-    });
-
 });

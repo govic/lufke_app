@@ -25,8 +25,8 @@
         </ion-list>
         <ion-infinite-scroll ng-if="model.moreData" on-infinite="moreNews()">
         </ion-infinite-scroll>
-        <div class="list">
-            <div class="item item-icon-left item-icon-right" ng-if="!model.moreData">No hay más noticias que mostrar :(</div>
+        <div class="list" ng-if="!model.moreData">
+            <div class="item item-icon-left item-icon-right">No hay más noticias que mostrar :(</div>
         </div>
     </ion-content>
 </ion-view>

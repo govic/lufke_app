@@ -1,4 +1,4 @@
-angular.module('lufke').controller('PublicProfileController', function($rootScope, $ionicLoading, lodash, $scope, $ionicPopup, $http, $stateParams, $state, $ionicHistory, $timeout, ShowMessageSrv) {
+angular.module('lufke').controller('PublicProfileController', function($rootScope, $ionicLoading, lodash, $scope, $ionicPopup, $http, $stateParams, $state, $ionicHistory, $timeout, ShowMessageSrv, TrackingStatus) {
     console.log('Inicia ... PublicProfileController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -10,8 +10,6 @@ angular.module('lufke').controller('PublicProfileController', function($rootScop
     $scope.btnSeguir = "Seguir";
 
 
-    console.dir($stateParams.profileId);
-
     $scope.back = function(){
         $ionicHistory.goBack();
     }
@@ -21,23 +19,58 @@ angular.module('lufke').controller('PublicProfileController', function($rootScop
     $scope.showMessage = ShowMessageSrv;
 
     $scope.follow = function(){
-        $scope.disabled = true;
-        $scope.btnSeguir = "enviando...";
-        $http.post(api.explore.followUser, {
-            id: $stateParams.profileId
-        }).success(function(data, status, headers, config) {
-            $scope.btnSeguir = "siguiendo";
-            $timeout(function(){
-                $scope.model.BeingFollowed = true;
-            }, 3000)
-            $rootScope.$emit("following-user");
-        }).error(function(data, status, headers, config) {
-            console.dir(data);
-            console.dir(status);
-            $scope.followEnabled = true;
-            $scope.disabled = false;
-            $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
-        });
+        if($scope.model.BeingFollowed){
+            var confirm = $ionicPopup.confirm({
+                cancelText: "No",
+                okText: "Sí",
+                template: "¿Estas seguro de dejar de seguir a " + $scope.model.profileFirstName + "?",
+                title: "dejar de seguir"
+            });
+            confirm.then(function(res){
+                if(res){
+                    $scope.disabled = true;
+                    $scope.btnSeguir = "enviando...";
+                    $scope.model.BeingFollowed = false;
+                    $scope.model.followersUnit--;
+                    $http.post(api.notifications.forsakeUser, {
+                        id: $stateParams.profileId
+                    }).success(function(data, status, headers, config) {
+                        $scope.btnSeguir = "SEGUIR";
+                        $scope.disabled = false;
+                        $rootScope.$emit("user-forsook", $stateParams.profileId);
+                    }).error(function(data, status, headers, config) {
+                        console.dir(data);
+                        console.dir(status);
+                        $scope.model.BeingFollowed = true;
+                        $scope.model.followersUnit++;
+                        $scope.disabled = false;
+                        $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
+                    });
+                }
+            });
+        }else{
+            $scope.disabled = true;
+            $scope.btnSeguir = "enviando...";
+            $http.post(api.explore.followUser, {
+                id: $stateParams.profileId
+            }).success(function(data, status, headers, config) {
+                if(TrackingStatus.Accepted == data){
+                    $scope.model.followersUnit++;
+                }
+                $scope.btnSeguir = "siguiendo";
+                $timeout(function(){
+                    $scope.model.BeingFollowed = true;
+                }, 3000)
+                $scope.disabled = false;
+                $rootScope.$emit("following-user", $stateParams.profileId);
+            }).error(function(data, status, headers, config) {
+                console.dir(data);
+                console.dir(status);
+                $scope.model.BeingFollowed = false;
+                $scope.disabled = false;
+                $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
+            });
+        }
     }
 
     function GetPublicProfile(){

@@ -1,7 +1,8 @@
 angular.module('lufke').config(function($stateProvider) {
     $stateProvider.state('tab.post', {
-        url: '/post/:postId',
+        cache: true,
+        controller: 'PostController',
         templateUrl: 'app/templates/post_detail.html',
-        controller: 'PostController'
+        url: '/post/:postId'
     });
 });

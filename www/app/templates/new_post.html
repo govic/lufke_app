@@ -1,9 +1,9 @@
-<ion-view title="Compatir Experiencia" hide-back-button="true">
+<ion-view title="Crear Post" hide-back-button="true">
     <ion-nav-buttons side="left">
         <a class="button button-icon icon" ng-click="cancel()">Cancelar</a>
     </ion-nav-buttons>
  	<ion-nav-buttons side="right">
-        <a ng-disabled="!(model.experienceText.length > 0 || model.mediaSelected)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
+        <a ng-disabled="!(model.experienceText.length > 0) || !(interests.length > 0)" class="button button-icon icon" ng-click="shareExperience()">Listo</a>
     </ion-nav-buttons>
 	<ion-content ng-show="user">
         <div class="experience-text has-footer">
@@ -13,16 +13,28 @@
     				  ng-model="model.experienceText"
     				  ng-blur="model.isExperienceTextFocus = false"
     				  ng-focus="model.isExperienceTextFocus = true"
-    				  placeholder="Comparte tu experiencia...">
+                      ng-change="validate()"
+                      placeholder="Comparte tu experiencia...">
                 </textarea>
                 <div>
                     <span class="with" ng-repeat-start="f in friends" ng-if="$first"> - con <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-if="!$last && !$first">,&nbsp;<span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-repeat-end ng-if="$last && !$first">&nbsp;y <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span>
                 </div>
             </div>
             <button class="button button-camera" ng-if="!model.mediaSelected" ng-click="showImagesOptions()"></button>
-            <button class="button button-camera" ng-if="model.mediaSelected" ng-style="{'background-image': 'url(data:image/jpeg;base64,' + model.imageBase64 + ')'}" ng-click="showImagesOptions()"></button>
+            <button class="button button-camera" ng-if="model.mediaSelected" ng-style="{'background-image': 'url(' + model.format + model.imageBase64 + ')'}" ng-click="showImagesOptions()"></button>
         </div>
         <hr class="hr-share">
+        <a ng-if="link" ng-click="triggerLink($event)">
+            <div class="row post-link">
+                <div class="col col-25 link-preview" ng-if="link.preview" ng-style="{'background-image': 'url(' + link.preview + ')'}">
+                </div>
+                <div class="col link-info" ng-class="{'col-75': link.preview}">
+                    <div class="link-title" ng-if="link.title" ng-bind-html="link.title"></div>
+                    <div class="link-content" ng-if="link.content" ng-bind-html="link.content"></div>
+                </div>
+            </div>
+        </a>
+        <hr class="hr-share" ng-if="link">
         <div class="experience-tools">
             <button class="add-friends" ui-sref="SearchUser({ profileid: user.profileId })"></button><button class="share-location"></button>
             <span class="experience-text-length">{{experienceTextCounter}}</span>

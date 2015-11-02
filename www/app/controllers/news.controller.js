@@ -28,11 +28,12 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         return _tmp;
     }
 
-    $scope.updateNews = function() {
-
+    $scope.updateNews = function(){
         var _form = Clone(FilterInterests);
         _form.page = page = 1;
         _form.limit = PageSize;
+
+        $scope.model.posts = [];
 
         $http.post(api.post.getAll, _form).success(function(data) {
             $scope.model = {
@@ -51,25 +52,11 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         });
     };
     $scope.toggleLike = function(post) {
-
         var postId = post.id;
         var original = {
             isLiked: post.isLiked,
             totalStars: post.totalStars
         };
-
-        $http.post(api.post.toggleLike, {
-            id: postId
-        }).success(function(data) {
-            //var post = lodash.find($scope.model.posts, { id: postId });
-            //post.totalStars = data.likes;
-            //post.isLiked = data.isLiked;
-        }).error(function(data) {
-            console.dir(data);
-            $scope.showMessage("Error", "Ha ocurrido un error al hacer like.");
-            post.isLiked = original.isLiked;
-            post.totalStars = original.totalStars;
-        });
 
         //Cambio el valor del Like.
         post.isLiked = !post.isLiked;
@@ -77,6 +64,20 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         //Con el nuevo valor del Like, actualizo el contador de Likes.
         if(post.isLiked) post.totalStars++;
         else post.totalStars--;
+
+        $http.post(api.post.toggleLike, {
+            id: postId
+        }).success(function(data) {
+            //var post = lodash.find($scope.model.posts, { id: postId });
+            //post.totalStars = data.likes;
+            //post.isLiked = data.isLiked;
+            $rootScope.$emit("toggle-like", { id: postId, isLiked: post.isLiked, totalStars: post.totalStars });
+        }).error(function(data) {
+            console.dir(data);
+            $scope.showMessage("Error", "Ha ocurrido un error al hacer like.");
+            post.isLiked = original.isLiked;
+            post.totalStars = original.totalStars;
+        });
     };
 
     $scope.moreNews = function() {
@@ -103,12 +104,13 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
             });
         }
     };
-    var filtersSaved = $rootScope.$on("filters-saved", function(){
+    function Reload(){
         var _form = Clone(FilterInterests);
         _form.page = page = 1;
         _form.limit = PageSize;
 
-        $ionicLoading.show();
+        $scope.model.posts = [];
+
         $http.post(api.post.getAll, _form)
             .success(function(data) {
                 $scope.model = {
@@ -119,17 +121,50 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
                     experienceText: "",
                     moreData: data.length > 0
                 };
-                $ionicLoading.hide();
                 $scope.$broadcast('scroll.refreshComplete');
             })
             .error(function(){
                 $scope.showMessage("Error", "Ha ocurrido un error al cargar las publicaciones.");
                 $scope.$broadcast('scroll.refreshComplete');
-                $ionicLoading.hide();
             });
+    }
+
+    var $commentAdded = $rootScope.$on("comment-added", function(e, args){
+        //args = { id:<comment id>, postId: <post id> }
+        var _post = lodash.find($scope.model.posts, { id: args.postId });
+        if(_post){
+            _post.totalComments = parseInt(_post.totalComments);
+            _post.totalComments++;
+        }
     });
+    var $commentDeleted = $rootScope.$on("comment-deleted", function(e, args){
+        //args = { id:<comment id>, postId: <post id> }
+        var _post = lodash.find($scope.model.posts, { id: args.postId });
+        if(_post){
+            _post.totalComments = parseInt(_post.totalComments);
+            _post.totalComments--;
+        }
+    });
+    var $toggleLike = $rootScope.$on("toggle-like", function(e, args){
+        //{ id: <int>, isLiked: <bool> }
+        var _post = lodash.find($scope.model.posts, { id: args.id });
+        if(_post){
+            _post.isLiked = args.isLiked;
+            _post.totalStars = args.totalStars;
+        }
+    });
+    var $filtersSaved = $rootScope.$on("filters-saved", Reload);
+    var $userForsook = $rootScope.$on("user-forsook", Reload);
+    var $followingUser = $rootScope.$on("following-user", Reload);
+
     var $destroy = $rootScope.$on("$destroy", function(){
-        filtersSaved();
+        $commentAdded();
+        $commentDeleted();
+        $filtersSaved();
+        $commentAdded();
+        $followingUser();
+        $userForsook();
+        $toggleLike();
         $destroy();
     })
     $scope.$on('$stateChangeSuccess', function() {
@@ -139,7 +174,8 @@ angular.module('lufke').controller('NewsController', function($ionicPlatform, $i
         profileService.viewprofile(authorId);
     };
     $rootScope.$on('newPost', function(event, args) {
-        $scope.model.posts.unshift(args.post);
+        //$scope.model.posts.unshift(args.post);
+        Reload();
     });
     $scope.showMessage = function(title, message, callback) {
         var alertPopup = $ionicPopup.alert({

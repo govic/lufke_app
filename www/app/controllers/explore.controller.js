@@ -20,7 +20,7 @@ angular.module('lufke').controller('ExploreController', function($rootScope, $st
         return interest.previewPath ? (url_files + interest.previewPath) : url_post;
     }
     $scope.allCategories = function() {
-        alert('All Categories');
+        //alert('All Categories');
     };
     $scope.followCategory = function(categoryId, categoryName) {
         $http.post(api.explore.followCategory, {

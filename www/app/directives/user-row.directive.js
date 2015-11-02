@@ -1,6 +1,6 @@
 angular
 .module("lufke")
-.directive("userRow", function($rootScope, $state, profileService, $http, $timeout, ShowMessageSrv){
+.directive("userRow", function($rootScope, $state, profileService, $http, $timeout, ShowMessageSrv, $ionicPopup, TrackingStatus){
     return {
         link: function($scope, $element, $attrs){
             $scope.url = url_files;
@@ -14,28 +14,59 @@ angular
             $scope.viewProfile = function(){
                 profileService.viewprofile($scope.user.profileId);
             }
-
             $scope.viewPost = function(post){
                 if($scope.postsNavegable === true){
                     $state.go("tab.post", { 'postId': post.id });
                 }
             }
             $scope.followUser = function(user){
-                $scope.disabled = true;
-                $scope.btnSeguir = "enviando...";
-                $http.post(api.explore.followUser, {
-                    id: user.profileId
-                }).success(function(data, status, headers, config) {
-                    $scope.btnSeguir = "siguiendo";
-                    user.BeingFollowed = true;
-                    $rootScope.$emit("following-user");
-                }).error(function(data, status, headers, config) {
-                    console.dir(data);
-                    console.dir(status);
-                    user.BeingFollowed = false;
-                    $scope.disabled = false;
-                    $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
-                });
+                if(user.BeingFollowed){
+                    var confirm = $ionicPopup.confirm({
+                        cancelText: "No",
+                        okText: "Sí",
+                        template: "¿Estas seguro de dejar de seguir a " + user.profileFirstName + "?",
+                        title: "dejar de seguir"
+                    });
+                    confirm.then(function(res){
+                        if(res){
+                            $scope.disabled = true;
+                            $scope.btnSeguir = "enviando...";
+                            user.BeingFollowed = false;
+                            $http.post(api.notifications.forsakeUser, {
+                                id: user.profileId
+                            }).success(function(data, status, headers, config) {
+                                $scope.btnSeguir = "SEGUIR";
+                                $scope.disabled = false;
+                                $rootScope.$emit("user-forsook");
+                            }).error(function(data, status, headers, config) {
+                                console.dir(data);
+                                console.dir(status);
+                                user.BeingFollowed = true;
+                                $scope.disabled = false;
+                                $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
+                            });
+                        }
+                    });
+                }else{
+                    $scope.disabled = true;
+                    $scope.btnSeguir = "enviando...";
+                    $http.post(api.explore.followUser, {
+                        id: user.profileId
+                    }).success(function(data, status, headers, config) {
+                        if(TrackingStatus.Accepted == data){
+                            $rootScope.$emit("following-user", user.profileId);
+                        }
+                        $scope.btnSeguir = "siguiendo";
+                        user.BeingFollowed = true;
+                        $scope.disabled = false;
+                    }).error(function(data, status, headers, config) {
+                        console.dir(data);
+                        console.dir(status);
+                        user.BeingFollowed = false;
+                        $scope.disabled = false;
+                        $scope.showMessage("Error", "Ha courrido un error al enviar la solicitud.");
+                    });
+                }
             }
         },
         restrict: "E",

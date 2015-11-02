@@ -121,9 +121,11 @@ angular.module('lufke').controller('SearchUsersController', function(lodash, $ro
     };
 
     var followingUser = $rootScope.$on("following-user", Load);
+    var userForsook = $rootScope.$on("user-forsook", Load);
     var destroy = $rootScope.$on("$destroy", function(){
         destroy();
         followingUser();
+        userForsook();
     });
 
     function Load(){

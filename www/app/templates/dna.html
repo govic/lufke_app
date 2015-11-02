@@ -1,7 +1,16 @@
 <ion-view title="ADN" hide-nav-bar="true">
     <div class="custom-bar adn">
         <div class="bar bar-header bar-light">
-            <button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>
+            <div class="buttons buttons-left">
+                <span class="left-buttons">
+                    <button class="button custom-back-button" ng-click="back()">
+                        <i class="icon ion-ios7-arrow-back"></i>
+                        <span class="back-text">
+                            <span class="previous-title">Atr&aacute;s</span>
+                        </span>
+                    </button>
+                </span>
+            </div>
             <h1 class="title">{{model.profileUserName}}</h1>
             <button id="right-button" class="button custom-right-button" ui-sref="editdna">
                 <!--<i class="ion-search"></i>-->

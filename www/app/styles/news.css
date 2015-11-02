@@ -290,3 +290,28 @@
     float: right;
 	font-size: 0.7em;
     padding-right: 1em;
+}
+
+
+
+/* (+) Utilizado en new_post.html y en post_detail.html */
+.post-link{
+	border: 1px solid #ccc;
+	min-height: 5.5em;
+}
+.post-link .link-preview{
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.post-link .link-info{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+.post-link .link-info .link-title{
+	font-size: 0.9em;
+	font-weight: bold;
+}
+.post-link .link-info .link-content{
+	font-size: 0.8em;
+}
+/* (-) Utilizado en new_post.html y en post_detail.html */

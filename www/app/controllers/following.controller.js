@@ -1,6 +1,6 @@
 angular
 .module("lufke")
-.controller("FollowingController", function($ionicHistory, $ionicLoading, $ionicPopup, $http, $scope, $stateParams, profileService, ShowMessageSrv){
+.controller("FollowingController", function($ionicHistory, $ionicLoading, $ionicPopup, $http, $scope, $stateParams, $rootScope, profileService, ShowMessageSrv){
     $scope.url = url_files;
     $scope.unknown_user = url_user;
     $scope.unknown_background = "/" + url_background;
@@ -44,6 +44,36 @@ angular
             });
     }
 
+    function Reload(){
+        paginador = { currentPage: 1, limit: 10 };
+        GetFollowing(paginador, function(err){
+            if(err){
+                console.error(err);
+                $scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error con Lufke.");
+            }else{
+                paginador.currentPage++;
+            }
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    }
+
+    var $userForsook = $rootScope.$on("user-forsook", function($event, userId){
+        userId = parseInt(userId);
+        if($scope.following && $scope.following.constructor === Array){
+            $scope.following.forEach(function(followed, index){
+                if(followed.profileId === userId){
+                    $scope.following.splice(index, 1);
+                }
+            });
+        }
+    });
+    var $followingUser = $rootScope.$on("following-user", Reload);
+    var $destroy = $rootScope.$on("$destroy", function(){
+        $userForsook();
+        $followingUser();
+        $destroy();
+    });
+
     var paginador = { currentPage: 1, limit: 10 };
 
     $scope.following = [];
@@ -59,4 +89,27 @@ angular
         }
         $ionicLoading.hide();
     });
+
+    function Reload(){
+        paginador = { currentPage: 1, limit: 10 };
+        $scope.following = [];
+        GetFollowing(paginador, function(err){
+            if(err){
+                console.error(err);
+                $scope.showMessage("Error", "¡¡¡Ups!!! ha ocurrido un error con Lufke.");
+            }else{
+                paginador.currentPage++;
+            }
+            $ionicLoading.hide();
+        });
+    }
+
+    var followingUser = $rootScope.$on("following-user", Reload);
+    var userForsook = $rootScope.$on("user-forsook", Reload);
+    var destroy = $rootScope.$on("$destroy", function(){
+        destroy();
+        followingUser();
+        userForsook();
+    });
+
 });

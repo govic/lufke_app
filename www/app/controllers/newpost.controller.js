@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NewPostController', function(fb, $base64, $ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv, YoutubeSrv /*, Camera, FileTransfer*/ ) {
+angular.module('lufke').controller('NewPostController', function(fb, $base64, $ionicLoading, $rootScope, lodash, $http, $state, $scope, $ionicActionSheet, $localStorage, $ionicPopup, $ionicHistory, PostsService, $stateParams, $cordovaInAppBrowser, ShowMessageSrv, maxExperienceTextSize, SelectedCategoriesSrv, SelectedUsersSrv, PageInfoSrv, PostType, ScanUri /*, Camera, FileTransfer*/ ) {
     console.log('Inicia ... NewPostController');
 
     $scope.url = url_files;
@@ -7,6 +7,20 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         mediaSelected: false,
         imageBase64: ""
     };
+
+    Object.defineProperty($scope.model, "postType", {
+        _postType: "",
+        get: function(){
+            return this._postType;
+        },
+        set: function(_val){
+            this._postType = _val;
+            if(_val === PostType.video){
+                $scope.model.mediaSelected = false;
+                $scope.model.imageBase64 = "";
+            }
+        }
+    })
 
     $scope.experienceTextCounter = maxExperienceTextSize;
     Object.defineProperty($scope.model, "experienceText", {
@@ -30,21 +44,56 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         $scope.shareToFacebook = false;
     }
 
+    $scope.link = null;
+
+    $scope.triggerLink = function($event){
+        if($scope.link && $scope.link.href){
+            $cordovaInAppBrowser.open($scope.link.href, "_system");
+        }
+    }
+
     $scope.validate = function(){
-        console.log('validate')
-        console.log($scope.model.experienceText)
         if($scope.model.experienceText){
-            var id = YoutubeSrv.getVideoId($scope.model.experienceText);
-            console.log('id:', id)
-            if(id){
-                var promise = YoutubeSrv.getInfo( id );
-                promise.then(function(data){
-                    console.log('data:', data)
-                    $scope.infoVideo = data;
-                }, function(err){
-                    console.log("err:", err);
-                })
-            }
+            var promise = PageInfoSrv.scan( $scope.model.experienceText );
+            promise.then(function(data){
+                if(data.from === "youtube"){
+                    var _link = {
+                        content: data ? (data.items ? (data.items[0] ? (data.items[0].snippet ? data.items[0].snippet.description : ""): "" ): ""): "",
+                        href: data.url,
+                        preview: data ? (data.items ? (data.items[0] ? (data.items[0].snippet ? (data.items[0].snippet.thumbnails ? (data.items[0].snippet.thumbnails.default ? data.items[0].snippet.thumbnails.default.url : ""): "") : ""): "" ): ""): "",
+                        title: data ? (data.items ? (data.items[0] ? (data.items[0].snippet ? data.items[0].snippet.title : ""): "" ): ""): ""
+                    };
+                    _link.content = _link.content && _link.content.length > 200 ? _link.content.substr(0, 197) + "..." : _link.content;
+                    _link.title = _link.title && _link.title.length > 100 ? _link.title.substr(0, 97) + "..." : _link.title;
+
+                    $scope.link = _link;
+                }else{
+                    if(!data || data.error || (!data.title && !data.description)){
+                        var _link = null;
+                    }else{
+                        var _link = {
+                            content: data.description,
+                            href: data.url,
+                            title: data.title
+                        }
+                        if(data.faviconUrl){
+                            //faviconUrl es una url escaneada del codigo html de la página y que puede tener un valor variable.
+                            _link.preview = data.faviconUrl;
+                        }else if(data.favicon){
+                            //favicon es la url por defecto del favicon de una página. Ej: <host>/favicon.ico.
+                            _link.preview = data.favicon;
+                        }
+                        _link.content = _link.content && _link.content.length > 200 ? _link.content.substr(0, 197) + "..." : _link.content;
+                        _link.title = _link.title && _link.title.length > 100 ? _link.title.substr(0, 97) + "..." : _link.title;
+                    }
+
+                    $scope.link = _link;
+                }
+            }, function(err){
+                $scope.link = null;
+            })
+        }else{
+            $scope.link = null;
         }
     }
     $scope.cancel = function(){
@@ -62,6 +111,31 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
                 imgMimeType: "image/jpeg" //depende del metodo getPhoto en las opciones
             };
 
+            //Escaneo si el texto tiene un link a youtube.
+            var id = PageInfoSrv.getVideoId(_newPost.text);
+            var uri = ScanUri(_newPost.text);
+
+            //Si lo tiene...
+            if(id){
+                //...y si se adjuntó una imagen, elimino la imagen y...
+                if($scope.model.mediaSelected){
+                    _newPost.imgBase64 = "",
+                    _newPost.imgMimeType = "";
+
+                }
+                //...el tipo del post lo dejo como "Video".
+                _newPost.postType = PostType.video;
+            }else{
+                //Si no tiene un link a youtube pero si tiene un link...
+                if(uri){
+                    //...el tipo del post lo dejo como "Text".
+                    _newPost.postType = PostType.text;
+                }else{
+                    _newPost.postType = $scope.model.mediaSelected ? PostType.photo : PostType.text;
+                }
+            }
+
+
             //Agregamos los usuarios relacionados al post.
             var interests = SelectedCategoriesSrv.get();
             _newPost.Interests = [];
@@ -77,12 +151,6 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
             });
 
             $http.post(api.post.create, _newPost).success(function(data, status, headers, config) {
-				if(typeof $stateParams.next === "undefined"){
-					$ionicHistory.goBack(1);
-				}else{
-					$state.go($stateParams.next);
-				}
-
                 if(loginData && $scope.shareToFacebook === true){
                     var _params = { access_token: loginData.access_token };
 
@@ -112,8 +180,15 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
                 SelectedCategoriesSrv.reset();
                 SelectedUsersSrv.reset();
                 $ionicLoading.hide();
-                
+
                 $rootScope.$emit('newPost', { post: data });
+
+                if(typeof $stateParams.next === "undefined"){
+					$ionicHistory.goBack(1);
+				}else{
+					$state.go($stateParams.next);
+				}
+
             }).error(function(err, status, headers, config) {
                 console.dir(err);
                 console.log(status);
@@ -169,12 +244,14 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
         navigator.camera.getPicture(function(imageBase64) {
             $scope.model.mediaSelected = true;
             $scope.model.imageBase64 = imageBase64;
+            $scope.model.format = "data:image/jpeg;base64,";
             $ionicLoading.hide();
         }, function(err) {
             console.log(err)
             if(!/cancel/.test(err)) $scope.showMessage("Error", "Ha ocurrido un error al intentar cargar la imagen.");
             $scope.model.mediaSelected = false;
             $scope.model.imageBase64 = "";
+            $scope.model.format = "";
             $ionicLoading.hide();
         }, options);
         return false;

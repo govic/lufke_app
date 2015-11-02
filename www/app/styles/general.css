@@ -240,12 +240,18 @@ ion-tabs.tabs-color-active-positive .tab-item {
     text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 }
 .custom-bar .bar .custom-back-button{
-    background-image: url("../../assets/img/navigationbarbackwhite_2x.png");
-    background-position: left;
+    background-color: transparent;
+    border-color: transparent;
     color: #fff;
-    padding-left: 1em;
-    font-size: 1.2em;
+    padding-left: 0px;
 }
+.custom-bar .bar .custom-back-button .previous-title{
+    font-size: 1.3em;
+}
+.custom-bar .bar .custom-back-button>i:before{
+    font-size: 32px;
+}
+
 .custom-bar .bar .custom-right-button{
     color: #fff;
     font-size: 2em;
@@ -346,4 +352,9 @@ ion-tabs.tabs-color-active-positive .tab-item {
     -webkit-transition-duration: 0.2s;
     transition-property: 'background-color', 'color';
     transition-duration: 0.2s;
+}
+
+.button-not-enabled{
+    opacity: 0.4;
+    cursor: default !important;
 }

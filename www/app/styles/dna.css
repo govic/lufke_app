@@ -63,3 +63,27 @@
     border-width: 0px;
     min-height: 100%;
 }
+
+#adn-back-button {
+    background-color: transparent;
+    border-color: transparent;
+    /*border-width: 0em;*/
+    /*
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 0.2em;
+    vertical-align: middle;
+    */
+    color: #fff;
+}
+#adn-back-button i{
+    /*font-size: 32px;*/
+}
+
+#adn-back-button>i:before{
+    font-size: 32px;
+}
+#adn-back-button .previous-title{
+    font-size: 1.3em;
+}

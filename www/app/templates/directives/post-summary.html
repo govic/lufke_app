@@ -1,4 +1,4 @@
-<div class="item post-summary" class="item" ng-style="{'background-image':'url({{post.backgroundImgUrl !== '' && post.backgroundImgUrl !== null ? url + post.backgroundImgUrl : unknown_post}})'}">
+<div class="item post-summary" class="item" ng-style="{'background-image':'url(' + post.backgroundImgUrl + ')'}">
     <div class="gradient">
         <div class="row row-top">
             <img class="post-summary-user-img" ng-src="{{post.authorImgUrl !== null  &&  post.authorImgUrl !== '' ? url + post.authorImgUrl : unknown_user}}" alt="Foto de perfil" ng-click="viewProfile(post.authorId)"/>
@@ -17,9 +17,7 @@
         </div>
 
         <div class="row" ui-sref="tab.post({'postId': post.id})">
-            <div class="post-summary-text">
-                {{post.text}}
-            </div>
+            <div class="post-summary-text" ng-bind-html="post.text"></div>
         </div>
 
         <div class="row row-bottom">

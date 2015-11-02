@@ -6,7 +6,6 @@
             <div class="degrade">
                 <div class="custom-bar">
                     <div class="bar bar-header bar-light">
-                        <!--<button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>-->
                         <h1 class="title">{{model.profileUserName}}</h1>
                         <button class="button custom-right-button" nav-direction="forward" ui-sref="menu-profile">
                             <i class="ion-gear-a"></i>
@@ -33,7 +32,7 @@
                         <div class="row profile-text-center light">
                             <div class="col no-side-padding" ui-sref="tab.usernews({ userId: model.profileId })">
                                 <div class="profile-number">{{model.postsUnit}}</div>
-                                <div class="profile-number-text-under">Experiencias</div>
+                                <div class="profile-number-text-under">Posts</div>
                             </div>
                             <div class="col" ui-sref="tab.followers({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followersUnit}}</div>

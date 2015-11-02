@@ -9,7 +9,18 @@
     </ion-nav-buttons>
     <ion-content class="padding publicacion has-footer" ng-show="model.post">
 
-        <div class="card imagen">
+        <a ng-if="link && showImage" ng-click="triggerLink($event)">
+            <div class="row post-link">
+                <div class="col col-25 link-preview" ng-if="link.preview" ng-style="{'background-image': 'url(' + link.preview + ')'}">
+                </div>
+                <div class="col link-info" ng-class="{'col-75': link.preview}">
+                    <div class="link-title" ng-if="link.title" ng-bind-html="link.title"></div>
+                    <div class="link-content" ng-if="link.content" ng-bind-html="link.content"></div>
+                </div>
+            </div>
+        </a>
+
+        <div class="card imagen" ng-if="!link && showImage">
             <div class="item item-body">
                 <img id="post-detail-content-container" ng-src="{{post_url}}" />
             </div>
@@ -37,7 +48,9 @@
 		</div>
 
         <div class="row row-bottom">
-			<div class="col post-detail-text">{{model.post.text}}
+			<div class="col post-detail-text">
+                <!-- OJO: El contenido del texto (post.text) se muestra aquí, dentro de esta directiva (bind-link) que está en el archivo "controllers\post.controller.js" (Al final). -->
+                <span bind-link></span>
                 <span class="with" ng-repeat-start="f in model.post.Friends" ng-if="$first"> - con <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-if="!$last && !$first">,&nbsp;<span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span><span class="with" ng-repeat-end ng-if="$last && !$first">&nbsp;y <span class="name">{{f.profileFirstName + ' ' + f.profileLastName}}</span></span>
             </div>
 		</div>

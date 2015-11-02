@@ -1,4 +1,4 @@
-angular.module('lufke').controller('NotificationsController', function($ionicLoading, profileService, $scope, $http, $ionicPopup, $state) {
+angular.module('lufke').controller('NotificationsController', function($ionicLoading, profileService, $scope, $http, $ionicPopup, $state, $rootScope) {
     console.log('Inicia ... NotificationsController');
     $scope.url = url_files;
     $scope.unknown_user = url_user;
@@ -50,6 +50,7 @@ angular.module('lufke').controller('NotificationsController', function($ionicLoa
         $http.post(api.notifications.acceptRequest, {
             requestId: request.requestId
         }).success(function(data, status, headers, config) {
+            $rootScope.$emit("follower-user");
             //model.requests.requestsList
             //alert("Solicitud aceptada id = " + request.requestId); //TODO .. falta efectos en la vista
         }).error(function(data, status, headers, config) {

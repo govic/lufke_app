@@ -8,7 +8,7 @@
             {{user.profileFirstName}}<br/>
             {{user.profileLastName}}<br/>
         </div>
-        <button class="button button-light button-small follow-button" ng-click="followUser(user)" ng-disabled="disabled || user.BeingFollowed">
+        <button class="button button-light button-small follow-button" ng-class="{'button-not-enabled': user.BeingFollowed}" ng-click="followUser(user)" ng-disabled="disabled">
             <i class="ion-plus active" ng-show="!disabled && !user.BeingFollowed"></i>{{user.BeingFollowed ? "siguiendo" : btnSeguir}}
         </button>
     </div>

@@ -1,6 +1,6 @@
 var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.1.41:50608'; //sirve para local y celular
+//var url_files = 'http://192.168.1.46:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
@@ -15,6 +15,7 @@ var api = {
         deleteInterest: url_base + '/user/deleteinterest',
         editProfile: url_base + '/user/editprofile',
         editPass: url_base + '/user/editpass',
+        editPrivacity: url_base + "/user/editprivacity",
         editProfileImage: url_base + '/user/editprofileimage',
         followers: url_base + '/user/followers',
         following: url_base + '/user/following',
@@ -33,8 +34,7 @@ var api = {
         searchInterests: url_base + '/user/searchinterests',
         setRegistrationKey: url_base + '/user/setregistrationkey',
         validateEmail:  url_base + "/user/validateemail?email=:email",
-        validateUserName:  url_base + "/user/validateuser?username=:userName",
-        editPrivacity: url_base + "/user/editprivacity"
+        validateUserName:  url_base + "/user/validateuser?username=:userName"
     },
     post: {
         get: url_base + '/post/get',
@@ -46,7 +46,9 @@ var api = {
         comment: {
             create: url_base + '/post/addcomment',
             delete: url_base + '/post/deletecomment'
-        }
+        },
+        videoInfo: url_base + "/post/videoinfo?id=:id",
+        pageInfo: url_base + "/post/pageinfo?url=:url"
     },
     explore: {
         followCategory: url_base + '/explore/followcategory',
@@ -63,7 +65,8 @@ var api = {
         acceptRequest: url_base + '/notification/acceptrequest',
         check: url_base + '/notification/checknotifications',
         revised: url_base + '/notification/revisednotification',
-        getAllNotifications: url_base + '/notification/getallnotifications'
+        getAllNotifications: url_base + '/notification/getallnotifications',
+        forsakeUser: url_base + '/notification/forsakeuser'
     },
     filters: {
         getFilters: url_base + '/filter/getfiltersdata',
@@ -110,8 +113,15 @@ angular
 .constant("ImagesPath", {
     login: 'assets/img/login.png'
 })
-.constant("yt", {
-    appKey: "AIzaSyBlNzuIuDkAtc9zk7abpkz_7a8OoRFh8ps"
+.constant("TrackingStatus", {
+    Pending: 0,
+    Accepted: 1,
+    Rejected: 2
+})
+.constant("PostType", {
+    photo: "Photo",
+    text: "Text",
+    video: "Video"
 });
 
 /*

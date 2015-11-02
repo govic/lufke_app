@@ -5,7 +5,16 @@
         <div id="profile-background-img" class="custom-bar" ng-style="{'background-image': 'url(' + background + ')'}">
             <div class="degrade">
                 <div class="bar bar-header bar-light">
-                    <button class="button custom-back-button" ng-click="back()">Atr&aacute;s</button>
+                    <div class="buttons buttons-left">
+                        <span class="left-buttons">
+                            <button class="button custom-back-button" ng-click="back()">
+                                <i class="icon ion-ios7-arrow-back"></i>
+                                <span class="back-text">
+                                    <span class="previous-title">Atr&aacute;s</span>
+                                </span>
+                            </button>
+                        </span>
+                    </div>
                     <h1 class="title">{{model.profileUserName}}</h1>
                 </div>
                 <div class="row profile-info">
@@ -19,7 +28,7 @@
                                 <div class="profile-name-text">{{model.profileLastName}}</div>
                             </div>
                             <div class="col profile-button-edit">
-                                <a class="button button-light button-small edit-profile-button" ng-click="follow()" ng-disabled="disabled || model.BeingFollowed">
+                                <a class="button button-light button-small edit-profile-button" ng-class="{'button-not-enabled': model.BeingFollowed}" ng-click="follow()" ng-disabled="disabled">
                                     <i class="ion-plus active" ng-show="!disabled && !model.BeingFollowed"></i>{{model.BeingFollowed ? "siguiendo" : btnSeguir}}
                                 </a>
                             </div>
@@ -27,7 +36,7 @@
                         <div class="row profile-text-center light">
                             <div class="col no-side-padding" ui-sref="tab.usernews({ userId: model.profileId })">
                                 <div class="profile-number">{{model.postsUnit}}</div>
-                                <div class="profile-number-text-under">Experiencias</div>
+                                <div class="profile-number-text-under">Posts</div>
                             </div>
                             <div class="col" ui-sref="tab.followers({ userid: model.profileId })">
                                 <div class="profile-number">{{model.followersUnit}}</div>

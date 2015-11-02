@@ -10,7 +10,7 @@
     <ion-content class="has-footer">
 		<ion-list>
             <ion-item class="explore-background-container" ng-show="followers.length" ng-repeat="user in followers" ng-style="{'background-image':'url(' + (user.backgroundImgUrl ? url + user.backgroundImgUrl : unknown_background) + ')'}">
-                <user-row follow-disabled="user.BeingFollowed" posts-navegable="true" user="user"></user-row>
+                <user-row posts-navegable="true" user="user"></user-row>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="moreData" on-infinite="more()"></ion-infinite-scroll>

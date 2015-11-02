@@ -58,8 +58,14 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
         });
 	}
 
+	var $followerUser = $rootScope.$on("follower-user", function(){
+        $scope.model.followersUnit++;
+    });
 	var $followingUser = $rootScope.$on("following-user", function(){
         $scope.model.followingUnit++;
+    });
+	var $userForsook = $rootScope.$on("user-forsook", function(){
+        $scope.model.followingUnit--;
     });
 	var $afterEnter = $scope.$on('$ionicView.afterEnter', function() {
         //TODO: el servicio debe encargarse de actualizar cambios en la lista de noticias
@@ -80,6 +86,7 @@ angular.module('lufke').controller('ProfileController', function(lodash, $ionicH
 		$newPost();
 		$profileUpdated();
 		$followingUser();
+		$userForsook();
 	});
 
 	function GetProfile(){
