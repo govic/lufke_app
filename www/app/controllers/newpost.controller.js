@@ -46,6 +46,9 @@ angular.module('lufke').controller('NewPostController', function(fb, $base64, $i
 
     $scope.link = null;
 
+    $scope.getImage = function(interest){
+        return interest.previewPath ? url_files + interest.previewPath : url_post_sm;
+    }
     $scope.triggerLink = function($event){
         if($scope.link && $scope.link.href){
             $cordovaInAppBrowser.open($scope.link.href, "_system");

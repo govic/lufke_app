@@ -12,10 +12,24 @@
             <div class="item item-divider">
                 Configurar
             </div>
-            <a class="item item-icon-left" href="#" ui-sref="privacity">
+            <li class="item item-icon-left item-toggle">
                 <i class="ion-person-stalker"></i>
                 Privacidad
-            </a>
+                <label class="toggle toggle-positive">
+                    <input type="checkbox" ng-click="togglePrivacity()" ng-checked="model.public" />
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+            <div class="privacity-view">
+                <div class="padding" ng-class="{'privacity-selected': (!model.public)}">
+                    T&uacute; decides si quieres que alguien te siga, aceptando o no su solicitud
+                </div>
+                <div class="padding" ng-class="{'privacity-selected': (model.public)}">
+                    No tendr&aacute;s que aceptar solicitudes de seguimiento, quien decida seguirte lo har&aacute;
+                </div>
+            </div>
             <a class="item item-icon-left" ui-sref="editprofile">
                 <i class="ion-edit"></i>
                 Editar perfil

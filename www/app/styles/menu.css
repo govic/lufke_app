@@ -7,3 +7,28 @@
 .menu-view .button-block i{
     font-size: 1.2em;
 }
+
+.privacity-view{
+    background-color: #fff;
+}
+.privacity-view .padding{
+    color: #aaa;
+    font-size: 0.9em;
+    height: 0px;
+    opacity: 0;
+    padding: 0px;
+}
+.privacity-view .padding.privacity-selected{
+    height: auto;
+    opacity: 1;
+    padding: 10px;
+
+    -o-transition-property: opacity;
+    -o-transition-duration: 0.2s;
+    -moz-transition-property: opacity;
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.2s;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}

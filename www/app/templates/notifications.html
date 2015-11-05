@@ -28,7 +28,7 @@
             </ion-item>
 
             <ion-item ng-show="!model.requests.requestsList.length">
-                {{model.requests.requestsList.length === 0 ? "No tiene solicitudes para mostrar" : "buscando..."}}
+                {{model.requests.requestsList.length === 0 ? "No hay solicitudes que mostrar" : "buscando..."}}
             </ion-item>
 
             <ion-item class="item-divider" ng-show="model.requests.requestsList.length > 0" ng-click="viewRequests()">
@@ -59,7 +59,7 @@
                 </div>
             </ion-item>
             <ion-item ng-show="!model.notifications.notificationsList.length">
-                {{model.notifications.notificationsList.length == 0 ? "No tiene notificaciones para mostrar" : "buscando..."}}
+                {{model.notifications.notificationsList.length == 0 ? "No hay notificaciones que mostrar" : "buscando..."}}
             </ion-item>
             <ion-item class="item-divider" ng-click="viewNotifications()">
                 Ver todas <i class="ion-chevron-down"></i>

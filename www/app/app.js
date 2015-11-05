@@ -75,7 +75,6 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     		}
         });
         $rootScope.$on("logout", function(){
-            console.log("logout event")
             $ionicHistory.clearCache();
             $http.defaults.headers.common.Authorization = null;
             $localStorage.basic = null;
@@ -86,7 +85,6 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
             if (ionic.Platform.platform() != "win32") {
                 try{
         			$cordovaPush.unregister({ "senderID": "767122101153" });
-                    console.log("unregistered")
                 }catch(e){
                     console.log("unregister exception")
                     console.log(e)

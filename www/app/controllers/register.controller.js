@@ -251,7 +251,7 @@ angular.module('lufke').controller('RegisterController', function($ionicHistory,
     $scope.sending = false;
 
     $scope.getImage = function(interest){
-        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
+        return interest.previewPath ? (url_files + interest.previewPath) : url_post_sm;
     }
     $scope.save = function(){
         RegisterData.Interests = SelectedCategoriesSrv.get();

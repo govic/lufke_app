@@ -30,8 +30,7 @@
                 <div class="categories" ng-if="interests.length > 0">
                     <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
                     <div class="category" ng-repeat="interest in interests">
-                        <div ng-if="interest.previewPath" class="image" ng-style="{'background-image':'url(' + getImage(interest) + ')' }"></div>
-                        <div ng-if="!interest.previewPath" class="image"></div>
+                        <div class="image" ng-style="{'background-image':'url(' + getImage(interest) + ')' }"></div>
                         <span class="btn-text">{{interest.interestText | initCap}}</span>
                     </div>
                 </div>

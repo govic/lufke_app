@@ -84,6 +84,7 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         if(loginDisabled) return;
         console.log('LoginController ... validateUser');
         if ($scope.model.user.email !== "" && $scope.model.user.password !== "") {
+            $ionicLoading.show();
             Login( $base64.encode( unescape( encodeURIComponent( $scope.model.user.name + ":" + $scope.model.user.password ) ) ) );
         } else {
             $localStorage.session = null;
@@ -92,6 +93,8 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
         }
     };
     $scope.facebook = function(){
+
+        $ionicLoading.show();
         //Hacemos login en facebook.
         $cordovaOauth.facebook(fb.appId, fb.permissions).then(function(result) {
                 //result = { access_token: "", expires_in: "" }
@@ -105,7 +108,8 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
                     .error(Error)
             }, function(data){
                 console.log("Error...")
-                console.log(data)
+                console.log(JSON.stringify(data))
+                $ionicLoading.hide();
                 if(!/cancel/.test(data)) $scope.showMessage("Error", "¡Ups!, ha ocurrido un error. Por favor intenta más tarde.");
             });
     }
@@ -149,13 +153,24 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
                 };
 
                 $http.post(api.user.register, registro).success(function(user, status, headers, config) {
+                    //Si existe un error de negocio (no de recursos).
+                    if(user.codeStatus == 1){
+                        $ionicLoading.hide();
+                        return $scope.showMessage("Éxito", "El nombre de usuario escogido ya está en uso. Intenta con otro.");
+                    }
+                    if(user.codeStatus == 2){
+                        $ionicLoading.hide();
+                        return $scope.showMessage("Éxito", "El correo electrónico escogido ya está en uso. Intenta con otro.");
+                    }
+
                     $scope.showMessage("Éxito", "Te has registrado exitosamente!");
                     var auth = 'Basic ' + user.credentialsHash;
                     $localStorage.basic = auth;//guarda cabecera auth en var global localstorage
                     $localStorage.session = user.id; //guarda id usuario para consultas - global localstorage
                     $localStorage.public = user.publicProfile;
 
-                    //Una ves registrado se redirige a "news"
+                    $ionicLoading.hide();
+                    //Una ves registrado se redirige a "news".
                     $state.go('tab.news');
                     return;
                 }).error(Error);
@@ -167,21 +182,20 @@ angular.module('lufke').controller('LoginController', function($timeout, fb, $co
 
     function Error(data){
         console.log("Error...")
-        console.log(data)
+        console.log(JSON.stringify(data))
+        $ionicLoading.hide();
         $scope.showMessage("Error", "¡Ups!, ha ocurrido un error. Por favor intenta más tarde.");
     }
 
     function Login(credentialsHash){
-        $ionicLoading.show();
-
         loginDisabled = true;
         $http.post(api.user.login, {
             credentialsHash: credentialsHash
         })
         .success(LoginDone)
         .error(function(err, status, headers, config) {
-            console.dir(err);
-            console.log(status);
+            console.dir(JSON.stringify(err));
+            console.log(JSON.stringify(status));
             $http.defaults.headers.common.Authorization = null;
             $localStorage.session = null;
             $localStorage.basic = null;

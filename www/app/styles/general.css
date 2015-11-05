@@ -329,6 +329,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
 }
 
 /* Boton de privacidad en profile->menu->privacidad */
+/*
 .privacity-view .item-divider{
     font-size: 0.9em;
 }
@@ -358,3 +359,4 @@ ion-tabs.tabs-color-active-positive .tab-item {
     opacity: 0.4;
     cursor: default !important;
 }
+*/

@@ -256,6 +256,9 @@
     vertical-align: middle;
     width: 2.3em;
 }
+.agregar-interes .lista .interest .ico.ico-user{
+	background-size: cover;
+}
 .agregar-interes .lista .interest .add{
 	border: 0.08em solid #cccccc;
     border-radius: 50%;
@@ -275,7 +278,7 @@
 .agregar-interes .lista .interest .ico{
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+	/*background-size: cover;*/
     vertical-align: middle;
 }
 /* (-) Agregar intereses a post */

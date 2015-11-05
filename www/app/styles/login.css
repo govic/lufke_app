@@ -41,5 +41,8 @@
 	background-image: url("../../assets/img/landingfacebookicon.png");
 	background-position: left;
 	background-repeat: no-repeat;
-	background-origin: content-box;
+	background-origin: padding-box;
+
+	display: inline-block;
+	padding-left: 2em;
 }

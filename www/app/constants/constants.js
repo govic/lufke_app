@@ -1,11 +1,12 @@
-var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
+//var url_files = 'http://betalufkegovic.azurewebsites.net'; //sirve para local y celular
 //var url_files = 'http://testlufkegobic.azurewebsites.net'; //sirve para local y celular
-//var url_files = 'http://192.168.1.46:50608'; //sirve para local y celular
+var url_files = 'http://192.168.1.36:50608'; //sirve para local y celular
 var url_base = url_files + '/api'; //sirve para local y celular
 
 var url_user = 'assets/img/uknown_user.png';
 var url_background = 'assets/img/unknown_background.png';
 var url_post = 'assets/img/unknown_post.png';
+var url_post_sm = 'assets/img/unknown_post_90x52.jpg';
 var url_adn = 'assets/img/profiledna.png'
 var adn_vertical = "assets/img/profiledna_vertical.png";
 

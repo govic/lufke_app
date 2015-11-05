@@ -12,6 +12,9 @@ angular
 
     var doneIsDisabled = 0;
 
+    $scope.getClass = function(){
+        return '';
+    }
     $scope.back = function(){
         $ionicHistory.goBack();
     }
@@ -33,7 +36,7 @@ angular
         return interest.interestText;
     }
     $scope.getImage = function(interest){
-        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
+        return interest.previewPath ? (url_files + interest.previewPath) : url_post_sm;
     }
 
     $scope.toggleSelect = function(interes){
@@ -90,6 +93,9 @@ angular
 
     var doneIsDisabled = 0;
 
+    $scope.getClass = function(){
+        return 'ico-user';
+    }
     $scope.back = function(){
         $ionicHistory.goBack();
     }

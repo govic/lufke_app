@@ -31,7 +31,6 @@ angular.module('lufke').controller('EditProfileController', function($ionicHisto
                 $scope.model = profile;
                 $http.defaults.headers.common.Authorization = 'Basic ' + profile.credentialsHash;
                 $localStorage.basic = 'Basic ' + profile.credentialsHash;
-                console.log(profile)
                 /*$scope.showMessage("Exito!", "Sus datos han sido actualizados exitosamente.");*/
                 $ionicHistory.goBack();
                 $rootScope.$emit("profile-updated");

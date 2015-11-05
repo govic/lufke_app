@@ -17,7 +17,7 @@ angular.module('lufke').controller('ExploreController', function($rootScope, $st
             });
     };
     $scope.GetImageInterest = function(interest){
-        return interest.previewPath ? (url_files + interest.previewPath) : url_post;
+        return interest.imagePath ? (url_files + interest.imagePath) : url_post;
     }
     $scope.allCategories = function() {
         //alert('All Categories');

@@ -25,7 +25,7 @@
                         <div class="add" ng-class="{'selected': interest.selected}" ng-click="toggleSelect(interest)">
                             <i class="ion-checkmark-circled"></i>
                         </div>
-                        <div class="ico" ng-style="{'background-image': 'url(' + getImage(interest) + ')'}"></div>
+                        <div class="ico {{getClass()}}" ng-style="{'background-image': 'url(' + getImage(interest) + ')'}"></div>
                         <span>{{getText(interest)}}</span>
                     </div>
                 </div>

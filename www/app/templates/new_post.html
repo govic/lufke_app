@@ -36,7 +36,8 @@
         </a>
         <hr class="hr-share" ng-if="link">
         <div class="experience-tools">
-            <button class="add-friends" ui-sref="SearchUser({ profileid: user.profileId })"></button><button class="share-location"></button>
+            <button class="add-friends" ui-sref="SearchUser({ profileid: user.profileId })"></button>
+            <button ng-if="false" class="share-location"></button>
             <span class="experience-text-length">{{experienceTextCounter}}</span>
         </div>
         <div class="add-categories publicacion">
@@ -44,8 +45,7 @@
             <div class="categories">
                 <!-- interest corresponde a la entidad UserInterest. Se debe agregar a esta Interest userInterest.interest.Id -->
                 <div class="category" ng-repeat="userInterest in interests" ui-sref="tab.category-profile({ id: userInterest.interestId, name: userInterest.interestText })">
-                    <div ng-if="userInterest.previewPath" class="image" ng-style="{'background-image':'url({{url + userInterest.previewPath}})' }"></div>
-                    <div ng-if="!userInterest.previewPath" class="image"></div>
+                    <div class="image" ng-style="{'background-image':'url(' + getImage(userInterest) + ')' }"></div>
                     <span class="btn-text">{{userInterest.interestText | initCap}}</span>
                 </div>
                 <!--<div class="category" ng-repeat="userInterest in interests">
