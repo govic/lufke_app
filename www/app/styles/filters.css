@@ -63,3 +63,22 @@
 .item-divider.item-button-right button.button i:after{
     vertical-align: top;
 }
+
+.lufke-camera, .lufke-play, .lufke-link{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 1em;
+    vertical-align: middle;
+    width: 1em;
+}
+.lufke-camera{
+    background-image: url('../../assets/img/svg/filter-photo.svg');
+}
+.lufke-play{
+    background-image: url('../../assets/img/svg/filter-video.svg');
+}
+.lufke-link{
+    background-image: url('../../assets/img/svg/filter-link.svg');
+}

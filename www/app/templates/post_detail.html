@@ -36,12 +36,11 @@
 				<span ng-show="model.post.authorLocation !== ''" id="post-detail-location">
 					<i class="ion-location"></i> {{model.post.authorLocation}}<br/>
 				</span>
-				<span><i class="ion-clock"></i> </span><span am-time-ago="model.post.postTimestamp"></span>
+				<span class="post-detail-clock" am-time-ago="model.post.postTimestamp"></span>
                 <div class="more" ng-click="showMore()">
-                    <i class="ion-more"></i>
                 </div>
                 <div class="stars" ng-click="toggleLike()">
-                    <div ng-class="{'like': model.post.isLiked, 'dont-like': !model.post.isLiked}"></div>
+                    <div ng-class="{'post-detail-like': model.post.isLiked, 'post-detail-dont-like': !model.post.isLiked}"></div>
                     <div class="counter">{{model.post.totalStars}}</div>
                 </div>
 			</div>

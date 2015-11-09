@@ -90,10 +90,12 @@
     color: yellow;
 }
 .dont-like{
-	background-image: url('../../assets/img/like/poststarbutton.png');
+	/*background-image: url('../../assets/img/like/poststarbutton.png');*/
+    background-image: url('../../assets/img/svg/like-deselected.svg');
 }
 .like{
-	background-image: url('../../assets/img/like/poststarbuttonactive.png');
+	/*background-image: url('../../assets/img/like/poststarbuttonactive.png');*/
+    background-image: url('../../assets/img/svg/like-selected.svg');
 }
 .comments{
     background-image: url('../../assets/img/postcommentbutton.png');
@@ -105,4 +107,11 @@
 	display: inline-block;
 	height: 1em;
 	width: 1.3em;
+}
+.postTimestamp{
+    background-image: url('../../assets/img/svg/reloj-post-summary.svg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 1.4em;
 }

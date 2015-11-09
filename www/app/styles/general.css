@@ -124,30 +124,52 @@ ion-tabs.tabs-color-active-positive .tab-item {
   background-position: center;
   width: 100%;
 }
+.home{
+
+}
+.home.tab-item, .explore.tab-item, .notifications.tab-item, .profile.tab-item{
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.home.tab-item, .home.tab-item.tab-item-active, .notifications.tab-item.tab-item-active, .notifications.tab-item, .profile.tab-item.tab-item-active, .profile.tab-item{
+    background-size: 35%;
+}
 .home.tab-item.tab-item-active{
-    background-image: url('../../assets/img/tabs/feedactive.png');
+    background-image: url('../../assets/img/svg/home-selected.svg');
 }
 .home.tab-item{
-    background-image: url('../../assets/img/tabs/feed.png');
+    background-image: url('../../assets/img/svg/home-deselected.svg');
+}
+
+.explore.tab-item.tab-item-active, .explore.tab-item{
+    background-size: 40%;
 }
 .explore.tab-item.tab-item-active{
-    background-image: url('../../assets/img/tabs/exploreactive.png');
+    background-image: url('../../assets/img/svg/explore-selected.svg');
 }
 .explore.tab-item{
-    background-image: url('../../assets/img/tabs/explore.png');
+    background-image: url('../../assets/img/svg/explore-deselected.svg');
 }
+
 .notifications.tab-item.tab-item-active{
-    background-image: url('../../assets/img/tabs/activityactive.png');
+    background-image: url('../../assets/img/svg/notificacion-selected.svg');
 }
 .notifications.tab-item{
-    background-image: url('../../assets/img/tabs/activity.png');
+    background-image: url('../../assets/img/svg/notificacion-deselected.svg');
+}
+
+.profile.tab-item.tab-item-active, .profile.tab-item{
+    background-size: 30%;
 }
 .profile.tab-item.tab-item-active{
-    background-image: url('../../assets/img/tabs/profileactive.png');
+    background-image: url('../../assets/img/svg/profile-selected.svg');
 }
 .profile.tab-item{
-    background-image: url('../../assets/img/tabs/profile.png');
+    background-image: url('../../assets/img/svg/profile-deselected.svg');
 }
+
+
 .home, .home, .explore, .explore, .notifications, .notifications, .profile, .profile{
     background-position: center;
     background-repeat: no-repeat;
@@ -173,10 +195,12 @@ ion-tabs.tabs-color-active-positive .tab-item {
     width: 2em;
 }
 .filters div{
-    background-image: url('../../assets/img/navigationbarfilter.png');
+    background-image: url('../../assets/img/svg/filter.svg');
+    background-size: contain;
 }
 .buscar div{
-    background-image: url('../../assets/img/navigationbarsearch.png');
+    background-image: url('../../assets/img/svg/search.svg');
+    background-size: 80% 80%;
 }
 .no-padding{
     padding: 0em;
@@ -314,6 +338,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     background-image: url('../../assets/img/navigationbarbackblack_right.png');
     background-position: right;
     background-repeat: no-repeat;
+    background-size: auto 75%;
     float: right;
     font-size: 0.8em;
     padding-right: 1em;

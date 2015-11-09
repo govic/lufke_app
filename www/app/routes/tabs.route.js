@@ -2,10 +2,10 @@ angular.module('lufke')
 		.config(function ($stateProvider) {
 			$stateProvider
 					.state('tab', {
-						url: '/tab',
 						abstract: true,
 						controller: "TabsCtrl",
-						templateUrl: 'app/templates/tabs.html'
+						templateUrl: 'app/templates/tabs.html',
+						url: '/tab'
 					})
 					.state('tab.news', {
 						url: '/news',

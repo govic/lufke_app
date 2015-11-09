@@ -180,3 +180,13 @@ ion-scroll .scroll{
     width: 100%;
 }
 /* (-) Barra compartir experiencia */
+.lufke-gear-a{
+    background-image: url('../../assets/img/svg/menu.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: inline-block;
+    height: 1em;
+    vertical-align: middle;
+    width: 1em;
+}

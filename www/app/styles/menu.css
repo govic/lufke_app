@@ -32,3 +32,33 @@
     transition-property: opacity;
     transition-duration: 0.2s;
 }
+.lufke-logout, .lufke-terms, .lufke-cambiar-contrasena, .lufke-edit, .lufke-privacidad{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 1.2em;
+    vertical-align: top;
+    width: 1.2em;
+}
+.lufke-logout{
+    background-image: url('../../assets/img/svg/logout.svg');
+}
+.lufke-terms{
+    background-image: url('../../assets/img/svg/terms.svg');
+}
+.lufke-cambiar-contrasena{
+    background-image: url('../../assets/img/svg/cambiarcontrasena.svg');
+}
+.lufke-edit{
+    background-image: url('../../assets/img/svg/editarperfil.svg');
+    width: 1.6em;
+}
+.lufke-privacidad{
+    background-image: url('../../assets/img/svg/privacidad.svg');
+    width: 1.2em;
+    height: 1.2em;
+}
+.menu-view .ion-person{
+    font-size: 1.2em;
+}

@@ -29,7 +29,8 @@
 }
 
 #post-detail-location {
-    color: #EEE0BB;
+    /*color: #EEE0BB;*/
+    color: #aaa;
     font-size: 100%;
 }
 
@@ -145,7 +146,7 @@
 }
 .publicacion .categories .category .image{
     background-color: #fff;
-    background-image: url('../../assets/img/unknown_post.png');
+    background-image: url('../../assets/img/unknown_post_90x52.jpg');
     background-position: center;
     background-repeat: no-repeat;
     /*background-size: cover;*/
@@ -167,7 +168,7 @@
 /* (-) listado de categorias */
 
 .publicacion .stars{
-    margin-left: 1em;
+
 }
 .publicacion .stars, .publicacion .stars>div{
     display: inline-block;
@@ -176,5 +177,32 @@
     float: right;
 }
 .publicacion .more{
+    background-image: url('../../assets/img/svg/opciones.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 1.5em;
     margin-left: 1em;
+    width: 0.5em;
+}
+.post-detail-clock{
+    background-image: url('../../assets/img/svg/reloj-post-detail.svg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 1.5em;
+}
+
+.post-detail-dont-like, .post-detail-like{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 1.5em;
+    vertical-align: bottom;
+    width: 1.5em;
+}
+.post-detail-dont-like{
+    background-image: url('../../assets/img/svg/like-deselected-post-detail.svg');
+}
+.post-detail-like{
+    background-image: url('../../assets/img/svg/like-selected-post-detail.svg');
 }

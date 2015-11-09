@@ -23,7 +23,7 @@
 	top: 7em;
 }
 .news-title{
-    padding-top: 0.5em;
+    padding-top: 0.3em;
 }
 .news-title img{
     height: 70%;
@@ -102,7 +102,7 @@
     width: 3.8em;
 }
 .experience-tools .add-friends{
-    background-image: url('../../assets/img/new-post/shareexperiencefriendtag_3x.png');
+    background-image: url('../../assets/img/svg/add-friend.svg');
 }
 .experience-tools .share-location{
     background-image: url('../../assets/img/new-post/shareexperiencelocation_3x.png');
@@ -289,6 +289,7 @@
     background-image: url('../../assets/img/navigationbarbackblack_right.png');
     background-position: right;
     background-repeat: no-repeat;
+	background-size: auto 75%;
 	display: inline;
     float: right;
 	font-size: 0.7em;

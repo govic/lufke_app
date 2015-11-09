@@ -2,6 +2,9 @@ angular.module('lufke', ['ionic', 'ngStorage', 'ngLodash', 'angularMoment', 'bas
     $urlRouterProvider.otherwise('/start');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
+    $ionicConfigProvider.backButton.icon('ion-ios7-arrow-back')
+    $ionicConfigProvider.backButton.text('Atrás')
+    //$ionicConfigProvider.views.transition('none');
 }).factory('authHttpResponseInterceptor', function($q, $location, $localStorage) {
     return {
         request: function(config){
